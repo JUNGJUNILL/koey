@@ -117,7 +117,14 @@ const mainPosts_1001 = ()=>{
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
                <div className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,'1001',v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
-               <div className='divTableImageCell'><div className="divImageCell"><img src={v.contentImages.indexOf(`<img src=`) !== -1 ? v.contentImages.substr(v.contentImages.indexOf(`<img src=`)+`<img src=`.length ,v.contentImages.substring(v.contentImages.indexOf(`<img src=`)+`<img src=`.length).indexOf('>')).split(`"`).join(''):`http://localhost:3095/noimages.gif`}  /></div></div>
+               <div className='divTableImageCell'>
+                  <div className="divImageCell">
+                  <img src={v.imageCount > 0 ? `http://localhost:3095/1001/${v.userNickName}/${v.firstImageName}`:'http://localhost:3095/noimages.gif'} />
+                  {/*
+                  <img src={v.contentImages.indexOf(`<img src=`) !== -1 ? v.contentImages.substr(v.contentImages.indexOf(`<img src=`)+`<img src=`.length ,v.contentImages.substring(v.contentImages.indexOf(`<img src=`)+`<img src=`.length).indexOf('>')).split(`"`).join(''):`http://localhost:3095/noimages.gif`}  />
+                  */}
+                  </div>
+               </div>
 
                 {/* 
                   <div className='divTableCell'>

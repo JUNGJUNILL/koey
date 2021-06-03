@@ -91,6 +91,7 @@ const postEdit = () =>{
                    contentImages :encodeURI(contentImages),
                    title:encodeURI(title),
                    userNickName:encodeURI(userInfo), 
+                   imageFileName: imageFileName, 
                    postFlag:'1001',
                    
            },

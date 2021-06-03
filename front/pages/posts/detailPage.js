@@ -9,7 +9,8 @@ import
      MAINPOSTS_1001_COMMENTINSERT_REQUEST,
      MAINPOSTS_1001_COMMENTLIKE_REQUEST,
      MAINPOSTS_1001_COMMENTBYCOMMENT_REQUEST,
-     MAINPOSTS_1001_MAINPOSTLIKE_REQUEST
+     MAINPOSTS_1001_MAINPOSTLIKE_REQUEST,
+     MAINPOST_1001_IMAGES_REQUEST
     } 
 from '../../reducers/mainPosts_1001';
 
@@ -30,42 +31,23 @@ const detailPage  = ({nickName,postFlag,postId,submitDay}) =>{
   const dispatch = useDispatch(); 
   const {mainPosts_1001Info , 
          mainPosts_1001Comments,
-         mainPosts_1001CommentByComments
+         mainPosts_1001CommentByComments,
+         imageSrc
         } = useSelector((state)=>state.mainPosts_1001); 
 
   const {userInfo}      = useSelector((state)=>state.auth);
   const ref = createRef(); 
   const blank_pattern = /^\s+|\s+&/g;  
   const [unfoldList,setUnfoldList] = useState('fold'); 
-/*
-  useEffect(()=>{
-    
-    //댓글 리스트 
-    dispatch({
-      type:MAINPOSTS_1001_COMMENTS_REQUEST, 
-      data:{
-        postId,
-        nickName,
-        postFlag,
-        who:userInfo, 
-        submitDay,
-      }
+
+  let contentImages=""; 
+  if(imageSrc.length > 0 ){
+    imageSrc.map((v)=>{
+        contentImages=contentImages +  `<figure ><img src="http://localhost:3095/1001/${nickName}/${v.src}"></figure>`
     }); 
+}
 
-    //상세 정보 
-    dispatch({
-          type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
-          data:{
-            postId,
-            nickName,
-            postFlag,
-            who:userInfo,
-            submitDay
-          }
-    });
 
-  },[nickName,postFlag,postId,submitDay]);
-*/
   //게시글 좋아요, 실어요 버튼
   const postLikeBtn = useCallback((likeFlag,submitDay)=>{
 
@@ -238,7 +220,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay}) =>{
 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
      <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"1%"}}>
-        <div dangerouslySetInnerHTML={{__html:mainPosts_1001Info[0].contentImages}}/>
+        <div dangerouslySetInnerHTML={{__html:imageSrc.length > 0 ? contentImages : ''}}/>
      </div> 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
     
@@ -358,7 +340,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     type:MAINPOSTS_1001_COMMENTS_REQUEST, 
     data:{
       postId,
-      nickName,
+      nickName:encodeURIComponent(nickName),
       postFlag,
       who:who, 
       submitDay,
@@ -370,10 +352,23 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
         data:{
           postId,
-          nickName,
+          nickName:encodeURIComponent(nickName),
           postFlag,
           who:who,
           submitDay
+        }
+  });
+
+
+  //이미지 이름 가져오기
+  context.store.dispatch({
+    type:MAINPOST_1001_IMAGES_REQUEST, 
+    data:{
+      postId,
+      nickName:encodeURIComponent(nickName),
+      submitDay,
+      postFlag,
+      
         }
   });
 

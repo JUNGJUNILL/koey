@@ -138,6 +138,30 @@ router.post('/mainPosts_1001Detail', async (req,res,next)=>{
 }); 
 
 
+
+//게시글 이미지 이름 가져오기
+router.post('/imagename', async (req,res,next)=>{
+    try{
+
+        const {postId, nickName, submitDay, postFlag,}= req.body.data; 
+        
+        let stringQuery = 'CALL US_SELECT_mainPostImages'; 
+            stringQuery =stringQuery.concat(`('${postId}',`);
+            stringQuery =stringQuery.concat(`'${decodeURIComponent(nickName)}',`); 
+            stringQuery =stringQuery.concat(`'${submitDay}',`);
+            stringQuery =stringQuery.concat(`'${postFlag}')`);
+
+        const mainPosts_1001ImageName = await pool.query(stringQuery); 
+        console.log(stringQuery); 
+        return res.json(mainPosts_1001ImageName[0]); 
+
+    }catch(e){
+        console.log(e); 
+        next(e);
+    }
+});
+
+
 //게시글 댓글 리스트 
 router.post('/mainPosts_1001Comments', async (req,res,next)=>{
 
@@ -173,14 +197,16 @@ router.post('/mainPosts_1001Comments', async (req,res,next)=>{
 router.post('/postInsert', async (req,res,next)=>{
 
     try{
-        const {content,title,userNickName,postFlag,contentImages} = req.body.data; 
+        const {content,title,userNickName,postFlag,contentImages,imageFileName} = req.body.data; 
         const _title   = decodeURIComponent(title); 
         const _content = decodeURIComponent(content); 
         const _contentImages = decodeURIComponent(contentImages); 
         const _userNickName   = decodeURIComponent(userNickName); 
         const _postFlag = postFlag; 
-  
-        let stringQuery = 'CALL US_INSERT_mainPosts'; 
+      
+        let stringQuery;
+            stringQuery=''; 
+            stringQuery = 'CALL US_INSERT_mainPosts'; 
             stringQuery =stringQuery.concat(`('${_title}',`);
             stringQuery =stringQuery.concat(`'${_content}',`); 
             stringQuery =stringQuery.concat(`'${_contentImages}',`); 
@@ -188,9 +214,25 @@ router.post('/postInsert', async (req,res,next)=>{
             stringQuery =stringQuery.concat(`'${_postFlag}')`);
             
   
-        const empInsert = await pool.query(stringQuery); 
+      
+        const postInsert = await pool.query(stringQuery); 
+
+        if(imageFileName.length > 0){
+            stringQuery=''; 
+            await Promise.all(imageFileName.map(imageName=>{
+                stringQuery = 'CALL US_INSERT_mainPostImages'; 
+                stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
+                stringQuery =stringQuery.concat(`'${_userNickName}',`); 
+                stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
+                stringQuery =stringQuery.concat(`'${imageName}',`); 
+                stringQuery =stringQuery.concat(`'${_postFlag}')`);
+                pool.query(stringQuery)
+            }));
+              
+        }
+
         console.log(stringQuery); 
-        return res.status(200).json(empInsert); 
+        return res.status(200).json(postInsert[0]); 
   
   
     }catch(e){

@@ -46,6 +46,12 @@ import
         UPLOAD_IMAGES_SUCCESS,
         UPLOAD_IMAGES_FAILURE,
 
+        MAINPOST_1001_IMAGES_REQUEST,
+        MAINPOST_1001_IMAGES_SUCCESS,
+        MAINPOST_1001_IMAGES_FAILURE,
+
+
+
     } 
 from '../reducers/mainPosts_1001'; 
 
@@ -480,6 +486,41 @@ function* watchMainPosts_1001UploadImage(){
 
 
 
+//이미지 이름 가져오기
+//-----------------------------------------------------------------------------------
+function APImainPosts_1001ImageName(data){
+    return axios.post('/mainPosts_1001/imagename',{data},{withCredentials:true})
+}
+
+
+function* sagaMainPosts_1001ImageName(action){
+
+    try{
+      const result = yield call(APImainPosts_1001ImageName,action.data); 
+      yield  put({
+            type:MAINPOST_1001_IMAGES_SUCCESS, 
+            data:result.data,
+        });
+
+    }catch(e){
+
+        console.error(e); 
+        alert('error', e); 
+        yield put({
+            type:MAINPOST_1001_IMAGES_FAILURE, 
+            error: e, 
+        }); 
+    }
+}
+
+
+function* watchMainPosts_1001ImageName(){
+    yield takeLatest(MAINPOST_1001_IMAGES_REQUEST,sagaMainPosts_1001ImageName); 
+}
+//-----------------------------------------------------------------------------------
+
+
+
 export default function* mainPosts_1001Saga(){
 
     yield all([
@@ -494,5 +535,6 @@ export default function* mainPosts_1001Saga(){
         fork(watchMainPosts_1001Like),
         fork(watchMainPosts_1001UploadImage),
         fork(watchInsertMainPost_1001), 
+        fork(watchMainPosts_1001ImageName), 
      ])
 }

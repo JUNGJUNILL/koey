@@ -13,7 +13,7 @@ export const  initialState = {
 
     imageFileName : [], 
     imageUploading: false, 
-    imagePaths         : [],
+    imageSrc         : [],
     likeIsClicked :null, 
     clickCommentId:null, 
     commentByCommentCount:0,             //대댓글 입력 후 대댓글 숫자 변경 
@@ -76,6 +76,11 @@ export const MAINPOST_1001_INSERT_FAILURE = 'MAINPOST_1001_INSERT_FAILURE';
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
+
+//이미지 이름 가져오기 
+export const MAINPOST_1001_IMAGES_REQUEST = 'MAINPOST_1001_IMAGES_REQUEST';
+export const MAINPOST_1001_IMAGES_SUCCESS = 'MAINPOST_1001_IMAGES_SUCCESS';
+export const MAINPOST_1001_IMAGES_FAILURE = 'MAINPOST_1001_IMAGES_FAILURE';
 
 export const TEST_REQUEST = 'TEST_REQUEST'; 
 export const TEST_SUCCESS = 'TEST_SUCCESS'; 
@@ -308,7 +313,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
 
             case UPLOAD_IMAGES_SUCCESS: {
                 draft.imageUploading=false;
-                console.log('reducer=>', action.data); 
                 draft.imageFileName=draft.imageFileName.concat(action.data); 
                 break; 
             }
@@ -317,6 +321,27 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
                 break; 
             }
 //----------------------------------------
+
+
+//이미지 이름 가져오기
+//----------------------------------------
+            case MAINPOST_1001_IMAGES_REQUEST: {
+                
+                break; 
+            }
+
+            case MAINPOST_1001_IMAGES_SUCCESS: {
+
+                draft.imageSrc=draft.imageSrc.concat(action.data); 
+                break; 
+            }
+
+            case MAINPOST_1001_IMAGES_FAILURE: {
+                break; 
+            }
+//----------------------------------------
+
+
 
             default : break; 
         }
