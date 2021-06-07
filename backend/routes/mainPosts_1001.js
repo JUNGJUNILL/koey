@@ -218,16 +218,31 @@ router.post('/postInsert', async (req,res,next)=>{
         const postInsert = await pool.query(stringQuery); 
 
         if(imageFileName.length > 0){
-            stringQuery=''; 
-            await Promise.all(imageFileName.map(imageName=>{
-                stringQuery = 'CALL US_INSERT_mainPostImages'; 
-                stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
-                stringQuery =stringQuery.concat(`'${_userNickName}',`); 
-                stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
-                stringQuery =stringQuery.concat(`'${imageName}',`); 
-                stringQuery =stringQuery.concat(`'${_postFlag}')`);
-                pool.query(stringQuery)
-            }));
+        
+                stringQuery=''; 
+                for(let i=0; i<imageFileName.length; i++){
+                    stringQuery = 'CALL US_INSERT_mainPostImages'; 
+                    stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
+                    stringQuery =stringQuery.concat(`'${_userNickName}',`); 
+                    stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
+                    stringQuery =stringQuery.concat(`'${imageFileName[i]}',`); 
+                    stringQuery =stringQuery.concat(`'${_postFlag}');`);
+                    console.log(stringQuery);
+                    await pool.query(stringQuery);
+                }
+
+                //무슨 이유에서인지는 모르지만 map이 기존 배열갯수 +1개를 반환해서 문제가 발생해서
+                //어쩔 수 없이 for문을 이용함.. 
+                // await Promise.all( imageFileName.map((imageName)=>{
+                //     stringQuery = 'CALL US_INSERT_mainPostImages'; 
+                //     stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
+                //     stringQuery =stringQuery.concat(`'${_userNickName}',`); 
+                //     stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
+                //     stringQuery =stringQuery.concat(`'${imageName}',`); 
+                //     stringQuery =stringQuery.concat(`'${_postFlag}');`);
+                //     console.log(stringQuery);
+                //     pool.query(stringQuery)
+                // }));
               
         }
 

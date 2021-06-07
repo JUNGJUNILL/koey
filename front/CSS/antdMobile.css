@@ -314,15 +314,17 @@ img {
 
 
 .footer {
- /*position: sticky;*/
+  /* position: sticky;*/
+  /* position: relative;*/
+  /* position: fixed;*/
  position: relative;
-  left: 0;
- 
-  width: 100%;
-  background-color: red;
-  color: white;
-  text-align: center;
-  height: 30px;
+ left: 0;
+ bottom: 0;
+ width: 100%;
+ background-color: red;
+ color: white;
+ text-align: center;
+ height: 30px;
 
 }
 

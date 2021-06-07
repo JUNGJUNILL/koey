@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import wrapper from '../store/configureStore';
+import { backImageUrl } from '../config/config';
 
 
 const AppLayOut = ({children}) =>{
@@ -82,10 +83,10 @@ const AppLayOut = ({children}) =>{
 
         <Col  xs={24} md={12}>
  
-      
+    
         <header className="hd">
         <h1 className="h1">
-        <AlignLeftOutlined onClick={showDrawer}/>&nbsp;<img src="http://localhost:3095/koielogo.jpg" style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
+        <AlignLeftOutlined onClick={showDrawer}/>&nbsp;<img src={`${backImageUrl}/koielogo.jpg`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
 	    </h1>
 
         <div className="fr" style={{marginRight:"-5px"}}>

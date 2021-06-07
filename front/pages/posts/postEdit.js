@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {END} from 'redux-saga'; 
 import axios from  'axios'; 
 import {Button, Input,} from 'antd'
+import { backImageUrl } from '../../config/config';
 
 import 
     {
@@ -105,7 +106,7 @@ const postEdit = () =>{
     //이미지 업로드 클릭 
     const onClickImageUpload = useCallback(() =>{
         
-        if(imageFileName.length>=5){
+        if(imageFileName.length>=10){
             alert(`게시물당 이미지는 ${imageFileName.length}장 올릴 수 있습니다.`); 
             return; 
         }
@@ -186,7 +187,7 @@ const postEdit = () =>{
        <div style={{textAlign:'center'}}>
             {imageFileName && imageFileName.map((v,i)=>(
                 <div style={{display:'inline-block'}} key={i} >
-                    <img style={{width:'60px',height:'60px'}} src={`http://localhost:3095/1001/${userInfo}/${v}`} />    
+                    <img style={{width:'60px',height:'60px'}} src={`${backImageUrl}/1001/${userInfo}/${v}`} />    
                     <br/>
                     <Button style={{width:'60px'}}><CloseOutlined /></Button>
                 </div>

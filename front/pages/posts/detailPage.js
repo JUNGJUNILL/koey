@@ -21,6 +21,7 @@ from '../../reducers/auth';
 import {DislikeTwoTone, LikeTwoTone, UserOutlined, FieldTimeOutlined, EyeOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
+import { backImageUrl } from '../../config/config';
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
 
@@ -43,7 +44,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay}) =>{
   let contentImages=""; 
   if(imageSrc.length > 0 ){
     imageSrc.map((v)=>{
-        contentImages=contentImages +  `<figure ><img src="http://localhost:3095/1001/${nickName}/${v.src}"></figure>`
+        contentImages=contentImages +  `<figure ><img src="${backImageUrl}/1001/${nickName}/${v.src}"></figure>`
     }); 
 }
 
