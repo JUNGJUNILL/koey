@@ -20,14 +20,14 @@ const AppLayOut = ({children}) =>{
     const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
 
-    useEffect(()=>{
-        //로그 아웃 후 메인 페이지로 이동
-        if(!userInfo){
-            Router.push('/'); 
+    // useEffect(()=>{
+    //     //로그 아웃 후 메인 페이지로 이동
+    //     if(!userInfo){
+    //         Router.push('/'); 
 
-        }
+    //     }
 
-    },[userInfo]);
+    // },[userInfo]);
 
     //로그아웃 버튼
     const logOut = useCallback((e)=>{

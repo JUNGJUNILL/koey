@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Router from 'next/router'; 
 import 
     {JOIN_REQUEST,} 
-from '../reducers/auth'; 
+from '../../reducers/auth'; 
 import {Button} from 'antd'
 
 

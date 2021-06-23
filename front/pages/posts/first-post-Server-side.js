@@ -3,7 +3,6 @@ import React , {useState,useEffect,useCallback}from 'react'
 import { END } from 'redux-saga';
 import wrapper from '../../store/configureStore';
 const fetch =require('node-fetch');
-import testComponent from '../../components/testComponent';
 
 
 

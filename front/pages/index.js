@@ -8,7 +8,6 @@ import
     {LOAD_USER_REQUEST,} 
     from '../reducers/auth'; 
 
-import AppLayout from '../components/AppLayout';
 import wrapper from '../store/configureStore';
 
 const Home =()=>{

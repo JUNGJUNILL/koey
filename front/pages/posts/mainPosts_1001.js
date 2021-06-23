@@ -1,5 +1,5 @@
 
-import React , {useState,useEffect,useCallback}from 'react'
+import React , {useState,useEffect,useCallback,useMemo}from 'react'
 import {Button,Input,Space } from 'antd'
 const { Search } = Input;
 import Router ,{ useRouter } from 'next/router';
@@ -13,7 +13,7 @@ import
     } 
 from '../../reducers/mainPosts_1001'; 
 
-
+import ReactRouterPropTypes from 'react-router-prop-types';
 import 
     {LOAD_USER_REQUEST,
     } 
@@ -39,10 +39,14 @@ const mainPosts_1001 = ()=>{
   const [postsPerPage] = useState(20);                             //한 페이지당 list 수 
   const [groupPage , setGroupPage] = useState(5);                 //페이징 그룹 당 수  1~5 , 6~10 , 11~15 ... 5의 배수만 입력가능 
   const [nowGroupPageArray,setNowGroupPageArray] =useState([]);   //현재 페이징 그룹 배열
-  
+  const pages=router.query.nowPage ? parseInt(router.query.nowPage) : 1;
+  const group=router.query.group ? parseInt(router.query.group) : 0;  
+  const [pageButtonClick,setPageButtonClick] = useState(''); 
 
-  const pagenate =useCallback((pageNumber, groupPageArray)=>{
+  const pagenate =useCallback((pageNumber, groupPageArray,param)=>{
 
+    
+    setPageButtonClick(param); 
     setNowPage(pageNumber); 
 
     nowGroupPageArray.length=0; 
@@ -52,7 +56,8 @@ const mainPosts_1001 = ()=>{
     const indexOfLastPost = pageNumber * postsPerPage;   
     const indexOfFirstPost = indexOfLastPost - postsPerPage;  
 
-     dispatch({
+
+      dispatch({
         type:MAINPOSTS_1001_LIST_REQUEST, 
         data:{postFlag:'1001',
               currentPage:indexOfFirstPost,
@@ -61,16 +66,16 @@ const mainPosts_1001 = ()=>{
        }, 
     });
 
-},[nowPage,nowGroupPageArray]); 
+ 
+
+},[]); 
 
       
   //01.페이지 첫 로드시.. 
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
   //03.페이지 이동 후 뒤로가기 눌렀을 경우
-  const pages=router.query.nowPage ? parseInt(router.query.nowPage) : 1;
-  const group=router.query.group ? parseInt(router.query.group) : 0;  
   useEffect(()=>{
-   
+
       //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
       let pageArray =Array.from({length: groupPage}, (v, i) => i);
 
@@ -84,10 +89,14 @@ const mainPosts_1001 = ()=>{
 
                 }
            }
+           
+          setPageButtonClick(''); 
+           if(!pageButtonClick){
+            pagenate(parseInt(pages),pageArray);  
+          }
+        
 
-          pagenate(parseInt(pages),pageArray);
-      
-  },[]); 
+  },[pages]); 
 
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
@@ -164,6 +173,8 @@ const mainPosts_1001 = ()=>{
     </div>
     );
 }; 
+
+
 
 
 export default mainPosts_1001; 
