@@ -441,6 +441,17 @@ img {
     font-weight: 700;
   }
 
+  /*제목이 너무 길 경우 ... 로 자름
+  abbreviation : 줄임말
+  */
+  .abbreviation {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+
   /*이미지 */
   .dot {
     width:60px;

@@ -1,9 +1,9 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import React,{useEffect}from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Row, List, Typography, Button, Divider  } from 'antd';
 const { Meta } = Card;
+
 
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
@@ -12,7 +12,6 @@ import
     from '../reducers/auth'; 
 
 import wrapper from '../store/configureStore';
-import MainCardImageComponenet from '../components/mainPage/MainCardImageComponenet'
 
 
 const Home =()=>{
@@ -24,49 +23,136 @@ const Home =()=>{
   const fileName2 = '동기부여1607408839105.png'; 
   const fileName3 = '담배땡긴다 - 복사본1622693419222.jpg';  
 
+
+
+  const data = [
+    'Racing car sprays burning fuel into crowd.',
+    'Japanese princess to wed commoner.',
+    'Australian walks 100km after outback crash1111111111111111111111111111111111.',
+    'Man charged over missing wedding girl111111111111111111111111111111.',
+    'Los Angeles battles huge wildfires.',
+  ];
+
   return (
     <div>
 
+  <Divider orientation="center">명예의 전당</Divider>
   <Row style={{marginTop:'3%'}}>
 
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
-
-    cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} src={`http://localhost:3095/1001/nick1111/%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC1607408839105.png`} />}
-
+          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          src={`http://localhost:3095/1001/nick1111/%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC1607408839105.png`} />}
     >
-    <Meta title="와 진짜 대박이다...."/>
-   
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
+          style={{height:'15px'}}
+    />
     </Card>
   </Col>
+
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
-    cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} src={`http://localhost:3095/1001/nick1111/%EC%97%90%EC%9D%B4%EC%8B%AF%ED%8C%941607324381388.jpg`} />}
-    
+          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          src={`http://localhost:3095/1001/nick1111/%EC%97%90%EC%9D%B4%EC%8B%AF%ED%8C%941607324381388.jpg`} />}
     >
-    <Meta title={<font>"와 진짜 음 말이 안되네...."</font>} />
-    
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
+          style={{height:'15px'}}
+    />
     </Card>
   </Col>
+
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
-    cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} src={`http://localhost:3095/1001/nick1111/%EB%8B%B4%EB%B0%B0%EB%95%A1%EA%B8%B4%EB%8B%A4%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B81622693419222.jpg`} />}
-    
+           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+           src={`http://localhost:3095/1001/nick1111/%EB%8B%B4%EB%B0%B0%EB%95%A1%EA%B8%B4%EB%8B%A4%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B81622693419222.jpg`} />}
     >
-    <Meta title="Card content"/>
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
+          style={{height:'15px'}}
+    />
     </Card>
   </Col>
 </Row>
 
-     <Link href="/posts/first-post-Server-side"><a>go to first-page-Server-side</a></Link>
-     <br/>
-     <Link href="/posts/first-post-Static-Generation"><a>go to first-page-Static</a></Link>
-     <br/>
-     <Link href="/posts/abc?foo=bar"><a>DynamicRouter Also goes to pages/post/[pid].js</a></Link>
-     <br />
-     <Link href="/posts/abc/a-comment"><a>DynamicRouter Also goes to pages/post/[pid]/[comment].js</a></Link>
-     <br />
-     <Link href="/posts/testPage"><a>테스트 페이지Gee</a></Link>
+
+<Row style={{marginTop:'3%'}}>
+
+  <Col span={8} style={{padding:'5px'}}> 
+    <Card bordered={true}
+          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          src={`http://localhost:3095/1001/nick1111/%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC1607408839105.png`} />}
+    >
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
+          style={{height:'15px'}}
+    />
+    </Card>
+  </Col>
+
+  <Col span={8} style={{padding:'5px'}}>
+    <Card bordered={true}
+          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          src={`http://localhost:3095/1001/nick1111/%EC%97%90%EC%9D%B4%EC%8B%AF%ED%8C%941607324381388.jpg`} />}
+    >
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
+          style={{height:'15px'}}
+    />
+    </Card>
+  </Col>
+
+  <Col span={8} style={{padding:'5px'}}>
+    <Card  bordered={true}
+           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+           src={`http://localhost:3095/1001/nick1111/%EB%8B%B4%EB%B0%B0%EB%95%A1%EA%B8%B4%EB%8B%A4%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B81622693419222.jpg`} />}
+    >
+    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
+          style={{height:'15px'}}
+    />
+    </Card>
+  </Col>
+</Row>
+
+
+  <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>자유게시판</b></div>}
+    footer={<div><Button block>더 보기</Button></div>}
+    
+    dataSource={data}
+    
+    renderItem={item => (
+      <List.Item className="abbreviation">
+      <span className='bestSpan'>BEST</span>  <Link href={`#`}><a >{item}<span className="countFontColor">[{item.length}]</span></a></Link>
+      </List.Item>
+    )}
+  />
+
+  <List
+  style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+  itemLayout="horizontal"
+  header={<div><b>미국</b></div>}
+  footer={<div><Button block>더 보기</Button></div>}
+  
+  dataSource={data}
+  renderItem={item => (
+    <List.Item>
+      <Typography.Text mark>[ITEM]</Typography.Text> {item}
+    </List.Item>
+  )}
+/>
+
+<List
+style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+itemLayout="horizontal"
+header={<div><b>중국</b></div>}
+footer={<div><Button block>더 보기</Button></div>}
+
+dataSource={data}
+renderItem={item => (
+  <List.Item>
+    <Typography.Text mark>[ITEM]</Typography.Text> {item}
+  </List.Item>
+)}
+/>
 
    </div>
 

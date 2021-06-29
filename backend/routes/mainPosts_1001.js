@@ -41,33 +41,6 @@ const upload = multer({
      return res.json(req.files.map(v=>v.filename)); 
   }); 
 
-  router.get('/comcom' ,async (req,res,next)=>{
-
-    
-    //return res.json('helo'); 
-//https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=gmlwo308&logNo=222051126736
-    var size= req.query.size;
-    console.log(size); 
-    const imageDir = path.join(__dirname,'images'); 
-    console.log('imageDir==>', imageDir); 
-     const filename = 'D:\\git Repository\\koey\\backend\\images\\'+'hellogirl'+'.png'
-     console.log('filename==>', filename); 
-    if(size) {
-        size = size.split('x');
-        console.log('size==>', size); 
-        //return  res.status(200).end(fs.readFileSync(filename));
-        return res.status(200).end(
-            
-            await sharp(filename).resize(
-                {width:parseInt(size[0]), 
-                height:parseInt(size[1]), 
-            }).toBuffer());
-    } else {
-        return  res.status(200).end(fs.readFileSync(filename));
-    }
-
-    //return res.json('gamjaggang1'); 
-  }); 
 
 
 
@@ -80,7 +53,6 @@ router.post('/', async (req,res,next)=>{
         let mainPost_1001_Popular_list;
         let stringQuery;
         let mainPosts_1001_List;
-
         if(pageNumber === 1){
 
             stringQuery = 'CALL US_SELECT_mainPostsPopular'; 
