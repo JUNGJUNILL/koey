@@ -97,14 +97,7 @@ const AppLayOut = ({children}) =>{
         </div>
   
         </header>
-        
-        {/* 
-        <ul className="navulSub">
-        <li className="navli" onClick={showDrawer}><UnorderedListOutlined /></li>  
-        <li className="navli"><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1}}} ><a>메인1001</a></Link></li>
-        <li className="navli"><Link href={{pathname:'/posts/postEdit'}} ><a>글쓰기</a></Link></li>
-        </ul>
-       */}
+
        <nav className='navInfo'>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1}}} ><a>자유 게시판</a></Link>
        <Link href={{pathname:''}}><a>유머</a></Link>
