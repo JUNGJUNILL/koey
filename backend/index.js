@@ -21,6 +21,7 @@ const empAPIRouter = require('./routes/emp');
 const authAPIRouter = require('./routes/auth'); 
 const mainPosts_1001APIRouter = require('./routes/mainPosts_1001'); 
 const imgResizingAPIRouter = require('./routes/imgResizing'); 
+const indexPageAPIRouter = require('./routes/indexPage'); 
 
 app.use(morgan('dev')); 
 
@@ -54,6 +55,7 @@ app.use('/api/emp',empAPIRouter);
 app.use('/api/auth',authAPIRouter); 
 app.use('/api/mainPosts_1001',mainPosts_1001APIRouter); 
 app.use('/api/imgResizing',imgResizingAPIRouter);
+app.use('/api/indexPage',indexPageAPIRouter); 
 
 
 

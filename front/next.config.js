@@ -5,6 +5,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   
   module.exports = withBundleAnalyzer({
     compress: true,
+
+    experimental: {
+      scrollRestoration: true,
+    },
+    
     env : {
       NAVERLOGINCLIENTCODE:'FQxK6vBp2RiL0gne54KV',
       NAVERLOGINREDIRECT:'http://localhost:3095/api/auth/naverLoginCallback',

@@ -101,7 +101,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             case MAINPOSTS_1001_LIST_SUCCESS: {
                 draft.mainPosts_1001.length=0; 
                 //배열 초기화
-                action.data.forEach((v)=>{
+                action.data.dataArray.forEach((v)=>{
                     draft.mainPosts_1001.push(v); 
                 }); 
                 break; 
@@ -162,6 +162,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
 //게시글 상세 페이지 가져오기 
 //----------------------------------------
             case MAINPOSTS_1001_DETAIL_INFO_REQUEST: {
+                console.log('action.data.helloworld==>', action.data.helloworld); 
                 break; 
             }
 
@@ -331,7 +332,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             }
 
             case MAINPOST_1001_IMAGES_SUCCESS: {
-
+                draft.imageSrc.length = 0; 
                 draft.imageSrc=draft.imageSrc.concat(action.data); 
                 break; 
             }

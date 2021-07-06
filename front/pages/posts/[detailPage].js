@@ -13,7 +13,7 @@ import
      MAINPOST_1001_IMAGES_REQUEST
     } 
 from '../../reducers/mainPosts_1001';
-
+import Router ,{ useRouter } from 'next/router';
 import 
     {LOAD_USER_REQUEST,} 
 from '../../reducers/auth'; 
@@ -26,10 +26,82 @@ import axios from  'axios';
 import {END} from 'redux-saga'; 
 
 
-
-const detailPage  = ({nickName,postFlag,postId,submitDay}) =>{
+//{nickName,postFlag,postId,submitDay}
+const detailPage  = () =>{
 
   const dispatch = useDispatch(); 
+  const router           = useRouter(); 
+
+  console.log(router.query); 
+  const {detailPage} =router.query; 
+  const postId   =  router.query.postId;
+  const nickName = router.query.userNickName;
+  const postFlag = router.query.postFlag;
+  const submitDay = router.query.submitDay;
+  const who       = router.query.who;
+
+
+  useEffect(()=>{
+
+    //url을 브라우져 주소창에 바로 입력 후 엔터 쳤을 때 에러 뜨는거 해결하는 로직 
+    if(!detailPage){
+
+      return null;
+
+    }else{
+
+    
+    //로그인 정보
+    dispatch({
+      type:LOAD_USER_REQUEST
+    });
+
+    //댓글 정보
+    dispatch({
+      type:MAINPOSTS_1001_COMMENTS_REQUEST, 
+      data:{
+        postId :postId,
+        nickName:encodeURIComponent(nickName),
+        postFlag :postFlag,
+        who:who, 
+        submitDay:submitDay,
+      }
+    }); 
+    
+    //상세 정보 
+    dispatch({
+          type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
+          data:{
+            postId:postId,
+            nickName:encodeURIComponent(nickName),
+            postFlag:postFlag,
+            who:who,
+            submitDay:submitDay,
+          }
+    });
+  
+  
+    //이미지 이름 가져오기
+    dispatch({
+      type:MAINPOST_1001_IMAGES_REQUEST, 
+      data:{
+        postId:postId,
+        nickName:encodeURIComponent(nickName),
+        submitDay:submitDay,
+        postFlag:postFlag,
+        
+          }
+    });
+  }
+  },[
+    detailPage,
+    postId   ,
+    nickName ,
+    postFlag ,
+    submitDay,
+    who      ,
+  ])
+
   const {mainPosts_1001Info , 
          mainPosts_1001Comments,
          mainPosts_1001CommentByComments,
@@ -317,13 +389,17 @@ const detailPage  = ({nickName,postFlag,postId,submitDay}) =>{
 }
 
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+//export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+ /*
   const array = context.query.postId.split(':'); 
   const postId   = array[0]; 
   const nickName = array[1]; 
   const postFlag = array[2]; 
   const submitDay = array[3];
   const who       = array[4];
+  const helloworld       = array[5];
+
+  console.log('helloworld==>', helloworld); 
   const cookie = context.req ? context.req.headers.cookie : '';
     axios.defaults.headers.Cookie = '';
     if (context.req && cookie) { //쿠키 공유 방지 
@@ -356,7 +432,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
           nickName:encodeURIComponent(nickName),
           postFlag,
           who:who,
-          submitDay
+          submitDay,
+          helloworld
         }
   });
 
@@ -379,7 +456,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   return {
       props: {nickName,postFlag,postId,submitDay}, // will be passed to the page component as props
     } 
-
-});
+*/
+//});
 
 export default detailPage;

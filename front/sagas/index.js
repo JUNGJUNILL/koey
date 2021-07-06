@@ -5,6 +5,7 @@ import { backUrl } from '../config/config';
 
 import testSaga from './testSaga';
 
+import indexPageSaga from './indexPageSaga'; 
 import mainPosts_1001Saga from './mainPosts_1001Saga';
 import authSaga from './authSaga'; 
 
@@ -16,6 +17,8 @@ axios.defaults.withCredentials = true;
 
 export default function* rootSaga() {
     yield all([ fork(testSaga), 
+
+                fork(indexPageSaga), 
                 fork(mainPosts_1001Saga), 
                 fork(authSaga), 
     ]);

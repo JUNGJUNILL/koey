@@ -1,20 +1,27 @@
 import Link from 'next/link'
 import React,{useEffect}from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import axios from  'axios'; 
+import {END} from 'redux-saga'; 
+import wrapper from '../store/configureStore';
+
 import { Card, Col, Row, List, Typography, Button, Divider  } from 'antd';
 const { Meta } = Card;
 
-
-import axios from  'axios'; 
-import {END} from 'redux-saga'; 
 import 
     {LOAD_USER_REQUEST,} 
-    from '../reducers/auth'; 
+from '../reducers/auth'; 
 
-import wrapper from '../store/configureStore';
+import 
+    {INDEX_PAGE_DATA01_REQUEST, } 
+from '../reducers/indexPage'; 
+
 
 
 const Home =()=>{
+
+  const {data01} = useSelector((state)=>state.indexPage); 
+
 
   const ht ="http://localhost:3095"; 
   const postflag = '1001'; 
@@ -23,15 +30,6 @@ const Home =()=>{
   const fileName2 = '동기부여1607408839105.png'; 
   const fileName3 = '담배땡긴다 - 복사본1622693419222.jpg';  
 
-
-
-  const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash1111111111111111111111111111111111.',
-    'Man charged over missing wedding girl111111111111111111111111111111.',
-    'Los Angeles battles huge wildfires.',
-  ];
 
   return (
     <div>
@@ -111,48 +109,26 @@ const Home =()=>{
 </Row>
 
 
-  <List
+
+    <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>자유게시판</b></div>}
-    footer={<div><Button block>더 보기</Button></div>}
-    
-    dataSource={data}
-    
+    header={<div><b>자유 게시판</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+
+    dataSource={data01}
     renderItem={item => (
-      <List.Item className="abbreviation">
-      <span className='bestSpan'>BEST</span>  <Link href={`#`}><a >{item}<span className="countFontColor">[{item.length}]</span></a></Link>
+      <List.Item>
+      <Link href={'#'}>
+      <a>
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
       </List.Item>
     )}
-  />
-
-  <List
-  style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
-  itemLayout="horizontal"
-  header={<div><b>미국</b></div>}
-  footer={<div><Button block>더 보기</Button></div>}
-  
-  dataSource={data}
-  renderItem={item => (
-    <List.Item>
-      <Typography.Text mark>[ITEM]</Typography.Text> {item}
-    </List.Item>
-  )}
-/>
-
-<List
-style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
-itemLayout="horizontal"
-header={<div><b>중국</b></div>}
-footer={<div><Button block>더 보기</Button></div>}
-
-dataSource={data}
-renderItem={item => (
-  <List.Item>
-    <Typography.Text mark>[ITEM]</Typography.Text> {item}
-  </List.Item>
-)}
-/>
+    />
 
    </div>
 
@@ -169,6 +145,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
  
    context.store.dispatch({
     type:LOAD_USER_REQUEST
+  });
+
+  
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA01_REQUEST, 
+    data:{postFlag:'1001',}, 
   });
 
 

@@ -70,7 +70,7 @@ function* sagaMainPosts_1001List(action){
 
       yield  put({
             type:MAINPOSTS_1001_LIST_SUCCESS, 
-            data:result.data,
+            data:{dataArray:result.data},
         });
 
     }catch(e){

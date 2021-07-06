@@ -3,15 +3,10 @@ import { combineReducers } from 'redux'; // 여러 리듀서들을 하나로 합
 
 import testReducer from './testReducer' 
 
+import indexPage from './indexPage'; 
 import mainPosts_1001 from './mainPosts_1001' 
 import auth from './auth';
 
-// const rootReducer = combineReducers({
-//     count, // 여기에 다른 리듀서들을 더 적으면 된다!
-//     emp,
-//     auth, 
-//     mainPosts_1001,
-// });
 
 // (이전상태, 액션) => 다음상태
 const rootReducer = (state, action) => {
@@ -27,8 +22,11 @@ const rootReducer = (state, action) => {
       default: {
         const combinedReducer = combineReducers({    
             testReducer,
+
+            indexPage,
             mainPosts_1001,
-            auth
+            auth,
+         
         });
         return combinedReducer(state, action);
       }
@@ -37,20 +35,5 @@ const rootReducer = (state, action) => {
 
 
 
-
-
-
-  // const rootReducer = (state, action) => {
-
-  //       const combinedReducer = combineReducers({    
-  //           testReducer,
-  //           mainPosts_1001,
-  //           emp,
-  //           auth
-  //         });
-      
-  //       return combinedReducer(state, action);
-   
-  // };
   
   export default rootReducer;

@@ -173,7 +173,7 @@ router.post('/mainPosts_1001Comments', async (req,res,next)=>{
         let stringQuery = 'CALL US_SELECT_mainPostComments'; 
         stringQuery =stringQuery.concat(`('${postFlag}',`);
         stringQuery =stringQuery.concat(`'${postId}',`); 
-        stringQuery =stringQuery.concat(`'${nickName}',`);
+        stringQuery =stringQuery.concat(`'${decodeURIComponent(nickName)}',`);
         stringQuery =stringQuery.concat(`'${who}',`); 
         stringQuery =stringQuery.concat(`'${submitDay}')`);
 

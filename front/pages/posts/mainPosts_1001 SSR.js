@@ -1,7 +1,9 @@
 
-import React , {useState,useEffect,useCallback,useRef}from 'react'
+import React , {useState,useEffect,useCallback,useMemo}from 'react'
 import {Button,Input,Space } from 'antd'
 const { Search } = Input;
+import {END} from 'redux-saga'; 
+
 import Router ,{ useRouter } from 'next/router';
 import Link from 'next/link'
 import wrapper from '../../store/configureStore';
@@ -13,6 +15,7 @@ import
     } 
 from '../../reducers/mainPosts_1001'; 
 
+import ReactRouterPropTypes from 'react-router-prop-types';
 import 
     {LOAD_USER_REQUEST,
     } 
@@ -24,14 +27,14 @@ import { backImageUrl } from '../../config/config';
 
 
 
+
 const mainPosts_1001 = ()=>{
-  const myRef = useRef(null);
-  const executeScroll = () => myRef.current.scrollIntoView(false);  //alert(myRef.current.value)//
 
   const dispatch         = useDispatch(); 
   const router           = useRouter(); 
   const {mainPosts_1001} = useSelector((state)=>state.mainPosts_1001); 
   const {userInfo}       = useSelector((state)=>state.auth);
+  const abc = () =>{alert('abc함수 ')}
 
   /*-------------------------------------------페이징 처리 로직 start-------------------------------------------------------*/
   const [nowPage,setNowPage] = useState(0);                       //현재 페이지
@@ -44,59 +47,74 @@ const mainPosts_1001 = ()=>{
 
   const pagenate =useCallback((pageNumber, groupPageArray,param)=>{
 
-        setPageButtonClick(param); 
-        setNowPage(pageNumber); 
-        nowGroupPageArray.length=0; 
+    
+    setPageButtonClick(param); 
+    setNowPage(pageNumber); 
 
-        setNowGroupPageArray(nowGroupPageArray.concat(groupPageArray));
+    nowGroupPageArray.length=0; 
 
-        const indexOfLastPost = pageNumber * postsPerPage;   
-        const indexOfFirstPost = indexOfLastPost - postsPerPage;  
+    setNowGroupPageArray(nowGroupPageArray.concat(groupPageArray));
 
-        dispatch({
-          type:MAINPOSTS_1001_LIST_REQUEST, 
-          data:{postFlag:'1001',
-                currentPage:indexOfFirstPost,
-                maxPage:postsPerPage,
-                pageNumber
-        }, 
-      });
+    const indexOfLastPost = pageNumber * postsPerPage;   
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;  
+
+
+      dispatch({
+        type:MAINPOSTS_1001_LIST_REQUEST, 
+        data:{postFlag:'1001',
+              currentPage:indexOfFirstPost,
+              maxPage:postsPerPage,
+              pageNumber
+       }, 
+    });
  
-    },[]); 
 
+},[]); 
+
+      
   //01.페이지 첫 로드시.. 
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
   //03.페이지 이동 후 뒤로가기 눌렀을 경우
   useEffect(()=>{
+      //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
+      let pageArray =Array.from({length: groupPage}, (v, i) => i);
 
-          //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
-          let pageArray =Array.from({length: groupPage}, (v, i) => i);
 
-          //groupPage 페이지 그룹 변경 시 로직 (5에서 ▶ 눌렀을 때)
-          if((group % groupPage === 0 )){
-                  pageArray.length=0; 
+      //groupPage 페이지 그룹 변경 시 로직 (5에서 ▶ 눌렀을 때)
+      if((group % groupPage === 0 )){
+              pageArray.length=0; 
 
-                    for(let i=group; i<group+groupPage; i++){
-                      pageArray.push(i); 
+                for(let i=group; i<group+groupPage; i++){
+                  pageArray.push(i); 
 
-                    }
-              }
-              
+                }
+           }
+        
+           /*
           setPageButtonClick(''); 
            if(!pageButtonClick){
             pagenate(parseInt(pages),pageArray);  
           }
-        
-  },[pages]); 
- 
+         */
+          return () =>{
+            window.scrollTo(0,133); 
+          }
+           
+    //pages       
+  },[]); 
+
+  if(mainPosts_1001.length > 0 ){
+    window.scrollTo(0,localStorage.getItem('scrollY'));
+  }
+
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
- 
+
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userNickName,postFlag,submitDay,userInfo)=>{
-     window.localStorage.setItem('scrollY',window.scrollY);  
-    
-     router.push(`/posts/detailPage?postId=${postId}&userNickName=${userNickName}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userInfo}` ,scroll=false); 
+    localStorage.setItem('scrollY',window.scrollY); 
+     const param=`${postId}:${userNickName}:${postFlag}:${submitDay}:${userInfo}`;
+     router.push(`/posts/detailPage?postId=${param}`, scroll=false); 
   },[]); 
 
 
@@ -106,20 +124,19 @@ const mainPosts_1001 = ()=>{
     router.push('/posts/postEdit'); 
   },[]); 
 
-  const onSearch = (e) =>console.log(e.target.value); 
-
+  const onSearch = value => console.log(value);
+  
 
    return (
     <div>
-{/* 
-    <button onClick={executeScroll}>scroll to top</button>
-*/}
+    
+  
     &nbsp;<Search placeholder="input search text" onSearch={onSearch} style={{marginTop:'3%',width:'50%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
 
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
-                <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,'1001',v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
+               <div className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,'1001',v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
                <div className='divTableImageCell'>
                   <div className="divImageCell">
 
@@ -143,9 +160,7 @@ const mainPosts_1001 = ()=>{
                 */}
 
                   <div className="divTableCell" >    
-                    <Link href={`/posts/detailPage?postId=${v.postId}&userNickName=${v.userNickName}&postFlag=1001&submitDay=${v.submitDay}&who=${userInfo}`
-
-                  }><a>
+                    <Link href={`/posts/detailPage?postId=${v.postId}:${v.userNickName}:1001:${v.submitDay}:${userInfo}`} scroll={false}><a>
                   
                     <font size="2">
 
@@ -166,13 +181,41 @@ const mainPosts_1001 = ()=>{
               </div>
             ))}
       </div>
-   
+
+  
       <Pagenation pagenate={pagenate} dataLength={mainPosts_1001.length} postsPerPage={postsPerPage} nowPage={nowPage} groupPage={groupPage} groupPageArray={nowGroupPageArray} />
 
     </div>
     );
 }; 
 
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+
+  const postsPerPage = 20;   
+  const indexOfLastPost = parseInt(context.query.nowPage) * postsPerPage;   
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;  
+
+
+  context.store.dispatch({
+    type:MAINPOSTS_1001_LIST_REQUEST, 
+    data:{postFlag:'1001',
+          currentPage:indexOfFirstPost,
+          maxPage:postsPerPage,
+          pageNumber : parseInt(context.query.nowPage),
+   }, 
+
+   
+});
+
+context.store.dispatch(END); 
+await context.store.sagaTask.toPromise(); 
+
+
+  return {
+    props: {}, // will be passed to the page component as props
+  } 
+
+});
 
 
 
