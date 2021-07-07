@@ -39,36 +39,43 @@ const mainPosts_1001 = ()=>{
   const [groupPage , setGroupPage] = useState(5);                 //페이징 그룹 당 수  1~5 , 6~10 , 11~15 ... 5의 배수만 입력가능 
   const [nowGroupPageArray,setNowGroupPageArray] =useState([]);   //현재 페이징 그룹 배열
   const pages=router.query.nowPage ? parseInt(router.query.nowPage) : 1;
-  const group=router.query.group ? parseInt(router.query.group) : 0;  
+  const group=router.query.group ? parseInt(router.query.group) : 0; 
+  const posf=router.query.posf;  
   const [pageButtonClick,setPageButtonClick] = useState(''); 
 
-  const pagenate =useCallback((pageNumber, groupPageArray,param)=>{
+  const pagenate =useCallback((pageNumber, groupPageArray, param)=>{
 
-        setPageButtonClick(param); 
-        setNowPage(pageNumber); 
-        nowGroupPageArray.length=0; 
+        if(!posf){
+          return null; 
+        }else{
 
-        setNowGroupPageArray(nowGroupPageArray.concat(groupPageArray));
+          setPageButtonClick(param); 
+          setNowPage(pageNumber); 
+          nowGroupPageArray.length=0; 
+  
+          setNowGroupPageArray(nowGroupPageArray.concat(groupPageArray));
+  
+          const indexOfLastPost = pageNumber * postsPerPage;   
+          const indexOfFirstPost = indexOfLastPost - postsPerPage;  
+  
+          dispatch({
+            type:MAINPOSTS_1001_LIST_REQUEST, 
+            data:{postFlag:posf,
+                  currentPage:indexOfFirstPost,
+                  maxPage:postsPerPage,
+                  pageNumber
+          }, 
+        });
 
-        const indexOfLastPost = pageNumber * postsPerPage;   
-        const indexOfFirstPost = indexOfLastPost - postsPerPage;  
-
-        dispatch({
-          type:MAINPOSTS_1001_LIST_REQUEST, 
-          data:{postFlag:'1001',
-                currentPage:indexOfFirstPost,
-                maxPage:postsPerPage,
-                pageNumber
-        }, 
-      });
- 
-    },[]); 
+        }
+     
+    },[posf]); 
 
   //01.페이지 첫 로드시.. 
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
   //03.페이지 이동 후 뒤로가기 눌렀을 경우
   useEffect(()=>{
-
+  
           //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
           let pageArray =Array.from({length: groupPage}, (v, i) => i);
 
@@ -87,7 +94,7 @@ const mainPosts_1001 = ()=>{
             pagenate(parseInt(pages),pageArray);  
           }
         
-  },[pages]); 
+  },[pages,posf]); 
  
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
@@ -103,8 +110,9 @@ const mainPosts_1001 = ()=>{
   //게시글 쓰기
   const gotoEdit = useCallback(()=>{
 
-    router.push('/posts/postEdit'); 
-  },[]); 
+    router.push(`/posts/postEdit?posf=${posf}`); 
+
+  },[posf]); 
 
   const onSearch = (e) =>console.log(e.target.value); 
 
@@ -119,13 +127,13 @@ const mainPosts_1001 = ()=>{
 
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
-                <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,'1001',v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
+                <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
                <div className='divTableImageCell'>
                   <div className="divImageCell">
 
                   
                   {/* 이미지 리사이징 url==> `http://localhost:3095/api/imgResizing?size=50x50&flag=${1001}&uflag=${encodeURIComponent(v.userNickName)}&fileName=${encodeURIComponent(v.firstImageName)}` */}
-                  <img src={v.imageCount > 0 ? `${backImageUrl}/1001/${v.userNickName}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
+                  <img src={v.imageCount > 0 ? `${backImageUrl}/${posf}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
                   
                
                   {/*
@@ -143,7 +151,7 @@ const mainPosts_1001 = ()=>{
                 */}
 
                   <div className="divTableCell" >    
-                    <Link href={`/posts/detailPage?postId=${v.postId}&userNickName=${v.userNickName}&postFlag=1001&submitDay=${v.submitDay}&who=${userInfo}`
+                    <Link href={`/posts/detailPage?postId=${v.postId}&userNickName=${v.userNickName}&postFlag=${posf}&submitDay=${v.submitDay}&who=${userInfo}`
 
                   }><a>
                   
@@ -167,7 +175,7 @@ const mainPosts_1001 = ()=>{
             ))}
       </div>
    
-      <Pagenation pagenate={pagenate} dataLength={mainPosts_1001.length} postsPerPage={postsPerPage} nowPage={nowPage} groupPage={groupPage} groupPageArray={nowGroupPageArray} />
+      <Pagenation pagenate={pagenate} dataLength={mainPosts_1001.length} postsPerPage={postsPerPage} nowPage={nowPage} groupPage={groupPage} groupPageArray={nowGroupPageArray} postFlag={posf}/>
 
     </div>
     );

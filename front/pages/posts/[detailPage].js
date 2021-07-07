@@ -116,7 +116,7 @@ const detailPage  = () =>{
   let contentImages=""; 
   if(imageSrc.length > 0 ){
     imageSrc.map((v)=>{
-        contentImages=contentImages +  `<figure ><img src="${backImageUrl}/1001/${nickName}/${v.src}"></figure>`
+        contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>`
     }); 
 }
 
@@ -266,6 +266,9 @@ const detailPage  = () =>{
     return (
       
     <div >
+    <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
+      광고입니다.
+    </div>
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
             <div className='divTableRowTh'>
@@ -283,7 +286,6 @@ const detailPage  = () =>{
                 </div>
            </div>
       </div>
-      <hr style={{opacity:'0.5'}}/>
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
    
 
@@ -308,9 +310,6 @@ const detailPage  = () =>{
 
 
 
-    <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
-      광고입니다.
-    </div>
 
 
 
@@ -323,10 +322,13 @@ const detailPage  = () =>{
       </div>
     </div>
     <br />
-    <hr style={{opacity:'0.5'}}/>
     {/*좋아요 싫어요 버튼--------------------------------------------------------------------------------*/}
 
 
+    <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
+      광고입니다.
+    </div>
+    <br/>
 
 
 

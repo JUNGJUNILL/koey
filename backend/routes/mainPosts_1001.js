@@ -15,21 +15,22 @@ const upload = multer({
       destination(req, file, done) {
           
         const postFlag= req.query.postFlag;
-        const user= decodeURIComponent(req.query.user);
         
-    fs.readdir(`images/${postFlag}/${user}`,(error,files)=>{
+        
+    fs.readdir(`images/${postFlag}`,(error,files)=>{
         if(error){
-            fs.mkdirSync(`images/${postFlag}/${user}`); 
+            fs.mkdirSync(`images/${postFlag}`); 
         }
     }); 
 
-       done(null, `images/${postFlag}/${user}`);
+       done(null, `images/${postFlag}`);
        //done(null,'uploads'); 
       },
       filename(req, file, done) {
+        const user= decodeURIComponent(req.query.user);
         const ext = path.extname(file.originalname);
         const basename = path.basename(file.originalname, ext); // 제로초.png, ext===.png, basename===제로초
-        done(null, basename + new Date().valueOf() + ext);
+        done(null, basename+'_'+ new Date().valueOf()+'_'+user+ext);
       },
     }),
     limits: { fileSize: 20 * 1024 * 1024 }, //20MB

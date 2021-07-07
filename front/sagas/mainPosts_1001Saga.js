@@ -453,7 +453,7 @@ function* watchInsertMainPost_1001(){
 //이미지 업로드
 //-----------------------------------------------------------------------------------
 function APImainPosts_1001UploadImage(data){
-    return axios.post(`/mainPosts_1001/images?postFlag=1001&user=${data.user}`,data.images,{withCredentials:true})
+    return axios.post(`/mainPosts_1001/images?postFlag=${data.postFlag}&user=${data.user}`,data.images,{withCredentials:true})
 }
 
 

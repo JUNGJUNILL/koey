@@ -99,8 +99,8 @@ const AppLayOut = ({children}) =>{
         </header>
 
        <nav className='navInfo'>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1}} }><a>자유 게시판</a></Link>
-       <Link href={{pathname:''}}><a>유머</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a>자유 게시판</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a>유머</a></Link>
        <Link href={{pathname:''}}><a>정보</a></Link>
        <Link href={{pathname:''}}><a>취업</a></Link>
        <Link href={{pathname:''}}><a>핫딜</a></Link>

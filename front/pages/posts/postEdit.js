@@ -37,7 +37,8 @@ const postEdit = () =>{
     const refContent = useRef(); 
     const imageInput = useRef();
     const videoInput = useRef(); 
-    const router = useRouter()
+    const router = useRouter();
+    const posf = router.query.posf; 
 
     const blank_pattern = /^\s+|\s+&/g; 
     const [title,setTtile] = useState(''); 
@@ -45,13 +46,17 @@ const postEdit = () =>{
     const [imageCount,setImageCount]= useState([]); 
   
     useEffect(()=>{
+
+        if(!posf){
+            return null
+        }
         
         //로그인 만료 시 로그인 창으로 이동 
         if(!userInfo){
             router.push('/auth/login'); 
         }
 
-    },[!userInfo])
+    },[!userInfo,posf])
 
 
     //제목 입력
@@ -82,7 +87,7 @@ const postEdit = () =>{
         let contentImages=""; 
         if(imageFileName.length > 0 ){
             imageFileName.map((v)=>{
-                contentImages =contentImages +  `<figure ><img src="http://localhost:3095/1001/${userInfo}/${v}"></figure>`
+                contentImages =contentImages +  `<figure ><img src="http://localhost:3095/${posf}/${v}"></figure>`
             }); 
         }
 
@@ -93,13 +98,13 @@ const postEdit = () =>{
                    title:encodeURI(title),
                    userNickName:encodeURI(userInfo), 
                    imageFileName: imageFileName, 
-                   postFlag:'1001',
+                   postFlag:posf,
                    
            },
 
        }); 
 
-       router.replace('/posts/mainPosts_1001'); 
+       router.replace(`/posts/mainPosts_1001?posf=${posf}`); 
     }
 
 
@@ -158,7 +163,7 @@ const postEdit = () =>{
 
             dispatch({type:UPLOAD_IMAGES_REQUEST,
                 data:{images:imageFormData,
-                     postFlag:'1001',
+                     postFlag:posf,
                      user:encodeURIComponent(userInfo),
                     },
                 }); 
@@ -169,6 +174,7 @@ const postEdit = () =>{
     },[imageCount]); 
 
     return (
+        
         <div style={{marginTop:'3%'}}>
             {/*이미지 업로드 */}
             <input type="file" name="image" multiple hidden ref={imageInput} accept={'.jpg,.gif,.png,.bmp,.jpeg'} onChange={onChangeImages}/>
@@ -187,7 +193,7 @@ const postEdit = () =>{
        <div style={{textAlign:'center'}}>
             {imageFileName && imageFileName.map((v,i)=>(
                 <div style={{display:'inline-block'}} key={i} >
-                    <img style={{width:'60px',height:'60px'}} src={`${backImageUrl}/1001/${userInfo}/${v}`} />    
+                    <img style={{width:'60px',height:'60px'}} src={`${backImageUrl}/${posf}/${v}`} />    
                     <br/>
                     <Button style={{width:'60px'}}><CloseOutlined /></Button>
                 </div>

@@ -40,7 +40,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/nick1111/%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC1607408839105.png`} />}
+          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
           style={{height:'15px'}}
@@ -51,7 +51,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/nick1111/%EC%97%90%EC%9D%B4%EC%8B%AF%ED%8C%941607324381388.jpg`} />}
+          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
@@ -62,7 +62,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
            cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-           src={`http://localhost:3095/1001/nick1111/%EB%8B%B4%EB%B0%B0%EB%95%A1%EA%B8%B4%EB%8B%A4%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B81622693419222.jpg`} />}
+           src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
           style={{height:'15px'}}
@@ -77,7 +77,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/nick1111/%EB%8F%99%EA%B8%B0%EB%B6%80%EC%97%AC1607408839105.png`} />}
+          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
           style={{height:'15px'}}
@@ -88,7 +88,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/nick1111/%EC%97%90%EC%9D%B4%EC%8B%AF%ED%8C%941607324381388.jpg`} />}
+          src={`http://localhost:3095/1001/5오_1625652527876_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
@@ -99,7 +99,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
            cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-           src={`http://localhost:3095/1001/nick1111/%EB%8B%B4%EB%B0%B0%EB%95%A1%EA%B8%B4%EB%8B%A4%20-%20%EB%B3%B5%EC%82%AC%EB%B3%B81622693419222.jpg`} />}
+           src={`http://localhost:3095/1001/5오_1625652527876_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
           style={{height:'15px'}}
@@ -114,7 +114,7 @@ const Home =()=>{
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
     header={<div><b>자유 게시판</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
 
     dataSource={data01}
     renderItem={item => (
