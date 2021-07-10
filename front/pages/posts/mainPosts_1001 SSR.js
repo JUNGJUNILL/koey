@@ -15,7 +15,6 @@ import
     } 
 from '../../reducers/mainPosts_1001'; 
 
-import ReactRouterPropTypes from 'react-router-prop-types';
 import 
     {LOAD_USER_REQUEST,
     } 
