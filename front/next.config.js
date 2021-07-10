@@ -6,8 +6,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   module.exports = withBundleAnalyzer({
     compress: true,
 
-    experimental: {
-      scrollRestoration: true,
+    future: {
+      webpack5: true,
     },
     
     env : {
