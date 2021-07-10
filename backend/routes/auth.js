@@ -235,7 +235,7 @@ router.get('/kakaoTest',async (req,res,next)=>{
             data: qs.stringify({
               grant_type: "authorization_code",
               client_id: '8cf1ea216775ee5a5ff24a71b855846c',
-              redirect_uri: 'http://localhost:3095/api/auth/kakaoTest',
+              redirect_uri: 'http://captainryan.iptime.org:3095/api/auth/kakaoTest',
               code :kakaotoken,
             })
           });
@@ -243,8 +243,9 @@ router.get('/kakaoTest',async (req,res,next)=>{
           res.cookie(process.env.KAKAO_COOKIE, kakaoAccessToken.data.access_token ,{httpOnly:true,
             secure:false, 
         }); 
-          return res.redirect('http://localhost:3001');
-
+          //return res.redirect('http://localhost:3001');
+          return res.redirect('http://captainryan.iptime.org:3001/');
+          
     }catch(e){
         console.error(e)
     }

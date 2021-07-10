@@ -8,6 +8,8 @@ import wrapper from '../store/configureStore';
 import { Card, Col, Row, List, Typography, Button, Divider  } from 'antd';
 const { Meta } = Card;
 
+import { backImageUrl } from '../config/config';
+
 import 
     {LOAD_USER_REQUEST,} 
 from '../reducers/auth'; 
@@ -40,7 +42,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
+          src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
           style={{height:'15px'}}
@@ -51,7 +53,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
+          src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
@@ -62,7 +64,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
            cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-           src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
+           src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
           style={{height:'15px'}}
@@ -77,7 +79,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/1일_1625651304854_계란빵.jpg`} />}
+          src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
           style={{height:'15px'}}
@@ -88,7 +90,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-          src={`http://localhost:3095/1001/5오_1625652527876_계란빵.jpg`} />}
+          src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
@@ -99,7 +101,7 @@ const Home =()=>{
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
            cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-           src={`http://localhost:3095/1001/5오_1625652527876_계란빵.jpg`} />}
+           src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />}
     >
     <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
           style={{height:'15px'}}
@@ -143,7 +145,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
      axios.defaults.headers.Cookie = cookie;
    }
  
-   context.store.dispatch({
+  context.store.dispatch({
     type:LOAD_USER_REQUEST
   });
 

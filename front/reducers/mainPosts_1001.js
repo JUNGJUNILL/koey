@@ -82,6 +82,11 @@ export const MAINPOST_1001_IMAGES_REQUEST = 'MAINPOST_1001_IMAGES_REQUEST';
 export const MAINPOST_1001_IMAGES_SUCCESS = 'MAINPOST_1001_IMAGES_SUCCESS';
 export const MAINPOST_1001_IMAGES_FAILURE = 'MAINPOST_1001_IMAGES_FAILURE';
 
+//이미지 이름 제거하기 
+export const MAINPOST_1001_IMAGENAME_REMOVE_REQUEST = 'MAINPOST_1001_IMAGENAME_REMOVE_REQUEST';
+export const MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS = 'MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS';
+export const MAINPOST_1001_IMAGENAME_REMOVE_FAILURE = 'MAINPOST_1001_IMAGENAME_REMOVE_FAILURE';
+
 export const TEST_REQUEST = 'TEST_REQUEST'; 
 export const TEST_SUCCESS = 'TEST_SUCCESS'; 
 export const TEST_FAILURE = 'TEST_FAILURE'; 
@@ -341,6 +346,17 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
                 break; 
             }
 //----------------------------------------
+
+
+//이미지 이름 제거하기
+//----------------------------------------
+            case MAINPOST_1001_IMAGENAME_REMOVE_REQUEST: {
+                draft.imageFileName = draft.imageFileName.filter((v, i) => v !== action.data.removeImageName);
+                break; 
+            }
+//----------------------------------------
+
+
 
 
 

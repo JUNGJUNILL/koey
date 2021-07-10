@@ -369,8 +369,8 @@ img {
   padding:6px;
   margin:0 0 1px 0;
   border-bottom:2px solid #ffcc99;
-  background:#ff6600;
-
+  /*background:#ff6600;*/
+  background:#e25a00;
 
 
 }
@@ -421,7 +421,8 @@ img {
     margin: 3px;
     padding: 5px 7px;
     border-radius: 5px;
-    background: #ff6600;
+    /*background: #ff6600;*/
+    background: #e25a00;
     color: #fff!important;
     text-decoration: none;
     font-size: 12px;
@@ -434,7 +435,8 @@ img {
     margin: 3px;
     padding: 5px 7px;
     border-radius: 5px;
-    background: #ff6600;
+    /*background: #ff6600;*/
+    background:#e25a00 ;
     color: #fff!important;
     text-decoration: none;
     font-size: 12px;

@@ -20,7 +20,7 @@ from '../../reducers/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl } from '../../config/config';
+import { backImageUrl, backUrl } from '../../config/config';
 
 
 
@@ -132,13 +132,13 @@ const mainPosts_1001 = ()=>{
                   <div className="divImageCell">
 
                   
-                  {/* 이미지 리사이징 url==> `http://localhost:3095/api/imgResizing?size=50x50&flag=${1001}&uflag=${encodeURIComponent(v.userNickName)}&fileName=${encodeURIComponent(v.firstImageName)}` */}
+                  {/* 
+                   이미지 원본 
                   <img src={v.imageCount > 0 ? `${backImageUrl}/${posf}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
-                  
-               
-                  {/*
-                  <img src={v.contentImages.indexOf(`<img src=`) !== -1 ? v.contentImages.substr(v.contentImages.indexOf(`<img src=`)+`<img src=`.length ,v.contentImages.substring(v.contentImages.indexOf(`<img src=`)+`<img src=`.length).indexOf('>')).split(`"`).join(''):`http://localhost:3095/noimages.gif`}  />
                   */}
+                  {/*이미지 리사이징 */}
+                  <img src={v.imageCount > 0 ? `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${encodeURIComponent(v.firstImageName)}` :`${backImageUrl}/noimages.gif`} />
+
                   </div>
                </div>
 

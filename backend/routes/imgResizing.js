@@ -11,8 +11,8 @@ router.get('/' ,async (req,res,next)=>{
 
     //https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=gmlwo308&logNo=222051126736
     //https://sharp.pixelplumbing.com/    
-    let {size , flag,uflag, fileName} = req.query;
-    const imageDir = path.join(__dirname,'../images',flag,decodeURIComponent(uflag)); 
+    let {size , posf, fileName} = req.query;
+    const imageDir = path.join(__dirname,'../images',posf); 
     const filename =  path.join(imageDir,decodeURIComponent(fileName)); 
 
     if(size) {

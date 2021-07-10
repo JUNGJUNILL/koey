@@ -21,6 +21,7 @@ from '../../reducers/auth';
 import 
     {
         MAINPOST_1001_INSERT_REQUEST,
+        MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
     } 
 from '../../reducers/mainPosts_1001'; 
 const { TextArea } = Input;
@@ -71,7 +72,6 @@ const postEdit = () =>{
 
     //submit
     const contentSummit = ()=>{
-     console.log('imageFileName=>>', imageFileName); 
         if(title.length === 0 || title.replace(blank_pattern,'')===""){
             refTitle.current.focus();  
             alert('제목을 입력 해 주세요'); 
@@ -87,7 +87,7 @@ const postEdit = () =>{
         let contentImages=""; 
         if(imageFileName.length > 0 ){
             imageFileName.map((v)=>{
-                contentImages =contentImages +  `<figure ><img src="http://localhost:3095/${posf}/${v}"></figure>`
+                contentImages =contentImages +  `<figure ><img src="${backImageUrl}/${posf}/${v}"></figure>`
             }); 
         }
 
@@ -104,7 +104,7 @@ const postEdit = () =>{
 
        }); 
 
-       router.replace(`/posts/mainPosts_1001?posf=${posf}`); 
+       router.replace(`/posts/mainPosts_1001?nowPage=1&posf=${posf}`); 
     }
 
 
@@ -151,12 +151,12 @@ const postEdit = () =>{
 
         }); 
         const imageArray = imageFormData.getAll('image');
-        setImageCount(imageCount.concat(imageArray));
+        //setImageCount(imageCount.concat(imageArray));
 
         //한번에 5장 이상 올렸을 경우 
         if(imageArray.length > 5){
             alert('한번에 5장 이상 올릴 수 없습니다.'); 
-            setImageCount([]);
+            //setImageCount([]);
             imageFormData.delete('image'); 
             return; 
         }else{
@@ -170,8 +170,18 @@ const postEdit = () =>{
     
         }
 
+    //imageCount
+    },[]); 
 
-    },[imageCount]); 
+
+    //이미지 제거 
+    const removeImage =(v) => {
+
+        dispatch({type:MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
+                  data:{removeImageName:v,},
+            }); 
+            
+    }
 
     return (
         
@@ -195,7 +205,7 @@ const postEdit = () =>{
                 <div style={{display:'inline-block'}} key={i} >
                     <img style={{width:'60px',height:'60px'}} src={`${backImageUrl}/${posf}/${v}`} />    
                     <br/>
-                    <Button style={{width:'60px'}}><CloseOutlined /></Button>
+                    <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v)} /></Button>
                 </div>
             ))}
         </div>

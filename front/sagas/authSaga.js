@@ -1,5 +1,6 @@
 import axios from 'axios'
 import jwtDeCoder from 'jwt-decode'
+import { backUrl } from '../config/config';
 //import Kakao from 'kakaojs'; 
 import {all,fork,takeLatest,takeEvery ,put, delay,call} from 'redux-saga/effects'; 
 import 
@@ -179,7 +180,8 @@ function* sagaLogin(action){
             Kakao.init('71a70e1c6ee55af30c3f9ec51fd7dcb7'); 
             if(Kakao.isInitialized()){
                     Kakao.Auth.authorize({               
-                        redirectUri:'http://localhost:3095/api/auth/kakaoTest',
+                        //redirectUri:'http://localhost:3095/api/auth/kakaoTest',
+                        redirectUri:`${backUrl}/auth/kakaoTest`,
                     });
                 }
 
