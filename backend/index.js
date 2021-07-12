@@ -1,7 +1,6 @@
 const express = require('express'); 
 const cors = require('cors'); 
 const morgan = require('morgan'); 
-const hpp = require('hpp');
 const cookieParser = require('cookie-parser'); 
 const path = require('path'); 
 
@@ -13,9 +12,8 @@ const app= express();
 dotenv.config(); 
 passportConfig(); 
 
-if(process.env.NODE_ENV ==='production'){
+if(process.env.NODE_ENV === 'production'){
     app.use(morgan('combined')); 
-    app.use(hpp());
 }else{
     app.use(morgan('dev')); 
 }
