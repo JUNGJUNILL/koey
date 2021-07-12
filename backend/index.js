@@ -17,7 +17,6 @@ app.use(cors({
     //--프론트와 백엔드간에 쿠키 주고 받기 위함
 }));
 
-const empAPIRouter = require('./routes/emp'); 
 const authAPIRouter = require('./routes/auth'); 
 const mainPosts_1001APIRouter = require('./routes/mainPosts_1001'); 
 const imgResizingAPIRouter = require('./routes/imgResizing'); 
