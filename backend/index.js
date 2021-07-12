@@ -8,8 +8,19 @@ const dotenv = require('dotenv');
 const passportConfig = require('./passport'); 
 const app= express(); 
 
+const hpp=require('hpp');
+const helmet =require('helmet');
+
 dotenv.config(); 
 passportConfig(); 
+
+if(process.env.NODE_ENV ==='production'){
+    app.use(morgan('combined')); 
+    app.use(hpp());
+    app.use(helmet());
+}else{
+    app.use(morgan('dev')); 
+}
 
 app.use(cors({
     origin: true, 
@@ -23,7 +34,6 @@ const mainPosts_1001APIRouter = require('./routes/mainPosts_1001');
 const imgResizingAPIRouter = require('./routes/imgResizing'); 
 const indexPageAPIRouter = require('./routes/indexPage'); 
 
-app.use(morgan('dev')); 
 
 //정적 파일 load
 app.use('/',express.static(path.join(__dirname,'images'))); 
