@@ -8,15 +8,8 @@ const dotenv = require('dotenv');
 const passportConfig = require('./passport'); 
 const app= express(); 
 
-
 dotenv.config(); 
 passportConfig(); 
-
-if(process.env.NODE_ENV === 'production'){
-    app.use(morgan('combined')); 
-}else{
-    app.use(morgan('dev')); 
-}
 
 app.use(cors({
     origin: true, 
@@ -30,6 +23,7 @@ const mainPosts_1001APIRouter = require('./routes/mainPosts_1001');
 const imgResizingAPIRouter = require('./routes/imgResizing'); 
 const indexPageAPIRouter = require('./routes/indexPage'); 
 
+app.use(morgan('dev')); 
 
 //정적 파일 load
 app.use('/',express.static(path.join(__dirname,'images'))); 
@@ -56,6 +50,7 @@ app.use(cookieParser()); //req.cookies 사용가능,
 // app.use(passport.initialize()); 
 // app.use(passport.session()); 
 
+
 app.use('/api/emp',empAPIRouter); 
 app.use('/api/auth',authAPIRouter); 
 app.use('/api/mainPosts_1001',mainPosts_1001APIRouter); 
@@ -68,20 +63,16 @@ app.use('/api/indexPage',indexPageAPIRouter);
 // app.use(function(e, req, res, next) {
 //     console.log('에러발생했어!!', e); 
 //   });
-
 app.get('/', (req,res)=>{
 
-//     res.cookie('backs' ,'beer' ,{httpOnly:true,
-//         secure:false, 
+    res.cookie('backs' ,'beer' ,{httpOnly:true,
+        secure:false, 
+}); 
 
-// }); 
-
-    res.send('backendServerrr~~')
+res.send('hello yabal');
 
 }); 
 
-
-
-app.listen(80,()=>{
-    console.log('server is Runnig in 80 port'); 
+app.listen(3095,()=>{
+    console.log('server is Runnig in 3095 port'); 
 })
