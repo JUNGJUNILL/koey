@@ -3,6 +3,9 @@ const cors = require('cors');
 const morgan = require('morgan'); 
 const cookieParser = require('cookie-parser'); 
 const path = require('path'); 
+const hpp = require('hpp');
+const helmet = require('helmet');
+
 
 const dotenv = require('dotenv');
 const passportConfig = require('./passport'); 
@@ -11,11 +14,25 @@ const app= express();
 dotenv.config(); 
 passportConfig(); 
 
-app.use(cors({
-    origin: true, 
-    credentials:true,
-    //--프론트와 백엔드간에 쿠키 주고 받기 위함
-}));
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(morgan('combined'));
+    app.use(hpp());
+    app.use(helmet({ contentSecurityPolicy: false }));
+    app.use(cors({
+        origin: true, 
+        credentials:true,
+        //--프론트와 백엔드간에 쿠키 주고 받기 위함
+    }));
+  } else {
+    app.use(morgan('dev'));
+    app.use(cors({
+      origin: true,
+      credentials: true,
+    }));
+  }
+
+
 
 const authAPIRouter = require('./routes/auth'); 
 const mainPosts_1001APIRouter = require('./routes/mainPosts_1001'); 
@@ -71,6 +88,6 @@ res.send('hello yabal');
 
 }); 
 
-app.listen(3095,()=>{
-    console.log('server is Runnig in 3095 port'); 
+app.listen(80,()=>{
+    console.log('server is Runnig in 80 port'); 
 })
