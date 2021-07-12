@@ -50,7 +50,6 @@ app.use(cookieParser()); //req.cookies 사용가능,
 // app.use(passport.initialize()); 
 // app.use(passport.session()); 
 
-
 app.use('/api/emp',empAPIRouter); 
 app.use('/api/auth',authAPIRouter); 
 app.use('/api/mainPosts_1001',mainPosts_1001APIRouter); 
@@ -63,14 +62,20 @@ app.use('/api/indexPage',indexPageAPIRouter);
 // app.use(function(e, req, res, next) {
 //     console.log('에러발생했어!!', e); 
 //   });
+
 app.get('/', (req,res)=>{
 
-    res.cookie('backs' ,'beer' ,{httpOnly:true,
-        secure:false, 
-}); 
+//     res.cookie('backs' ,'beer' ,{httpOnly:true,
+//         secure:false, 
+
+// }); 
+
+    res.send('backendServerrr~~')
 
 }); 
+
+
 
 app.listen(80,()=>{
-    console.log('server is Runnig in 3095 port'); 
+    console.log('server is Runnig in 80 port'); 
 })
