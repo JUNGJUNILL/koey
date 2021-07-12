@@ -41,10 +41,11 @@ const Home =()=>{
 
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
-          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          cover={<img alt="example" style={{width:'100%',height:'130px', objectFit:'cover'}} 
           src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
+    <Meta title='새우깡 와 진짜 대박이다 호박깡'
+
           style={{height:'15px'}}
     />
     </Card>
@@ -52,10 +53,10 @@ const Home =()=>{
 
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
-          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          cover={<img alt="example" style={{width:'100%',height:'130px', objectFit:'cover'}} 
           src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
+    <Meta title={<font style={{fontSize:'1.3vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
     />
     </Card>
@@ -63,10 +64,10 @@ const Home =()=>{
 
   <Col span={8} style={{padding:'5px'}}>
     <Card  bordered={true}
-           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+           cover={<img alt="example" style={{width:'100%',height:'130px', objectFit:'cover'}} 
            src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
+    <Meta title={<font style={{fontSize:'1.5vh'}}>고고공 고고공 고고공 고고공</font>}
           style={{height:'15px'}}
     />
     </Card>
@@ -78,10 +79,10 @@ const Home =()=>{
 
   <Col span={8} style={{padding:'5px'}}> 
     <Card bordered={true}
-          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          cover={<img alt="example" style={{width:'100%',height:'130px', objectFit:'cover'}} 
           src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />}
     >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
+    <Meta title={<font style={{fontSize:'1.5vh'}}>와 진짜 대박이다 새우깡 호박깡</font>}
           style={{height:'15px'}}
     />
     </Card>
@@ -89,24 +90,26 @@ const Home =()=>{
 
   <Col span={8} style={{padding:'5px'}}>
     <Card bordered={true}
-          cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
+          cover={<img alt="example" style={{width:'100%',height:'130px', objectFit:'cover'}} 
           src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />}
     >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
+    <Meta title={<font style={{fontSize:'1.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>} 
           style={{height:'15px'}}
     />
     </Card>
   </Col>
 
   <Col span={8} style={{padding:'5px'}}>
-    <Card  bordered={true}
-           cover={<img alt="example" style={{width:'100%',height:'100px', objectFit:'cover'}} 
-           src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />}
-    >
-    <Meta title={<font style={{fontSize:'0.5vh'}}>와 진짜 음 말이 안되네 감자깡</font>}
-          style={{height:'15px'}}
-    />
-    </Card>
+  <div style={{textAlign:'center'}}>
+      <div>
+          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />    
+          <br />
+          <div className="helloworld">
+          ddd와 진짜 음 말이 안되네 감자깡호랑이 기운이 솟아나요!
+          </div>
+      </div>
+  </div>
+
   </Col>
 </Row>
 
@@ -122,9 +125,9 @@ const Home =()=>{
     renderItem={item => (
       <List.Item>
       <Link href={'#'}>
-      <a>
+      <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
-        {item.title}
+        {item.title}ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
         <span className="countFontColor">[{item.commentCount}] </span>
       </a>
       </Link>
