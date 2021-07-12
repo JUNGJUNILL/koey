@@ -1,6 +1,8 @@
 const express = require('express'); 
 const cors = require('cors'); 
 const morgan = require('morgan'); 
+const hpp = require('hpp');
+const helmet = require('helmet');
 const cookieParser = require('cookie-parser'); 
 const path = require('path'); 
 
@@ -8,8 +10,6 @@ const dotenv = require('dotenv');
 const passportConfig = require('./passport'); 
 const app= express(); 
 
-const hpp=require('hpp');
-const helmet =require('helmet');
 
 dotenv.config(); 
 passportConfig(); 
@@ -17,7 +17,7 @@ passportConfig();
 if(process.env.NODE_ENV ==='production'){
     app.use(morgan('combined')); 
     app.use(hpp());
-    app.use(helmet());
+    app.use(helmet({ contentSecurityPolicy: false }));
 }else{
     app.use(morgan('dev')); 
 }
