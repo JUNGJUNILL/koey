@@ -71,6 +71,6 @@ app.get('/', (req,res)=>{
 
 }); 
 
-app.listen(3095,()=>{
+app.listen(80,()=>{
     console.log('server is Runnig in 3095 port'); 
 })
