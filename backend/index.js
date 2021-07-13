@@ -3,8 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan'); 
 const cookieParser = require('cookie-parser'); 
 const path = require('path'); 
-const hpp = require('hpp');
-const helmet = require('helmet');
+// const hpp = require('hpp');
+// const helmet = require('helmet');
 
 
 const dotenv = require('dotenv');
@@ -17,8 +17,8 @@ passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
     app.use(morgan('combined'));
-    app.use(hpp());
-    app.use(helmet({ contentSecurityPolicy: false }));
+    // app.use(hpp());
+    // app.use(helmet({ contentSecurityPolicy: false }));
     app.use(cors({
         origin: true, 
         credentials:true,
