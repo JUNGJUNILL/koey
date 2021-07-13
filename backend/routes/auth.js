@@ -1,12 +1,11 @@
 const express = require('express');
 const passport = require('passport');
 const {isLoggedIn , vertifiyToken} = require('./middlewares')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const pool = require('../DataBaseInfo');
 const jwt = require('jsonwebtoken'); 
 const axios = require('axios'); 
 var qs = require('querystring');
-const { Console } = require('console');
 const router = express.Router();
 
 
