@@ -3,8 +3,8 @@ const cors = require('cors');
 const morgan = require('morgan'); 
 const cookieParser = require('cookie-parser'); 
 const path = require('path'); 
-// const hpp = require('hpp');
-// const helmet = require('helmet');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 
 const dotenv = require('dotenv');
@@ -17,8 +17,8 @@ passportConfig();
 
 if (process.env.NODE_ENV === 'production') {
     app.use(morgan('combined'));
-    // app.use(hpp());
-    // app.use(helmet({ contentSecurityPolicy: false }));
+    app.use(hpp());
+    app.use(helmet({ contentSecurityPolicy: false }));
     app.use(cors({
         origin: true, 
         credentials:true,
@@ -80,14 +80,10 @@ app.use('/api/indexPage',indexPageAPIRouter);
 //   });
 app.get('/', (req,res)=>{
 
-    res.cookie('backs' ,'beer' ,{httpOnly:true,
-        secure:false, 
-}); 
-
 res.send('hello yabal');
 
 }); 
 
-app.listen(80,()=>{
-    console.log('server is Runnig in 80 port'); 
+app.listen(8080,()=>{
+    console.log('server is Runnig in 8080 port'); 
 })
