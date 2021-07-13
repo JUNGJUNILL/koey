@@ -29,7 +29,7 @@ function* sagaIndexPageData01List(action){
     }catch(e){
 
         console.error(e); 
-        alert('error', e); 
+        //alert('error', e); 
         yield put({
             type:INDEX_PAGE_DATA01_FAILURE, 
             error: e, 

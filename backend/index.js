@@ -84,6 +84,6 @@ res.send('hello yabal');
 
 }); 
 
-app.listen(8080,()=>{
-    console.log('server is Runnig in 8080 port'); 
+app.listen(3095,()=>{
+    console.log('server is Runnig in 3095 port'); 
 })

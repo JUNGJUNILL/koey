@@ -1,6 +1,6 @@
 const passport = require('passport'); 
 const local    = require('./local'); 
-const kakaoLogin =require('./kakao'); 
+//const kakaoLogin =require('./kakao'); 
 const pool = require('../DataBaseInfo');
 
 
@@ -33,7 +33,7 @@ module.exports = () =>{
 
     local(); 
 
-    kakaoLogin(); 
+    //kakaoLogin(); 
     
 
 }
