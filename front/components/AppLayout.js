@@ -1,6 +1,6 @@
 
-import {useCallback,useState,useEffect, useRef} from 'react'
-import {Row,Col,Drawer,Menu,Button,Layout} from  'antd'; 
+import {useCallback,useState, useRef} from 'react'
+import {Row,Col,Drawer,Menu,} from  'antd'; 
 import {AlignLeftOutlined,UserOutlined } from '@ant-design/icons'
 
 
@@ -9,15 +9,15 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 
 
-import wrapper from '../store/configureStore';
+//import wrapper from '../store/configureStore';
 import { backImageUrl } from '../config/config';
 
 
 const AppLayOut = ({children}) =>{
-    const dummyList = ['자유 게시판','유머','정보','취업','핫딜','미국','일본','중국','동남아','유럽','호주','기타']; 
+    //const dummyList = ['자유 게시판','유머','정보','취업','핫딜','미국','일본','중국','동남아','유럽','호주','기타']; 
     const { SubMenu } = Menu;
     //const router   =useRouter(); 
-    const dispatch = useDispatch(); 
+    //const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
 
     // useEffect(()=>{
@@ -30,21 +30,21 @@ const AppLayOut = ({children}) =>{
     // },[userInfo]);
 
     //로그아웃 버튼
-    const logOut = useCallback((e)=>{
+    // const logOut = useCallback((e)=>{
 
-        dispatch({
-            type:LOGOUT_REQUEST, 
-        });
+    //     dispatch({
+    //         type:LOGOUT_REQUEST, 
+    //     });
 
-    },[userInfo]); 
+    // },[userInfo]); 
  
     const [isClicked,setIsClicked] = useState(false); 
-    const inputEl = useRef(null); 
+    //const inputEl = useRef(null); 
   
 
-    const catergoriList = () =>{
-          setIsClicked(!isClicked);
-    }
+    // const catergoriList = () =>{
+    //       setIsClicked(!isClicked);
+    // }
 
     const [visible, setVisible] = useState(false);
 
@@ -59,9 +59,9 @@ const AppLayOut = ({children}) =>{
 
 
 
-    const closeCatergoriList = () =>{
-        setIsClicked(false);
-    }
+    // const closeCatergoriList = () =>{
+    //     setIsClicked(false);
+    // }
 
     const gotoHome = () =>{
         Router.push('/'); 
@@ -99,20 +99,23 @@ const AppLayOut = ({children}) =>{
         </header>
 
        <nav className='navInfo'>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a>자유 게시판</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a>유머</a></Link>
-       <Link href={{pathname:''}}><a>정보</a></Link>
-       <Link href={{pathname:''}}><a>취업</a></Link>
+       <Link href={{pathname:''}}><a>좋소!베스트</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a>좋좋소!</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a>좋소!</a></Link>
+       <Link href={{pathname:''}}><a>주말출근</a></Link>
+       <Link href={{pathname:''}}><a>야근/철야</a></Link>
+       <Link href={{pathname:''}}><a>현장/이슈</a></Link>
+       <Link href={{pathname:''}}><a>거래처썰</a></Link>
+       <Link href={{pathname:''}}><a>좋소!탈출</a></Link>
+       <Link href={{pathname:''}}><a>좋소!명작</a></Link>
        <Link href={{pathname:''}}><a>핫딜</a></Link>
-       <Link href={{pathname:''}}><a>미국</a></Link>
-       <Link href={{pathname:''}}><a>중국</a></Link>
-       <Link href={{pathname:''}}><a>일본</a></Link>
+       <Link href={{pathname:''}}><a>운영진 요청사항</a></Link>
+       {/* 
        <Link href={{pathname:''}}><a>동남아</a></Link>
        <Link href={{pathname:''}}><a>유럽</a></Link>
        <Link href={{pathname:''}}><a>아프리카</a></Link>
        <Link href={{pathname:''}}><a>오세아니아</a></Link>
-
-       <a>핫딜</a>
+        */}
        </nav>
             
  
