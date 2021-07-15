@@ -198,6 +198,7 @@ router.post('/postInsert', async (req,res,next)=>{
 
     try{
         const {content,title,userNickName,postFlag,contentImages,imageFileName} = req.body.data; 
+
         const _title   = decodeURIComponent(title); 
         const _content = decodeURIComponent(content); 
         const _contentImages = decodeURIComponent(contentImages); 

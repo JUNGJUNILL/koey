@@ -32,8 +32,9 @@ function* sagaLoadUser(action){
     try{
 
         const result = yield call(APILoadUser,action.data);    
-        const nick = result.data.nick;
+        const nick = result.data.nick.nick;
         const loginType = result.data.loginType; 
+        
         yield put({
                 type:LOAD_USER_SUCCESS, 
                 data: {nickName: nick,loginTyle:loginType},           
@@ -169,6 +170,7 @@ function* sagaLogin(action){
             
             result = yield call(APILogin,action.data); 
             decoded =jwtDeCoder(result.data.token); 
+            console.log('decoded=>',decoded,'decoded.nick=>', decoded.nick); 
             yield put({
                 type:LOGIN_SUCCESS,
                 data:{nickName: decoded.nick,loginTyle:'local'},   

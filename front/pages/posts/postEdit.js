@@ -7,6 +7,7 @@ import {END} from 'redux-saga';
 import axios from  'axios'; 
 import {Button, Input,} from 'antd'
 import { backImageUrl } from '../../config/config';
+import secureFilter from   '../../util/secureFilter';
 
 import 
     {
@@ -90,13 +91,17 @@ const postEdit = () =>{
                 contentImages =contentImages +  `<figure ><img src="${backImageUrl}/${posf}/${v}"></figure>`
             }); 
         }
+        const filteredContent = secureFilter(content); 
+        const filteredTitle   = secureFilter(title); 
+        const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
+        console.log(filteredTitle,hello); 
         dispatch({
             type: MAINPOST_1001_INSERT_REQUEST,
-            data: {content:encodeURI(content),
-                   contentImages :encodeURI(contentImages),
-                   title:encodeURI(title),
-                   userNickName:encodeURI(userInfo), 
+            data: {content:encodeURIComponent(hello),
+                   contentImages :encodeURIComponent(contentImages),
+                   title:encodeURIComponent(filteredTitle),
+                   userNickName:encodeURIComponent(userInfo), 
                    imageFileName: imageFileName, 
                    postFlag:posf,
                    
