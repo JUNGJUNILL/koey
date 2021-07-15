@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(hpp());
     app.use(helmet({ contentSecurityPolicy: false }));
     app.use(cors({
-      origin: 'http://jscompany.live/',
+      origin: 'http://jscompany.live',
       credentials: true,
         //--프론트와 백엔드간에 쿠키 주고 받기 위함
     }));
