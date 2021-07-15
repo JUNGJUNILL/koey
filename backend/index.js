@@ -49,22 +49,22 @@ app.use('/',express.static('uploads'));
 app.use(express.json()); 
 app.use(express.urlencoded({extended : true})); //form 데이터 처리 
 
-app.use(cookieParser(process.env.COOKIE_SECRET)); //req.cookies 사용가능, 
+app.use(cookieParser()); //req.cookies 사용가능, 
 
 
-app.use(session({
-    resave : false,             //매번 세션 강제 저장
-    saveUninitialized : false,  //빈 값도 저장
-    secret: process.env.COOKIE_SECRET, 
-    cookie :{
-        httpOnly : true, 
-        secure: false, //https 시 true
-        domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
-      //  maxAge : 1000*60*60,
-    },
-   // name:'rnbck',
+// app.use(session({
+//     resave : false,             //매번 세션 강제 저장
+//     saveUninitialized : false,  //빈 값도 저장
+//     secret: process.env.COOKIE_SECRET, 
+//     cookie :{
+//         httpOnly : true, 
+//         secure: false, //https 시 true
+//         domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
+//       //  maxAge : 1000*60*60,
+//     },
+//    // name:'rnbck',
 
-}));
+// }));
 // app.use(passport.initialize()); 
 // app.use(passport.session()); 
 
