@@ -48,7 +48,7 @@ app.use('/',express.static('uploads'));
 app.use(express.json()); 
 app.use(express.urlencoded({extended : true})); //form 데이터 처리 
 
-app.use(cookieParser(process.env.COOKIE_SECRET)); //req.cookies 사용가능, 
+app.use(cookieParser()); //req.cookies 사용가능, 
 
 
 // app.use(expressSession({
