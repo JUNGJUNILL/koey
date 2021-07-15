@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors'); 
 const morgan = require('morgan'); 
 const cookieParser = require('cookie-parser'); 
+const session = require('express-session');
 const path = require('path'); 
 const hpp = require('hpp');
 const helmet = require('helmet');
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use(hpp());
     app.use(helmet({ contentSecurityPolicy: false }));
     app.use(cors({
-      origin: 'http://jscompany.live',
+      origin: 'http://jscompany.live/',
       credentials: true,
         //--프론트와 백엔드간에 쿠키 주고 받기 위함
     }));
@@ -48,7 +49,7 @@ app.use('/',express.static('uploads'));
 app.use(express.json()); 
 app.use(express.urlencoded({extended : true})); //form 데이터 처리 
 
-app.use(cookieParser()); //req.cookies 사용가능, 
+app.use(cookieParser(process.env.COOKIE_SECRET)); //req.cookies 사용가능, 
 
 
 // app.use(expressSession({
