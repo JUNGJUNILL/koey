@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use(hpp());
     app.use(helmet({ contentSecurityPolicy: false }));
     app.use(cors({
-        origin: true, 
-        credentials:true,
+      origin: 'http://jscompany.live',
+      credentials: true,
         //--프론트와 백엔드간에 쿠키 주고 받기 위함
     }));
   } else {
@@ -48,7 +48,7 @@ app.use('/',express.static('uploads'));
 app.use(express.json()); 
 app.use(express.urlencoded({extended : true})); //form 데이터 처리 
 
-app.use(cookieParser()); //req.cookies 사용가능, 
+app.use(cookieParser(process.env.COOKIE_SECRET)); //req.cookies 사용가능, 
 
 
 // app.use(expressSession({
@@ -58,6 +58,7 @@ app.use(cookieParser()); //req.cookies 사용가능,
 //     cookie :{
 //         httpOnly : true, 
 //         secure: false, //https 시 true
+//         domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
 //       //  maxAge : 1000*60*60,
 //     },
 //     name:'rnbck',
