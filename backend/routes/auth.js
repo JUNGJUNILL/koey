@@ -199,6 +199,7 @@ router.post('/login',async (req,res,next)=>{
                     //토큰을 쿠키에 저장함.                  
                     res.cookie(process.env.COOKIE_SECRET, token ,{httpOnly:true,
                                                                   secure:false, 
+                                                                  domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
                     }); 
                 
 
