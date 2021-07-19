@@ -102,13 +102,14 @@ const AppLayOut = ({children}) =>{
        <Link href={{pathname:''}}><a>좋소!베스트</a></Link>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a>좋좋소!</a></Link>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a>좋소!</a></Link>
+       <Link href={{pathname:''}}><a>좋소!탈출</a></Link>
+       <Link href={{pathname:''}}><a>좋소!희망편</a></Link>
        <Link href={{pathname:''}}><a>주말출근</a></Link>
        <Link href={{pathname:''}}><a>야근/철야</a></Link>
        <Link href={{pathname:''}}><a>현장/이슈</a></Link>
        <Link href={{pathname:''}}><a>거래처썰</a></Link>
-       <Link href={{pathname:''}}><a>좋소!탈출</a></Link>
-       <Link href={{pathname:''}}><a>좋소!명작</a></Link>
-       <Link href={{pathname:''}}><a>핫딜</a></Link>
+       <Link href={{pathname:''}}><a>추노</a></Link>
+       <Link href={{pathname:''}}><a>핫딜/광고</a></Link> 
        <Link href={{pathname:''}}><a>운영진 요청사항</a></Link>
        {/* 
        <Link href={{pathname:''}}><a>동남아</a></Link>
