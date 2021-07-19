@@ -208,7 +208,7 @@ const postEdit = () =>{
        <div style={{textAlign:'center'}}>
             {imageFileName && imageFileName.map((v,i)=>(
                 <div style={{display:'inline-block'}} key={i} >
-                    <img style={{width:'60px',height:'60px'}} src={`${backImageUrl}/${posf}/${v}`} />    
+                    <img style={{width:'60px',height:'60px'}} src={`${v}`} />    
                     <br/>
                     <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v)} /></Button>
                 </div>
