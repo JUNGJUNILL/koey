@@ -101,7 +101,7 @@ const mainPosts_1001 = ()=>{
  
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userNickName,postFlag,submitDay,userInfo)=>{
-     window.localStorage.setItem('scrollY',window.scrollY);  
+     //window.localStorage.setItem('scrollY',window.scrollY);  
     
      router.push(`/posts/detailPage?postId=${postId}&userNickName=${userNickName}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userInfo}` ,scroll=false); 
   },[]); 

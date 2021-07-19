@@ -167,7 +167,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
 //게시글 상세 페이지 가져오기 
 //----------------------------------------
             case MAINPOSTS_1001_DETAIL_INFO_REQUEST: {
-                console.log('action.data.helloworld==>', action.data.helloworld); 
                 break; 
             }
 
