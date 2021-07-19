@@ -10,8 +10,29 @@ const multer =require('multer');
 const path   =require('path');
 const fs = require('fs'); 
 
+const multerS3 = require('multer-s3'); 
+const AWS = require('aws-sdk'); 
+
+AWS.config.update({
+    accessKeyId:process.env.AWSAccessKeyId,
+    secretAccessKey:process.env.AWSSecretKey,
+    region:'ap-northeast-2'
+}); 
+
 const upload = multer({
-    storage: multer.diskStorage({
+    storage: multerS3({
+        s3:new AWS.S3(),
+        bucket:'jscompany-s3',
+        key(req,file,cb){
+            const postFlag= req.query.postFlag;
+            const user= decodeURIComponent(req.query.user);
+            const ext = path.extname(file.originalname);
+            const basename = path.basename(file.originalname, ext); // 제로초.png, ext===.png, basename===제로초
+            cb(null,`images/${postFlag}/${basename+'_'+ new Date().valueOf()+'_'+user+ext}`)
+        }
+    }),
+    /*
+      multer.diskStorage({
       destination(req, file, done) {
           
         const postFlag= req.query.postFlag;
@@ -32,14 +53,17 @@ const upload = multer({
         const basename = path.basename(file.originalname, ext); // 제로초.png, ext===.png, basename===제로초
         done(null, basename+'_'+ new Date().valueOf()+'_'+user+ext);
       },
+      
     }),
+    */
     limits: { fileSize: 20 * 1024 * 1024 }, //20MB
   });
 
 
 
   router.post('/images',upload.array('image'),(req,res)=>{
-     return res.json(req.files.map(v=>v.filename)); 
+     //return res.json(req.files.map(v=>v.filename)); 
+     return res.json(req.files.map(v=>v.location)); 
   }); 
 
 
