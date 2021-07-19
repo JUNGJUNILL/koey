@@ -141,7 +141,7 @@ const mainPosts_1001 = ()=>{
                   */}
 
                   {/*AWS용*/}
-                  <img src={v.imageCount > 0 ? `${backImageUrl}/${posf}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
+                  <img src={v.imageCount > 0 ? `${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
 
 
                   </div>

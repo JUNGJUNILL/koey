@@ -116,7 +116,11 @@ const detailPage  = () =>{
   let contentImages=""; 
   if(imageSrc.length > 0 ){
     imageSrc.map((v)=>{
-        contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>`
+      //하드 디스크에서 가져온 이미지
+      //contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>`
+      
+      //aws s3용
+      contentImages=contentImages +  `<figure ><img src="${v.src}"></figure>`
     }); 
 }
 
