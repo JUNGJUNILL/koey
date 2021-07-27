@@ -9,6 +9,8 @@ export const  initialState = {
     userInfo : null,      //사용자 정보
     loginTyle:'',         //로그인 타입
 
+    loginError:null,        //로그인 에러 메시지
+
 
 }
 
@@ -67,11 +69,13 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
 //로그인
 //------------------------------------------------
             case LOGIN_REQUEST :{
+                draft.loginError=null;
                 draft.isLogining = true; 
                 break; 
             }
 
             case LOGIN_SUCCESS :{
+                draft.loginError = null;
                 draft.isLogining = false;               
                 draft.userInfo = action.data.nickName; 
                 draft.loginTyle = action.data.loginTyle; 
@@ -79,7 +83,8 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             }
         
             case LOGIN_FAILURE :{
-
+                draft.loginError = action.error; 
+                draft.isLogining = false; 
                 break; 
             }
 //------------------------------------------------

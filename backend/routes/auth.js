@@ -173,17 +173,25 @@ router.post('/login',async (req,res,next)=>{
                 stringQuery = stringQuery.concat(`'${loginType}')`);
                 console.log(stringQuery); 
                 const user = await pool.query(stringQuery); 
-                if(!user){
+                let result;
+                let userInfo;
+
+                
+                if(!user[0][0]){
+
                     return res.status(401).json({
                         code:401,
                         message: '등록되지 않는 아이디 입니다.', 
                     }) ;
+
+                }else{
+                    result = await bcrypt.compare(password,user[0][0].password);
+                    delete user[0][0].password;  
+                    userInfo = user[0][0]; 
                 }
 
-                const result = await bcrypt.compare(password,user[0][0].password);
-                delete user[0][0].password;  
-                const userInfo = user[0][0]; 
-                
+             
+            
                 //로그인 성공 
                 if(result){
                     
@@ -209,6 +217,13 @@ router.post('/login',async (req,res,next)=>{
                         token 
                     });
 
+                }else{
+
+                    return res.status(401).json({
+                        code: 401, 
+                        message:'비밀번호가 틀렸습니다.', 
+                         
+                    });
                 }
 
             }catch(e){

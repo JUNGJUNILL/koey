@@ -27,7 +27,7 @@ const Login = ()=>{
 
     const dispatch = useDispatch(); 
     const router   =useRouter(); 
-    const {isLogining, userInfo} = useSelector(state => state.auth); 
+    const {isLogining,userInfo,loginError} = useSelector(state => state.auth); 
     const hell = process.env.NAVERLOGINCLIENTCODE; 
 
     const [id,setId] = useState(''); 
@@ -45,9 +45,20 @@ const Login = ()=>{
                   }
         }); 
 
-        router.push({pathname:'/'});
-
     },[id,password]); 
+
+    useEffect(()=>{
+
+        if(loginError){
+            alert(loginError); 
+            return; 
+        }
+
+        if(userInfo){
+            router.push({pathname:'/'});
+        }
+
+    },[loginError,userInfo])
 
 
 

@@ -142,7 +142,12 @@ function* watchLogOut(){
 function APILogin(data){
 
     //jwt 로그인
-    return axios.post('/auth/login',{data},{withCredentials:true});
+    return axios.post('/auth/login',{data},{withCredentials:true}).catch((error)=>{
+        if(error.response){
+            console.log(error.response);
+            return error.response; 
+        }
+    });
 
     //passport local 로그인
     //return axios.post('/auth/login',data,{withCredentials:true});
@@ -161,16 +166,17 @@ function* sagaLogin(action){
 
 
     try{
-        console.log('action.data.loginType==>', action.data.loginType); 
         let result; 
         let decoded;
-
+        
         //jwt 로그인
         if(action.data.loginType==='local'){
-            
             result = yield call(APILogin,action.data); 
+            if(result.status > 400){
+                throw Error(result.data.message);
+            }
             decoded =jwtDeCoder(result.data.token); 
-            console.log('decoded=>',decoded,'decoded.nick=>', decoded.nick); 
+            
             yield put({
                 type:LOGIN_SUCCESS,
                 data:{nickName: decoded.nick,loginTyle:'local'},   
@@ -199,10 +205,10 @@ function* sagaLogin(action){
 
 
     }catch(e){
-        alert('로그인 에러',result); 
+  
         yield put({
             type:LOGIN_FAILURE, 
-            error:e,
+            error:e.message,
         })
     }
 }
