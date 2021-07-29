@@ -9,7 +9,6 @@
   "author": "jji",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.955.0",
-    "sharp": "^0.28.3"
+    "faker": "^5.5.3"
   }
 }
