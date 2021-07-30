@@ -1,0 +1,20 @@
+service: sample-app
+provider:
+          name: aws
+            runtime: Node.js 14.x
+              stage: dev
+                region: ap-northeast-2
+                  memorySize: 128
+                  functions:
+                            app:
+                                        handler: imageResize-lambda/index.handler
+                                            events: 
+                                                  - https: 
+                                                              path: /
+                                                                        method: ANY
+                                                                                  cors: true
+                                                                                        - https: 
+                                                                                                    path: /{proxy+}
+                                                                                                              method: ANY
+                                                                                                                        cors: true
+
