@@ -8,14 +8,14 @@ const path   =require('path');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.get('/helloWorld/imageResize-lambda', (req, res) => {
+app.get('/helloWorld/imageResize-lambda', async (req, res) => {
 
-  const {url,size}=req.query; 
-  const bufferImage=await got(url).buffer();
+  let {url,size}=req.query; 
+  const bufferImage=await got('https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_1600,c_limit/phonepicutres-TA.jpg').buffer();
 
   if(size) {
     size = size.split('x');
-    return res.status(200).end(
+     res.end(
         
         await sharp(bufferImage).resize(
             {width:parseInt(size[0]), 
