@@ -11,6 +11,9 @@ app.use(express.json());
 app.get('/helloWorld/imageResize-lambda', async (req, res) => {
 
   let {url,size}=req.query; 
+  const array = hello.split('.'); 
+  const ext = array[array.length-1]; 
+  const requiredFormat = ext === 'jpg' ? 'jpeg' : ext;
   const bufferImage=await got('https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_1600,c_limit/phonepicutres-TA.jpg').buffer();
 
   if(size) {
@@ -22,7 +25,7 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
             height:parseInt(size[1]), 
             position:'top',
 
-        }).toBuffer());
+        }).toFormat(requiredFormat).toBuffer());
 
   } else {
 
