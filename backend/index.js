@@ -82,7 +82,7 @@ app.use('/api/indexPage',indexPageAPIRouter);
 //   });
 app.get('/', (req,res)=>{
 
-res.send('hello yabal');
+res.end('hello yabal');
 
 }); 
 
