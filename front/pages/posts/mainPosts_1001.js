@@ -133,8 +133,7 @@ const mainPosts_1001 = ()=>{
 
                   
                   {/* 이미지 리사이징 (무슨 이유에서인지 잘 안됨 일단 원본으로 가자)      */}
-                   
-                    <img src={v.imageCount > 0 ? `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${encodeURIComponent(v.firstImageName)}` :`${backImageUrl}/noimages.gif`} />
+                  <img src={v.imageCount > 0 ? `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${encodeURIComponent(v.firstImageName)}` :`${backImageUrl}/noimages.gif`} />
                
                   {/*이미지 원본
                     <img src={v.imageCount > 0 ? `${backImageUrl}/${posf}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />

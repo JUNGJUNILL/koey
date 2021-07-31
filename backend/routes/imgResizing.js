@@ -18,7 +18,7 @@ router.get('/' ,async (req,res,next)=>{
     console.log('filename==>',filename);
 
     //외부 이미지를 resize 할 경우
-    const buf=await got('https://upload.wikimedia.org/wikipedia/ko/6/60/%EA%B8%B0%EC%83%9D%EC%B6%A9_%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg')
+    const buf=await got('https://jscompany-s3.s3.ap-northeast-2.amazonaws.com/images/1001/Cheer_5738754_11681_photo1_org_1627545039491_1111.jpg')
                     .buffer();
     //D:\git Repository\koey\backend\images\1001\1일_1625652527838_계란빵.jpg
     if(size) {
