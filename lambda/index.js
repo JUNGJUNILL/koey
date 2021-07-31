@@ -17,6 +17,7 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
   const bufferImage=await got('https://media.wired.com/photos/598e35994ab8482c0d6946e0/master/w_1600,c_limit/phonepicutres-TA.jpg').buffer();
 
   if(size) {
+    console.log(size);
     size = size.split('x');
     res.end(`hello express!!!!,${size[0]},${size[1]}`);
     //  res.end(
