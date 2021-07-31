@@ -24,7 +24,6 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
          res.end(
 		         await sharp(bufferImage)
 		         .resize(parseInt(size[0]), parseInt(size[1]),{ fit: 'inside' })
-		         .toFormat(requiredFormat)
 		         .toBuffer());
 
    }else{
