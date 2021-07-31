@@ -18,17 +18,15 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
    const bufferImage=await got(url).buffer();
 
    if(size){
-   size = size.split('x');
-   //res.end(`hello express!!!!,${size[0]},${size[1]}`);
-	
-         res.end(
-		         await sharp(bufferImage)
-		         .resize(parseInt(size[0]), parseInt(size[1]),{ fit: 'inside' })
-             .toFormat(requiredFormat)
-             .toBuffer());
+        size = size.split('x');	
+        const resizedImage = await sharp(bufferImage)
+                                  .resize(parseInt(size[0]), parseInt(size[1]),{ fit: 'inside' })
+                                  .toFormat(requiredFormat)
+                                  .toBuffer()
+        res.end(resizedImage);
 
    }else{
-   res.end('hello express!!!!');
+       res.end('hello lambda express');
    }
 
 });
