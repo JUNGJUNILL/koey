@@ -5,7 +5,7 @@ provider:
               stage: dev
                 region: ap-northeast-2
                   memorySize: 128
-                  functions:
+                  functions: 
                             app:
                                         handler: imageResize-lambda/index.handler
                                             events: 
