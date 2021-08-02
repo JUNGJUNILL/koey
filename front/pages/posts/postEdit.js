@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {END} from 'redux-saga'; 
 import axios from  'axios'; 
 import {Button, Input,} from 'antd'
-import { backImageUrl } from '../../config/config';
+import { backImageUrl,AWSImageUrl,backUrl } from '../../config/config';
 import secureFilter from   '../../util/secureFilter';
 
 import 
@@ -208,7 +208,11 @@ const postEdit = () =>{
        <div style={{textAlign:'center'}}>
             {imageFileName && imageFileName.map((v,i)=>(
                 <div style={{display:'inline-block'}} key={i} >
-                    <img style={{width:'60px',height:'60px'}} src={`${v}`} />    
+                    <img style={{width:'60px',height:'60px'}} src={process.env.NODE_ENV==='production' 
+                                                                   ? 
+                                                                   `${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}` 
+                                                                   : 
+                                                                   `${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v}`} />    
                     <br/>
                     <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v)} /></Button>
                 </div>

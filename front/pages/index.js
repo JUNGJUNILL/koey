@@ -130,7 +130,7 @@ const Home =()=>{
       <Link href={'#'}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
-        {item.title}ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+        {item.title}
         <span className="countFontColor">[{item.commentCount}] </span>
       </a>
       </Link>

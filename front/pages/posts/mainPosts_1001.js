@@ -20,7 +20,7 @@ from '../../reducers/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl, backUrl } from '../../config/config';
+import { backImageUrl, AWSImageUrl, backUrl } from '../../config/config';
 
 
 
@@ -136,7 +136,15 @@ const mainPosts_1001 = ()=>{
                     <img src={v.imageCount > 0 ? `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${encodeURIComponent(v.firstImageName)}` :`${backImageUrl}/noimages.gif`} />
                 */}
                   {/*이미지 원본    */}
-                    <img src={v.imageCount > 0 ? `${backImageUrl}/${posf}/${v.firstImageName}` :`${backImageUrl}/noimages.gif`} />
+                    <img src={v.imageCount > 0 ? 
+                      process.env.NODE_ENV==='production' 
+                      ?
+                      `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`
+                      :
+                      `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v.firstImageName}`
+                    
+
+                      :`${backImageUrl}/noimages.gif`} />
               
 
                   {/*AWS용

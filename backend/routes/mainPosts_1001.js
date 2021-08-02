@@ -19,6 +19,7 @@ AWS.config.update({
     region:'ap-northeast-2'
 }); 
 
+//AWS용 
 const upload = multer({
     storage: multerS3({
         s3:new AWS.S3(),
@@ -31,39 +32,46 @@ const upload = multer({
             cb(null,`images/${postFlag}/${basename+'_'+ new Date().valueOf()+'_'+user+ext}`)
         }
     }),
-    /*
-      multer.diskStorage({
-      destination(req, file, done) {
-          
-        const postFlag= req.query.postFlag;
+    limits: { fileSize: 20 * 1024 * 1024 }, //20MB
+  });
+
+  const upload_local = multer({
+    storage: multer.diskStorage({
+    destination(req, file, done) {
         
-        
+    const postFlag= req.query.postFlag;
+      
     fs.readdir(`images/${postFlag}`,(error,files)=>{
         if(error){
             fs.mkdirSync(`images/${postFlag}`); 
         }
     }); 
-
-       done(null, `images/${postFlag}`);
-       //done(null,'uploads'); 
-      },
-      filename(req, file, done) {
-        const user= decodeURIComponent(req.query.user);
-        const ext = path.extname(file.originalname);
-        const basename = path.basename(file.originalname, ext); // 제로초.png, ext===.png, basename===제로초
-        done(null, basename+'_'+ new Date().valueOf()+'_'+user+ext);
-      },
-      
-    }),
-    */
-    limits: { fileSize: 20 * 1024 * 1024 }, //20MB
-  });
+     done(null, `images/${postFlag}`);
+     //done(null,'uploads'); 
+    },
+    filename(req, file, done) {
+      const user= decodeURIComponent(req.query.user);
+      const ext = path.extname(file.originalname);
+      const basename = path.basename(file.originalname, ext); // 제로초.png, ext===.png, basename===제로초
+      done(null, basename+'_'+ new Date().valueOf()+'_'+user+ext);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 }, //20MB
+});
 
 
 
-  router.post('/images',upload.array('image'),(req,res)=>{
-     return res.json(req.files.map(v=>v.filename)); 
-     //return res.json(req.files.map(v=>v.location)); 
+
+  router.post('/images',process.env.NODE_ENV === 'production' ? 
+                        upload.array('image') 
+                        :
+                        upload_local.array('image'),(req,res)=>{
+     
+    return  process.env.NODE_ENV === 'production' ? 
+    res.json(req.files.map(v=>v.location))
+    :
+    res.json(req.files.map(v=>v.filename))
+    
   }); 
 
 
@@ -221,7 +229,7 @@ router.post('/mainPosts_1001Comments', async (req,res,next)=>{
 router.post('/postInsert', async (req,res,next)=>{
 
     try{
-        const {content,title,userNickName,postFlag,contentImages,imageFileName} = req.body.data; 
+        let {content,title,userNickName,postFlag,contentImages,imageFileName} = req.body.data; 
 
         const _title   = decodeURIComponent(title); 
         const _content = decodeURIComponent(content); 
@@ -250,7 +258,7 @@ router.post('/postInsert', async (req,res,next)=>{
                     stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
                     stringQuery =stringQuery.concat(`'${_userNickName}',`); 
                     stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
-                    stringQuery =stringQuery.concat(`'${imageFileName[i]}',`); 
+                    stringQuery =stringQuery.concat(`'${imageFileName[i].split('/')[imageFileName[i].split('/').length-1]}',`); 
                     stringQuery =stringQuery.concat(`'${_postFlag}');`);
                     console.log(stringQuery);
                     await pool.query(stringQuery);

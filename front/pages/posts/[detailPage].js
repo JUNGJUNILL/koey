@@ -21,7 +21,7 @@ from '../../reducers/auth';
 import {DislikeTwoTone, LikeTwoTone, UserOutlined, FieldTimeOutlined, EyeOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl } from '../../config/config';
+import { backImageUrl,AWSImageUrl } from '../../config/config';
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
 
@@ -118,9 +118,13 @@ const detailPage  = () =>{
     imageSrc.map((v)=>{
       //하드 디스크에서 가져온 이미지
       //contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>`
-      
+      process.env.NODE_ENV==='production'
+      ?
+      contentImages=contentImages +  `<figure ><img src="${AWSImageUrl}/images/${postFlag}/${v.src}"></figure>`
+      :
+      contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>` 
       //aws s3용
-      contentImages=contentImages +  `<figure ><img src="${v.src}"></figure>`
+      
     }); 
 }
 
