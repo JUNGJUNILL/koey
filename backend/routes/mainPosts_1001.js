@@ -62,8 +62,8 @@ const upload = multer({
 
 
   router.post('/images',upload.array('image'),(req,res)=>{
-     //return res.json(req.files.map(v=>v.filename)); 
-     return res.json(req.files.map(v=>v.location)); 
+     return res.json(req.files.map(v=>v.filename)); 
+     //return res.json(req.files.map(v=>v.location)); 
   }); 
 
 
