@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import immerProduce from '../util/produce';
 
 export const  initialState = {
 
@@ -12,7 +12,7 @@ export const INDEX_PAGE_DATA01_SUCCESS ='INDEX_PAGE_DATA01_SUCCESS';
 export const INDEX_PAGE_DATA01_FAILURE ='INDEX_PAGE_DATA01_FAILURE';
 
 
-const reducer = (state = initialState, action) => produce(state, (draft) => {
+const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
 
     switch(action.type){
 

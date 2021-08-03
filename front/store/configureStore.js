@@ -9,7 +9,11 @@ import rootSaga from '../sagas';
 
 
 const loggerMiddleware = ({ dispatch, getState }) => (next) => (action) => {
-    console.log(action);
+  
+    if(process.env.NODE_ENV === 'development'){
+      console.log(action);
+    }
+    
     return next(action);
   };
 
@@ -27,7 +31,7 @@ return store;
 
 
 const wrapper = createWrapper(configureStore, {
-   debug: false//process.env.NODE_ENV === 'development',
+   debug: process.env.NODE_ENV === 'development'? true : false,
   });
   
   export default wrapper;

@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import immerProduce from '../util/produce';
 
 export const  initialState = {
 
@@ -33,7 +33,7 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'; 
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'; 
 
-const reducer = (state = initialState, action) => produce(state, (draft) => {
+const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
 
 
         switch(action.type){

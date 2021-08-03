@@ -1,4 +1,4 @@
-import produce from '../util/produce';
+import immerProduce from '../util/produce';
 
 
 export const  initialState = {
@@ -93,7 +93,7 @@ export const TEST_FAILURE = 'TEST_FAILURE';
 
 
 
-const reducer = (state = initialState, action) => produce(state, (draft) => {
+const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
 
         switch(action.type){
 

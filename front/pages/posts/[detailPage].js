@@ -274,9 +274,11 @@ const detailPage  = () =>{
     return (
       
     <div >
+    {/* 
     <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
       광고입니다.
     </div>
+    */}
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
             <div className='divTableRowTh'>
@@ -294,6 +296,11 @@ const detailPage  = () =>{
                 </div>
            </div>
       </div>
+      
+      <div style={{padding:'3%'}}>
+      <hr style={{opacity:'0.3'}}/>
+      </div>
+      
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
    
 
@@ -309,7 +316,9 @@ const detailPage  = () =>{
     
     
     {/*상세 페이지 글--------------------------------------------------------------------------------*/}
-    <div dangerouslySetInnerHTML={{__html:mainPosts_1001Info[0].content}}></div>
+
+        <div style={{padding:'3%'}} dangerouslySetInnerHTML={{__html:mainPosts_1001Info[0].content}} />
+ 
     {/*상세 페이지 글--------------------------------------------------------------------------------*/}
     
 
