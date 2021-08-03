@@ -139,7 +139,7 @@ const mainPosts_1001 = ()=>{
                     <img src={v.imageCount > 0 ? 
                       process.env.NODE_ENV==='production' 
                       ?
-                      `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`
+                      `${backImageUrl}/noimages.gif`//`${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`
                       :
                       `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v.firstImageName}`
                     
