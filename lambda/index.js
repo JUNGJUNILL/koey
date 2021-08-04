@@ -24,10 +24,11 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
                                                              position:'top',})
                                                    .toFormat(requiredFormat)
                                                    .toBuffer();
-        res.send(resizedImage);
+        //res.send(resizedImage);
+        res.status(200).end(resizedImage)
 
    }else{
-       res.end('hello lambda express~~~');
+       res.end('hello lambda express!!!!');
    }
 
 });
