@@ -9,7 +9,7 @@ const path   =require('path');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-    origin: 'https://id6dso16db.execute-api.ap-northeast-2.amazonaws.com',
+    origin: true,
     credentials: true,
   }));
 app.get('/helloWorld/imageResize-lambda', async (req, res) => {
