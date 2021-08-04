@@ -30,16 +30,14 @@ router.get('/' ,async (req,res,next)=>{
 
     if(size) {
         size = size.split('x');
-        return res.status(200).end(
+        const resizedImage= await sharp(bufferImg).resize({width:parseInt(size[0]), 
+                                                           height:parseInt(size[1]), 
+                                                            position:'top',})
+                                                  .toFormat(requiredFormat)
+                                                  .toBuffer();
+        return res.status(200).end(resizedImage)
             
-            await sharp(bufferImg).resize(
-                {width:parseInt(size[0]), 
-                height:parseInt(size[1]), 
-                position:'top',
-     
-            })
-            .toFormat(requiredFormat)
-            .toBuffer());
+      
     } else {
         return  res.status(200).end(fs.readFileSync(filename));
     }
