@@ -4,14 +4,10 @@ const app = express();
 
 const got = require('got'); 
 const sharp = require('sharp');
-const path   =require('path');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({
-    origin: true,
-    credentials: true,
-  }));
+
 app.get('/helloWorld/imageResize-lambda', async (req, res) => {
 
    let {size} =req.query;
@@ -31,7 +27,7 @@ app.get('/helloWorld/imageResize-lambda', async (req, res) => {
         res.send(resizedImage);
 
    }else{
-       res.end('hello lambda express!!!');
+       res.end('hello lambda express~~~');
    }
 
 });

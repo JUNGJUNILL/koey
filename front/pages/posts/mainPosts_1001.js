@@ -139,7 +139,14 @@ const mainPosts_1001 = ()=>{
                     <img src={v.imageCount > 0 ? 
                       process.env.NODE_ENV==='production' 
                       ?
-                      `http://captainryan.iptime.org:3333/api/imgResizing?size=80x60&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`//`${backImageUrl}/noimages.gif`//`${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`
+                      //람다
+                      //`https://id6dso16db.execute-api.ap-northeast-2.amazonaws.com/helloWorld/imageResize-lambda?size=80x60`
+                      //이미지 없음
+                      //`${backImageUrl}/noimages.gif`
+                      //이미지 리사이즈
+                      //`${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.firstImageName}`
+                      //이미지 원본
+                      `${AWSImageUrl}/images/${posf}/${v.firstImageName}`
                       :
                       `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v.firstImageName}`
                     
