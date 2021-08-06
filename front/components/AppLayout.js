@@ -178,8 +178,16 @@ const AppLayOut = ({children}) =>{
 
 
     <footer>
-        <div className="footerSub"></div>
-        <div className="footer">푸터입니다.</div>
+        <div className="footerSub" />
+        <div className="footer">
+            <b>좋소? 좋좋소!</b>
+            <br/>
+            <Link href={'#'}><a>운영목적 | </a></Link>
+            <Link href={'#'}><a>운영진 요청사항 | </a></Link>
+            <Link Link href={'#'}><a>후원하기</a></Link>
+            <br/>
+            좋소(jscompany)2021 ~ © All Rights Reserved.
+        </div>
     </footer>
     </Col>
 
