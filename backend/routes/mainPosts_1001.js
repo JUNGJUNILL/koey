@@ -81,7 +81,7 @@ const upload = multer({
 router.post('/', async (req,res,next)=>{
 
     try{    
-        const {postFlag, currentPage, maxPage,pageNumber}= req.body.data;   
+        const {postFlag, currentPage, maxPage,pageNumber,searchCondition,searchValue}= req.body.data;   
 
         let mainPost_1001_Popular_list;
         let stringQuery;
@@ -96,8 +96,10 @@ router.post('/', async (req,res,next)=>{
             stringQuery=''; 
             stringQuery = 'CALL US_SELECT_mainPosts'; 
             stringQuery =stringQuery.concat(`('${postFlag}',`);
-            stringQuery =stringQuery.concat(`${currentPage},`); 
-            stringQuery =stringQuery.concat(`${maxPage})`);
+            stringQuery =stringQuery.concat(`${currentPage},`);
+            stringQuery =stringQuery.concat(`${maxPage},`); 
+            stringQuery =stringQuery.concat(`'${searchCondition}',`); 
+            stringQuery =stringQuery.concat(`'${decodeURIComponent(searchValue)}')`);
             console.log(stringQuery); 
             mainPosts_1001_List = await pool.query(stringQuery); 
             

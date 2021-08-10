@@ -1,6 +1,7 @@
 
 import React , {useState,useEffect,useCallback,useRef}from 'react'
-import {Button,Input,Space } from 'antd'
+import {Button,Input,Space,Select } from 'antd'
+const { Option } = Select;
 const { Search } = Input;
 import Router ,{ useRouter } from 'next/router';
 import Link from 'next/link'
@@ -33,6 +34,13 @@ const mainPosts_1001 = ()=>{
   const {mainPosts_1001} = useSelector((state)=>state.mainPosts_1001); 
   const {userInfo}       = useSelector((state)=>state.auth);
 
+  const blank_pattern = /^\s+|\s+&/g; 
+  const refSearchValue = useRef(); 
+  const [searchCondition,setSearchCondition] = useState('title'); 
+  const searchValueParam = router.query.searchValue ? router.query.searchValue : ''; 
+  const [searchValue,setSearchValue]= useState(''); 
+
+
   /*-------------------------------------------페이징 처리 로직 start-------------------------------------------------------*/
   const [nowPage,setNowPage] = useState(0);                       //현재 페이지
   const [postsPerPage] = useState(20);                             //한 페이지당 list 수 
@@ -63,13 +71,15 @@ const mainPosts_1001 = ()=>{
             data:{postFlag:posf,
                   currentPage:indexOfFirstPost,
                   maxPage:postsPerPage,
-                  pageNumber
+                  pageNumber,
+                  searchCondition:searchCondition ,
+                  searchValue:encodeURIComponent(searchValueParam) ,
           }, 
         });
 
         }
      
-    },[posf]); 
+    },[posf,searchValueParam]); 
 
   //01.페이지 첫 로드시.. 
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
@@ -94,7 +104,7 @@ const mainPosts_1001 = ()=>{
             pagenate(parseInt(pages),pageArray);  
           }
         
-  },[pages,posf]); 
+  },[pages,posf,searchValueParam]); 
  
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
@@ -114,15 +124,53 @@ const mainPosts_1001 = ()=>{
 
   },[posf]); 
 
-  const onSearch = (e) =>console.log(e.target.value); 
+  //게시물 검색 조회 조건 변경
+  const changeSearchCondition = useCallback((value) =>{
+    setSearchCondition(value); 
+  },[searchCondition]); 
 
+
+  //게시물 검색
+  const onSearch = useCallback(() =>{
+
+    if(searchValue.length === 0 || searchValue.replace(blank_pattern,'')===""){
+
+      refSearchValue.current.focus();  
+      alert('검색어를 입력 해 주세요'); 
+      return; 
+    }
+
+    if(searchValue.length === 1){
+
+      refSearchValue.current.focus();
+      alert('두 글자 이상 입력 해야 합니다.'); 
+      return; 
+    }
+
+    router.push(`/posts/mainPosts_1001?nowPage=1&posf=${posf}&searchValue=${searchValue}`);
+
+  },[posf,searchValue]); 
+
+  //검색창 입력
+  const onSearchValue = useCallback((e) =>{
+
+    setSearchValue(e.target.value); 
+
+  },[searchValue]); 
 
    return (
     <div>
 {/* 
     <button onClick={executeScroll}>scroll to top</button>
 */}
-    &nbsp;<Search placeholder="input search text" onSearch={onSearch} style={{marginTop:'3%',width:'50%'}} /> 
+    &nbsp;
+    <Select defaultValue='title' style={{marginTop:'3%',width:'30%'}} onChange={changeSearchCondition}>
+      <Option value={'title'}>제목</Option>
+      <Option value={'title_content'}>제목+내용</Option>
+      <Option value={'userNickName'}>작성자</Option>
+    </Select>
+    &nbsp;
+    <Search placeholder="search" ref={refSearchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
 
       <div className="divTable">

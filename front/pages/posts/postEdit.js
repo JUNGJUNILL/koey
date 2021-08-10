@@ -96,7 +96,6 @@ const postEdit = () =>{
         const filteredTitle   = secureFilter(title); 
         const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        console.log(filteredTitle,hello); 
         dispatch({
             type: MAINPOST_1001_INSERT_REQUEST,
             data: {content:encodeURIComponent(hello),
@@ -194,9 +193,9 @@ const postEdit = () =>{
         <div style={{marginTop:'3%'}}>
             {/*이미지 업로드 */}
             <input type="file" name="image" multiple hidden ref={imageInput} accept={'.jpg,.gif,.png,.bmp,.jpeg'} onChange={onChangeImages}/>
-            {/*비디오 업로드 */}
+            {/*비디오 업로드
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
-            
+             */}
         <Input placeholder='제목을 입력하세요' ref={refTitle} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
         <TextArea placeholder='하고 싶은 이야기' ref={refContent} onChange={onChangeContent} rows={4} />
         <div style={{marginTop:'2%',textAlign:'center'}}>
