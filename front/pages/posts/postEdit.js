@@ -211,7 +211,12 @@ const postEdit = () =>{
                 <div style={{display:'inline-block'}} key={i} >
                     <img style={{width:'60px',height:'60px'}} src={process.env.NODE_ENV==='production' 
                                                                    ? 
-                                                                   `${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}` 
+                                                                   
+                                                                   //원본 이미지
+                                                                   `${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}`
+                                                                   
+                                                                   //이미지 리사이즈
+                                                                   //`${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}` 
                                                                    : 
                                                                    `${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v}`} />    
                     <br/>
