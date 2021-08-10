@@ -4,6 +4,7 @@ import immerProduce from '../util/produce';
 export const  initialState = {
 
     isWriting          : false, 
+    posf               :null,
     mainPosts_1001     : [], 
     mainPosts_1001Info : [{}], 
                         //하 이것때매 몇시간을 날려 먹었는지.. 아크릴 새우님이 해결법을 알려주심
@@ -87,6 +88,11 @@ export const MAINPOST_1001_IMAGENAME_REMOVE_REQUEST = 'MAINPOST_1001_IMAGENAME_R
 export const MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS = 'MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS';
 export const MAINPOST_1001_IMAGENAME_REMOVE_FAILURE = 'MAINPOST_1001_IMAGENAME_REMOVE_FAILURE';
 
+//nav backgroundColor 유지
+export const POST_CLICKED_REQUEST = 'POST_CLICKED_REQUEST';
+
+
+
 export const TEST_REQUEST = 'TEST_REQUEST'; 
 export const TEST_SUCCESS = 'TEST_SUCCESS'; 
 export const TEST_FAILURE = 'TEST_FAILURE'; 
@@ -100,6 +106,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 //게시글 리스트 가져오기       
 //----------------------------------------
             case MAINPOSTS_1001_LIST_REQUEST: {
+                draft.posf=action.data.postFlag;
                 break; 
             }
 
@@ -354,6 +361,16 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 break; 
             }
 //----------------------------------------
+
+//이미지 이름 제거하기
+//----------------------------------------
+            case POST_CLICKED_REQUEST: {
+                draft.posf=action.data.postFlag;
+                break; 
+            }
+//----------------------------------------
+
+
 
 
 

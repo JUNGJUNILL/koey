@@ -432,7 +432,7 @@ img {
     font-weight: 700;
   }
 
-  .navInfo a.active {
+  .navInfo a:active {
     color: white;
     background-color: #4CAF50;
   }

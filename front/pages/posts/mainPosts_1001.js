@@ -148,7 +148,11 @@ const mainPosts_1001 = ()=>{
                       //이미지 원본
                       `${AWSImageUrl}/images/${posf}/${v.firstImageName}`
                       :
-                      `${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v.firstImageName}`
+                      
+                      //로컬 이미지 리사이즈
+                      //`${backUrl}/imgResizing?size=80x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v.firstImageName}`
+                      //로컬 이미지 원본
+                      `${backImageUrl}/${posf}/${v.firstImageName}`
                     
 
                       :`${backImageUrl}/noimages.gif`} />

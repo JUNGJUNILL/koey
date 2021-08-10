@@ -19,6 +19,8 @@ const AppLayOut = ({children}) =>{
     //const router   =useRouter(); 
     //const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
+    const {posf} = useSelector((state)=>state.mainPosts_1001); 
+
 
     // useEffect(()=>{
     //     //로그 아웃 후 메인 페이지로 이동
@@ -98,10 +100,10 @@ const AppLayOut = ({children}) =>{
   
         </header>
 
-       <nav className='navInfo'>
-       <Link href={{pathname:''}}><a>좋소!베스트</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a>좋좋소!</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a>좋소!</a></Link>
+        <nav className='navInfo'>
+       <Link href={{pathname:''}}><a style={{backgroundColor:posf==='1000'?'#4CAF50':''}}>좋소!베스트</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a style={{backgroundColor:posf==='1001'?'#4CAF50':''}}>좋좋소!</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a style={{backgroundColor:posf==='1002'?'#4CAF50':''}}>좋소!</a></Link>
        <Link href={{pathname:''}}><a>좋소!탈출</a></Link>
        <Link href={{pathname:''}}><a>좋소!희망편</a></Link>
        <Link href={{pathname:''}}><a>주말출근</a></Link>
@@ -110,13 +112,7 @@ const AppLayOut = ({children}) =>{
        <Link href={{pathname:''}}><a>거래처썰</a></Link>
        <Link href={{pathname:''}}><a>추노</a></Link>
        <Link href={{pathname:''}}><a>핫딜/광고</a></Link> 
-       <Link href={{pathname:''}}><a>운영진 요청사항</a></Link>
-       {/* 
-       <Link href={{pathname:''}}><a>동남아</a></Link>
-       <Link href={{pathname:''}}><a>유럽</a></Link>
-       <Link href={{pathname:''}}><a>아프리카</a></Link>
-       <Link href={{pathname:''}}><a>오세아니아</a></Link>
-        */}
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
        </nav>
             
  
@@ -182,9 +178,9 @@ const AppLayOut = ({children}) =>{
         <div className="footer">
             <b>좋소? 좋좋소!</b>
             <br/>
-            <Link href={'#'}><a>운영목적 | </a></Link>
-            <Link href={'#'}><a>운영진 요청사항 | </a></Link>
-            <Link Link href={'#'}><a>후원하기</a></Link>
+            <Link href={`/posts/detailPage?postId=10000001&userNickName=${decodeURIComponent('운영자')}&postFlag=1011&submitDay=20210810&who=${userInfo}`}><a>운영목적 | </a></Link>
+            <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a>운영진 요청사항 | </a></Link>
+            <Link href={`/posts/detailPage?postId=10000002&userNickName=${decodeURIComponent('운영자')}&postFlag=1011&submitDay=20210810&who=${userInfo}`}><a>후원하기</a></Link>
             <br/>
             좋소(jscompany)2021 ~ © All Rights Reserved.
         </div>

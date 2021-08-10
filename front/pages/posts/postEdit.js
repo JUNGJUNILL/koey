@@ -23,6 +23,7 @@ import
     {
         MAINPOST_1001_INSERT_REQUEST,
         MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
+        POST_CLICKED_REQUEST
     } 
 from '../../reducers/mainPosts_1001'; 
 const { TextArea } = Input;
@@ -238,6 +239,16 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     context.store.dispatch({
         type:LOAD_USER_REQUEST
     });
+
+     
+    //nav background 유지
+    context.store.dispatch({
+        type:POST_CLICKED_REQUEST,
+        data:{postFlag:context.query.posf,}
+    });
+
+
+    
 
     context.store.dispatch(END); 
     await context.store.sagaTask.toPromise(); 
