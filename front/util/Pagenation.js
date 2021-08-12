@@ -2,7 +2,7 @@ import React,{useState,useCallback,useEffect,memo} from 'react'
 import { number } from 'prop-types';
 import Link from 'next/link'
 
-const Pagenation = ({pagenate,dataLength,postsPerPage,nowPage,groupPage,groupPageArray,postFlag}) =>{
+const Pagenation = ({pagenate,dataLength,postsPerPage,nowPage,groupPage,groupPageArray,postFlag,searchValue,searchCondition}) =>{
 
     const  pageNumers= []; 
 
@@ -50,13 +50,13 @@ const Pagenation = ({pagenate,dataLength,postsPerPage,nowPage,groupPage,groupPag
         <>  
             <div className="paginationDiv" style={{marginTop:"3%"}}>
                 <ul className="pagination">
-                    <li  style={{display: nowPage === 1 || nowPage === 0  ? "none" : ""}}><Link href={{query:{nowPage:nowPage-1,group:pageNumers[0].valueOf(),posf:postFlag}}}><a onClick={()=>pagenate(nowPage-1,pageNumers,'click')}>◀</a></Link></li>
+                    <li  style={{display: nowPage === 1 || nowPage === 0  ? "none" : ""}}><Link href={{query:{nowPage:nowPage-1,group:pageNumers[0].valueOf(),posf:postFlag,searchValue:searchValue,searchCondition:searchCondition}}}><a onClick={()=>pagenate(nowPage-1,pageNumers,'click')}>◀</a></Link></li>
                     {pageNumers.map((v,i,array)=>(
                         <li key={v}   style={{display : (isInVisible===true) && (v >=nowPage) ? "none" : "" }}>
-                            <li><Link href={{query:{nowPage:v+1,group:pageNumers[0].valueOf(),posf:postFlag}}}><a className={(nowPage === 0 && nowPage === v) || (nowPage === v+1) ? "active" : ""} onClick={()=>pagenate(v+1,array,'click')}>{v+1}</a></Link></li>
+                            <li><Link href={{query:{nowPage:v+1,group:pageNumers[0].valueOf(),posf:postFlag,searchValue:searchValue,searchCondition:searchCondition}}}><a className={(nowPage === 0 && nowPage === v) || (nowPage === v+1) ? "active" : ""} onClick={()=>pagenate(v+1,array,'click')}>{v+1}</a></Link></li>
                         </li>
                     ))}
-                    <li style={{display :isInVisible===true ? "none" : ""}}><Link href={{query:{nowPage:nowPage+1,group:pageNumers[0].valueOf(),posf:postFlag}}}><a onClick={()=>pagenate(nowPage+1,pageNumers,'click')}>▶</a></Link></li>
+                    <li style={{display :isInVisible===true ? "none" : ""}}><Link href={{query:{nowPage:nowPage+1,group:pageNumers[0].valueOf(),posf:postFlag,searchValue:searchValue,searchCondition:searchCondition}}}><a onClick={()=>pagenate(nowPage+1,pageNumers,'click')}>▶</a></Link></li>
                 </ul>     
             </div>        
         </>

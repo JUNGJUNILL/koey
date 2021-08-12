@@ -44,7 +44,7 @@ const mainPosts_1001 = ()=>{
 
   /*-------------------------------------------페이징 처리 로직 start-------------------------------------------------------*/
   const [nowPage,setNowPage] = useState(0);                       //현재 페이지
-  const [postsPerPage] = useState(20);                             //한 페이지당 list 수 
+  const [postsPerPage] = useState(3);                             //한 페이지당 list 수 
   const [groupPage , setGroupPage] = useState(5);                 //페이징 그룹 당 수  1~5 , 6~10 , 11~15 ... 5의 배수만 입력가능 
   const [nowGroupPageArray,setNowGroupPageArray] =useState([]);   //현재 페이징 그룹 배열
   const pages=router.query.nowPage ? parseInt(router.query.nowPage) : 1;
@@ -74,13 +74,13 @@ const mainPosts_1001 = ()=>{
                   maxPage:postsPerPage,
                   pageNumber,
                   searchCondition:searchCondition ,
-                  searchValue:encodeURIComponent(searchValueParam) ,
+                  searchValue:encodeURIComponent(searchValue) ,
           }, 
         });
 
         }
      
-    },[posf,searchValueParam]); 
+    },[posf,searchValue]); 
 
   //01.페이지 첫 로드시.. 
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
@@ -150,7 +150,7 @@ const mainPosts_1001 = ()=>{
 
     router.push(`/posts/mainPosts_1001?nowPage=1&posf=${posf}&searchValue=${searchValue}&searchCondition=${searchCondition}`);
 
-  },[posf,searchValue]); 
+  },[posf,searchValue,searchCondition]); 
 
   //검색창 입력
   const onSearchValue = useCallback((e) =>{
@@ -247,7 +247,15 @@ const mainPosts_1001 = ()=>{
             ))}
       </div>
    
-      <Pagenation pagenate={pagenate} dataLength={mainPosts_1001.length} postsPerPage={postsPerPage} nowPage={nowPage} groupPage={groupPage} groupPageArray={nowGroupPageArray} postFlag={posf}/>
+      <Pagenation pagenate={pagenate} 
+                  dataLength={mainPosts_1001.length} 
+                  postsPerPage={postsPerPage} 
+                  nowPage={nowPage} 
+                  groupPage={groupPage} 
+                  groupPageArray={nowGroupPageArray} 
+                  postFlag={posf} 
+                  searchValue={searchValue} 
+                  searchCondition={searchCondition}/>
 
     </div>
     );
