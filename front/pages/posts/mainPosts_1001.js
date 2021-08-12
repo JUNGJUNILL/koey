@@ -36,9 +36,10 @@ const mainPosts_1001 = ()=>{
 
   const blank_pattern = /^\s+|\s+&/g; 
   const refSearchValue = useRef(); 
-  const [searchCondition,setSearchCondition] = useState('title'); 
+  const refConditionValue =useRef();
+  const [searchCondition,setSearchCondition] = useState(router.query.searchCondition ? router.query.searchCondition : 'title'); 
   const searchValueParam = router.query.searchValue ? router.query.searchValue : ''; 
-  const [searchValue,setSearchValue]= useState(''); 
+  const [searchValue,setSearchValue]= useState(router.query.searchValue ? router.query.searchValue : ''); 
 
 
   /*-------------------------------------------페이징 처리 로직 start-------------------------------------------------------*/
@@ -147,7 +148,7 @@ const mainPosts_1001 = ()=>{
       return; 
     }
 
-    router.push(`/posts/mainPosts_1001?nowPage=1&posf=${posf}&searchValue=${searchValue}`);
+    router.push(`/posts/mainPosts_1001?nowPage=1&posf=${posf}&searchValue=${searchValue}&searchCondition=${searchCondition}`);
 
   },[posf,searchValue]); 
 
@@ -164,13 +165,13 @@ const mainPosts_1001 = ()=>{
     <button onClick={executeScroll}>scroll to top</button>
 */}
     &nbsp;
-    <Select defaultValue='title' style={{marginTop:'3%',width:'30%'}} onChange={changeSearchCondition}>
+    <Select  value={searchCondition} style={{marginTop:'3%',width:'30%'}} onChange={changeSearchCondition}>
       <Option value={'title'}>제목</Option>
       <Option value={'title_content'}>제목+내용</Option>
       <Option value={'userNickName'}>작성자</Option>
     </Select>
     &nbsp;
-    <Search placeholder="search" ref={refSearchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
+    <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
 
       <div className="divTable">
