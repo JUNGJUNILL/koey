@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import React,{useEffect}from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
 import wrapper from '../store/configureStore';
 
-import { Card, Col, Row, List, Typography, Button, Divider  } from 'antd';
+import { Card, Col, Row, List,  Button, Divider  } from 'antd';
 const { Meta } = Card;
 
 import { backImageUrl } from '../config/config';
@@ -29,6 +29,7 @@ from '../reducers/indexPage';
 const Home =()=>{
 
   const {data01,data02,data03,data04,data05,data06} = useSelector((state)=>state.indexPage); 
+  const {userInfo}       = useSelector((state)=>state.auth);
 
 
   const ht ="http://localhost:3095"; 
@@ -133,7 +134,7 @@ const Home =()=>{
     dataSource={data01}
     renderItem={item => (
       <List.Item>
-      <Link href={'#'}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1001&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -154,28 +155,7 @@ const Home =()=>{
     dataSource={data02}
     renderItem={item => (
       <List.Item>
-      <Link href={'#'}>
-      <a className="abbreviation">
-      <span className="bestSpan">BEST</span> 
-        {item.title}
-        <span className="countFontColor">[{item.commentCount}] </span>
-      </a>
-      </Link>
-      </List.Item>
-    )}
-    />
-
-    {/*좋소!*/}
-    <List
-    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
-    itemLayout="horizontal"
-    header={<div><b>좋소!</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
-
-    dataSource={data02}
-    renderItem={item => (
-      <List.Item>
-      <Link href={'#'}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1002&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -197,7 +177,7 @@ const Home =()=>{
     dataSource={data03}
     renderItem={item => (
       <List.Item>
-      <Link href={'#'}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1003&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -218,7 +198,7 @@ const Home =()=>{
     dataSource={data04}
     renderItem={item => (
       <List.Item>
-      <Link href={'#'}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1004&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -240,7 +220,7 @@ const Home =()=>{
      dataSource={data05}
      renderItem={item => (
        <List.Item>
-       <Link href={'#'}>
+       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1005&submitDay=${item.submitDay}&who=${userInfo}`}>
        <a className="abbreviation">
        <span className="bestSpan">BEST</span> 
          {item.title}
@@ -261,7 +241,7 @@ const Home =()=>{
       dataSource={data06}
       renderItem={item => (
         <List.Item>
-        <Link href={'#'}>
+        <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1006&submitDay=${item.submitDay}&who=${userInfo}`}>
         <a className="abbreviation">
         <span className="bestSpan">BEST</span> 
           {item.title}
