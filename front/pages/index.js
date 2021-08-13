@@ -15,14 +15,20 @@ import
 from '../reducers/auth'; 
 
 import 
-    {INDEX_PAGE_DATA01_REQUEST, } 
+    {INDEX_PAGE_DATA_1001_REQUEST,
+     INDEX_PAGE_DATA_1002_REQUEST,
+     INDEX_PAGE_DATA_1003_REQUEST,
+     INDEX_PAGE_DATA_1004_REQUEST,
+     INDEX_PAGE_DATA_1005_REQUEST,
+     INDEX_PAGE_DATA_1006_REQUEST,
+    } 
 from '../reducers/indexPage'; 
 
 
 
 const Home =()=>{
 
-  const {data01} = useSelector((state)=>state.indexPage); 
+  const {data01,data02,data03,data04,data05,data06} = useSelector((state)=>state.indexPage); 
 
 
   const ht ="http://localhost:3095"; 
@@ -117,7 +123,7 @@ const Home =()=>{
 </Row>
 
 
-
+    {/*좋좋소!*/}
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
@@ -138,6 +144,134 @@ const Home =()=>{
     )}
     />
 
+    {/*좋소!*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+
+    dataSource={data02}
+    renderItem={item => (
+      <List.Item>
+      <Link href={'#'}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+    {/*좋소!*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+
+    dataSource={data02}
+    renderItem={item => (
+      <List.Item>
+      <Link href={'#'}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+
+    {/*좋소!탈출*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!탈출</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+
+    dataSource={data03}
+    renderItem={item => (
+      <List.Item>
+      <Link href={'#'}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+    {/*좋소!희망편*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!희망편</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+
+    dataSource={data04}
+    renderItem={item => (
+      <List.Item>
+      <Link href={'#'}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+
+     {/*주말출근*/}
+     <List
+     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+     itemLayout="horizontal"
+     header={<div><b>주말출근</b></div>}
+     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+ 
+     dataSource={data05}
+     renderItem={item => (
+       <List.Item>
+       <Link href={'#'}>
+       <a className="abbreviation">
+       <span className="bestSpan">BEST</span> 
+         {item.title}
+         <span className="countFontColor">[{item.commentCount}] </span>
+       </a>
+       </Link>
+       </List.Item>
+     )}
+     />
+
+      {/*야근/철야*/}
+      <List
+      style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+      itemLayout="horizontal"
+      header={<div><b>야근/철야</b></div>}
+      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+  
+      dataSource={data06}
+      renderItem={item => (
+        <List.Item>
+        <Link href={'#'}>
+        <a className="abbreviation">
+        <span className="bestSpan">BEST</span> 
+          {item.title}
+          <span className="countFontColor">[{item.commentCount}] </span>
+        </a>
+        </Link>
+        </List.Item>
+      )}
+      />
+
    </div>
 
   )
@@ -157,9 +291,38 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
 
   
   context.store.dispatch({
-    type:INDEX_PAGE_DATA01_REQUEST, 
+    type:INDEX_PAGE_DATA_1001_REQUEST, 
     data:{postFlag:'1001',}, 
   });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1002_REQUEST, 
+    data:{postFlag:'1002',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1003_REQUEST, 
+    data:{postFlag:'1003',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1004_REQUEST, 
+    data:{postFlag:'1004',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1005_REQUEST, 
+    data:{postFlag:'1005',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1006_REQUEST, 
+    data:{postFlag:'1006',}, 
+  });
+
+
+
+
 
 
   context.store.dispatch(END); 

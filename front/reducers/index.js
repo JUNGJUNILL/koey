@@ -16,7 +16,7 @@ const rootReducer = (state, action) => {
 
       //SSR 시 store에 저장된 state 초기화 됨
       case HYDRATE:
-        console.log('HYDRATE==>', action);
+        //console.log('HYDRATE==>', action);
         return  action.payload;
         
       default: {

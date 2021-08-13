@@ -88,7 +88,7 @@ const AppLayOut = ({children}) =>{
     
         <header className="hd">
         <h1 className="h1">
-        <AlignLeftOutlined onClick={showDrawer}/>&nbsp;<img src={`${backImageUrl}/koielogo.jpg`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
+        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/koielogo.jpg`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
 	    </h1>
 
         <div className="fr" style={{marginRight:"-5px"}}>
@@ -101,18 +101,18 @@ const AppLayOut = ({children}) =>{
         </header>
 
         <nav className='navInfo'>
-       <Link href={{pathname:''}}><a style={{backgroundColor:posf==='1000'?'#4CAF50':''}}>좋소!베스트</a></Link>
+       <Link href={{pathname:'#' }}><a style={{backgroundColor:posf==='1000'?'#4CAF50':''}}>좋소!베스트</a></Link>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a style={{backgroundColor:posf==='1001'?'#4CAF50':''}}>좋좋소!</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}}><a style={{backgroundColor:posf==='1002'?'#4CAF50':''}}>좋소!</a></Link>
-       <Link href={{pathname:''}}><a>좋소!탈출</a></Link>
-       <Link href={{pathname:''}}><a>좋소!희망편</a></Link>
-       <Link href={{pathname:''}}><a>주말출근</a></Link>
-       <Link href={{pathname:''}}><a>야근/철야</a></Link>
-       <Link href={{pathname:''}}><a>현장/이슈</a></Link>
-       <Link href={{pathname:''}}><a>거래처썰</a></Link>
-       <Link href={{pathname:''}}><a>추노</a></Link>
-       <Link href={{pathname:''}}><a>핫딜/광고</a></Link> 
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}} }><a style={{backgroundColor:posf==='1002'?'#4CAF50':''}}>좋소!</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}} }><a style={{backgroundColor:posf==='1003'?'#4CAF50':''}}>좋소!탈출</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}} }><a style={{backgroundColor:posf==='1004'?'#4CAF50':''}}>좋소!희망편</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}} }><a style={{backgroundColor:posf==='1005'?'#4CAF50':''}}>주말출근</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}} }><a style={{backgroundColor:posf==='1006'?'#4CAF50':''}}>야근/철야</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1007'}} }><a style={{backgroundColor:posf==='1007'?'#4CAF50':''}}>현장/이슈</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1008'}} }><a style={{backgroundColor:posf==='1008'?'#4CAF50':''}}>거래처썰</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1009'}} }><a style={{backgroundColor:posf==='1009'?'#4CAF50':''}}>추노</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1010'}} }><a style={{backgroundColor:posf==='1010'?'#4CAF50':''}}>핫딜/광고</a></Link> 
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a  style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
        </nav>
             
  
