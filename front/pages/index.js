@@ -32,6 +32,19 @@ const Home =()=>{
   const {userInfo}       = useSelector((state)=>state.auth);
 
 
+
+  const scrollRestoration = () =>{
+
+    window.localStorage.setItem('scrollY',window.scrollY); 
+    
+  }
+
+
+  useEffect(()=>{
+    window.scrollTo(0,window.localStorage.getItem('scrollY')); 
+
+  },[])
+
   const ht ="http://localhost:3095"; 
   const postflag = '1001'; 
   const userFlag = "nick1111";
@@ -129,11 +142,11 @@ const Home =()=>{
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
     header={<div><b>좋좋소!</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data01}
     renderItem={item => (
-      <List.Item>
+      <List.Item onClick={scrollRestoration}>
       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1001&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
@@ -150,11 +163,11 @@ const Home =()=>{
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
     header={<div><b>좋소!</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data02}
     renderItem={item => (
-      <List.Item>
+      <List.Item onClick={scrollRestoration}>
       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1002&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
@@ -172,11 +185,11 @@ const Home =()=>{
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
     header={<div><b>좋소!탈출</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data03}
     renderItem={item => (
-      <List.Item>
+      <List.Item onClick={scrollRestoration}>
       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1003&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
@@ -193,11 +206,11 @@ const Home =()=>{
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
     header={<div><b>좋소!희망편</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data04}
     renderItem={item => (
-      <List.Item>
+      <List.Item onClick={scrollRestoration}>
       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1004&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
@@ -215,11 +228,11 @@ const Home =()=>{
      style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
      itemLayout="horizontal"
      header={<div><b>주말출근</b></div>}
-     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
  
      dataSource={data05}
      renderItem={item => (
-       <List.Item>
+       <List.Item onClick={scrollRestoration} >
        <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1005&submitDay=${item.submitDay}&who=${userInfo}`}>
        <a className="abbreviation">
        <span className="bestSpan">BEST</span> 
@@ -236,11 +249,11 @@ const Home =()=>{
       style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
       itemLayout="horizontal"
       header={<div><b>야근/철야</b></div>}
-      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button block>더 보기</Button></a></Link></div>}
+      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
   
       dataSource={data06}
       renderItem={item => (
-        <List.Item>
+        <List.Item onClick={scrollRestoration} >
         <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1006&submitDay=${item.submitDay}&who=${userInfo}`}>
         <a className="abbreviation">
         <span className="bestSpan">BEST</span> 
