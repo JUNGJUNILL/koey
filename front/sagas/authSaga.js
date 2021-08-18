@@ -32,9 +32,9 @@ function* sagaLoadUser(action){
     try{
 
         const result = yield call(APILoadUser,action.data);    
-        const nick = result.data.nick.nick;
+        const nick = result.data.nick;
         const loginType = result.data.loginType; 
-        console.log('nick==>', nick,'result.data.nick==>', result.data.nick); 
+        
         yield put({
                 type:LOAD_USER_SUCCESS, 
                 data: {nickName: nick,loginTyle:loginType},           

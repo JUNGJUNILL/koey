@@ -32,6 +32,11 @@ const Login = ()=>{
 
     const [id,setId] = useState(''); 
     const [password, setPassword] = useState('');
+    const naverLoginUri    =process.env.NODE_ENV==='production'?`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVERLOGINCLIENTCODE}&redirect_uri=${process.env.NAVERLOGINREDIRECT}&state=RAMDOM_STATE`
+                                                               :`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVERLOGINCLIENTCODE}&redirect_uri=${process.env.NAVERLOGINREDIRECT_LOCAL}&state=RAMDOM_STATE`
+
+    const facebookLoginUri =process.env.NODE_ENV==='production' ?`https://www.facebook.com/v10.0/dialog/oauth?client_id=${process.env.FACEBOOKLOGINCLIENTCODE}&redirect_uri=${process.env.FACEBOOKLOGINREDIRECT}&state=200`
+                                                                :`https://www.facebook.com/v10.0/dialog/oauth?client_id=${process.env.FACEBOOKLOGINCLIENTCODE}&redirect_uri=${process.env.FACEBOOKLOGINREDIRECT_LOCAL}&state=200`
 
 
     //일반 로그인, 
@@ -110,13 +115,13 @@ const Login = ()=>{
      
         </form>         
         <div style={{textAlign:'center',marginTop:'3%'}}>
-            <Link href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NAVERLOGINCLIENTCODE}&redirect_uri=${process.env.NAVERLOGINREDIRECT}&state=RAMDOM_STATE`}>
+            <Link href={`${naverLoginUri}`}>
                 <a><ButtonWrapper block>네이버(NAVER) 로그인 </ButtonWrapper></a>
             </Link>
                 <ButtonWrapper onClick={()=>SNSLogin('kakao')} block>카카오(KAKAO) 로그인 </ButtonWrapper>
-                <ButtonWrapper block>구글(GOOGLE)) 로그인(준비중) </ButtonWrapper>
-            <Link href={`https://www.facebook.com/v10.0/dialog/oauth?client_id=${process.env.FACEBOOKLOGINCLIENTCODE}&redirect_uri=${process.env.FACEBOOKLOGINREDIRECT}&state=200`}>
-                <a><ButtonWrapper block>페이스북(FACEBOOK) 로그인 </ButtonWrapper> </a>      
+                <ButtonWrapper block disabled>구글(GOOGLE)) 로그인(준비중) </ButtonWrapper>
+            <Link href={`${facebookLoginUri}`}>
+                <a><ButtonWrapper block disabled>페이스북(FACEBOOK) 로그인(준비중) </ButtonWrapper> </a>      
             </Link>
         </div>  
              {/* 

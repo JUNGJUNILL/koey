@@ -12,9 +12,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
     
     env : {
       NAVERLOGINCLIENTCODE:'FQxK6vBp2RiL0gne54KV',
-      NAVERLOGINREDIRECT:'http://localhost:3095/api/auth/naverLoginCallback',
+      NAVERLOGINREDIRECT_LOCAL:'http://localhost:3333/api/auth/naverLoginCallback',
+      NAVERLOGINREDIRECT:'http://api.jscompany.live:3333/api/auth/naverLoginCallback',
       FACEBOOKLOGINCLIENTCODE:'1145587049279696',
-      FACEBOOKLOGINREDIRECT:'http://localhost:3095/api/auth/facebookLogin',
+      FACEBOOKLOGINREDIRECT_LOCAL:'http://localhost:3333/api/auth/facebookLogin',
+      FACEBOOKLOGINREDIRECT:'http://api.jscompany.live:3333/api/auth/facebookLogin',
     },
 
     webpack(config, { webpack }) {

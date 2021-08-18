@@ -241,6 +241,7 @@ router.get('/kakaoTest',async (req,res,next)=>{
 
       
         const kakaotoken = req.query.code;
+        const redirectUri=process.env.NODE_ENV === 'production' ? 'http://api.jscompany.live:3333/api/auth/kakaoTest':'http://localhost:3333/api/auth/kakaoTest';
         const kakaoAccessToken = await axios({
             method: "POST",
             url: 'https://kauth.kakao.com/oauth/token',
@@ -250,7 +251,7 @@ router.get('/kakaoTest',async (req,res,next)=>{
             data: qs.stringify({
               grant_type: "authorization_code",
               client_id: '8cf1ea216775ee5a5ff24a71b855846c',
-              redirect_uri: 'http://captainryan.iptime.org:3095/api/auth/kakaoTest',
+              redirect_uri: redirectUri,
               code :kakaotoken,
             })
           });
@@ -258,8 +259,9 @@ router.get('/kakaoTest',async (req,res,next)=>{
           res.cookie(process.env.KAKAO_COOKIE, kakaoAccessToken.data.access_token ,{httpOnly:true,
             secure:false, 
         }); 
-          //return res.redirect('http://localhost:3001');
-          return res.redirect('http://captainryan.iptime.org:3001/');
+
+          const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+          return res.redirect(redirectHome);
           
     }catch(e){
         console.error(e)
@@ -276,7 +278,8 @@ router.get('/naverLoginCallback',async (req,res,next)=>{
     try{
         const client_id = 'FQxK6vBp2RiL0gne54KV';
         const client_secret = 'V6rGNwgrBK';
-        const redirectURI = encodeURI("http://localhost:3095/api/auth/naverLoginCallback");
+        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/naverLoginCallback":"http://localhost:3333/api/auth/naverLoginCallback";
+        const redirectURI = encodeURI(redirectUri);
         const code  = req.query.code; 
         const state = req.query.state;
 
@@ -296,7 +299,8 @@ router.get('/naverLoginCallback',async (req,res,next)=>{
             secure:false, 
         }); 
 
-        return res.redirect('http://localhost:3001');
+        const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+        return res.redirect(redirectHome);
 
     }catch(e){
         console.error(e); 
@@ -307,13 +311,16 @@ router.get('/naverLoginCallback',async (req,res,next)=>{
 //페이스북 로그인
 router.get('/facebookLogin',async (req,res,next)=>{
 
-    try{        
+    try{ 
+        
+        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/facebookLogin":"http://localhost:3333/api/auth/facebookLogin";
+
         const { data } = await axios({
             url: 'https://graph.facebook.com/v10.0/oauth/access_token',
             method: 'GET',
             params: {
                 client_id: "1145587049279696",
-                redirect_uri: 'http://localhost:3095/api/auth/facebookLogin', 
+                redirect_uri: redirectUri, 
                 client_secret : 'cec98856baf4b9d9bcbc2844855b2a26',
                 code: req.query.code,
             },
@@ -322,7 +329,9 @@ router.get('/facebookLogin',async (req,res,next)=>{
         res.cookie(process.env.FACEBOOK_COOKIE, data.access_token,{httpOnly:true,
             secure:false, 
         }); 
-       return res.redirect('http://localhost:3001');
+
+       const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+       return res.redirect(redirectHome);
 
     }catch(e){
         console.error(e); 
