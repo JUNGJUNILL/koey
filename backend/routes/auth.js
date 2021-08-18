@@ -258,6 +258,7 @@ router.get('/kakaoTest',async (req,res,next)=>{
 
           res.cookie(process.env.KAKAO_COOKIE, kakaoAccessToken.data.access_token ,{httpOnly:true,
             secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
         }); 
 
           const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
@@ -297,6 +298,7 @@ router.get('/naverLoginCallback',async (req,res,next)=>{
 
           res.cookie(process.env.NAVER_COOKIE, naverAccessToken,{httpOnly:true,
             secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
         }); 
 
         const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
@@ -328,6 +330,7 @@ router.get('/facebookLogin',async (req,res,next)=>{
      
         res.cookie(process.env.FACEBOOK_COOKIE, data.access_token,{httpOnly:true,
             secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
         }); 
 
        const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
