@@ -35,10 +35,11 @@ const detailPage  = () =>{
   console.log(router.query); 
   const {detailPage} =router.query; 
   const postId   =  router.query.postId;
-  const nickName = router.query.userNickName;
+  const pid = router.query.pid;
+  const nickName = router.query.userNickName; //현재 로그인한 사람의 닉네임
   const postFlag = router.query.postFlag;
   const submitDay = router.query.submitDay;
-  const who       = router.query.who;
+  const who       = router.query.who;        //현재 로그인한 사람의 아이디값
 
 
   useEffect(()=>{
@@ -61,6 +62,7 @@ const detailPage  = () =>{
       type:MAINPOSTS_1001_COMMENTS_REQUEST, 
       data:{
         postId :postId,
+        pid :pid ,
         nickName:encodeURIComponent(nickName),
         postFlag :postFlag,
         who:who, 
@@ -73,7 +75,7 @@ const detailPage  = () =>{
           type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
           data:{
             postId:postId,
-            nickName:encodeURIComponent(nickName),
+            pid:encodeURIComponent(pid),
             postFlag:postFlag,
             who:who,
             submitDay:submitDay,
@@ -86,7 +88,7 @@ const detailPage  = () =>{
       type:MAINPOST_1001_IMAGES_REQUEST, 
       data:{
         postId:postId,
-        nickName:encodeURIComponent(nickName),
+        pid:encodeURIComponent(pid),
         submitDay:submitDay,
         postFlag:postFlag,
         
@@ -96,6 +98,7 @@ const detailPage  = () =>{
   },[
     detailPage,
     postId   ,
+    pid      ,
     nickName ,
     postFlag ,
     submitDay,
@@ -108,7 +111,7 @@ const detailPage  = () =>{
          imageSrc
         } = useSelector((state)=>state.mainPosts_1001); 
 
-  const {userInfo}      = useSelector((state)=>state.auth);
+  const {userInfo,userid}      = useSelector((state)=>state.auth);
   const ref = createRef(); 
   const blank_pattern = /^\s+|\s+&/g;  
   const [unfoldList,setUnfoldList] = useState('fold'); 
@@ -143,15 +146,14 @@ const detailPage  = () =>{
       return; 
     
     }
-    alert(`${submitDay}+submitDay`)
     //게시글 좋아요!
     dispatch({
             type:MAINPOSTS_1001_MAINPOSTLIKE_REQUEST,
             data:{
               postId,
-              nickName,
+              pid:pid,
               postFlag,
-              who: userInfo, 
+              who: userid, 
               flag:likeFlag, 
               submitDay,
               mainPosts_1001Info:[...mainPosts_1001Info], 
@@ -184,8 +186,8 @@ const detailPage  = () =>{
             postFlag,
             postId,
             flag: likeDislike ,
-            who: userInfo,
-            nickName,
+            who: userid,
+            pid:pid,
             submitDay,
             mainPosts_1001Comments:[...mainPosts_1001Comments],
           }
@@ -199,7 +201,7 @@ const detailPage  = () =>{
 
 
   //댓글 입력 
-  const insertComment = useCallback((postFlag,postId,nickName,comment,submitDay)=>{
+  const insertComment = useCallback((postFlag,pid,postId,nickName,comment,submitDay)=>{
     if(comment.length === 0 || comment.replace(blank_pattern,'')===""){
       
          
@@ -223,8 +225,9 @@ const detailPage  = () =>{
             data:{
               postId,
               postFlag,
+              pid,
               nickName ,
-              who:userInfo, 
+              who:userid, 
               comment,
               submitDay,
             }
@@ -245,7 +248,7 @@ const detailPage  = () =>{
 
 
       //대댓글 리스트 
-      const commentByCommentList =useCallback((postFlag,nickName,postId,commentId,clickCommentId,unfoldList,submitDay)=>{
+      const commentByCommentList =useCallback((postFlag,pid,nickName,postId,commentId,clickCommentId,unfoldList,submitDay)=>{
                
                 if(unfoldList==='unfold' && commentId === clickCommentId){
                   setUnfoldList('fold'); 
@@ -257,6 +260,7 @@ const detailPage  = () =>{
                     type:MAINPOSTS_1001_COMMENTBYCOMMENT_REQUEST,
                     data:{
                         postFlag,
+                        pid,
                         nickName,
                         postId,
                         commentId,
@@ -350,7 +354,8 @@ const detailPage  = () =>{
     {/*댓글 입력--------------------------------------------------------------------------------*/}
     <div><b>댓글 {mainPosts_1001Comments.length}</b></div>
     <CommentTextArea   
-            postFlag={postFlag} 
+            postFlag={postFlag}
+            pid={pid} 
             nickName={nickName} 
             postId={postId} 
             userInfo={userInfo}
@@ -370,9 +375,11 @@ const detailPage  = () =>{
         <Comments1001 
               key={i} 
               postFlag={postFlag} 
-              nickName={nickName} 
+              pid={pid}
+              nickName={v.userNickName}
+              loginNickName={userInfo}
               postId={postId} 
-              userInfo={userInfo}
+              userInfo={userid}
               submitDay={submitDay}
     
               commentId={v.commentId} 

@@ -33,11 +33,11 @@ function* sagaLoadUser(action){
 
         const result = yield call(APILoadUser,action.data);    
         const nick = result.data.nick;
-        const loginType = result.data.loginType; 
+        const userid    = result.data.userid; 
         
         yield put({
                 type:LOAD_USER_SUCCESS, 
-                data: {nickName: nick,loginTyle:loginType},           
+                data: {nickName: nick,userid:userid},           
         }); 
 
     }catch(e){
@@ -176,10 +176,10 @@ function* sagaLogin(action){
                 throw Error(result.data.message);
             }
             decoded =jwtDeCoder(result.data.token); 
-            
+
             yield put({
                 type:LOGIN_SUCCESS,
-                data:{nickName: decoded.nick,loginTyle:'local'},   
+                data:{nickName: decoded.nick,userid:decoded.userId},   
             }); 
 
         //카카오 로그인

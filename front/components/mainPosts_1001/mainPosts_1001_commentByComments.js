@@ -6,6 +6,7 @@ import {DislikeTwoTone,LikeTwoTone , UserOutlined, FieldTimeOutlined} from '@ant
 const Comment1001ByComments = ({
                                 key,
                                 postFlag,
+                                pid,
                                 nickName,
                                 postId,
                                 userInfo,
@@ -29,7 +30,7 @@ const Comment1001ByComments = ({
     return (
         <div className='divTableRow' >
             <div className="divTableCell02">
-                    └&nbsp;<b>{who}</b> &nbsp; <small>{custumDateFormat(createdDate)}</small><br />
+                    └&nbsp;<b>{nickName}</b> &nbsp; <small>{custumDateFormat(createdDate)}</small><br />
                     &nbsp;&nbsp;&nbsp;&nbsp;{comment}
                 <div  style={{marginTop:"1%",display:"block",float:"right"}}>
                     <LikeTwoTone onClick={()=>commentByCommentLikeBtn(byCommentId,flag,'good',submitDay)} twoToneColor={clickedComponent && likeDislikeflag==='good' ? "#ff0000" : "#ff6600"}/>{clickedComponent && likeDislikeflag==='good' ? parseInt(good)+1:good}

@@ -7,7 +7,7 @@ export const  initialState = {
 
     isLogining : false, //로그인 시도 중
     userInfo : null,      //사용자 정보
-    loginTyle:'',         //로그인 타입
+    userid   : null,    //사용자 아이디
 
     loginError:null,        //로그인 에러 메시지
 
@@ -78,7 +78,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 draft.loginError = null;
                 draft.isLogining = false;               
                 draft.userInfo = action.data.nickName; 
-                draft.loginTyle = action.data.loginTyle; 
+                draft.userid    = action.data.userid; 
                 break; 
             }
         
@@ -98,7 +98,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 
             case LOAD_USER_SUCCESS :{
                 draft.userInfo = action.data.nickName; 
-                draft.loginTyle = action.data.loginTyle; 
+                draft.userid    = action.data.userid; 
                 break; 
             }
 

@@ -112,7 +112,7 @@ const AppLayOut = ({children}) =>{
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1008'}} }><a style={{backgroundColor:posf==='1008'?'#4CAF50':''}}>거래처썰</a></Link>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1009'}} }><a style={{backgroundColor:posf==='1009'?'#4CAF50':''}}>추노</a></Link>
        <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1010'}} }><a style={{backgroundColor:posf==='1010'?'#4CAF50':''}}>핫딜/광고</a></Link> 
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a  style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
+       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}} }><a  style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
        </nav>
             
  

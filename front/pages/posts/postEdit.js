@@ -35,7 +35,7 @@ const postEdit = () =>{
 
     const dispatch = useDispatch(); 
     const {imageUploading,imageFileName,postInserting} = useSelector((state)=>state.mainPosts_1001); 
-    const {userInfo} = useSelector((state)=>state.auth); 
+    const {userInfo,userid} = useSelector((state)=>state.auth); 
     const refTitle = useRef(); 
     const refContent = useRef(); 
     const imageInput = useRef();
@@ -104,6 +104,7 @@ const postEdit = () =>{
                    userNickName:encodeURIComponent(userInfo), 
                    imageFileName: imageFileName, 
                    postFlag:posf,
+                   userid:encodeURIComponent(userid),
                    
            },
 
@@ -165,7 +166,7 @@ const postEdit = () =>{
             imageFormData.delete('image'); 
             return; 
         }else{
-
+            
             dispatch({type:UPLOAD_IMAGES_REQUEST,
                 data:{images:imageFormData,
                      postFlag:posf,

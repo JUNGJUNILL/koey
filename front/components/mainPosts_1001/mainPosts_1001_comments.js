@@ -15,7 +15,9 @@ from '../../reducers/mainPosts_1001';
 
 const Comments1001 = ({
                       postFlag,
+                      pid,
                       nickName,
+                      loginNickName,
                       postId,
                       userInfo,
                       submitDay,
@@ -49,8 +51,8 @@ const Comments1001 = ({
   const blank_pattern = /^\s+|\s+&/g;  
         
   //대댓글 입력 
-  const insertComment = useCallback((postFlag,postId,nickName,comment,submitDay)=>{
-
+  const insertComment = useCallback((postFlag,pid,postId,nickName,comment,submitDay)=>{
+        
         if(comment.length === 0 || comment.replace(blank_pattern,'')===""){
  
             alert('댓글을 입력해 주세요!'); 
@@ -69,9 +71,10 @@ const Comments1001 = ({
         dispatch({
             type:MAINPOSTS_1001_COMMENTBYCOMMENTINSERT_REQUEST, 
             data:{
-                postFlag,
-                nickName,
                 postId,
+                postFlag,
+                pid,
+                nickName,
                 commentId,
                 who:userInfo,
                 comment,   
@@ -105,6 +108,7 @@ const Comments1001 = ({
                         commentId,
                         postId,
                         postFlag,
+                        pid,
                         nickName,
                         who:userInfo,
                         flag : likeDislike,
@@ -122,9 +126,9 @@ const Comments1001 = ({
         <>        
                 <div  className='divTableRow' >
                     <div  className="divTableCellDetail">        
-                    <Avatar size="small" icon={<UserOutlined />} />  <b>{who}</b> &nbsp; <small>{custumDateFormat(createdDate)}</small><br/>
+                    <Avatar size="small" icon={<UserOutlined />} />  <b>{nickName}</b> &nbsp; <small>{custumDateFormat(createdDate)}</small><br/>
                     {comment},  {commentId}<br />
-                    <a onClick={()=>commentByCommentList(postFlag,nickName,postId,commentId,clickCommentId,unfoldList,submitDay)}>{`답글[${commentByCommentInsertCommentId===commentId ? commentByCommentCount : byCommentCount}]`   }</a>          
+                    <a onClick={()=>commentByCommentList(postFlag,pid,nickName,postId,commentId,clickCommentId,unfoldList,submitDay)}>{`답글[${commentByCommentInsertCommentId===commentId ? commentByCommentCount : byCommentCount}]`   }</a>          
                         <div  style={{marginTop:"1%",display:"block",float:"right"}}>
                             <LikeTwoTone onClick={()=>likeBtn(commentId,flag,'good',submitDay)} twoToneColor={clickedComponent && likeDislikeflag==='good' ? "#ff0000" : "#ff6600"}/>{clickedComponent && likeDislikeflag==='good' ? parseInt(good)+1:good}
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -140,7 +144,8 @@ const Comments1001 = ({
                     <Comment1001ByComments                  
                             key={i}
                             postFlag={postFlag}
-                            nickName={nickName}
+                            pid={pid}
+                            nickName={v.userNickName}
                             postId={postId}
                             userInfo={userInfo}
                             commentId={commentId}
@@ -167,7 +172,8 @@ const Comments1001 = ({
                {unfoldList ==='unfold' && clickCommentId === commentId && byCommentCount >= 0 && 
                     <CommentTextArea   
                             postFlag={postFlag} 
-                            nickName={nickName} 
+                            pid={pid}
+                            nickName={loginNickName} 
                             postId={postId} 
                             userInfo={userInfo}
                             submitDay={submitDay}

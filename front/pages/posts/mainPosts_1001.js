@@ -32,7 +32,7 @@ const mainPosts_1001 = ()=>{
   const dispatch         = useDispatch(); 
   const router           = useRouter(); 
   const {mainPosts_1001} = useSelector((state)=>state.mainPosts_1001); 
-  const {userInfo}       = useSelector((state)=>state.auth);
+  const {userInfo,userid}       = useSelector((state)=>state.auth);
 
   const blank_pattern = /^\s+|\s+&/g; 
   const refSearchValue = useRef(); 
@@ -118,10 +118,9 @@ const mainPosts_1001 = ()=>{
 
  
   //게시글 상세 페이지 
-  const gotoDetail = useCallback((postId,userNickName,postFlag,submitDay,userInfo)=>{
+  const gotoDetail = useCallback((postId,userId,postFlag,submitDay,userNickName)=>{
      //window.localStorage.setItem('scrollY',window.scrollY);  
-    
-     router.push(`/posts/detailPage?postId=${postId}&userNickName=${userNickName}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userInfo}` ,scroll=false); 
+     router.push(`/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
   },[]); 
 
 
@@ -185,7 +184,7 @@ const mainPosts_1001 = ()=>{
 
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
-                <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userNickName,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
+                <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userid,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
                <div className='divTableImageCell'>
                   <div className="divImageCell">
 
@@ -232,7 +231,7 @@ const mainPosts_1001 = ()=>{
                 */}
 
                   <div className="divTableCell" >    
-                    <Link href={`/posts/detailPage?postId=${v.postId}&userNickName=${v.userNickName}&postFlag=${posf}&submitDay=${v.submitDay}&who=${userInfo}`
+                    <Link href={`/posts/detailPage?postId=${v.postId}&postFlag=${posf}&submitDay=${v.submitDay}&who=${userid}&pid=${v.userid}&userNickName=${userInfo}`
 
                   }><a>
                   
