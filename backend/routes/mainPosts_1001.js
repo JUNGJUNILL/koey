@@ -130,26 +130,27 @@ router.post('/', async (req,res,next)=>{
 router.post('/mainPosts_1001Detail', async (req,res,next)=>{
 
     try{    
-        const {postId, pid, nickName, postFlag, who, submitDay}= req.body.data; 
+        const {postId, pid,  postFlag, who, submitDay}= req.body.data; 
 
-        console.log(`${postId}\n${decodeURIComponent(pid)}\n${nickName}\n${postFlag}\n${who}\n${submitDay}\n`); 
         //(쿠키가 없는 경우 게시글 정보로 쿠키생성)
-        // if(!req.cookies[process.env.HITCOUNT_COOKIE] || req.cookies[process.env.HITCOUNT_COOKIE] !== postId+nickName+postFlag){
+        if(!req.cookies[process.env.HITCOUNT_COOKIE] || req.cookies[process.env.HITCOUNT_COOKIE] !== postId+decodeURIComponent(pid)+postFlag+submitDay){
 
-        //     let rowQuery ='CALL US_UPDATE_mainPostsHit'; 
-        //     rowQuery =rowQuery.concat(`('${postId}',`);
-        //     rowQuery =rowQuery.concat(`'${decodeURIComponent(nickName)}',`);
-        //     rowQuery =rowQuery.concat(`'${postFlag}',`); 
-        //     rowQuery =rowQuery.concat(`'${submitDay}')`);
-        //     console.log(rowQuery); 
-        //     await pool.query(rowQuery); 
+            let rowQuery ='CALL US_UPDATE_mainPostsHit'; 
+            rowQuery =rowQuery.concat(`('${postId}',`);
+            rowQuery =rowQuery.concat(`'${decodeURIComponent(pid)}',`);
+            rowQuery =rowQuery.concat(`'${postFlag}',`); 
+            rowQuery =rowQuery.concat(`'${submitDay}')`);
+            console.log(rowQuery); 
+            await pool.query(rowQuery); 
          
-        //     res.cookie(process.env.HITCOUNT_COOKIE,postId+decodeURIComponent(nickName)+postFlag,
-        //         {httpOnly:true,
-        //         secure:false,
-        //     }); 
+            res.cookie(process.env.HITCOUNT_COOKIE,postId+decodeURIComponent(pid)+postFlag+submitDay,
+                {httpOnly:true,
+                secure:false,
+                domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
 
-        // }
+            }); 
+
+        }
 
 
         let stringQuery = 'CALL US_SELECT_mainPostsDetail'; 
