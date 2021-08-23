@@ -120,6 +120,7 @@ const mainPosts_1001 = ()=>{
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userId,postFlag,submitDay,userNickName)=>{
      //window.localStorage.setItem('scrollY',window.scrollY);  
+     alert(`userId==> ${userId}`); 
      router.push(`/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
   },[]); 
 
