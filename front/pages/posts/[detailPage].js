@@ -69,7 +69,7 @@ const detailPage  = () =>{
         submitDay:submitDay,
       }
     }); 
-    
+    alert(`pid==> ${pid}`); 
     //상세 정보 
     dispatch({
           type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
