@@ -147,7 +147,7 @@ const Home =()=>{
     dataSource={data01}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1001&submitDay=${item.submitDay}&who=${userInfo}`} >
+      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1001&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -168,7 +168,7 @@ const Home =()=>{
     dataSource={data02}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1002&submitDay=${item.submitDay}&who=${userInfo}`} >
+      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1002&submitDay=${item.submitDay}&who=${userInfo}`} >
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -190,7 +190,7 @@ const Home =()=>{
     dataSource={data03}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1003&submitDay=${item.submitDay}&who=${userInfo}`}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1003&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -211,7 +211,7 @@ const Home =()=>{
     dataSource={data04}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1004&submitDay=${item.submitDay}&who=${userInfo}`}>
+      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1004&submitDay=${item.submitDay}&who=${userInfo}`}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -233,7 +233,7 @@ const Home =()=>{
      dataSource={data05}
      renderItem={item => (
        <List.Item onClick={scrollRestoration} >
-       <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1005&submitDay=${item.submitDay}&who=${userInfo}`}>
+       <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1005&submitDay=${item.submitDay}&who=${userInfo}`}>
        <a className="abbreviation">
        <span className="bestSpan">BEST</span> 
          {item.title}
@@ -254,7 +254,7 @@ const Home =()=>{
       dataSource={data06}
       renderItem={item => (
         <List.Item onClick={scrollRestoration} >
-        <Link href={`/posts/detailPage?postId=${item.postId}&userNickName=${item.userNickName}&postFlag=1006&submitDay=${item.submitDay}&who=${userInfo}`}>
+        <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1006&submitDay=${item.submitDay}&who=${userInfo}`}>
         <a className="abbreviation">
         <span className="bestSpan">BEST</span> 
           {item.title}
