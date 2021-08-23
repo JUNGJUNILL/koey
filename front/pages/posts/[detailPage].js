@@ -32,7 +32,6 @@ const detailPage  = () =>{
   const dispatch = useDispatch(); 
   const router           = useRouter(); 
 
-  console.log(router.query); 
   const {detailPage} =router.query; 
   const postId   =  router.query.postId;
   const pid = router.query.pid;
