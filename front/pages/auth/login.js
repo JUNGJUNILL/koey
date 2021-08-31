@@ -20,7 +20,6 @@ margin-bottom:5%
 const ButtonWrapper = styled(Button)`
 margin-bottom:1.5%;
 width:80%;
-display:inline-block
 `;
 
 const Login = ()=>{
@@ -108,9 +107,20 @@ const Login = ()=>{
         <form onSubmit={onSubmit}>
         <div style={{textAlign:'center',marginTop:'5%',marginBottom:'3%',}}>
             <div style={{display:'inline-block',border:'1px solid',height:'10vh',width:'80%',marginBottom:'3%'}}>로고</div>
-            <Input style={{width:'80%',marginBottom:'1%'}} type="text" name="userId" value={id} onChange={onChangeId} placeholder={'아이디'}/>
+            <Input style={{width:'80%',marginBottom:'1%'}} type="text" name="userId" value={id} onChange={onChangeId} placeholder={'이메일'}/>
             <Input style={{width:'80%'}} type="password" name="password" value={password} onChange={onChangPassword} placeholder={'비밀번호'}/>
+            
             <ButtonWrapper type="primary" onClick={onSubmit} loading={isLogining} block>로그인</ButtonWrapper>
+
+            <Link href={`${naverLoginUri}`}>
+                <a><ButtonWrapper block>네이버(NAVER) 로그인 </ButtonWrapper></a>
+            </Link>
+            <ButtonWrapper onClick={()=>SNSLogin('kakao')} block>카카오(KAKAO) 로그인 </ButtonWrapper>
+            <ButtonWrapper block disabled>구글(GOOGLE)) 로그인(준비중) </ButtonWrapper>
+
+            <Link href={`${facebookLoginUri}`}>
+                <a><ButtonWrapper block disabled>페이스북(FACEBOOK) 로그인(준비중) </ButtonWrapper> </a>      
+            </Link>
         </div>
      
         </form>         

@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const axios = require('axios'); 
 var qs = require('querystring');
 const router = express.Router();
+const nodemailer = require("nodemailer");
 
 
 
@@ -168,10 +169,10 @@ router.post('/login',async (req,res,next)=>{
 
             try{
                 const {userId , password} = req.body.data;  
-
+                const base64UserEmail = Buffer.from(userId).toString('base64'); 
                 let loginType='local'; 
                 let stringQuery = 'CALL US_SELECT_getUserInfo'; 
-                stringQuery = stringQuery.concat(`('${userId}',`);
+                stringQuery = stringQuery.concat(`('${base64UserEmail}',`);
                 stringQuery = stringQuery.concat(`'${loginType}')`);
                 console.log(stringQuery); 
                 const user = await pool.query(stringQuery); 
@@ -366,5 +367,98 @@ router.get('/logOut',(req,res)=>{
     res.json('로그아웃'); 
 
 }); 
+
+
+
+
+//이메일 인증  
+router.post('/sendemail',async (req,res)=>{
+
+    try{
+
+        const {userEmailAdress , eMailType} = req.body.data;  
+
+        
+        const userEmail=`${userEmailAdress}@${eMailType}`;
+        const base64UserEmail=Buffer.from(userEmail).toString('base64');
+        
+        let stringQuery = 'CALL US_SELECT_CHECK_USER'; 
+            stringQuery = stringQuery.concat(`('${base64UserEmail}')`);
+
+        const user = await pool.query(stringQuery);
+        console.log(stringQuery); 
+        if(user[0][0]){
+
+            return res.status(200).json({mailExistence:'이미 가입한 메일입니다.'});  
+        }else{
+            let transporter = nodemailer.createTransport({
+                service:'gmail',
+                host: "smtp.gmail.com",
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                  user: process.env.FROMEMAIL, 
+                  pass: process.env.FROMEMAILPASS, 
+                },
+              });
+    
+
+              const joinUrl =process.env.NODE_ENV === 'production'
+                            ?`http://jscompany.live/auth/join?pid=${base64UserEmail}`
+                            :`http://localhost:3001/auth/join?pid=${base64UserEmail}`;
+
+              let info = await transporter.sendMail({
+                from: 'devjji1207@gmail.com', // sender address
+                to: `${userEmailAdress}@${eMailType}`, // list of receivers
+                subject: "좋소!(JS) 회원가입 인증", // Subject line
+                text: "좋소!(JS) 회원가입 인증", // plain text body
+                html: `<pre>
+                            <b>좋소 회원가입 바로가기</b>
+                            <a href='${joinUrl}'>${joinUrl}</a>
+                       </pre>
+                       `, // html body
+              });
+    
+    
+              return res.json({response:info.response,
+                               userEmailAdress:userEmail}); 
+    
+
+        }
+        
+    }catch(e){
+        console.error(e); 
+    }
+
+}); 
+
+
+//닉네임 중복 확인 
+router.post('/checkNickName',async (req,res)=>{
+    
+    try{
+
+        const {chckNickName} = req.body.data;  
+
+        let stringQuery = 'CALL US_SELECT_CHECK_NICKNAME'; 
+        stringQuery = stringQuery.concat(`('${decodeURIComponent(chckNickName)}')`);
+        console.log(stringQuery);
+        const nickName = await pool.query(stringQuery);
+
+        if(nickName[0][0]){
+
+            return res.status(200).json({nickNameExistence:false});
+
+        }else{
+            return res.status(200).json({nickNameExistence:true});  
+        }
+
+    }catch(e){
+        console.error(e); 
+    }
+
+
+}); 
+
 
 module.exports  = router; 

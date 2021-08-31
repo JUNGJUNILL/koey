@@ -2,15 +2,23 @@ import immerProduce from '../util/produce';
 
 export const  initialState = {
 
-    isJoinng : false, //회원가입 시도중 
-    joined   : ''   , //회원가입 성공 
+    isJoinng : false,           //회원가입 시도중 
+    joined   : ''   ,           //회원가입 성공 
 
-    isLogining : false, //로그인 시도 중
-    userInfo : null,      //사용자 정보
-    userid   : null,    //사용자 아이디
+    checkingNickName : false,   //중복 확인 버튼 클릭 
+    nickNameExistence : '',     //닉네임 중복 여부
 
-    loginError:null,        //로그인 에러 메시지
+    isLogining : false,         //로그인 시도 중
+    userInfo : null,            //사용자 정보
+    userid   : null,            //사용자 아이디
+    loginError:null,            //로그인 에러 메시지
 
+    emailSending:false,         //이메일 보내기 버튼 클릭 
+    emailSendingResponse:'',    //메일 응답 
+    userEmailadress:'',         //사용자 메일
+    mailExistence:'',           //가입여부
+
+    
 
 }
 
@@ -32,6 +40,20 @@ export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST'; 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'; 
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE'; 
+
+//인증 이메일 보내기 
+export const SEND_EMAIL_REQUEST='SEND_EMAIL_REQUEST';
+export const SEND_EMAIL_SUCCESS='SEND_EMAIL_SUCCESS';
+export const SEND_EMAIL_FAILURE='SEND_EMAIL_FAILURE';
+
+//닉네임 중복 확인 
+export const CHECK_NICKNAME_REQUEST='CHECK_NICKNAME_REQUEST';
+export const CHECK_NICKNAME_SUCCESS='CHECK_NICKNAME_SUCCESS';
+export const CHECK_NICKNAME_FAILURE='CHECK_NICKNAME_FAILURE';
+
+//닉네임 새로 입력 
+export const LOAD_CHECK_NICKNAME='LOAD_CHECK_NICKNAME';
+
 
 const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
 
@@ -120,6 +142,54 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             }
 
             case LOGOUT_FAILURE :{
+                break; 
+            }
+//------------------------------------------------
+
+//인증 이메일 보내기 
+//------------------------------------------------
+            case SEND_EMAIL_REQUEST :{
+                draft.emailSending = true; 
+                break; 
+            }
+
+            case SEND_EMAIL_SUCCESS :{
+                draft.emailSending = false; 
+                draft.emailSendingResponse = action.data.emailSendingResponse;
+                draft.userEmailadress = action.data.userEmailAdress;
+                draft.mailExistence = action.data.mailExistence; 
+                break; 
+            }
+
+            case SEND_EMAIL_FAILURE :{
+                draft.emailSending = false; 
+                break; 
+            }
+//------------------------------------------------
+
+//닉네임 중복 확인 
+//------------------------------------------------
+            case CHECK_NICKNAME_REQUEST :{
+                draft.checkingNickName=true; 
+                break; 
+            }
+
+            case CHECK_NICKNAME_SUCCESS :{
+                draft.checkingNickName=false; 
+                draft.nickNameExistence=action.data.nickNameExistence;
+                break; 
+            }
+
+            case CHECK_NICKNAME_FAILURE :{
+                draft.checkingNickName=false; 
+                break; 
+            }
+//------------------------------------------------
+
+//닉네임 새로 입력 
+//------------------------------------------------
+            case LOAD_CHECK_NICKNAME :{ 
+                draft.nickNameExistence=''; 
                 break; 
             }
 //------------------------------------------------

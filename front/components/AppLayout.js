@@ -95,7 +95,7 @@ const AppLayOut = ({children}) =>{
         
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link> :'' }
         {!userInfo ?    <Link href={'/auth/join'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><UserOutlined onClick={goProfile}/> 내 정보</a></Link> } 
-
+        <Link href={'/auth/authentication'} ><a className="mu">회원가입1</a></Link>
         </div>
   
         </header>

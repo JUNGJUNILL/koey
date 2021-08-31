@@ -7,15 +7,27 @@ import
     {JOIN_REQUEST,
      JOIN_SUCCESS,
      JOIN_FAILURE,
+
      LOGIN_REQUEST,
      LOGIN_SUCCESS,
      LOGIN_FAILURE, 
+
      LOAD_USER_REQUEST,
      LOAD_USER_SUCCESS,
      LOAD_USER_FAILURE,
+
      LOGOUT_REQUEST,
      LOGOUT_SUCCESS,
      LOGOUT_FAILURE,
+
+     SEND_EMAIL_REQUEST,
+     SEND_EMAIL_SUCCESS,
+     SEND_EMAIL_FAILURE,
+
+    CHECK_NICKNAME_REQUEST,
+    CHECK_NICKNAME_SUCCESS,
+    CHECK_NICKNAME_FAILURE, 
+
     } 
 from '../reducers/auth'; 
 
@@ -72,7 +84,6 @@ function APIJoin(data){
 function* sagaJoin(action){
     
     try{
-       console.log(action, action.data);
         const result = yield call(APIJoin,action.data); 
         yield put({
             type:JOIN_SUCCESS,
@@ -219,6 +230,83 @@ function* watchLogin(){
 //------------------------------------------------------------------------
 
 
+
+//이메일 인증 사이클
+//------------------------------------------------------------------------
+function APISendEmail(data){
+
+    return axios.post('/auth/sendemail',{data},{withCredentials:true});
+
+
+}
+
+function* sagaSendEmail(action){
+
+
+    try{
+      const result =   yield call(APISendEmail,action.data); 
+        
+        yield put({
+            type:SEND_EMAIL_SUCCESS,
+            data:{emailSendingResponse:result.data.response,
+                  userEmailAdress     :result.data.userEmailAdress,
+                  mailExistence       :result.data.mailExistence,
+                 }
+        }); 
+
+
+    }catch(e){
+        alert('이메일 보내기 에러'); 
+        yield put({
+            type:SEND_EMAIL_FAILURE, 
+            error:e,
+        })
+    }
+}
+
+function* watchSendEmail(){
+    yield takeLatest(SEND_EMAIL_REQUEST,sagaSendEmail); 
+}
+//------------------------------------------------------------------------
+
+
+
+//닉네임 중복 확인 
+//------------------------------------------------------------------------
+function APICheckNickName(data){
+
+    return axios.post('/auth/checkNickName',{data},{withCredentials:true});
+
+
+}
+
+function* sagaCheckNickName(action){
+
+
+    try{
+      const result =   yield call(APICheckNickName,action.data); 
+        
+        yield put({
+            type:CHECK_NICKNAME_SUCCESS,
+            data:{nickNameExistence : result.data.nickNameExistence,}
+        }); 
+
+
+    }catch(e){
+        alert('닉네임 중복 체크 에러'); 
+        yield put({
+            type:CHECK_NICKNAME_FAILURE, 
+            error:e,
+        })
+    }
+}
+
+function* watchCheckNickName(){
+    yield takeLatest(CHECK_NICKNAME_REQUEST,sagaCheckNickName); 
+}
+//------------------------------------------------------------------------
+
+
 export default function* authSaga(){
 
 
@@ -227,6 +315,8 @@ export default function* authSaga(){
         fork(watchLogin), 
         fork(watchLoadUser), 
         fork(watchLogOut), 
+        fork(watchSendEmail), 
+        fork(watchCheckNickName), 
         
     ])
 }
