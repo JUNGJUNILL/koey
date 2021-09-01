@@ -36,7 +36,6 @@ const Join = ()=>{
 
     const pid  = router.query.pid ? router.query.pid : ''; 
     const refPid = useRef(); 
-
     
     const blank_pattern = /^\s+|\s+&/g; 
     const spc_pattern = /[~!@#$%^&*()_+|<>?:{}]/; 
@@ -72,7 +71,7 @@ const Join = ()=>{
         const checkMail = base64Decoder(pid).split('@'); 
 
         if(checkMail[0].length===0 || 
-                                   !(checkMail[1]==='naver.com'
+                                   !( checkMail[1]==='naver.com'
                                    || checkMail[1]==='nate.com'
                                    || checkMail[1]==='gmail.com'
                                    || checkMail[1]==='daum.net')
@@ -160,10 +159,7 @@ const Join = ()=>{
     return (
             <>           
             <form onSubmit={onSubmit}>
-            <input type="hidden" name="id" value={'조이 존나 쪼일듯'} />
-            <input type="text" value={base64Decoder(pid)} />
             
-
             <div style={{textAlign:'center',marginTop:'5%',marginBottom:'3%',}}>
                 <div style={{display:'inline-block',border:'1px solid',height:'10vh',width:'80%',marginBottom:'3%'}}>
                     회원가입

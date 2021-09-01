@@ -14,7 +14,19 @@ import { backImageUrl } from '../config/config';
 
 
 const AppLayOut = ({children}) =>{
-    //const dummyList = ['자유 게시판','유머','정보','취업','핫딜','미국','일본','중국','동남아','유럽','호주','기타']; 
+    const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
+                          { categoryName:'좋소!',posf:'1002'},      
+                          { categoryName:'좋소!탈출',posf:'1003'},     
+                          { categoryName:'좋소!희망편',posf:'1004'},     
+                          { categoryName:'주말출근',posf:'1005'},     
+                          { categoryName:'야근/철야',posf:'1006'},     
+                          { categoryName:'현장/이슈',posf:'1007'},     
+                          { categoryName:'거래처썰',posf:'1008'},     
+                          { categoryName:'추노',posf:'1009'},     
+                          { categoryName:'핫딜/광고',posf:'1010'},     
+                          { categoryName:'운영진 요청사항',posf:'1011'},     
+                        ]; 
+
     const { SubMenu } = Menu;
     //const router   =useRouter(); 
     //const dispatch = useDispatch(); 
@@ -65,15 +77,23 @@ const AppLayOut = ({children}) =>{
     //     setIsClicked(false);
     // }
 
+    //index 페이지 이동
     const gotoHome = () =>{
         Router.push('/'); 
     }
 
+    //프로필 화면으로 이동 
     const goProfile = () =>{
         Router.push('/posts/profile'); 
         return; 
     }
     
+    //스크롤 위치 초기화
+    const initScrollRestoration = () =>{
+
+        window.localStorage.setItem('scrollY',0); 
+
+    }
 
     
     return(
@@ -94,26 +114,16 @@ const AppLayOut = ({children}) =>{
         <div className="fr" style={{marginRight:"-5px"}}>
         
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link> :'' }
-        {!userInfo ?    <Link href={'/auth/join'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><UserOutlined onClick={goProfile}/> 내 정보</a></Link> } 
-        <Link href={'/auth/authentication'} ><a className="mu">회원가입1</a></Link>
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><UserOutlined onClick={goProfile}/> 내 정보</a></Link> } 
         </div>
   
         </header>
 
         <nav className='navInfo'>
-       <Link href={{pathname:'#' }}><a style={{backgroundColor:posf==='1000'?'#4CAF50':''}}>좋소!베스트</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}} }><a style={{backgroundColor:posf==='1001'?'#4CAF50':''}}>좋좋소!</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}} }><a style={{backgroundColor:posf==='1002'?'#4CAF50':''}}>좋소!</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}} }><a style={{backgroundColor:posf==='1003'?'#4CAF50':''}}>좋소!탈출</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}} }><a style={{backgroundColor:posf==='1004'?'#4CAF50':''}}>좋소!희망편</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}} }><a style={{backgroundColor:posf==='1005'?'#4CAF50':''}}>주말출근</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}} }><a style={{backgroundColor:posf==='1006'?'#4CAF50':''}}>야근/철야</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1007'}} }><a style={{backgroundColor:posf==='1007'?'#4CAF50':''}}>현장/이슈</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1008'}} }><a style={{backgroundColor:posf==='1008'?'#4CAF50':''}}>거래처썰</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1009'}} }><a style={{backgroundColor:posf==='1009'?'#4CAF50':''}}>추노</a></Link>
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1010'}} }><a style={{backgroundColor:posf==='1010'?'#4CAF50':''}}>핫딜/광고</a></Link> 
-       <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}} }><a  style={{backgroundColor:posf==='1011'?'#4CAF50':''}}>운영진 요청사항</a></Link>
-       </nav>
+            {categoryList.map((v)=>(
+                <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+            ))} 
+        </nav>
             
  
      

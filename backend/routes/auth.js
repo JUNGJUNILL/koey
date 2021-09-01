@@ -27,8 +27,9 @@ router.get('/',async (req,res)=>{
         if(req.cookies[process.env.COOKIE_SECRET]){
             console.log('jwt login'); 
             req.decoded = jwt.verify(req.cookies[process.env.COOKIE_SECRET],process.env.JWT_SECRET); 
-            return res.json({nick:req.decoded,
-                             userid:null}); 
+            
+            return res.json({nick:req.decoded.nick,
+                             userid:req.decoded.userId}); 
 
         //카카오 로그인    
         }else if(req.cookies[process.env.KAKAO_COOKIE]){
@@ -197,7 +198,6 @@ router.post('/login',async (req,res,next)=>{
             
                 //로그인 성공 
                 if(result){
-                    console.log('userInfo==> ', userInfo); 
                     const token = jwt.sign({
                                 nick:userInfo.userNickName, 
                                 userId:userInfo.userId,

@@ -187,7 +187,7 @@ function* sagaLogin(action){
                 throw Error(result.data.message);
             }
             decoded =jwtDeCoder(result.data.token); 
-
+            
             yield put({
                 type:LOGIN_SUCCESS,
                 data:{nickName: decoded.nick,userid:decoded.userId},   
