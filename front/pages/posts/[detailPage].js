@@ -284,7 +284,7 @@ const detailPage  = () =>{
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
             <div className='divTableRowTh'>
-                <div className='divTableCellTh'><h3><b>{mainPosts_1001Info[0].title},{mainPosts_1001Info[0].postId}</b></h3></div>
+                <div className='divTableCellTh'><h3><b>{mainPosts_1001Info[0].title}</b></h3></div>
            </div>
            <div className='divTableRowTh'>
                 <div className='divTableCellTh'><Avatar size="small" icon={<UserOutlined />} />&nbsp;{mainPosts_1001Info[0].userNickName}</div>

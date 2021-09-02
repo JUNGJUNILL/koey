@@ -127,7 +127,7 @@ const Comments1001 = ({
                 <div  className='divTableRow' >
                     <div  className="divTableCellDetail">        
                     <Avatar size="small" icon={<UserOutlined />} />  <b>{nickName}</b> &nbsp; <small>{custumDateFormat(createdDate)}</small><br/>
-                    {comment},  {commentId}<br />
+                    {comment}<br />
                     <a onClick={()=>commentByCommentList(postFlag,pid,nickName,postId,commentId,clickCommentId,unfoldList,submitDay)}>{`답글[${commentByCommentInsertCommentId===commentId ? commentByCommentCount : byCommentCount}]`   }</a>          
                         <div  style={{marginTop:"1%",display:"block",float:"right"}}>
                             <LikeTwoTone onClick={()=>likeBtn(commentId,flag,'good',submitDay)} twoToneColor={clickedComponent && likeDislikeflag==='good' ? "#ff0000" : "#ff6600"}/>{clickedComponent && likeDislikeflag==='good' ? parseInt(good)+1:good}
