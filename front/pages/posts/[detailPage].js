@@ -224,7 +224,7 @@ const detailPage  = () =>{
               postId,
               postFlag,
               pid,
-              nickName ,
+              nickName,
               who:userid, 
               comment,
               submitDay,
@@ -354,7 +354,7 @@ const detailPage  = () =>{
     <CommentTextArea   
             postFlag={postFlag}
             pid={pid} 
-            nickName={who} 
+            nickName={nickName} 
             postId={postId} 
             userInfo={userInfo}
             insertComment={insertComment}
