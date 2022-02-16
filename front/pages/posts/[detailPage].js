@@ -193,7 +193,6 @@ const detailPage  = () =>{
 
     }
 
-     alert(`${likeDislike}`); 
     
     },[mainPosts_1001Comments]); 
 
