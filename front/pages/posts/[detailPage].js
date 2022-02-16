@@ -216,7 +216,7 @@ const detailPage  = () =>{
         }
 
         
-        
+          alert(nickName); 
           //댓글 입력
           dispatch({
             type:MAINPOSTS_1001_COMMENTINSERT_REQUEST, 
