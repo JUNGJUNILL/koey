@@ -87,11 +87,13 @@ const postEdit = () =>{
         }
 
         let contentImages=""; 
+        /*
         if(imageFileName.length > 0 ){
             imageFileName.map((v)=>{
                 contentImages =contentImages +  `<figure ><img src="${backImageUrl}/${posf}/${v}"></figure>`
             }); 
         }
+        */
         const filteredContent = secureFilter(content); 
         const filteredTitle   = secureFilter(title); 
         const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
@@ -198,7 +200,7 @@ const postEdit = () =>{
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
              */}
         <Input placeholder='제목을 입력하세요' ref={refTitle} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
-        <TextArea placeholder='하고 싶은 이야기' ref={refContent} onChange={onChangeContent} rows={4} />
+        <TextArea placeholder='하고 싶은 이야기' ref={refContent} onChange={onChangeContent} rows={10} />
         <div style={{marginTop:'2%',textAlign:'center'}}>
             <Button onClick={onClickImageUpload} >    <PictureOutlined />    </Button>&nbsp;
             <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp;
