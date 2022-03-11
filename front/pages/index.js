@@ -8,7 +8,7 @@ import wrapper from '../store/configureStore';
 import { Card, Col, Row, List,  Button, Divider  } from 'antd';
 const { Meta } = Card;
 
-import { backImageUrl } from '../config/config';
+import { backImageUrl,AWSImageUrl } from '../config/config';
 
 import 
     {LOAD_USER_REQUEST,} 
@@ -52,111 +52,40 @@ const Home =()=>{
   const fileName2 = '동기부여1607408839105.png'; 
   const fileName3 = '담배땡긴다 - 복사본1622693419222.jpg';  
 
+  const array=['1','2','3']
 
   return (
     <div>
 
-  <Divider orientation="center">좋소!베스트</Divider>
+  <Divider orientation="center">좋좋소! 베스트</Divider>
   <Row style={{marginTop:'3%'}}>
-
-  <Col span={8} style={{padding:'5px'}}> 
+  
+  {data01.map((v,i)=>(
+    <Link href={`/posts/detailPage?postId=${v.postId}&pid=${v.userid}&userNickName=${v.userNickName}&postFlag=1001&submitDay=${v.submitDay}&who=${userInfo}`} >
+    <Col span={8} style={{padding:'5px'}}> 
     <div style={{textAlign:'center'}}>
       <div>
-          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />    
+          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  
+               src={v.firstImageName.length > 0 ? 
+                    process.env.NODE_ENV==='production' 
+                    ? 
+                    `${AWSImageUrl}/images/1001/${v.firstImageName}`
+                    : 
+                    `${backImageUrl}/1001/${v.firstImageName}`   
+                    :`${backImageUrl}/noimages.gif`               
+          } />    
           <br />
           <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          새우깡 와 진짜 대박이다 호박깡
+          {v.title}
           </div>
       </div>
     </div>
   </Col>
+  </Link>
+  ))}
 
-  <Col span={8} style={{padding:'5px'}}>
-    <div style={{textAlign:'center'}}>
-      <div>
-          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />    
-          <br />
-          <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          와 진짜 대박이다 새우깡 호박깡
-          </div>
-      </div>
-    </div>
-  </Col>
-
-  <Col span={8} style={{padding:'5px'}}>
-    <div style={{textAlign:'center'}}>
-      <div>
-          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/1일_1625651304854_계란빵.jpg`} />    
-          <br />
-          <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          고고공 고고공 고고공 고고공
-          </div>
-      </div>
-    </div>
-  </Col>
 </Row>
 
-
-<Row style={{marginTop:'3%'}}>
-
-  <Col span={8} style={{padding:'5px'}}> 
-    <div style={{textAlign:'center'}}>
-      <div>
-          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />    
-          <br />
-          <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          와 진짜 대박이다 새우깡 호박깡
-          </div>
-      </div>
-    </div>
-  </Col>
-
-  <Col span={8} style={{padding:'5px'}}>
-    <div style={{textAlign:'center'}}>
-      <div>
-          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />    
-          <br />
-          <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          와 진짜 음 말이 안되네 감자깡
-          </div>
-      </div>
-    </div>
-  </Col>
-
-  <Col span={8} style={{padding:'5px'}}>
-    <div style={{textAlign:'center'}}>
-        <div>
-            <img style={{width:'100%',height:'130px',objectFit:'cover'}}  src={`${backImageUrl}/1001/5오_1625652527876_계란빵.jpg`} />    
-            <br />
-            <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-            ddd와 진짜 음 말이 안되네 감자깡호랑이 기운이 솟아나요!
-            </div>
-        </div>
-    </div>
-  </Col>
-</Row>
-
-
-    {/*좋좋소!*/}
-    <List
-    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
-    itemLayout="horizontal"
-    header={<div><b>좋좋소!</b></div>}
-    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1001'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
-
-    dataSource={data01}
-    renderItem={item => (
-      <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1001&submitDay=${item.submitDay}&who=${userInfo}`} >
-      <a className="abbreviation">
-      <span className="bestSpan">BEST</span> 
-        {item.title}
-        <span className="countFontColor">[{item.commentCount}] </span>
-      </a>
-      </Link>
-      </List.Item>
-    )}
-    />
 
     {/*좋소!*/}
     <List

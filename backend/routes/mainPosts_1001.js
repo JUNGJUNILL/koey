@@ -320,6 +320,8 @@ router.post('/mainPosts_1001CommentInsert', async (req,res,next)=>{
         stringQuery =stringQuery.concat(`'${comment}',`); 
         stringQuery =stringQuery.concat(`'${submitDay}',`); 
         stringQuery =stringQuery.concat(`'${pid}')`);
+        console.log(stringQuery); 
+
         await pool.query(stringQuery); 
     
         stringQuery=''; 
@@ -598,6 +600,20 @@ router.post('/mainPosts_1001CommentByCommentsLike', async (req,res,next)=>{
 }); 
 
 
+//게시글 댓글 업데이트 
+router.post('/mainPosts_1001CommentByCommentsLike', async (req,res,next)=>{
+    try{
+
+        let stringQuery = 'CALL US_UPDATE_mainPostComments '; 
+
+        console.log(stringQuery); 
+        await pool.query(stringQuery); 
+
+    }catch(e){
+        console.log(e); 
+        next(e); 
+    }
+}); 
 
 
 
