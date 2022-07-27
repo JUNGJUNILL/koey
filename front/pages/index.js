@@ -57,7 +57,7 @@ const Home =()=>{
   return (
     <div>
 
-  <Divider orientation="center">좋좋소! 베스트</Divider>
+  <Divider orientation="center">좋좋소! 베스트트트</Divider>
   <Row style={{marginTop:'3%'}}>
   
   {data01.map((v,i)=>(
