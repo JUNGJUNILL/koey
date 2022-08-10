@@ -17,12 +17,15 @@ const HeaderComponenet =({posf,title,image})=>{
     }
 
     return(
-        <Head>
-                <meta property="og:url" content="http://www.jscompany.live"></meta>
-                <meta property="og:image" content={rootUrl.length===0?jsMetaImage:rootUrl}></meta>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content='중소기업 썰 ㅋ'></meta>
-        </Head>
+        <>
+            <Head>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <meta property="og:url" content="http://www.jscompany.live"></meta>
+                    <meta property="og:image" content={rootUrl ? rootUrl : jsMetaImage}></meta>
+                    <meta property="og:title" content={title ? title : '좋소! 썰'} />
+                    <meta property="og:description" content='중소기업 썰 ㅋ'></meta>
+            </Head>
+        </>
     )
 
 }
