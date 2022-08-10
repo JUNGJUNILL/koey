@@ -23,6 +23,8 @@ const HeaderComponenet =({posf,title,image})=>{
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
                     <meta property="og:image" content='https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif'></meta>
+                    <meta property="og:image:width" content="80"></meta>
+                    <meta property="og:image:height" content="60"></meta>
                     <meta property="og:title" content={title || '좋소! 썰'} />
                     <meta property="og:description" content='중소기업 썰 ㅋ'></meta>
             </Head>
