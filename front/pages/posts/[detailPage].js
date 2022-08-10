@@ -284,7 +284,10 @@ const detailPage  = () =>{
     */}
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
-      <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage}/>
+      { mainPosts_1001Info &&
+        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage}/>
+      }
+        
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>

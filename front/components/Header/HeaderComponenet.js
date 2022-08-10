@@ -17,7 +17,7 @@ const HeaderComponenet =({posf,title,image})=>{
     }
 
     return(
-        <>
+        <>  
             <Head>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
