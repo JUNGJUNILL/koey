@@ -11,7 +11,7 @@ const Koey = ({ Component, pageProps }) => (
     <div>
       <Head>
         <meta charSet="utf-8" />
-        <title>Koey</title>
+        <title>좋소!</title>
       </Head>
       <AppLayout>
          <Component {...pageProps} />

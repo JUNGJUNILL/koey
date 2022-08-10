@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import wrapper from '../../store/configureStore';
 import Comments1001 from '../../components/mainPosts_1001/mainPosts_1001_comments'
 import CommentTextArea from '../../components/mainPosts_1001/mainPosts_1001_textArea'
+import HeaderComponenet from '../../components/Header/HeaderComponenet'
 import 
     {MAINPOSTS_1001_DETAIL_INFO_REQUEST,
      MAINPOSTS_1001_COMMENTS_REQUEST, 
@@ -115,7 +116,9 @@ const detailPage  = () =>{
   const [unfoldList,setUnfoldList] = useState('fold'); 
 
   let contentImages=""; 
+  let firstImage="";
   if(imageSrc.length > 0 ){
+    firstImage = imageSrc[0].src;
     imageSrc.map((v)=>{
       //하드 디스크에서 가져온 이미지
       //contentImages=contentImages +  `<figure ><img src="${backImageUrl}/${postFlag}/${v.src}"></figure>`
@@ -279,6 +282,10 @@ const detailPage  = () =>{
       광고입니다.
     </div>
     */}
+
+      {/*메타 테그--------------------------------------------------------------------------------*/}
+      <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage}/>
+
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
             <div className='divTableRowTh'>
