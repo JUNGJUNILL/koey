@@ -120,8 +120,9 @@ const mainPosts_1001 = ()=>{
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userId,postFlag,submitDay,userNickName)=>{
      //window.localStorage.setItem('scrollY',window.scrollY);  
-     router.push(`/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
-  },[]); 
+     //router.push(`/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
+  router.push(`/posts/12345?postId=${postId}`); 
+    },[]); 
 
 
   //게시글 쓰기

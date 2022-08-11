@@ -2,6 +2,7 @@
 import jsMetaImage from '../../public/jsMetaImage.gif';
 import { backImageUrl,AWSImageUrl } from '../../config/config';
 import Head from "next/head";
+import {Helmet} from "react-helmet";
 
 const HeaderComponenet =({posf,title,image})=>{
 
@@ -17,7 +18,7 @@ const HeaderComponenet =({posf,title,image})=>{
     }
 
     return(
-        <>  
+        <div>  
             <Head>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
@@ -25,9 +26,10 @@ const HeaderComponenet =({posf,title,image})=>{
                     <meta property="og:image:width" content="80"></meta>
                     <meta property="og:image:height" content="60"></meta>
                     <meta property="og:title" content={title || '좋소! 썰'} />
-                    <meta property="og:description" content='중소기업 썰 ㅋ'></meta>
+                    <meta property="og:description" content='중소기업 썰 ㅋ'></meta>            
             </Head>
-        </>
+            <input type='text' value={title}/>
+        </div>
     )
 
 }

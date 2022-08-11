@@ -9,10 +9,6 @@ import wrapper from '../store/configureStore';
 
 const Koey = ({ Component, pageProps }) => (
     <div>
-      <Head>
-        <meta charSet="utf-8" />
-        <title>좋소!</title>
-      </Head>
       <AppLayout>
          <Component {...pageProps} />
       </AppLayout>

@@ -9,6 +9,10 @@ const nextConfig =  withBundleAnalyzer({
 
     compress: true,
 
+    experimental: {
+      scrollRestoration: true,
+    },
+    
     future: {
       webpack5: true,
     },
