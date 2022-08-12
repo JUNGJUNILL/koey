@@ -37,7 +37,6 @@ const detailPage  = ({postId}) =>{
     return (  
     <div>
                   <Head>
-                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
                     <meta property="og:image" content='https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif'></meta>
                     <meta property="og:image:width" content="80"></meta>

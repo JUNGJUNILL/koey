@@ -9,9 +9,10 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>        
+        <Head> 
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" /> 
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
          {/*구글에드 센스_20210902 */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
         <script
@@ -24,7 +25,7 @@ class MyDocument extends Document {
               `
         }}/>
 
-        <meta charSet="utf-8" />
+    
         </Head>
         <body>
           <Main />
