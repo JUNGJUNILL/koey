@@ -285,7 +285,7 @@ const detailPage  = () =>{
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
-        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage}/>
+        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content}/>
       }
         
 
