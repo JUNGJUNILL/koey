@@ -6,6 +6,7 @@ import wrapper from '../../store/configureStore';
 import { Helmet } from "react-helmet"
 
 import {END} from 'redux-saga'; 
+import wrapper from '../../store/configureStore';
 
 
 const HeaderComponenet =({posf,title,image,contents})=>{
@@ -25,11 +26,10 @@ const HeaderComponenet =({posf,title,image,contents})=>{
         <div>              
             <Helmet title={title} 
                     meta={[
-
                         { property:"og:url", content:"http://www.jscompany.live"},
-                        { property:"og:title", content:'안녕하세요'},
-                        { property: "og:description", content:'감사합니다.' },
-                        { property: "og:image", content:'https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif' },  
+                        { property:"og:title", content:{title}},
+                        { property: "og:description", content: {contents} },
+                        { property: "og:image", content: {rootUrl} },  
                     ]}/>      
         </div>
     )
