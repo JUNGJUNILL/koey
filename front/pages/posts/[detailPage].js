@@ -25,6 +25,7 @@ import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl,AWSImageUrl } from '../../config/config';
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
+import Head from "next/head";
 
 
 //{nickName,postFlag,postId,submitDay}
@@ -283,10 +284,15 @@ const detailPage  = () =>{
     </div>
     */}
 
-      {/*메타 테그--------------------------------------------------------------------------------*/}
-      { mainPosts_1001Info &&
-        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content}/>
-      }
+        <Helmet title={title} 
+                      meta={[
+                          { property:"og:url", content:"http://www.jscompany.live"},
+                          { property:"og:title", content:mainPosts_1001Info[0].title},
+                          { property: "og:description", content: mainPosts_1001Info[0].content },
+                          { property: "og:image", content:'https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif' },  
+                      ]}/>
+
+
         
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
