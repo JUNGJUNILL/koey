@@ -26,6 +26,7 @@ import { backImageUrl,AWSImageUrl } from '../../config/config';
 import axios from  'axios'; 
 import {END} from 'redux-saga'; 
 import Head from "next/head";
+import { Helmet } from "react-helmet"
 
 
 //{nickName,postFlag,postId,submitDay}
