@@ -23,12 +23,14 @@ const HeaderComponenet =({posf,title,image,contents})=>{
 
     return(
         <div>              
-            <Helmet meta={[
-                { property:"og:url", content:"http://www.jscompany.live"},
-                { property:"og:title", content:{title}},
-                { property: "og:description", content: {contents} },
-                { property: "og:image", content: {rootUrl} },  
-            ]}/>      
+            <Helmet title={title} 
+                    
+                    meta={[
+                        { name:"url", content:"http://www.jscompany.live"},
+                        { name:"title", content:{title}},
+                        { name: "description", content: {contents} },
+                        { name: "image", content: {rootUrl} },  
+                    ]}/>      
         </div>
     )
 
