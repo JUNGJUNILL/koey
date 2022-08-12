@@ -2,6 +2,7 @@
 import jsMetaImage from '../../public/jsMetaImage.gif';
 import { backImageUrl,AWSImageUrl } from '../../config/config';
 import { Helmet } from "react-helmet"
+import Head from "next/head";
 
 
 const HeaderComponenet =({posf,title,image,contents})=>{
@@ -18,14 +19,16 @@ const HeaderComponenet =({posf,title,image,contents})=>{
     }
 
     return(
-        <div>              
-            <Helmet title={title} 
-                    meta={[
-                        { property:"og:url", content:"http://www.jscompany.live"},
-                        { property:"og:title", content:title},
-                        { property: "og:description", content: contents },
-                        { property: "og:image", content:rootUrl },  
-                    ]}/>      
+        <div>  
+            <Head>
+                <Helmet title={title} 
+                        meta={[
+                            { property:"og:url", content:"http://www.jscompany.live"},
+                            { property:"og:title", content:title},
+                            { property: "og:description", content: contents },
+                            { property: "og:image", content:rootUrl },  
+                        ]}/>
+            </Head>                  
         </div>
     )
 
