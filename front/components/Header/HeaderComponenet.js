@@ -20,6 +20,10 @@ const HeaderComponenet =({posf,title,image,contents})=>{
 
     return(
         <div>  
+            {/*
+            리엑트 헬멧..
+            잘 안됨..
+          
                 <Helmet title={title} 
                         meta={[
                             { property:"og:url", content:"http://www.jscompany.live"},
@@ -27,6 +31,18 @@ const HeaderComponenet =({posf,title,image,contents})=>{
                             { property: "og:description", content: contents },
                             { property: "og:image", content:rootUrl },  
                         ]}/>
+            */}
+
+            <Head>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <meta property="og:url" content="http://www.jscompany.live"></meta>
+                    <meta property="og:image" content={rootUrl ? rootUrl:'https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif'}></meta>
+                    <meta property="og:image:width" content="80"></meta>
+                    <meta property="og:image:height" content="60"></meta>
+                    <meta property="og:title" content={title ? title : '좋소! 썰'} />
+                    <meta property="og:description" content={contents? contents : '중소기업 썰 ㅋ'}></meta>
+            </Head>
+
         </div>
     )
 
