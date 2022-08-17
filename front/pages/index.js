@@ -29,7 +29,7 @@ from '../reducers/indexPage';
 const Home =()=>{
 
   const {data01,data02,data03,data04,data05,data06} = useSelector((state)=>state.indexPage); 
-  const {userInfo}       = useSelector((state)=>state.auth);
+  const {userInfo,userid}       = useSelector((state)=>state.auth);
 
 
 
@@ -45,23 +45,25 @@ const Home =()=>{
 
   },[])
 
-  const ht ="http://localhost:3095"; 
-  const postflag = '1001'; 
-  const userFlag = "nick1111";
-  const fileName1 = '에이싯팔1607324381388.jpg';
-  const fileName2 = '동기부여1607408839105.png'; 
-  const fileName3 = '담배땡긴다 - 복사본1622693419222.jpg';  
-
-  const array=['1','2','3']
-
   return (
     <div>
 
-  <Divider orientation="center">좋좋소! 베스트트트</Divider>
+  <Divider orientation="center">좋좋소! 베스트</Divider>
   <Row style={{marginTop:'3%'}}>
   
   {data01.map((v,i)=>(
-    <Link href={`/posts/detailPage?postId=${v.postId}&pid=${v.userid}&userNickName=${v.userNickName}&postFlag=1001&submitDay=${v.submitDay}&who=${userInfo}`} >
+    <Link 
+        href={{
+          pathname:'/posts/[detailPage]',
+          query:{detailPage:'detailPage',
+                  postId:v.postId,
+                  postFlag:'1001',
+                  submitDay:v.submitDay,
+                  pid:v.userid,  
+                  userNickName:userInfo,                          
+                  who:userid,},
+
+        }}>
     <Col span={8} style={{padding:'5px'}}> 
     <div style={{textAlign:'center'}}>
       <div>
@@ -97,7 +99,18 @@ const Home =()=>{
     dataSource={data02}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1002&submitDay=${item.submitDay}&who=${userInfo}`} >
+      <Link 
+          href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1002',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -119,7 +132,17 @@ const Home =()=>{
     dataSource={data03}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1003&submitDay=${item.submitDay}&who=${userInfo}`}>
+      <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1003',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -140,7 +163,17 @@ const Home =()=>{
     dataSource={data04}
     renderItem={item => (
       <List.Item onClick={scrollRestoration}>
-      <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1004&submitDay=${item.submitDay}&who=${userInfo}`}>
+      <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1004',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
       <a className="abbreviation">
       <span className="bestSpan">BEST</span> 
         {item.title}
@@ -162,7 +195,17 @@ const Home =()=>{
      dataSource={data05}
      renderItem={item => (
        <List.Item onClick={scrollRestoration} >
-       <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1005&submitDay=${item.submitDay}&who=${userInfo}`}>
+       <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1005',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
        <a className="abbreviation">
        <span className="bestSpan">BEST</span> 
          {item.title}
@@ -183,7 +226,17 @@ const Home =()=>{
       dataSource={data06}
       renderItem={item => (
         <List.Item onClick={scrollRestoration} >
-        <Link href={`/posts/detailPage?postId=${item.postId}&pid=${item.userid}&userNickName=${item.userNickName}&postFlag=1006&submitDay=${item.submitDay}&who=${userInfo}`}>
+        <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'100',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
         <a className="abbreviation">
         <span className="bestSpan">BEST</span> 
           {item.title}

@@ -119,10 +119,20 @@ const mainPosts_1001 = ()=>{
  
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userId,postFlag,submitDay,userNickName)=>{
-     //window.localStorage.setItem('scrollY',window.scrollY);  
-     //router.push(`/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
-     router.push(`/posts/detailPage_SSR?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&who=${userid}&pid=${userId}&userNickName=${userNickName}` ,scroll=false); 
-     
+    router.push({pathname:'/posts/[detailPage]',
+                  query:{detailPage:'detailPage', 
+                         postId:postId,
+                         postFlag:postFlag,
+                         submitDay:submitDay,
+                         pid:userId,
+                         userNickName:userNickName,                     
+                         who:userid,
+                  },
+               
+                  
+                  
+        }); 
+			
     },[]); 
 
 
@@ -234,24 +244,31 @@ const mainPosts_1001 = ()=>{
                 */}
 
                   <div className="divTableCell" >    
-                    <Link href={`/posts/detailPage?postId=${v.postId}&postFlag=${posf}&submitDay=${v.submitDay}&who=${userid}&pid=${v.userid}&userNickName=${userInfo}`
-
-                  }><a>
+                    <Link 
+                        href={{
+                          pathname:'/posts/[detailPage]',
+                          query:{detailPage:'detailPage',
+                                  postId:v.postId,
+                                  postFlag:posf,
+                                  submitDay:v.submitDay,
+                                  pid:v.userid,  
+                                  userNickName:userInfo,                          
+                                  who:userid,},
                   
-                    <font size="2">
-
-                  {v.remark01==='best' ? <span className='bestSpan'>BEST</span> : ''}  <b>{isEmpty(v.title)}</b> 
-                    </font>
-               
-                    </a></Link><span className="countFontColor">[{v.commentCount}] </span>
+                        }}>
+                        <a>
+                          <font size="2">
+                          {v.remark01==='best' ? <span className='bestSpan'>BEST</span> : ''}  <b>{isEmpty(v.title)}</b> 
+                          </font>
+                        </a>
+                     </Link>
+                     <span className="countFontColor">[{v.commentCount}] </span>
 
                     <br/>
 
-                    <div style={{marginTop:'3%'}}>
-                      <font size="1" style={{opacity:'0.7'}}>추천 {v.good}  </font>
-                    <br/>
-                      <font size="1" style={{opacity:'0.7'}}>{isEmpty(v.userNickName)}  {custumDateFormat(v.createdDate)}</font>
-                     
+                    <div style={{marginTop:'3%'}}><font size="1" style={{opacity:'0.7'}}>추천 {v.good} </font>
+                      <br/>
+                      <font size="1" style={{opacity:'0.7'}}>{isEmpty(v.userNickName)}  {custumDateFormat(v.createdDate)}</font>      
                     </div>
                   </div>
               </div>

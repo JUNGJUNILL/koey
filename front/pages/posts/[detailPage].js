@@ -43,11 +43,11 @@ const detailPage  = () =>{
   useEffect(()=>{
 
     //url을 브라우져 주소창에 바로 입력 후 엔터 쳤을 때 에러 뜨는거 해결하는 로직 
-    if(!detailPage){
+    //if(!detailPage){
 
-      return null;
+   //   return null;
 
-    }else{
+   // }else{
 
     
     //로그인 정보
@@ -91,9 +91,9 @@ const detailPage  = () =>{
         
           }
     });
-  }
+  //}
   },[
-    detailPage,
+   // detailPage,
     postId   ,
     pid      ,
     nickName ,

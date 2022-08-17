@@ -36,79 +36,6 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
   
 
   const dispatch = useDispatch(); 
-  const router           = useRouter(); 
-  /*
-  const {detailPage} =router.query; 
-  const postId   =  router.query.postId;
-  const pid = router.query.pid;
-  const nickName = router.query.userNickName; //현재 로그인한 사람의 닉네임
-  const postFlag = router.query.postFlag;
-  const submitDay = router.query.submitDay;
-  const who       = router.query.who;        //현재 로그인한 사람의 아이디값
-  */
-/*
-  useEffect(()=>{
-
-    //url을 브라우져 주소창에 바로 입력 후 엔터 쳤을 때 에러 뜨는거 해결하는 로직 
-    if(!detailPage){
-
-      return null;
-
-    }else{
-
-    
-    //로그인 정보
-    dispatch({
-      type:LOAD_USER_REQUEST
-    });
-
-    //댓글 정보
-    dispatch({
-      type:MAINPOSTS_1001_COMMENTS_REQUEST, 
-      data:{
-        postId :postId,
-        pid :pid ,
-        nickName:encodeURIComponent(nickName),
-        postFlag :postFlag,
-        who:who, 
-        submitDay:submitDay,
-      }
-    }); 
-    //상세 정보 
-    dispatch({
-          type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
-          data:{
-            postId:postId,
-            pid:encodeURIComponent(pid),
-            postFlag:postFlag,
-            who:who,
-            submitDay:submitDay,
-          }
-    });
-  
-  
-    //이미지 이름 가져오기
-    dispatch({
-      type:MAINPOST_1001_IMAGES_REQUEST, 
-      data:{
-        postId:postId,
-        pid:encodeURIComponent(pid),
-        submitDay:submitDay,
-        postFlag:postFlag,
-        
-          }
-    });
-  }
-  },[
-    detailPage,
-    postId   ,
-    pid      ,
-    nickName ,
-    postFlag ,
-    submitDay,
-    who      ,
-  ])
-*/
   const {mainPosts_1001Info , 
          mainPosts_1001Comments,
          mainPosts_1001CommentByComments,
@@ -293,7 +220,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
       { mainPosts_1001Info &&
         <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content}/>
       }
-        
+        <input type="text" value="SSR" />
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
@@ -424,7 +351,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
         )
 }
 
-
+//서버 사이드 렌더링
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
 
   //const array = context.query.postId.split(':'); 
