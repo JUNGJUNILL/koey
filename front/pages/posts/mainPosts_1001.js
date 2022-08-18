@@ -1,23 +1,19 @@
 
 import React , {useState,useEffect,useCallback,useRef}from 'react'
-import {Button,Input,Space,Select } from 'antd'
+import {Button,Input,Select } from 'antd'
+import {EditOutlined} from '@ant-design/icons'
 const { Option } = Select;
 const { Search } = Input;
-import Router ,{ useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
-import wrapper from '../../store/configureStore';
 import Pagenation from '../../util/Pagenation'
-import {EditOutlined} from '@ant-design/icons'
+
+
 import 
     {MAINPOSTS_1001_LIST_REQUEST,
-     MAINPOSTS_1001_DETAIL_INFO_REQUEST
     } 
 from '../../reducers/mainPosts_1001'; 
 
-import 
-    {LOAD_USER_REQUEST,
-    } 
-from '../../reducers/auth'; 
 import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
@@ -28,11 +24,11 @@ import { backImageUrl, AWSImageUrl, backUrl } from '../../config/config';
 const mainPosts_1001 = ()=>{
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(false);  //alert(myRef.current.value)//
-
   const dispatch         = useDispatch(); 
   const router           = useRouter(); 
   const {mainPosts_1001} = useSelector((state)=>state.mainPosts_1001); 
   const {userInfo,userid}       = useSelector((state)=>state.auth);
+
 
   const blank_pattern = /^\s+|\s+&/g; 
   const refSearchValue = useRef(); 
@@ -86,7 +82,6 @@ const mainPosts_1001 = ()=>{
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
   //03.페이지 이동 후 뒤로가기 눌렀을 경우
   useEffect(()=>{
-  
           //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
           let pageArray =Array.from({length: groupPage}, (v, i) => i);
 
@@ -180,10 +175,6 @@ const mainPosts_1001 = ()=>{
 
    return (
     <div>
-{/* 
-    <button onClick={executeScroll}>scroll to top</button>
-*/}
- 
     &nbsp;
     <Select  value={searchCondition} style={{marginTop:'3%',width:'30%'}} onChange={changeSearchCondition}>
       <Option value={'title'}>제목</Option>

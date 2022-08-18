@@ -220,7 +220,6 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
       { mainPosts_1001Info &&
         <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content}/>
       }
-        <input type="text" value="SSR" />
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>

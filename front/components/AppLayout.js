@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 //import wrapper from '../store/configureStore';
 import { backImageUrl } from '../config/config';
+import 
+    {LOGOUT_REQUEST,} 
+from '../reducers/auth'
 
 
 const AppLayOut = ({children}) =>{
@@ -28,8 +31,7 @@ const AppLayOut = ({children}) =>{
                         ]; 
 
     const { SubMenu } = Menu;
-    //const router   =useRouter(); 
-    //const dispatch = useDispatch(); 
+    const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
 
@@ -44,21 +46,16 @@ const AppLayOut = ({children}) =>{
     // },[userInfo]);
 
     //로그아웃 버튼
-    // const logOut = useCallback((e)=>{
+    const logOut = useCallback(()=>{
 
-    //     dispatch({
-    //         type:LOGOUT_REQUEST, 
-    //     });
+        dispatch({
+            type:LOGOUT_REQUEST, 
+        });
 
-    // },[userInfo]); 
+    },[userInfo]); 
  
     const [isClicked,setIsClicked] = useState(false); 
-    //const inputEl = useRef(null); 
-  
 
-    // const catergoriList = () =>{
-    //       setIsClicked(!isClicked);
-    // }
 
     const [visible, setVisible] = useState(false);
 
@@ -70,12 +67,6 @@ const AppLayOut = ({children}) =>{
       setVisible(false);
     };
 
-
-
-
-    // const closeCatergoriList = () =>{
-    //     setIsClicked(false);
-    // }
 
     //index 페이지 이동
     const gotoHome = () =>{
@@ -115,6 +106,8 @@ const AppLayOut = ({children}) =>{
         
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link> :'' }
         {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><UserOutlined onClick={goProfile}/> 내 정보</a></Link> } 
+        {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
+
         </div>
   
         </header>
