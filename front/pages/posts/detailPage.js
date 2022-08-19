@@ -281,10 +281,11 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     <br />
     {/*좋아요 싫어요 버튼--------------------------------------------------------------------------------*/}
 
-
+    {/* 
     <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
       광고입니다.
     </div>
+    */}
     <br/>
 
 

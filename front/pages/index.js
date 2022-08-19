@@ -230,7 +230,7 @@ const Home =()=>{
             pathname:'/posts/[detailPage]',
             query:{detailPage:'detailPage',
                     postId:item.postId,
-                    postFlag:'100',
+                    postFlag:'1006',
                     submitDay:item.submitDay,
                     pid:item.userid,  
                     userNickName:userInfo,                          
