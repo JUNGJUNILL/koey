@@ -500,3 +500,34 @@ img {
  
   
   }
+
+  @font-face {
+    src:url('../public/BMJUA_ttf.ttf');
+    font-family: "jua";
+  }
+  
+  @font-face {
+  
+    src:url('../public/BMHANNAPro.ttf');
+    font-family: "Hanna";
+  }
+
+
+  .divTableCellTEST {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 1%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    border-bottom: 1px solid #a0a0a0;
+    word-wrap: break-word;
+ 
+  }
+  
+
+  .divTableRowTEST {
+    display: table-row;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px soli d#a0a0a0;
+  }

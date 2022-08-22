@@ -17,7 +17,7 @@ from '../../reducers/mainPosts_1001';
 import { useDispatch, useSelector } from 'react-redux';
 import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl, AWSImageUrl, backUrl } from '../../config/config';
+import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
 
 
@@ -215,7 +215,7 @@ const mainPosts_1001 = ()=>{
                       `${backImageUrl}/${posf}/${v.firstImageName}`
                     
 
-                      :`${backImageUrl}/noimages.gif`} />
+                      :`${Url}/noimages.gif`} />
               
 
                   {/*AWS용

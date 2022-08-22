@@ -4,6 +4,8 @@ import { backImageUrl,AWSImageUrl } from '../../config/config';
 import { Helmet } from "react-helmet"
 import Head from "next/head";
 
+import { Url } from '../../config/config';
+
 
 const HeaderComponenet =({posf,title,image,contents})=>{
 
@@ -15,7 +17,7 @@ const HeaderComponenet =({posf,title,image,contents})=>{
     if(image.length>0){
         rootUrl+=image;
     }else{
-        rootUrl='https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif';
+        rootUrl=Url+'/jsMetaImage.gif';
     }
 
     return(
@@ -36,7 +38,7 @@ const HeaderComponenet =({posf,title,image,contents})=>{
             <Head>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
-                    <meta property="og:image" content={rootUrl ? rootUrl:'https://www.hubpass.co.kr/external/images/a1001/jsMetaImage.gif'}></meta>
+                    <meta property="og:image" content={rootUrl}></meta>
                     <meta property="og:image:width" content="80"></meta>
                     <meta property="og:image:height" content="60"></meta>
                     <meta property="og:title" content={title ? title : '좋소! 썰'} />

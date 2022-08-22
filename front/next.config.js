@@ -17,6 +17,11 @@ const nextConfig =  withBundleAnalyzer({
       webpack5: true,
     },
     
+    images: {
+      domains: ['www.hubpass.co.kr','image.hubpass.co.kr','bigseller.hubmeka.co.kr'],
+  
+    },
+    
     env : {
       NAVERLOGINCLIENTCODE:'FQxK6vBp2RiL0gne54KV',
       NAVERLOGINREDIRECT_LOCAL:'http://localhost:3333/api/auth/naverLoginCallback',
