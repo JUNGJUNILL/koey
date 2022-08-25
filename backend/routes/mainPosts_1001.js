@@ -233,11 +233,10 @@ router.post('/mainPosts_1001Comments', async (req,res,next)=>{
 router.post('/postInsert', async (req,res,next)=>{
 
     try{
-        let {content,title,userNickName,postFlag,contentImages,imageFileName,userid} = req.body.data; 
+        let {content,title,userNickName,postFlag,imageFileName,userid} = req.body.data; 
 
         const _title   = decodeURIComponent(title); 
         const _content = decodeURIComponent(content); 
-        const _contentImages = decodeURIComponent(contentImages); 
         const _userNickName   = decodeURIComponent(userNickName); 
         const _postFlag = postFlag; 
         const _userid   =decodeURIComponent(userid); 
@@ -247,7 +246,6 @@ router.post('/postInsert', async (req,res,next)=>{
             stringQuery = 'CALL US_INSERT_mainPosts'; 
             stringQuery =stringQuery.concat(`('${_title}',`);
             stringQuery =stringQuery.concat(`'${_content}',`); 
-            stringQuery =stringQuery.concat(`'${_contentImages}',`); 
             stringQuery =stringQuery.concat(`'${_userNickName}',`); 
             stringQuery =stringQuery.concat(`'${_postFlag}',`); 
             stringQuery =stringQuery.concat(`'${_userid}')`);
@@ -296,6 +294,73 @@ router.post('/postInsert', async (req,res,next)=>{
   }); 
 
 
+//게시글 삭제
+router.post('/postDelete', async (req,res,next)=>{
+    try{
+        let {postflag,postid,userid,submitday} = req.body.data; 
+
+        const _postFlag =postflag;
+        const _postId   =postid;
+        const _userId   =userid;
+        const _submitDay=submitday;
+
+        let stringQuery;
+        stringQuery=''; 
+        stringQuery = 'CALL US_UPDATE_mainPost_delete'; 
+        stringQuery =stringQuery.concat(`('${_postFlag}',`);
+        stringQuery =stringQuery.concat(`'${_postId}',`); 
+        stringQuery =stringQuery.concat(`'${_userId}',`); 
+        stringQuery =stringQuery.concat(`'${_submitDay}')`);
+        console.log(stringQuery); 
+        await pool.query(stringQuery);       
+        
+        return res.status(200);
+
+    }catch(e){
+        console.log(e); 
+        next(e); 
+    }
+
+}); 
+
+//게시글 변경
+router.post('/postUpdate', async (req,res,next)=>{
+    try{
+        let {postFlag,
+             postId,
+             userId,
+             submitDay,
+             title,
+             content,} = req.body.data; 
+
+        const _postFlag = postFlag; 
+        const _postId = postId;        
+        const _userid   =decodeURIComponent(userId); 
+        const _submitDay=submitDay;
+        const _title   = decodeURIComponent(title); 
+        const _content = decodeURIComponent(content); 
+      
+      
+        let stringQuery;
+            stringQuery=''; 
+            stringQuery = 'CALL US_UPDATE_mainPosts'; 
+            stringQuery =stringQuery.concat(`('${_postFlag}',`);
+            stringQuery =stringQuery.concat(`'${_postId}',`); 
+            stringQuery =stringQuery.concat(`'${_userid}',`); 
+            stringQuery =stringQuery.concat(`'${_submitDay}',`); 
+            stringQuery =stringQuery.concat(`'${_title}',`); 
+            stringQuery =stringQuery.concat(`'${_content}')`);
+
+        console.log(stringQuery); 
+        await pool.query(stringQuery); 
+
+        return res.status(200).json({massage:'success'}); 
+
+    }catch(e){
+        console.log(e); 
+        next(e); 
+    }
+}); 
 
 //게시글 댓글 INSERT
 router.post('/mainPosts_1001CommentInsert', async (req,res,next)=>{
@@ -347,7 +412,7 @@ router.post('/mainPosts_1001CommentInsert', async (req,res,next)=>{
 
 
 }); 
-+
+
 //게시글 대댓글 INSERT
 router.post('/mainPosts_1001CommentByCommentInsert', async (req,res,next)=>{
 

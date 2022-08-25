@@ -23,35 +23,48 @@ import
     {
         MAINPOST_1001_INSERT_REQUEST,
         MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
-        POST_CLICKED_REQUEST
+        POST_CLICKED_REQUEST,
+        MAINPOSTS_UPDATE_REQUEST,
+        MAINPOSTS_1001_DETAIL_INFO_REQUEST
     } 
 from '../../reducers/mainPosts_1001'; 
 const { TextArea } = Input;
 
 
 
-const postEdit = () =>{
+const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
 
 
     const dispatch = useDispatch(); 
-    const {imageUploading,imageFileName,postInserting} = useSelector((state)=>state.mainPosts_1001); 
+    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info} = useSelector((state)=>state.mainPosts_1001); 
     const {userInfo,userid} = useSelector((state)=>state.auth); 
     const refTitle = useRef(); 
     const refContent = useRef(); 
     const imageInput = useRef();
     const videoInput = useRef(); 
     const router = useRouter();
-    const posf = router.query.posf; 
-
     const blank_pattern = /^\s+|\s+&/g; 
-    const [title,setTtile] = useState(''); 
-    const [content,setContent] = useState('');
+    const [title,setTtile] = useState(updateFlag==='update'? mainPosts_1001Info[0].title:''); 
+    const [content,setContent] = useState(updateFlag==='update'? mainPosts_1001Info[0].content:'');
     const [imageCount,setImageCount]= useState([]); 
   
     useEffect(()=>{
-
         if(!posf){
-            return null
+            return null;
+        }
+
+        if(updateFlag && updateFlag==='update'){
+                dispatch({
+                    type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
+                    data:{
+                        postId:postId,
+                        pid:encodeURIComponent(userId),     
+                        postFlag:posf,
+                        who:'',
+                        submitDay,
+                        submitDay:submitDay,
+                    }
+                })
         }
         
         //로그인 만료 시 로그인 창으로 이동 
@@ -59,6 +72,8 @@ const postEdit = () =>{
             router.push('/auth/login'); 
         }
 
+        
+       
     },[!userInfo,posf])
 
 
@@ -86,33 +101,56 @@ const postEdit = () =>{
             return; 
         }
 
-        let contentImages=""; 
-        /*
-        if(imageFileName.length > 0 ){
-            imageFileName.map((v)=>{
-                contentImages =contentImages +  `<figure ><img src="${backImageUrl}/${posf}/${v}"></figure>`
-            }); 
-        }
-        */
         const filteredContent = secureFilter(content); 
         const filteredTitle   = secureFilter(title); 
         const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
-        dispatch({
-            type: MAINPOST_1001_INSERT_REQUEST,
-            data: {content:encodeURIComponent(hello),
-                   contentImages :encodeURIComponent(contentImages),
-                   title:encodeURIComponent(filteredTitle),
-                   userNickName:encodeURIComponent(userInfo), 
-                   imageFileName: imageFileName, 
-                   postFlag:posf,
-                   userid:encodeURIComponent(userid),
-                   
-           },
+        //게시글 UPDATE
+        if(updateFlag && updateFlag==='update'){
+            dispatch({
+                type: MAINPOSTS_UPDATE_REQUEST,
+                data: {postFlag:posf,
+                       postId:postId,
+                       userId:encodeURIComponent(userid),
+                       submitDay:submitDay,
+                       title:encodeURIComponent(filteredTitle),
+                       content:encodeURIComponent(hello),
+                       
+               },
+    
+           }); 
 
-       }); 
 
-       router.replace(`/posts/mainPosts_1001?nowPage=1&posf=${posf}`); 
+           router.push({pathname:'/posts/[detailPage]',
+           query:{detailPage:'detailPage', 
+                  postId:postId,
+                  postFlag:posf,
+                  submitDay:submitDay,
+                  pid:userId,
+                  userNickName:'',                     
+                  who:'',
+           },}); 
+
+
+        //게시글 INSERT
+        }else{
+
+            dispatch({
+                type: MAINPOST_1001_INSERT_REQUEST,
+                data: {content:encodeURIComponent(hello),
+                       title:encodeURIComponent(filteredTitle),
+                       userNickName:encodeURIComponent(userInfo), 
+                       imageFileName: imageFileName, 
+                       postFlag:posf,
+                       userid:encodeURIComponent(userid),
+                       
+               },
+    
+           }); 
+
+           router.replace(`/posts/mainPosts_1001?nowPage=1&posf=${posf}`); 
+        }
+
     }
 
 
@@ -163,7 +201,7 @@ const postEdit = () =>{
 
         //한번에 5장 이상 올렸을 경우 
         if(imageArray.length > 5){
-            alert('한번에 5장 이상 올릴 수 없습니다.'); 
+            alert('한번에 6장 이상 올릴 수 없습니다.'); 
             //setImageCount([]);
             imageFormData.delete('image'); 
             return; 
@@ -199,8 +237,8 @@ const postEdit = () =>{
             {/*비디오 업로드
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
              */}
-        <Input placeholder='제목을 입력하세요' ref={refTitle} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
-        <TextArea placeholder='하고 싶은 이야기' ref={refContent} onChange={onChangeContent} rows={10} />
+        <Input placeholder='제목을 입력하세요' ref={refTitle} value={title} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
+        <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content} onChange={onChangeContent} rows={10} />
         <div style={{marginTop:'2%',textAlign:'center'}}>
             <Button onClick={onClickImageUpload} >    <PictureOutlined />    </Button>&nbsp;
             <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp;
@@ -235,6 +273,11 @@ const postEdit = () =>{
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+    const posf=context.query.posf?context.query.posf:'';
+    const postId=context.query.postid?context.query.postid:'';
+    const userId=context.query.userid?context.query.userid:'';
+    const submitDay=context.query.submitday?context.query.submitday:'';
+    const updateFlag=context.query.updateflag?context.query.updateflag:'';
 
     const cookie = context.req ? context.req.headers.cookie : '';
     axios.defaults.headers.Cookie = '';
@@ -251,7 +294,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     //nav background 유지
     context.store.dispatch({
         type:POST_CLICKED_REQUEST,
-        data:{postFlag:context.query.posf,}
+        data:{postFlag:posf,}
     });
 
 
@@ -259,6 +302,10 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
 
     context.store.dispatch(END); 
     await context.store.sagaTask.toPromise(); 
+    
+    return {
+        props :{posf,postId,userId,submitDay,updateFlag}
+    }
 
 });
 

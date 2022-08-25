@@ -50,6 +50,13 @@ import
         MAINPOST_1001_IMAGES_SUCCESS,
         MAINPOST_1001_IMAGES_FAILURE,
 
+        MAINPOSTS_REMOVE_REQUEST,
+        MAINPOSTS_REMOVE_SUCCESS,
+        MAINPOSTS_REMOVE_FAILURE,
+
+        MAINPOSTS_UPDATE_REQUEST,
+        MAINPOSTS_UPDATE_SUCCESS,
+        MAINPOSTS_UPDATE_FAILURE,
 
 
     } 
@@ -521,6 +528,76 @@ function* watchMainPosts_1001ImageName(){
 
 
 
+//게시글 삭제하기
+//-----------------------------------------------------------------------------------
+function APImainPosts_1001Delete(data){
+    return axios.post('/mainPosts_1001/postDelete',{data},{withCredentials:true})
+}
+
+
+function* sagaMainPosts_1001Delete(action){
+
+    try{
+      const result = yield call(APImainPosts_1001Delete,action.data); 
+      yield  put({
+            type:MAINPOSTS_REMOVE_SUCCESS, 
+            data:'게시글이 삭제되었습니다.',
+        });
+
+    }catch(e){
+
+        console.error(e); 
+        alert('error', e); 
+        yield put({
+            type:MAINPOSTS_REMOVE_FAILURE, 
+            error: e, 
+        }); 
+    }
+}
+
+
+function* watchMainPosts_1001Delete(){
+    yield takeLatest(MAINPOSTS_REMOVE_REQUEST,sagaMainPosts_1001Delete); 
+}
+//-----------------------------------------------------------------------------------
+
+
+
+//게시글 수정하기
+//-----------------------------------------------------------------------------------
+function APImainPosts_1001Update(data){
+    return axios.post('/mainPosts_1001/postUpdate',{data},{withCredentials:true})
+}
+
+
+function* sagaMainPosts_1001Update(action){
+
+    try{
+      const result = yield call(APImainPosts_1001Update,action.data); 
+      yield  put({
+            type:MAINPOSTS_UPDATE_SUCCESS, 
+            data:'게시글이 수정되었습니다.',
+        });
+
+    }catch(e){
+
+        console.error(e); 
+        alert('error', e); 
+        yield put({
+            type:MAINPOSTS_UPDATE_FAILURE, 
+            error: e, 
+        }); 
+    }
+}
+
+
+function* watchMainPosts_1001Update(){
+    yield takeLatest(MAINPOSTS_UPDATE_REQUEST,sagaMainPosts_1001Update); 
+}
+//-----------------------------------------------------------------------------------
+
+
+
 export default function* mainPosts_1001Saga(){
 
     yield all([
@@ -536,5 +613,7 @@ export default function* mainPosts_1001Saga(){
         fork(watchMainPosts_1001UploadImage),
         fork(watchInsertMainPost_1001), 
         fork(watchMainPosts_1001ImageName), 
+        fork(watchMainPosts_1001Delete),
+        fork(watchMainPosts_1001Update),
      ])
 }

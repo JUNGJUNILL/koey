@@ -1,4 +1,4 @@
-import React, { useCallback,useEffect, useState, createRef } from 'react'
+import React, { useCallback,useEffect, useState, createRef} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Comments1001 from '../../components/mainPosts_1001/mainPosts_1001_comments'
 import CommentTextArea from '../../components/mainPosts_1001/mainPosts_1001_textArea'
@@ -10,7 +10,8 @@ import
      MAINPOSTS_1001_COMMENTLIKE_REQUEST,
      MAINPOSTS_1001_COMMENTBYCOMMENT_REQUEST,
      MAINPOSTS_1001_MAINPOSTLIKE_REQUEST,
-     MAINPOST_1001_IMAGES_REQUEST
+     MAINPOST_1001_IMAGES_REQUEST,
+     MAINPOSTS_REMOVE_REQUEST
     } 
 from '../../reducers/mainPosts_1001';
 import Router ,{ useRouter } from 'next/router';
@@ -105,7 +106,10 @@ const detailPage  = () =>{
   const {mainPosts_1001Info , 
          mainPosts_1001Comments,
          mainPosts_1001CommentByComments,
-         imageSrc
+         imageSrc,
+
+         postDeleting,
+         postDeleteMessage
         } = useSelector((state)=>state.mainPosts_1001); 
 
   const {userInfo,userid}      = useSelector((state)=>state.auth);
@@ -270,6 +274,39 @@ const detailPage  = () =>{
                
       },[mainPosts_1001CommentByComments,unfoldList]); 
 
+      //게시글 삭제
+      const deletePost =useCallback((postFlag,postId,userId,submitDay) =>{
+
+        if(window.confirm('정말로 삭제하시겠습니까?')){
+          dispatch({
+            type:MAINPOSTS_REMOVE_REQUEST,
+            data:{postflag:postFlag,
+                  postid:postId,
+                  userid:userId,
+                  submitday:submitDay,}
+          });      
+          alert('게시물이 삭제되었습니다.');
+          router.push({pathname:'/posts/mainPosts_1001',
+          query:{nowPage:1, 
+                posf:postFlag
+               }
+          
+          });
+
+        }else{
+          return;
+        }
+
+      },[]);
+
+       //게시글 수정
+       const updatePost=useCallback((postFlag,postId,userId,submitDay)=>{
+        const queryParam =`?posf=${postFlag}&postid=${postId}&userid=${userId}&submitday=${submitDay}&updateflag=update`
+        router.push('/posts/postEdit'+queryParam , '/posts/postEdit')
+
+        
+
+       },[]);
 
 
     return (
@@ -304,6 +341,16 @@ const detailPage  = () =>{
                 <DislikeTwoTone twoToneColor={'#ff6600'} />&nbsp;{mainPosts_1001Info[0].bad}   
                 </div>
            </div>
+            {/*로그인 했을 경우 삭제, 수정 버튼이 보인다.*/}
+            {userInfo===mainPosts_1001Info[0].userNickName &&          
+                <div className='divTableRowTh'>
+                  <div className='divTableCellTh'>
+                      <Button onClick={()=>deletePost(postFlag,mainPosts_1001Info[0].postId ,mainPosts_1001Info[0].userid,mainPosts_1001Info[0].submitDay)} loading={postDeleting}>삭제</Button>
+                      <Button onClick={()=>updatePost(postFlag,mainPosts_1001Info[0].postId ,mainPosts_1001Info[0].userid,mainPosts_1001Info[0].submitDay)}>수정</Button>
+                  </div>
+              </div>
+            }
+     
       </div>
       
       <div style={{padding:'3%'}}>
@@ -418,75 +465,5 @@ const detailPage  = () =>{
         )
 }
 
-
-//export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
- /*
-  const array = context.query.postId.split(':'); 
-  const postId   = array[0]; 
-  const nickName = array[1]; 
-  const postFlag = array[2]; 
-  const submitDay = array[3];
-  const who       = array[4];
-  const helloworld       = array[5];
-
-  console.log('helloworld==>', helloworld); 
-  const cookie = context.req ? context.req.headers.cookie : '';
-    axios.defaults.headers.Cookie = '';
-    if (context.req && cookie) { //쿠키 공유 방지 
-      axios.defaults.headers.Cookie = cookie;
-    }
-  
-  //로그인 정보 유지 
-  context.store.dispatch({
-    type:LOAD_USER_REQUEST
-  });
-
-
-  //댓글 리스트 
-  context.store.dispatch({
-    type:MAINPOSTS_1001_COMMENTS_REQUEST, 
-    data:{
-      postId,
-      nickName:encodeURIComponent(nickName),
-      postFlag,
-      who:who, 
-      submitDay,
-    }
-  }); 
-  
-  //상세 정보 
-  context.store.dispatch({
-        type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
-        data:{
-          postId,
-          nickName:encodeURIComponent(nickName),
-          postFlag,
-          who:who,
-          submitDay,
-          helloworld
-        }
-  });
-
-
-  //이미지 이름 가져오기
-  context.store.dispatch({
-    type:MAINPOST_1001_IMAGES_REQUEST, 
-    data:{
-      postId,
-      nickName:encodeURIComponent(nickName),
-      submitDay,
-      postFlag,
-      
-        }
-  });
-
-  context.store.dispatch(END); 
-  await context.store.sagaTask.toPromise(); 
-  
-  return {
-      props: {nickName,postFlag,postId,submitDay}, // will be passed to the page component as props
-    } 
-*/
-//});
 
 export default detailPage;

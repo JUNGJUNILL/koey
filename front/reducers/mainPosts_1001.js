@@ -20,6 +20,9 @@ export const  initialState = {
     commentByCommentCount:0,             //대댓글 입력 후 대댓글 숫자 변경 
     commentByCommentInsertCommentId:null,//어떤 댓글에 대댓글을 달았는지 알기 위한 flag 값
 
+    postDeleting : false,
+    postDeleteMessage:'',
+
 
 }
 
@@ -90,6 +93,16 @@ export const MAINPOST_1001_IMAGENAME_REMOVE_FAILURE = 'MAINPOST_1001_IMAGENAME_R
 
 //nav backgroundColor 유지
 export const POST_CLICKED_REQUEST = 'POST_CLICKED_REQUEST';
+
+//게시글 삭제 
+export const MAINPOSTS_REMOVE_REQUEST='MAINPOSTS_REMOVE_REQUEST';
+export const MAINPOSTS_REMOVE_SUCCESS='MAINPOSTS_REMOVE_SUCCESS';
+export const MAINPOSTS_REMOVE_FAILURE='MAINPOSTS_REMOVE_FAILURE';
+
+//게시글 수정
+export const MAINPOSTS_UPDATE_REQUEST='MAINPOSTS_UPDATE_REQUEST';
+export const MAINPOSTS_UPDATE_SUCCESS='MAINPOSTS_UPDATE_SUCCESS';
+export const MAINPOSTS_UPDATE_FAILURE='MAINPOSTS_UPDATE_FAILURE';
 
 
 
@@ -371,6 +384,41 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 //----------------------------------------
 
 
+
+//게시글 삭제
+//----------------------------------------
+            case MAINPOSTS_REMOVE_REQUEST: {
+                draft.postDeleting=true;           
+                break; 
+            }
+
+            case MAINPOSTS_REMOVE_SUCCESS: {
+                draft.postDeleting=false;   
+                draft.postDeleteMessage =action.data.message;
+                break; 
+            }
+
+            case MAINPOSTS_REMOVE_FAILURE: {
+                break; 
+            }
+//----------------------------------------
+
+
+//게시글 수정
+//----------------------------------------
+            case MAINPOSTS_UPDATE_REQUEST: {
+                break; 
+            }
+
+            case MAINPOSTS_UPDATE_SUCCESS: {
+  
+                break; 
+            }
+
+            case MAINPOSTS_UPDATE_FAILURE: {
+                break; 
+            }
+//----------------------------------------
 
 
 

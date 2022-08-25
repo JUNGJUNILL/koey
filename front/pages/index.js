@@ -4,6 +4,7 @@ import {END} from 'redux-saga';
 import wrapper from '../store/configureStore';
 import { useSelector } from 'react-redux';
 import Image from 'next/image'
+import axios from 'axios';
 
 import {Button} from 'antd';
 import { useRouter } from 'next/router';
@@ -14,6 +15,9 @@ import
     {INDEX_PAGE_DATA_1001_REQUEST
     } 
 from '../reducers/indexPage'; 
+import 
+    {LOAD_USER_REQUEST,} 
+from '../reducers/auth'; 
 import custumDateFormat from '../util/custumDateFormat';
 
 
@@ -107,6 +111,15 @@ const MainPage =()=>{
     )
 }
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+      const cookie = context.req ? context.req.headers.cookie : '';
+      axios.defaults.headers.Cookie = '';
+      if (context.req && cookie) { //쿠키 공유 방지 
+        axios.defaults.headers.Cookie = cookie;
+      }
+
+    context.store.dispatch({
+      type:LOAD_USER_REQUEST
+    });
 
     context.store.dispatch({
         type:INDEX_PAGE_DATA_1001_REQUEST, 
