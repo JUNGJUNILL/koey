@@ -58,7 +58,10 @@ import
         MAINPOSTS_UPDATE_SUCCESS,
         MAINPOSTS_UPDATE_FAILURE,
 
-
+        MAINPOST_1001_IMAGE_REMOVE_REQUEST,
+        MAINPOST_1001_IMAGE_REMOVE_SUCCESS,
+        MAINPOST_1001_IMAGE_REMOVE_FAILURE,
+        
     } 
 from '../reducers/mainPosts_1001'; 
 
@@ -526,6 +529,39 @@ function* watchMainPosts_1001ImageName(){
 }
 //-----------------------------------------------------------------------------------
 
+//이미지 제거하기
+//-----------------------------------------------------------------------------------
+function APImainPosts_1001ImageDelete(data){
+    return axios.post('/mainPosts_1001/imageDelete',{data},{withCredentials:true})
+}
+
+
+function* sagaMainPosts_1001ImageDelete(action){
+
+    try{
+      const result = yield call(APImainPosts_1001ImageDelete,action.data); 
+      yield  put({
+            type:MAINPOST_1001_IMAGE_REMOVE_SUCCESS, 
+            data:result.data,
+        });
+
+    }catch(e){
+
+        console.error(e); 
+        alert('error', e); 
+        yield put({
+            type:MAINPOST_1001_IMAGE_REMOVE_FAILURE, 
+            error: e, 
+        }); 
+    }
+}
+
+
+function* watchMainPosts_1001ImageDelete(){
+    yield takeLatest(MAINPOST_1001_IMAGE_REMOVE_REQUEST,sagaMainPosts_1001ImageDelete); 
+}
+//-----------------------------------------------------------------------------------
+
 
 
 //게시글 삭제하기
@@ -538,7 +574,7 @@ function APImainPosts_1001Delete(data){
 function* sagaMainPosts_1001Delete(action){
 
     try{
-      const result = yield call(APImainPosts_1001Delete,action.data); 
+      yield call(APImainPosts_1001Delete,action.data); 
       yield  put({
             type:MAINPOSTS_REMOVE_SUCCESS, 
             data:'게시글이 삭제되었습니다.',
@@ -613,6 +649,7 @@ export default function* mainPosts_1001Saga(){
         fork(watchMainPosts_1001UploadImage),
         fork(watchInsertMainPost_1001), 
         fork(watchMainPosts_1001ImageName), 
+        fork(watchMainPosts_1001ImageDelete),
         fork(watchMainPosts_1001Delete),
         fork(watchMainPosts_1001Update),
      ])

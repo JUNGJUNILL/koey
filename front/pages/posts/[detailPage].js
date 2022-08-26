@@ -300,13 +300,13 @@ const detailPage  = () =>{
       },[]);
 
        //게시글 수정
-       const updatePost=useCallback((postFlag,postId,userId,submitDay)=>{
-        const queryParam =`?posf=${postFlag}&postid=${postId}&userid=${userId}&submitday=${submitDay}&updateflag=update`
+       const updatePost=(postFlag,postId,userId,submitDay)=>{
+        
+        const imageExist = imageSrc.length;
+        const queryParam =`?posf=${postFlag}&postid=${postId}&userid=${userId}&submitday=${submitDay}&imageexist=${imageExist}&updateflag=update`
         router.push('/posts/postEdit'+queryParam , '/posts/postEdit')
 
-        
-
-       },[]);
+       };
 
 
     return (

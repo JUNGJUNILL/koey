@@ -196,6 +196,41 @@ router.post('/imagename', async (req,res,next)=>{
     }
 });
 
+//게시글 이미지 제거하기
+router.post('/imageDelete', async (req,res,next)=>{
+    try{
+
+        const {
+                posf,
+                imageId,
+                postId,
+                userId,
+                submitDay} =req.body.data; 
+
+        const _pos=posf;
+        const _imageId=imageId;
+        const _postId=postId;
+        const _userId=userId;
+        const _submitDay=submitDay;
+        
+        let stringQuery = 'CALL US_UPDATE_mainPostImage_delete'; 
+        stringQuery =stringQuery.concat(`('${_pos}',`);
+        stringQuery =stringQuery.concat(`'${_imageId}',`); 
+        stringQuery =stringQuery.concat(`'${_postId}',`);
+        stringQuery =stringQuery.concat(`'${decodeURIComponent(_userId)}',`);
+        stringQuery =stringQuery.concat(`'${_submitDay}')`);
+
+        console.log(stringQuery); 
+        await pool.query(stringQuery); 
+        return res.status(200).json({massage:'success'}); 
+
+    }catch(e){
+        console.log(e); 
+        next(e);
+    }
+});
+
+
 
 //게시글 댓글 리스트 
 router.post('/mainPosts_1001Comments', async (req,res,next)=>{
@@ -314,7 +349,7 @@ router.post('/postDelete', async (req,res,next)=>{
         console.log(stringQuery); 
         await pool.query(stringQuery);       
         
-        return res.status(200);
+        return res.status(200).json({massage:'success'});
 
     }catch(e){
         console.log(e); 
@@ -353,7 +388,6 @@ router.post('/postUpdate', async (req,res,next)=>{
 
         console.log(stringQuery); 
         await pool.query(stringQuery); 
-
         return res.status(200).json({massage:'success'}); 
 
     }catch(e){

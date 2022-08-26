@@ -86,10 +86,15 @@ export const MAINPOST_1001_IMAGES_REQUEST = 'MAINPOST_1001_IMAGES_REQUEST';
 export const MAINPOST_1001_IMAGES_SUCCESS = 'MAINPOST_1001_IMAGES_SUCCESS';
 export const MAINPOST_1001_IMAGES_FAILURE = 'MAINPOST_1001_IMAGES_FAILURE';
 
-//이미지 이름 제거하기 
+//이미지 제거하기(게시글 업로드 시) 
 export const MAINPOST_1001_IMAGENAME_REMOVE_REQUEST = 'MAINPOST_1001_IMAGENAME_REMOVE_REQUEST';
 export const MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS = 'MAINPOST_1001_IMAGENAME_REMOVE_SUCCESS';
 export const MAINPOST_1001_IMAGENAME_REMOVE_FAILURE = 'MAINPOST_1001_IMAGENAME_REMOVE_FAILURE';
+
+//이미지 제거하기(게시글 수정 시) 
+export const MAINPOST_1001_IMAGE_REMOVE_REQUEST = 'MAINPOST_1001_IMAGE_REMOVE_REQUEST';
+export const MAINPOST_1001_IMAGE_REMOVE_SUCCESS = 'MAINPOST_1001_IMAGE_REMOVE_SUCCESS';
+export const MAINPOST_1001_IMAGE_REMOVE_FAILURE = 'MAINPOST_1001_IMAGE_REMOVE_FAILURE';
 
 //nav backgroundColor 유지
 export const POST_CLICKED_REQUEST = 'POST_CLICKED_REQUEST';
@@ -367,15 +372,24 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 //----------------------------------------
 
 
-//이미지 이름 제거하기
+//이미지 제거하기(게시글 업로드 시) 
 //----------------------------------------
-            case MAINPOST_1001_IMAGENAME_REMOVE_REQUEST: {
+            case MAINPOST_1001_IMAGENAME_REMOVE_REQUEST: {    
                 draft.imageFileName = draft.imageFileName.filter((v, i) => v !== action.data.removeImageName);
                 break; 
             }
 //----------------------------------------
 
-//이미지 이름 제거하기
+
+//이미지 제거하기(게시글 수정 시) 
+//----------------------------------------
+        case MAINPOST_1001_IMAGE_REMOVE_REQUEST: { 
+                draft.imageSrc = draft.imageSrc.filter((v, i) => v.src !== action.data.removeImageName);
+                break; 
+        }
+//----------------------------------------
+
+//nav backgroundColor 유지
 //----------------------------------------
             case POST_CLICKED_REQUEST: {
                 draft.posf=action.data.postFlag;

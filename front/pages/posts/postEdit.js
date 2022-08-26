@@ -1,13 +1,14 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import wrapper from '../../store/configureStore';
-import {PictureOutlined,PlaySquareOutlined,CloseOutlined} from '@ant-design/icons'
+import {PictureOutlined,PlaySquareOutlined} from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
 import {END} from 'redux-saga'; 
 import axios from  'axios'; 
 import {Button, Input,} from 'antd'
 import { backImageUrl,AWSImageUrl,backUrl } from '../../config/config';
 import secureFilter from   '../../util/secureFilter';
+import ImageUploadComponent from '../../components/mainPosts_1001/ImageUploadComponent';
 
 import 
     {
@@ -25,14 +26,16 @@ import
         MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
         POST_CLICKED_REQUEST,
         MAINPOSTS_UPDATE_REQUEST,
-        MAINPOSTS_1001_DETAIL_INFO_REQUEST
+        MAINPOSTS_1001_DETAIL_INFO_REQUEST,
+        MAINPOST_1001_IMAGES_REQUEST,
+        MAINPOST_1001_IMAGE_REMOVE_REQUEST
     } 
 from '../../reducers/mainPosts_1001'; 
 const { TextArea } = Input;
 
 
 
-const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
+const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
 
     const dispatch = useDispatch(); 
@@ -53,6 +56,7 @@ const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
             return null;
         }
 
+        
         if(updateFlag && updateFlag==='update'){
                 dispatch({
                     type:MAINPOSTS_1001_DETAIL_INFO_REQUEST, 
@@ -61,11 +65,23 @@ const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
                         pid:encodeURIComponent(userId),     
                         postFlag:posf,
                         who:'',
-                        submitDay,
                         submitDay:submitDay,
                     }
-                })
+                });
+
+                if(imageExist>0){
+                    dispatch({
+                        type:MAINPOST_1001_IMAGES_REQUEST, 
+                        data:{
+                          postId:postId,
+                          pid:encodeURIComponent(userId),
+                          submitDay:submitDay,
+                          postFlag:posf,}
+                      });
+                }          
         }
+
+
         
         //로그인 만료 시 로그인 창으로 이동 
         if(!userInfo){
@@ -121,7 +137,7 @@ const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
            }); 
 
 
-           router.push({pathname:'/posts/[detailPage]',
+           router.replace({pathname:'/posts/[detailPage]',
            query:{detailPage:'detailPage', 
                   postId:postId,
                   postFlag:posf,
@@ -220,13 +236,35 @@ const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
     },[]); 
 
 
-    //이미지 제거 
-    const removeImage =(v) => {
+    //이미지 제거(게시글 수정 시)
+    const removeImage =(v,posf,imageId,postId,userId,submitDay) => {
+        if(window.confirm('정말로 삭제하시겠습니까?')){
+            dispatch({type:MAINPOST_1001_IMAGE_REMOVE_REQUEST,
+                data:{removeImageName:v,
+                     posf,
+                     imageId,
+                     postId,
+                     userId,
+                     submitDay
+                },
+          }); 
+          alert('사진이 삭제되었습니다.');
+        }else{
+            return;
+        }
 
-        dispatch({type:MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
-                  data:{removeImageName:v,},
-            }); 
-            
+    }
+
+    //이미지 제거(게시글 입력 시)
+    const removeImageName=(v)=>{
+        if(window.confirm('정말로 삭제하시겠습니까?')){
+            dispatch({type:MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
+                data:{removeImageName:v,},
+          }); 
+          alert('사진이 삭제되었습니다.');
+        }else{
+            return;
+        }
     }
 
     return (
@@ -246,27 +284,8 @@ const postEdit = ({posf,postId,userId,submitDay,updateFlag}) =>{
        </div> 
        <br/>
 
-       <div style={{textAlign:'center'}}>
-            {imageFileName && imageFileName.map((v,i)=>(
-                <div style={{display:'inline-block'}} key={i} >
-                    <img style={{width:'60px',height:'60px'}} src={process.env.NODE_ENV==='production' 
-                                                                   ? 
-                                                                   
-                                                                   //원본 이미지
-                                                                   `${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}`
-                                                                   
-                                                                   //이미지 리사이즈
-                                                                   //`${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}` 
-                                                                   : 
-                                                                   `${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v}`} />    
-                    <br/>
-                    <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v)} /></Button>
-                </div>
-            ))}
-        </div>
-  
-      
-
+        <ImageUploadComponent postFlag={posf} updateFlag={updateFlag} imageFileName={imageFileName} removeImage={removeImage} removeImageName={removeImageName}/>
+    
         </div>
     )
 
@@ -277,6 +296,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const postId=context.query.postid?context.query.postid:'';
     const userId=context.query.userid?context.query.userid:'';
     const submitDay=context.query.submitday?context.query.submitday:'';
+    const imageExist=context.query.imageexist?parseInt(context.query.imageexist):'';
     const updateFlag=context.query.updateflag?context.query.updateflag:'';
 
     const cookie = context.req ? context.req.headers.cookie : '';
@@ -298,13 +318,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     });
 
 
-    
-
     context.store.dispatch(END); 
     await context.store.sagaTask.toPromise(); 
     
     return {
-        props :{posf,postId,userId,submitDay,updateFlag}
+        props :{posf,postId,userId,submitDay,imageExist,updateFlag}
     }
 
 });

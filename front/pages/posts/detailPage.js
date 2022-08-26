@@ -16,7 +16,8 @@ import
      MAINPOSTS_1001_COMMENTLIKE_REQUEST,
      MAINPOSTS_1001_COMMENTBYCOMMENT_REQUEST,
      MAINPOSTS_1001_MAINPOSTLIKE_REQUEST,
-     MAINPOST_1001_IMAGES_REQUEST
+     MAINPOST_1001_IMAGES_REQUEST,
+     POST_CLICKED_REQUEST
     } 
 from '../../reducers/mainPosts_1001';
 
@@ -373,6 +374,12 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   context.store.dispatch({
     type:LOAD_USER_REQUEST
   });
+
+    //nav background 유지
+    context.store.dispatch({
+      type:POST_CLICKED_REQUEST,
+      data:{postFlag:postFlag,}
+    });
 
 
   //댓글 리스트 
