@@ -24,6 +24,8 @@ import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl,AWSImageUrl } from '../../config/config';
 
+import GoogleAds_DetailPage from '../../components/Ads/GooleAds_DetailPaage';
+
 
 
 //{nickName,postFlag,postId,submitDay}
@@ -395,11 +397,8 @@ const detailPage  = () =>{
     <br />
     {/*좋아요 싫어요 버튼--------------------------------------------------------------------------------*/}
 
-    {/* 
-    <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
-      광고입니다.
-    </div>
-    */}
+    {/*구글 광고*/}
+    <GoogleAds_DetailPage />
     <br/>
 
 

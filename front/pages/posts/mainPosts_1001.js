@@ -19,6 +19,7 @@ import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
+import GooleAds_MainpostList from '../../components/Ads/GooleAds_MainpostList'
 
 
 const mainPosts_1001 = ()=>{
@@ -275,6 +276,8 @@ const mainPosts_1001 = ()=>{
                   postFlag={posf} 
                   searchValue={searchValue} 
                   searchCondition={searchCondition}/>
+      
+      <GooleAds_MainpostList />
 
     </div>
     );
