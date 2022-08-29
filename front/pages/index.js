@@ -8,7 +8,7 @@ import wrapper from '../store/configureStore';
 import { Card, Col, Row, List,  Button, Divider  } from 'antd';
 const { Meta } = Card;
 
-import { backImageUrl,AWSImageUrl } from '../config/config';
+import { backImageUrl,AWSImageUrl,Url } from '../config/config';
 
 import 
     {LOAD_USER_REQUEST,} 
@@ -74,7 +74,7 @@ const Home =()=>{
                     `${AWSImageUrl}/images/1001/${v.firstImageName}`
                     : 
                     `${backImageUrl}/1001/${v.firstImageName}`   
-                    :`${backImageUrl}/noimages.gif`               
+                    :`${Url}/noimages.gif`               
           } />    
           <br />
           <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
