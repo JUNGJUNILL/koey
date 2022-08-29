@@ -1,133 +1,309 @@
-import React,{useEffect}from 'react'
 import Link from 'next/link'
+import React,{useEffect}from 'react'
+import { useSelector } from 'react-redux';
+import axios from  'axios'; 
 import {END} from 'redux-saga'; 
 import wrapper from '../store/configureStore';
-import { useSelector } from 'react-redux';
-import Image from 'next/image'
-import axios from 'axios';
 
-import {Button} from 'antd';
-import { useRouter } from 'next/router';
-import noimages from '/public/noimages.gif'
+import { Card, Col, Row, List,  Button, Divider  } from 'antd';
+const { Meta } = Card;
 
+import { backImageUrl,AWSImageUrl } from '../config/config';
 
-import 
-    {INDEX_PAGE_DATA_1001_REQUEST
-    } 
-from '../reducers/indexPage'; 
 import 
     {LOAD_USER_REQUEST,} 
 from '../reducers/auth'; 
-import custumDateFormat from '../util/custumDateFormat';
+
+import 
+    {INDEX_PAGE_DATA_1001_REQUEST,
+     INDEX_PAGE_DATA_1002_REQUEST,
+     INDEX_PAGE_DATA_1003_REQUEST,
+     INDEX_PAGE_DATA_1004_REQUEST,
+     INDEX_PAGE_DATA_1005_REQUEST,
+     INDEX_PAGE_DATA_1006_REQUEST,
+    } 
+from '../reducers/indexPage'; 
 
 
 
+const Home =()=>{
 
-const MainPage =()=>{
-
-    const {data01} = useSelector((state)=>state.indexPage); 
-    const router           = useRouter(); 
-
-    const moreView =()=>{
-    router.push({pathname:'/posts/mainPosts_1001',
-                  query:{ 
-                    nowPage:1,
-                    posf:'1001',
-
-                  },
-               
-                  
-                  
-        }); 
-    }
-    const gotoDetail = (postId,userId,postFlag,submitDay,userNickName)=>{
-      router.push({pathname:'/posts/[detailPage]',
-                    query:{detailPage:'detailPage', 
-                           postId:postId,
-                           postFlag:postFlag,
-                           submitDay:submitDay,
-                           pid:userId,
-                           userNickName:'',                     
-                           who:'',
-                    },
-                 
-                    
-                    
-          }); 
-        
-      }; 
+  const {data01,data02,data03,data04,data05,data06} = useSelector((state)=>state.indexPage); 
+  const {userInfo,userid}       = useSelector((state)=>state.auth);
 
 
 
-    return (
-        <div>
-             <div style={{width:'100%',textAlign:"center"}}>
-                    <font style={{fontFamily:'Hanna',fontSize:'3vh'}}>우리나라 중소기업 관련 자료</font> <br/>
-                    <font style={{fontFamily:'jua',fontSize:'2vh',opacity:'0.6'}}>(인기순으로 정렬)</font>
-            </div>
+  const scrollRestoration = () =>{
 
-            <div className='divTable'>
-                {data01 && data01.map((v,i)=>(
-                <div className='divTableRowTEST' key={i} onClick={()=>gotoDetail(v.postId,v.userid,'1001',v.submitDay,v.userNickName)}>
-                    {/* col1 */}
-                    <div className='divTableImageCell'>
-                    <div className="divImageCell" style={{alignItems:"center"}}><Image src={i<=2
-                                                                                                                            ?`https://www.hubpass.co.kr/external/images/a1001/${i===0?'rank_1':i===1?'rank_2':'rank_3'}.jpg`
-                                                                                                                            :v.storeCount === '0'
-                                                                                                                            ? 'https://www.hubpass.co.kr/external/images/a1001/noorder.gif' 
-                                                                                                                            :'https://www.hubpass.co.kr/external/images/a1001/delivery.gif'
-
-                                                                                                                    }
-                                                                                                                    
-                                                                                                                    alt={noimages}
-                                                                                                                    width={80} height={60}
-                                                                                                                    layout='responsive'
-                                                                                                                    />  </div>
-                    </div>
-
-                    {/* col2 */}                                                                                                      
-                    <div className='divTableCellTEST'>
-                        <font className="abbreviation" color={i<=2 ? 'red' : ''} style={{fontFamily:'Hanna',fontSize:'3vh'}}>
-                        {v.title}
-                        </font>
-                      <br/>
-                        <font  className="abbreviation" style={{fontFamily:'jua',fontSize:'2vh'}}>&nbsp;{v.content}</font>
-
-                      <br/>
-                        <font style={{fontFamily:'jua',fontSize:'2vh',opacity:'0.6'}}>&nbsp;{v.userNickName},{custumDateFormat(v.createdDate)}</font>            
+    window.localStorage.setItem('scrollY',window.scrollY); 
+    
+  }
 
 
-                    </div>
+  useEffect(()=>{
+    window.scrollTo(0,window.localStorage.getItem('scrollY')); 
+
+  },[])
+
+  return (
+    <div>
+
+  <Divider orientation="center">좋좋소! 베스트</Divider>
+  <Row style={{marginTop:'3%'}}>
+  
+  {data01.map((v,i)=>(
+    <Link 
+        href={{
+          pathname:'/posts/[detailPage]',
+          query:{detailPage:'detailPage',
+                  postId:v.postId,
+                  postFlag:'1001',
+                  submitDay:v.submitDay,
+                  pid:v.userid,  
+                  userNickName:userInfo,                          
+                  who:userid,},
+
+        }}>
+    <Col span={8} style={{padding:'5px'}}> 
+    <div style={{textAlign:'center'}}>
+      <div>
+          <img style={{width:'100%',height:'130px',objectFit:'cover'}}  
+               src={v.firstImageName.length > 0 ? 
+                    process.env.NODE_ENV==='production' 
+                    ? 
+                    `${AWSImageUrl}/images/1001/${v.firstImageName}`
+                    : 
+                    `${backImageUrl}/1001/${v.firstImageName}`   
+                    :`${backImageUrl}/noimages.gif`               
+          } />    
+          <br />
+          <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
+          {v.title}
+          </div>
+      </div>
+    </div>
+  </Col>
+  </Link>
+  ))}
+
+</Row>
 
 
+    {/*좋소!*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
-                  
-                </div>
-                ))}
-            </div>
-            <Button type="primary" onClick={moreView}  block>더 보기 ▼</Button>
+    dataSource={data02}
+    renderItem={item => (
+      <List.Item onClick={scrollRestoration}>
+      <Link 
+          href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1002',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
 
-        </div>
-    )
+
+    {/*좋소!탈출*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!탈출</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
+
+    dataSource={data03}
+    renderItem={item => (
+      <List.Item onClick={scrollRestoration}>
+      <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1003',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+    {/*좋소!희망편*/}
+    <List
+    style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+    itemLayout="horizontal"
+    header={<div><b>좋소!희망편</b></div>}
+    footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
+
+    dataSource={data04}
+    renderItem={item => (
+      <List.Item onClick={scrollRestoration}>
+      <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1004',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
+      <a className="abbreviation">
+      <span className="bestSpan">BEST</span> 
+        {item.title}
+        <span className="countFontColor">[{item.commentCount}] </span>
+      </a>
+      </Link>
+      </List.Item>
+    )}
+    />
+
+
+     {/*주말출근*/}
+     <List
+     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+     itemLayout="horizontal"
+     header={<div><b>주말출근</b></div>}
+     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
+ 
+     dataSource={data05}
+     renderItem={item => (
+       <List.Item onClick={scrollRestoration} >
+       <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1005',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
+       <a className="abbreviation">
+       <span className="bestSpan">BEST</span> 
+         {item.title}
+         <span className="countFontColor">[{item.commentCount}] </span>
+       </a>
+       </Link>
+       </List.Item>
+     )}
+     />
+
+      {/*야근/철야*/}
+      <List
+      style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
+      itemLayout="horizontal"
+      header={<div><b>야근/철야</b></div>}
+      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
+  
+      dataSource={data06}
+      renderItem={item => (
+        <List.Item onClick={scrollRestoration} >
+        <Link href={{
+            pathname:'/posts/[detailPage]',
+            query:{detailPage:'detailPage',
+                    postId:item.postId,
+                    postFlag:'1006',
+                    submitDay:item.submitDay,
+                    pid:item.userid,  
+                    userNickName:userInfo,                          
+                    who:userid,},
+      
+          }}>
+        <a className="abbreviation">
+        <span className="bestSpan">BEST</span> 
+          {item.title}
+          <span className="countFontColor">[{item.commentCount}] </span>
+        </a>
+        </Link>
+        </List.Item>
+      )}
+      />
+
+   </div>
+
+  )
 }
+
+
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-      const cookie = context.req ? context.req.headers.cookie : '';
-      axios.defaults.headers.Cookie = '';
-      if (context.req && cookie) { //쿠키 공유 방지 
-        axios.defaults.headers.Cookie = cookie;
-      }
+   const cookie = context.req ? context.req.headers.cookie : '';
+   axios.defaults.headers.Cookie = '';
+   if (context.req && cookie) { //쿠키 공유 방지 
+     axios.defaults.headers.Cookie = cookie;
+   }
+ 
+  context.store.dispatch({
+    type:LOAD_USER_REQUEST
+  });
 
-    context.store.dispatch({
-      type:LOAD_USER_REQUEST
-    });
+  
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1001_REQUEST, 
+    data:{postFlag:'1001',}, 
+  });
 
-    context.store.dispatch({
-        type:INDEX_PAGE_DATA_1001_REQUEST, 
-        data:{postFlag:'1001',}, 
-        });
-        
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1002_REQUEST, 
+    data:{postFlag:'1002',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1003_REQUEST, 
+    data:{postFlag:'1003',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1004_REQUEST, 
+    data:{postFlag:'1004',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1005_REQUEST, 
+    data:{postFlag:'1005',}, 
+  });
+
+  context.store.dispatch({
+    type:INDEX_PAGE_DATA_1006_REQUEST, 
+    data:{postFlag:'1006',}, 
+  });
+
+
+
+
+
+
   context.store.dispatch(END); 
   await context.store.sagaTask.toPromise(); 
+
+
 });
 
-export default MainPage; 
+export default Home; 
