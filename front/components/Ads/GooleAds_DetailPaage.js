@@ -10,7 +10,7 @@ const GoogleAds_DetailPage = () =>{
 
     return (
         <ins className="adsbygoogle"
-            style={{display:'block',textAlign:'center'}}
+            style={{display:'block',width:'100%',textAlign:'center'}}
             data-ad-layout={"in-article"}
             data-ad-format={"auto"}
             data-full-width-responsive={"true"}
