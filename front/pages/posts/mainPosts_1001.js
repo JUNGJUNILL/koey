@@ -19,7 +19,8 @@ import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
-import GooleAds_MainpostList from '../../components/Ads/GooleAds_MainpostList'
+import GooleAds_footer from '../../components/Ads/GooleAds_footer';
+import GooleAds_header from '../../components/Ads/GooleAds_header';
 
 
 const mainPosts_1001 = ()=>{
@@ -185,7 +186,10 @@ const mainPosts_1001 = ()=>{
     &nbsp;
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
-
+    
+     {/*구글 광고*/}
+    <GooleAds_header />
+ 
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
                 <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userid,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
@@ -276,8 +280,9 @@ const mainPosts_1001 = ()=>{
                   postFlag={posf} 
                   searchValue={searchValue} 
                   searchCondition={searchCondition}/>
-      
-      <GooleAds_MainpostList />
+
+      {/*구글 광고*/}
+      <GooleAds_footer />
 
     </div>
     );

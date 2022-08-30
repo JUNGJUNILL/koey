@@ -31,6 +31,7 @@ import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl,AWSImageUrl } from '../../config/config';
 
 import GoogleAds_DetailPage from '../../components/Ads/GooleAds_DetailPaage';
+import GooleAds_comment_footer from '../../components/Ads/GooleAds_comment_footer';
 
 
 
@@ -348,6 +349,8 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     </div>
     {/*댓글 리스트--------------------------------------------------------------------------------*/}
 
+    {/*구글 광고*/}
+    <GooleAds_comment_footer />
     </div>
         )
 }
