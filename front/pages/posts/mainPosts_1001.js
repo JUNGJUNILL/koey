@@ -188,7 +188,7 @@ const mainPosts_1001 = ()=>{
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
     
      {/*구글 광고*/}
-    <GooleAds_header />
+     {posf &&  <GooleAds_header />}
  
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
@@ -282,7 +282,8 @@ const mainPosts_1001 = ()=>{
                   searchCondition={searchCondition}/>
 
       {/*구글 광고*/}
-      <GooleAds_footer />
+      {posf && <GooleAds_footer />}
+
 
     </div>
     );

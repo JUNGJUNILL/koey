@@ -287,7 +287,8 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     {/*좋아요 싫어요 버튼--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    <GoogleAds_DetailPage />
+    {mainPosts_1001Info && <GoogleAds_DetailPage />}
+    
     <br/>
 
 
@@ -350,7 +351,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     {/*댓글 리스트--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    <GooleAds_comment_footer />
+    {mainPosts_1001Info && <GooleAds_comment_footer />}
     </div>
         )
 }
