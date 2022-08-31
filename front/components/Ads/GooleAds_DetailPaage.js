@@ -1,6 +1,6 @@
 import React , {useEffect}from 'react'
 
-//메인 페이지 좋아요 싫어요 버튼 쪽
+//상세 페이지 좋아요 싫어요 버튼 쪽
 const GoogleAds_DetailPage = () =>{
 
     useEffect(()=>{

@@ -24,6 +24,8 @@ import
     } 
 from '../reducers/indexPage'; 
 
+import GoogleAds_MainPage01 from '../components/Ads/GoogleAds_MainPage01'
+import GoogleAds_MainPage02 from '../components/Ads/GoogleAds_MainPage02'
 
 
 const Home =()=>{
@@ -121,6 +123,8 @@ const Home =()=>{
     )}
     />
 
+  {/*구글 광고*/}
+  <GoogleAds_MainPage01 />
 
     {/*좋소!탈출*/}
     <List
@@ -246,6 +250,9 @@ const Home =()=>{
         </List.Item>
       )}
       />
+
+    {/*구글 광고*/}
+    <GoogleAds_MainPage02 />
 
    </div>
 
