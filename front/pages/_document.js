@@ -27,6 +27,7 @@ class MyDocument extends Document {
     
         </Head>
         <body>
+          <title>좋소!</title>
           <Main />
           <NextScript />
         </body>
