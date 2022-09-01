@@ -28,7 +28,7 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
                                                             //`${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${backImageUrl}/${posf}/${v}`} /> 
                                                             `${backImageUrl}/${posf}/${v.src}`  } />
                 <br/>
-                <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v.src,posf,v.imageId,v.postId,v.userId,v.submitDay)} /></Button>
+                <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImage(v.src,posf,v.imageId,v.postId,v.userId,v.submitDay,v.update)} /></Button>
             </div>
             ))}
 

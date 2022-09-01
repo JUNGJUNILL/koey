@@ -471,10 +471,9 @@ function* sagaMainPosts_1001UploadImage(action){
 
     try{
       const result = yield call(APImainPosts_1001UploadImage,action.data); 
-      
       yield  put({
             type:UPLOAD_IMAGES_SUCCESS, 
-            data:result.data,
+            data:{filnameArray:result.data , updateflag:action.data.isUpdate},
         });
 
     }catch(e){
@@ -539,6 +538,9 @@ function APImainPosts_1001ImageDelete(data){
 function* sagaMainPosts_1001ImageDelete(action){
 
     try{
+      //게시글 수정 화면에서 파일 업로드 후 제거 눌렀을 경우
+      if(action.data.update==='Y') return; 
+
       const result = yield call(APImainPosts_1001ImageDelete,action.data); 
       yield  put({
             type:MAINPOST_1001_IMAGE_REMOVE_SUCCESS, 
@@ -609,7 +611,7 @@ function APImainPosts_1001Update(data){
 function* sagaMainPosts_1001Update(action){
 
     try{
-      const result = yield call(APImainPosts_1001Update,action.data); 
+      yield call(APImainPosts_1001Update,action.data); 
       yield  put({
             type:MAINPOSTS_UPDATE_SUCCESS, 
             data:'게시글이 수정되었습니다.',

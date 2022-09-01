@@ -39,7 +39,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
 
     const dispatch = useDispatch(); 
-    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info} = useSelector((state)=>state.mainPosts_1001); 
+    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc} = useSelector((state)=>state.mainPosts_1001); 
     const {userInfo,userid} = useSelector((state)=>state.auth); 
     const refTitle = useRef(); 
     const refContent = useRef(); 
@@ -123,6 +123,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
         //게시글 UPDATE
         if(updateFlag && updateFlag==='update'){
+             
             dispatch({
                 type: MAINPOSTS_UPDATE_REQUEST,
                 data: {postFlag:posf,
@@ -131,6 +132,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
                        submitDay:submitDay,
                        title:encodeURIComponent(filteredTitle),
                        content:encodeURIComponent(hello),
+                       imageSrc:imageSrc,
                        
                },
     
@@ -192,7 +194,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
     //이미지 업로드 
     const onChangeImages = useCallback((e)=>{
-    
+        
         //파일을 2개 올렸을 시 e.target.files의 생김새
         //{0:File, 1:File, length:2} 유사 배열 형태
 
@@ -224,10 +226,11 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
             imageFormData.delete('image'); 
             return; 
         }else{
-            
+            const updateflag = updateFlag?updateFlag:'';
             dispatch({type:UPLOAD_IMAGES_REQUEST,
                 data:{images:imageFormData,
                      postFlag:posf,
+                     isUpdate:updateflag,
                      user:encodeURIComponent(userInfo),
                     },
                 }); 
@@ -239,7 +242,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
 
     //이미지 제거(게시글 수정 시)
-    const removeImage =(v,posf,imageId,postId,userId,submitDay) => {
+    const removeImage =(v,posf,imageId,postId,userId,submitDay,update) => {
         if(window.confirm('정말로 삭제하시겠습니까?')){
             dispatch({type:MAINPOST_1001_IMAGE_REMOVE_REQUEST,
                 data:{removeImageName:v,
@@ -247,7 +250,8 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
                      imageId,
                      postId,
                      userId,
-                     submitDay
+                     submitDay,
+                     update
                 },
           }); 
           alert('사진이 삭제되었습니다.');
@@ -298,7 +302,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const postId=context.query.postid?context.query.postid:'';
     const userId=context.query.userid?context.query.userid:'';
     const submitDay=context.query.submitday?context.query.submitday:'';
-    const imageExist=context.query.imageexist?parseInt(context.query.imageexist):'';
+    const imageExist=context.query.imageexist?parseInt(context.query.imageexist):0;
     const updateFlag=context.query.updateflag?context.query.updateflag:'';
 
     const cookie = context.req ? context.req.headers.cookie : '';

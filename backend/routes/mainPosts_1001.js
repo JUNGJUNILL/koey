@@ -188,6 +188,7 @@ router.post('/imagename', async (req,res,next)=>{
 
         const mainPosts_1001ImageName = await pool.query(stringQuery); 
         console.log(stringQuery); 
+
         return res.json(mainPosts_1001ImageName[0]); 
 
     }catch(e){
@@ -366,17 +367,35 @@ router.post('/postUpdate', async (req,res,next)=>{
              userId,
              submitDay,
              title,
-             content,} = req.body.data; 
+             content,
+             imageSrc,
+            } = req.body.data; 
+            
+          
+            
+            const _postFlag = postFlag; 
+            const _postId = postId;        
+            const _userid   =decodeURIComponent(userId); 
+            const _submitDay=submitDay;
+            const _title   = decodeURIComponent(title); 
+            const _content = decodeURIComponent(content);
+            const _imageSrc =imageSrc; 
 
-        const _postFlag = postFlag; 
-        const _postId = postId;        
-        const _userid   =decodeURIComponent(userId); 
-        const _submitDay=submitDay;
-        const _title   = decodeURIComponent(title); 
-        const _content = decodeURIComponent(content); 
-      
-      
-        let stringQuery;
+            let stringQuery=''; 
+                //게시글 수정 시 추가된 이미지 insert 
+                await Promise.all( _imageSrc.map((v)=>{
+                    if(v.update==='Y'){
+                        stringQuery = 'CALL US_INSERT_mainPostImages'; 
+                        stringQuery =stringQuery.concat(`('${_postId}',`);
+                        stringQuery =stringQuery.concat(`'${_userid}',`); 
+                        stringQuery =stringQuery.concat(`'${_submitDay}',`); 
+                        stringQuery =stringQuery.concat(`'${v.src}',`); 
+                        stringQuery =stringQuery.concat(`'${_postFlag}');`);
+                        console.log(stringQuery);
+                        pool.query(stringQuery)
+                    }       
+                }));
+ 
             stringQuery=''; 
             stringQuery = 'CALL US_UPDATE_mainPosts'; 
             stringQuery =stringQuery.concat(`('${_postFlag}',`);

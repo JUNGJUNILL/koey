@@ -343,7 +343,24 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 
             case UPLOAD_IMAGES_SUCCESS: {
                 draft.imageUploading=false;
-                draft.imageFileName=draft.imageFileName.concat(action.data); 
+
+                //게시글 수정 화면에서 이미지를 업로드 했을 경우 
+                if(action.data.updateflag==='update'){
+                    const jsonArray = new Array();
+                    action.data.filnameArray.map((v)=>{
+                        let jsonObj = new Object(); 
+                        jsonObj.src = v;
+                        jsonObj.update='Y';
+                        jsonObj = JSON.stringify(jsonObj); 
+                        jsonArray.push(JSON.parse(jsonObj)); 
+                    });  
+                    draft.imageSrc = draft.imageSrc.concat(jsonArray); 
+
+                //게시글 작성 화면에서 이미지를 업로드 했을 경우 
+                }else{
+                    draft.imageFileName=draft.imageFileName.concat(action.data.filnameArray); 
+
+                }
                 break; 
             }
 
