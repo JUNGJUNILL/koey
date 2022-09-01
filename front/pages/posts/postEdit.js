@@ -136,6 +136,8 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
     
            }); 
 
+           
+
 
            router.replace({pathname:'/posts/[detailPage]',
            query:{detailPage:'detailPage', 
