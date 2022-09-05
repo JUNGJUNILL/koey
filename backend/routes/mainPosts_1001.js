@@ -276,7 +276,7 @@ router.post('/postInsert', async (req,res,next)=>{
         const _userNickName   = decodeURIComponent(userNickName); 
         const _postFlag = postFlag; 
         const _userid   =decodeURIComponent(userid); 
-        const _imageFileName =decodeURIComponent(imageFileName);
+        const _imageFileName =imageFileName;
       
         let stringQuery;
             stringQuery=''; 
