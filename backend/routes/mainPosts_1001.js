@@ -385,11 +385,12 @@ router.post('/postUpdate', async (req,res,next)=>{
                 //게시글 수정 시 추가된 이미지 insert 
                 await Promise.all( _imageSrc.map((v)=>{
                     if(v.update==='Y'){
+                        let imageName = process.env.NODE_ENV === 'production'? v.src.split('/')[v.src.split('/').length-1] : v.src; 
                         stringQuery = 'CALL US_INSERT_mainPostImages'; 
                         stringQuery =stringQuery.concat(`('${_postId}',`);
                         stringQuery =stringQuery.concat(`'${_userid}',`); 
-                        stringQuery =stringQuery.concat(`'${_submitDay}',`); 
-                        stringQuery =stringQuery.concat(`'${v.src}',`); 
+                        stringQuery =stringQuery.concat(`'${_submitDay}',`);  
+                        stringQuery =stringQuery.concat(`'${imageName}',`);
                         stringQuery =stringQuery.concat(`'${_postFlag}');`);
                         console.log(stringQuery);
                         pool.query(stringQuery)
