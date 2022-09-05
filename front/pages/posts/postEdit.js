@@ -243,20 +243,25 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
     //이미지 제거(게시글 수정 시)
     const removeImage =(v,posf,imageId,postId,userId,submitDay,update) => {
-        if(window.confirm('정말로 삭제하시겠습니까?')){
-            dispatch({type:MAINPOST_1001_IMAGE_REMOVE_REQUEST,
-                data:{removeImageName:v,
-                     posf,
-                     imageId,
-                     postId,
-                     userId,
-                     submitDay,
-                     update
-                },
-          }); 
-          alert('사진이 삭제되었습니다.');
-        }else{
-            return;
+        try{
+            if(window.confirm('정말로 삭제하시겠습니까?')){
+                dispatch({type:MAINPOST_1001_IMAGE_REMOVE_REQUEST,
+                    data:{removeImageName:v,
+                        posf,
+                        imageId,
+                        postId,
+                        userId,
+                        submitDay,
+                        update
+                    },
+            }); 
+            alert('사진이 삭제되었습니다.');
+            }else{
+                return;
+            }
+
+        }catch(e){
+            alert(e);
         }
 
     }
