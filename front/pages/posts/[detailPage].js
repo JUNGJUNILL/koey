@@ -26,6 +26,7 @@ import { backImageUrl,AWSImageUrl } from '../../config/config';
 
 import GoogleAds_DetailPage from '../../components/Ads/GooleAds_DetailPaage';
 import GooleAds_comment_footer from '../../components/Ads/GooleAds_comment_footer';
+import GooleAds_DetailPage_Top from '../../components/Ads/GooleAds_DetailPage_Top'; 
 
 
 //{nickName,postFlag,postId,submitDay}
@@ -314,12 +315,9 @@ const detailPage  = () =>{
     return (
       
     <div >
-    {/* 
-    <div style={{width:"100%",height:"auto", border:"1px solid", borderColor:"#8cc49c",marginTop:"1%"}}>
-      광고입니다.
-    </div>
-    */}
-
+    {/*구글 광고*/}       
+    {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
+  
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
