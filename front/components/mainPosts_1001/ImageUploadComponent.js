@@ -19,7 +19,7 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
                 <img style={{width:'60px',height:'60px'}} src={process.env.NODE_ENV==='production' 
                                                             ?                                                                   
                                                             //원본 이미지
-                                                            `${AWSImageUrl}/images/${posf}/${v.src.split('/')[v.split('/').length-1]}`
+                                                            `${AWSImageUrl}/images/${posf}/${v.src.split('/')[v.src.split('/').length-1]}`
                                                             
                                                             //이미지 리사이즈
                                                             //`${backUrl}/imgResizing?size=60x60&posf=${posf}&fileName=${AWSImageUrl}/images/${posf}/${v.split('/')[v.split('/').length-1]}` 
