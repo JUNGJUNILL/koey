@@ -228,7 +228,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         }else{
             const updateflag = updateFlag?updateFlag:'';
             dispatch({type:UPLOAD_IMAGES_REQUEST,
-                data:{images:imageFormData,
+                data:{images:encodeURIComponent(imageFormData),
                      postFlag:posf,
                      isUpdate:updateflag,
                      user:encodeURIComponent(userInfo),

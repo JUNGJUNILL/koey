@@ -276,6 +276,7 @@ router.post('/postInsert', async (req,res,next)=>{
         const _userNickName   = decodeURIComponent(userNickName); 
         const _postFlag = postFlag; 
         const _userid   =decodeURIComponent(userid); 
+        const _imageFileName =decodeURIComponent(imageFileName);
       
         let stringQuery;
             stringQuery=''; 
@@ -290,15 +291,15 @@ router.post('/postInsert', async (req,res,next)=>{
       
         const postInsert = await pool.query(stringQuery); 
 
-        if(imageFileName.length > 0){
+        if(_imageFileName.length > 0){
         
                 stringQuery=''; 
-                for(let i=0; i<imageFileName.length; i++){
+                for(let i=0; i<_imageFileName.length; i++){
                     stringQuery = 'CALL US_INSERT_mainPostImages'; 
                     stringQuery =stringQuery.concat(`('${postInsert[0][0].postId}',`);
                     stringQuery =stringQuery.concat(`'${_userid}',`); 
                     stringQuery =stringQuery.concat(`'${postInsert[0][0].submitDay}',`); 
-                    stringQuery =stringQuery.concat(`'${imageFileName[i].split('/')[imageFileName[i].split('/').length-1]}',`); 
+                    stringQuery =stringQuery.concat(`'${_imageFileName[i].split('/')[_imageFileName[i].split('/').length-1]}',`); 
                     stringQuery =stringQuery.concat(`'${_postFlag}');`);
                     console.log(stringQuery);
                     await pool.query(stringQuery);
