@@ -11,7 +11,7 @@ import
 from '../../reducers/auth'; 
 import { useRouter } from 'next/router';
 import {Button,Input} from 'antd'
-import { backUrl } from '../../config/config';
+import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
 const DiveWrapper = styled.div`
 margin-top : 5%; 
@@ -115,7 +115,9 @@ const Login = ()=>{
         <>
         <form onSubmit={onSubmit}>
         <div style={{textAlign:'center',marginTop:'5%',marginBottom:'3%',}}>
-            <div style={{display:'inline-block',border:'1px solid',height:'10vh',width:'80%',marginBottom:'3%'}}>로고</div>
+            <div style={{display:'inline-block',height:'40vh',width:'80%',marginBottom:'3%'}}>
+                <img src={`${Url}/jsMetaImage.gif`} />
+            </div>
             <Input style={{width:'80%',marginBottom:'1%'}} type="email" name="userId" value={id} onChange={onChangeId} placeholder={'이메일'}/>
             <Input style={{width:'80%'}} type="password" name="password" value={password} onKeyPress={enterLogin} onChange={onChangPassword} placeholder={'비밀번호'}/>
             <Button style={{width:'80%'}} type="primary" onClick={onSubmit} loading={isLogining} block>로그인</Button>
@@ -124,7 +126,7 @@ const Login = ()=>{
         </form>         
         <div style={{textAlign:'center'}}>
             <Link href={`${naverLoginUri}`}>
-                <a><Button style={{width:'80%'}} block>네이버(NAVER) 로그인 </Button></a>
+                <a><Button style={{width:'80%'}} block disabled>네이버(NAVER) 로그인(준비중) </Button></a>
             </Link>
                 <Button style={{width:'80%'}} onClick={()=>SNSLogin('kakao')} block>카카오(KAKAO) 로그인 </Button>
                 <Button style={{width:'80%'}} block disabled>구글(GOOGLE)) 로그인(준비중) </Button>
