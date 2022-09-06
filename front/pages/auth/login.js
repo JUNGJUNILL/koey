@@ -115,7 +115,7 @@ const Login = ()=>{
         <>
         <form onSubmit={onSubmit}>
         <div style={{textAlign:'center',marginTop:'5%',marginBottom:'3%',}}>
-            <div style={{display:'inline-block',height:'40vh',width:'80%',marginBottom:'3%'}}>
+            <div style={{display:'inline-block',height:'80%',width:'80%',marginBottom:'3%'}}>
                 <img src={`${Url}/jsMetaImage.gif`} />
             </div>
             <Input style={{width:'80%',marginBottom:'1%'}} type="email" name="userId" value={id} onChange={onChangeId} placeholder={'이메일'}/>
