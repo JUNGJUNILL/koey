@@ -50,6 +50,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
     const [title,setTtile] = useState(updateFlag==='update'? mainPosts_1001Info[0].title:''); 
     const [content,setContent] = useState(updateFlag==='update'? mainPosts_1001Info[0].content:'');
     const [imageCount,setImageCount]= useState([]); 
+    const [preview,setPreview] = useState(false); 
   
     useEffect(()=>{
         if(!posf){
@@ -154,7 +155,8 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
         //게시글 INSERT
         }else{
-
+            const previewCheck =preview?'Y':'N';  
+            
             dispatch({
                 type: MAINPOST_1001_INSERT_REQUEST,
                 data: {content:encodeURIComponent(hello),
@@ -163,6 +165,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
                        imageFileName: imageFileName, 
                        postFlag:posf,
                        userid:encodeURIComponent(userid),
+                       preview:previewCheck,
                        
                },
     
@@ -227,11 +230,13 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
             return; 
         }else{
             const updateflag = updateFlag?updateFlag:'';
+
             dispatch({type:UPLOAD_IMAGES_REQUEST,
                 data:{images:imageFormData,
                      postFlag:posf,
                      isUpdate:updateflag,
                      user:encodeURIComponent(userInfo),
+
                     },
                 }); 
     
@@ -278,6 +283,11 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         }
     }
 
+    const checkPreviewOption =useCallback(()=>{
+        preview ? setPreview(false) : setPreview(true); 
+
+    },[preview])
+
     return (
         
         <div style={{marginTop:'3%'}}>
@@ -295,7 +305,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
        </div> 
        <br/>
 
-        <ImageUploadComponent postFlag={posf} updateFlag={updateFlag} imageFileName={imageFileName} removeImage={removeImage} removeImageName={removeImageName}/>
+        <ImageUploadComponent postFlag={posf} updateFlag={updateFlag} imageFileName={imageFileName} removeImage={removeImage} removeImageName={removeImageName} checkPreviewOption={checkPreviewOption} preview={preview}/>
     
         </div>
     )

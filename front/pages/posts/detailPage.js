@@ -215,13 +215,14 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     return (
       
     <div >
-    {/*구글 광고*/}       
+    {/*구글 광고*/}   
+    <input type="text" value={mainPosts_1001Info[0].preview} />    
     {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
 
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
-        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content}/>
+        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content} preview={mainPosts_1001Info[0].preview}/>
       }
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}

@@ -4,7 +4,7 @@ import {CloseOutlined} from '@ant-design/icons'
 import { useSelector } from 'react-redux';
 
 
-const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,removeImageName}) =>{
+const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,removeImageName,checkPreviewOption,preview}) =>{
     const posf = postFlag;
     const updateflag = updateFlag;
     const imagefilename = imageFileName; 
@@ -35,6 +35,8 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
                                                                                        v.userId,
                                                                                        v.submitDay,
                                                                                        v.update)} /></Button>
+                
+
             </div>
             ))}
 
@@ -55,6 +57,10 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
                                                             `${backImageUrl}/${posf}/${v.split('/')[v.split('/').length-1]}`  } />
                 <br/>
                 <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImageName(v)} /></Button>
+                
+                <div style={{marginTop:'2%',textAlign:'center'}}>
+                        <input type="checkbox" value={preview} onChange={()=>checkPreviewOption()} /> 미리보기 방지
+                </div> 
             </div>
         ))}
             
