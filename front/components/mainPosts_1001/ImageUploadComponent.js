@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,removeImageName,checkPreviewOption,preview}) =>{
     const posf = postFlag;
-    const updateflag = updateFlag;
+    const updateflag = updateFlag?updateFlag:'';
     const imagefilename = imageFileName; 
     const {imageSrc} = useSelector((state)=>state.mainPosts_1001); 
 
@@ -40,9 +40,8 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
             </div>
             ))}
 
-         
             {/* 게시글 작성 시*/}
-            {updateflag!=='update' && imagefilename && imagefilename.map((v,i)=>(
+            {updateflag!=='update'&& imagefilename && imagefilename.map((v,i)=>(
             <div style={{display:'inline-block'}} key={i} >
                 <img style={{width:'60px',height:'60px'}} src={process.env.NODE_ENV==='production' 
                                                             ?                                                                   
@@ -57,14 +56,17 @@ const ImageUploadComponent = ({postFlag,updateFlag,imageFileName,removeImage,rem
                                                             `${backImageUrl}/${posf}/${v.split('/')[v.split('/').length-1]}`  } />
                 <br/>
                 <Button style={{width:'60px'}}><CloseOutlined onClick={()=>removeImageName(v)} /></Button>
-                
-                <div style={{marginTop:'2%',textAlign:'center'}}>
-                        <input type="checkbox" value={preview} onChange={()=>checkPreviewOption()} /> 미리보기 방지
-                </div> 
+        
             </div>
         ))}
-            
-       
+        <br />
+        {imagefilename.length!==0 &&
+            <div style={{display:'inline-block'}} >
+                <div style={{marginTop:'2%',textAlign:'center'}}>
+                    <input type="checkbox" value={preview} onChange={()=>checkPreviewOption()} /> 미리보기 방지
+                </div> 
+            </div> 
+        }
 
         </div>
     )

@@ -203,12 +203,39 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
         //File의 생김새
         //name , size, type, lastModified, lastModifiedDate 속성을 가져올 수 있다.
-
         //typeof e.target.files  == object 
         //유사 배열이므로 [].forEach.call을 사용한다. 
+        try{
+
 
         const imageFormData = new FormData(); 
         Array.prototype.forEach.call(e.target.files,(f,i)=>{
+
+            const special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+            let fileName=Object.values(e.target.files)[i].name; 
+            let fileNamelength=fileName.length; 
+            let lastDot=fileName.lastIndexOf(".");
+            let fileExt=fileName.substring(lastDot,fileNamelength).toLowerCase(); 
+
+            if(special_pattern.test(fileName)){
+                alert("파일명에 특수문자가 있을 경우 업로드 할 수 없습니다."); 
+                return; 
+            }
+
+            if(lastDot === -1){
+                alert("파일 확장자가 없는 파일은 업로드 할 수 없습니다."); 
+                return; 
+            }
+
+            switch(fileExt){
+                case ".jpg" : break;
+                case ".gif" : break;
+                case ".png" : break;
+                case ".bmp" : break;
+                case ".jpeg" : break;
+                case ".webp" : break;
+                default : alert("지원되지 않는 파일 확장자입니다.\n (.jpg, .gif, .png, .bmp, .jpeg, .webp 만 가능)"); return;
+            }
 
             //10485760 BYTE == 10MB
             if(Object.values(e.target.files)[i].size > 10485760){
@@ -229,6 +256,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
             imageFormData.delete('image'); 
             return; 
         }else{
+           
             const updateflag = updateFlag?updateFlag:'';
 
             dispatch({type:UPLOAD_IMAGES_REQUEST,
@@ -242,6 +270,10 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
     
         }
 
+
+    }catch(e){
+        alert(e);
+    }
     //imageCount
     },[]); 
 
@@ -292,7 +324,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         
         <div style={{marginTop:'3%'}}>
             {/*이미지 업로드 */}
-            <input type="file" name="image" multiple hidden ref={imageInput} accept={'.jpg,.gif,.png,.bmp,.jpeg'} onChange={onChangeImages}/>
+            <input type="file" name="image" multiple hidden ref={imageInput} accept={'.jpg,.gif,.png,.bmp,.jpeg,.webp'} onChange={onChangeImages}/>
             {/*비디오 업로드
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
              */}
