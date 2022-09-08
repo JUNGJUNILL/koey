@@ -46,10 +46,11 @@ function* sagaLoadUser(action){
         const result = yield call(APILoadUser,action.data);    
         const nick = result.data.nick;
         const userid    = result.data.userid; 
+        const userlevel = result.data.levelId;
         
         yield put({
                 type:LOAD_USER_SUCCESS, 
-                data: {nickName: nick,userid:userid},           
+                data: {nickName: nick,userid:userid,userLevel:userlevel},           
         }); 
 
     }catch(e){
@@ -190,7 +191,9 @@ function* sagaLogin(action){
             
             yield put({
                 type:LOGIN_SUCCESS,
-                data:{nickName: decoded.nick,userid:decoded.userId},   
+                data:{nickName: decoded.nick,
+                      userid:decoded.userId,
+                      userLevel:decoded.userLevel},   
             }); 
 
         //카카오 로그인

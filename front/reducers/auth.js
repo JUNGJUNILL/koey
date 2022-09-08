@@ -11,6 +11,7 @@ export const  initialState = {
     isLogining : false,         //로그인 시도 중
     userInfo : null,            //사용자 정보
     userid   : null,            //사용자 아이디
+    userLevel: '',              //유저 레벨
     loginError:null,            //로그인 에러 메시지
 
     emailSending:false,         //이메일 보내기 버튼 클릭 
@@ -101,6 +102,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 draft.isLogining = false;               
                 draft.userInfo = action.data.nickName; 
                 draft.userid    = action.data.userid; 
+                draft.userLevel = action.data.userLevel;
                 break; 
             }
         
@@ -121,6 +123,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             case LOAD_USER_SUCCESS :{
                 draft.userInfo = action.data.nickName; 
                 draft.userid    = action.data.userid; 
+                draft.userLevel = action.data.userLevel;            
                 break; 
             }
 

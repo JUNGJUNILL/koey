@@ -216,7 +216,6 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
       
     <div >
     {/*구글 광고*/}   
-    <input type="text" value={mainPosts_1001Info[0].preview} />    
     {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
 
 

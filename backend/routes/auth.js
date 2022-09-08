@@ -29,7 +29,9 @@ router.get('/',async (req,res)=>{
             req.decoded = jwt.verify(req.cookies[process.env.COOKIE_SECRET],process.env.JWT_SECRET); 
             
             return res.json({nick:req.decoded.nick,
-                             userid:req.decoded.userId}); 
+                             userid:req.decoded.userId,
+                             levelId:req.decoded.userLevel,
+                            }); 
 
         //카카오 로그인    
         }else if(req.cookies[process.env.KAKAO_COOKIE]){
@@ -201,6 +203,7 @@ router.post('/login',async (req,res,next)=>{
                     const token = jwt.sign({
                                 nick:userInfo.userNickName, 
                                 userId:userInfo.userId,
+                                userLevel:userInfo.levelId,
                     },
                     process.env.JWT_SECRET, 
                     {
