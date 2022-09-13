@@ -126,11 +126,11 @@ const Home =()=>{
   {/*구글 광고*/}
   <GoogleAds_MainPage01 />
 
-    {/*좋소!탈출*/}
+    {/*유머*/}
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>좋소!탈출</b></div>}
+    header={<div><b>유머</b></div>}
     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data03}
@@ -157,11 +157,11 @@ const Home =()=>{
     )}
     />
 
-    {/*좋소!희망편*/}
+    {/*연애/결혼*/}
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>좋소!희망편</b></div>}
+    header={<div><b>연애/결혼</b></div>}
     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data04}
@@ -189,11 +189,11 @@ const Home =()=>{
     />
 
 
-     {/*주말출근*/}
+     {/*좋소!탈출*/}
      <List
      style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
      itemLayout="horizontal"
-     header={<div><b>주말출근</b></div>}
+     header={<div><b>좋소!탈출</b></div>}
      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
  
      dataSource={data05}
@@ -220,11 +220,11 @@ const Home =()=>{
      )}
      />
 
-      {/*야근/철야*/}
+      {/*좋소!희망편*/}
       <List
       style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
       itemLayout="horizontal"
-      header={<div><b>야근/철야</b></div>}
+      header={<div><b>좋소!희망편</b></div>}
       footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
   
       dataSource={data06}
