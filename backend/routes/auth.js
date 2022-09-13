@@ -366,7 +366,7 @@ router.get('/googleLogin',async (req,res,next)=>{
 //로그아웃 
 router.get('/logOut',(req,res)=>{
 
-    res.clearCookie(process.env.COOKIE_SECRET); 
+    res.clearCookie(process.env.COOKIE_SECRET,{domain:process.env.NODE_ENV === 'production' && '.jscompany.live'}); 
     res.json('로그아웃'); 
 
 }); 

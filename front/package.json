@@ -12,6 +12,7 @@
     "@next/bundle-analyzer": "^10.2.3",
     "antd": "^4.16.1",
     "axios": "^0.21.1",
+    "cookies-next": "^2.1.1",
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.5",
     "immer": "^9.0.2",

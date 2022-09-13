@@ -1,7 +1,7 @@
 
 import {useCallback,useState, useRef} from 'react'
-import {Row,Col,Drawer,Menu,} from  'antd'; 
-import {AlignLeftOutlined,UserOutlined } from '@ant-design/icons'
+import {Row,Col} from  'antd'; 
+import {UserOutlined } from '@ant-design/icons'
 
 
 import Router from 'next/router'; 
@@ -30,20 +30,9 @@ const AppLayOut = ({children}) =>{
                           { categoryName:'운영진 요청사항',posf:'1011'},     
                         ]; 
 
-    const { SubMenu } = Menu;
     const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
-
-
-    // useEffect(()=>{
-    //     //로그 아웃 후 메인 페이지로 이동
-    //     if(!userInfo){
-    //         Router.push('/'); 
-
-    //     }
-
-    // },[userInfo]);
 
     //로그아웃 버튼
     const logOut = useCallback(()=>{
@@ -54,19 +43,6 @@ const AppLayOut = ({children}) =>{
 
     },[userInfo]); 
  
-    const [isClicked,setIsClicked] = useState(false); 
-
-
-    const [visible, setVisible] = useState(false);
-
-    const showDrawer = () => {
-      setVisible(true);
-    };
-  
-    const onClose = () => {
-      setVisible(false);
-    };
-
 
     //index 페이지 이동
     const gotoHome = () =>{
@@ -117,61 +93,6 @@ const AppLayOut = ({children}) =>{
                 <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
             ))} 
         </nav>
-            
- 
-     
-    {/* 
-    <div className="sidenav" style={{width : isClicked? "40%":"0"}}>
-       <a className="closebtn" onClick={closeCatergoriList}>x</a>
-       {dummyList.map((v,i)=>(      
-        <Link href={'/about'} key={i}>
-            <a onClick={closeCatergoriList} >{v}</a>
-        </Link>
-       ))}
-    </div>   
-    */}     
-    
-    
-
-        {/*  
-            https://ant.design/components/drawer/
-        */}
-        <Drawer
-        title="koie"
-        placement="left"
-        mask={false}
-        onClose={onClose}
-        visible={visible}
-        width={'40%'}
-    >
-
-        <Menu
-
-        style={{width:400,marginLeft:-30}}
-        defaultOpenKeys={['sub1']}
-        mode="inline"
-        >
-        <Menu.Item key="1" >자유 게시판</Menu.Item>
-        <Menu.Item key="2" >유머</Menu.Item>
-        <hr style={{opacity:'0.3'}}/>
-
-        <Menu.Item key="3" >정보</Menu.Item>
-        <Menu.Item key="4" >취업</Menu.Item>
-        <Menu.Item key="5" >핫딜</Menu.Item>
-        <hr style={{opacity:'0.3'}}/>
-        <SubMenu key="sub2" title="국가(country)">
-        <Menu.Item key="sub2_1">미국</Menu.Item>
-        <Menu.Item key="sub2_2">중국</Menu.Item>
-        <Menu.Item key="sub2_3">일본</Menu.Item>
-        <Menu.Item key="sub2_4">동남아</Menu.Item>
-        <Menu.Item key="sub2_5">유럽</Menu.Item>
-        <Menu.Item key="sub2_6">호주</Menu.Item>
-        <Menu.Item key="sub2_7">기타</Menu.Item>
-        </SubMenu>
-        </Menu>
-
-    </Drawer>
-
 
     {children}
 

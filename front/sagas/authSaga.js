@@ -46,7 +46,7 @@ function* sagaLoadUser(action){
         const result = yield call(APILoadUser,action.data);    
         const nick = result.data.nick;
         const userid    = result.data.userid; 
-        const userlevel = result.data.levelId;
+        const userlevel = result.data.levelId?result.data.levelId:'';
         
         yield put({
                 type:LOAD_USER_SUCCESS, 
