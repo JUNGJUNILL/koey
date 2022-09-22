@@ -121,7 +121,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         const filteredContent = secureFilter(content); 
         const filteredTitle   = secureFilter(title); 
         const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
-
+        console.log('hello=',hello); 
         //게시글 UPDATE
         if(updateFlag && updateFlag==='update'){
              
@@ -329,7 +329,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
              */}
         <Input placeholder='제목을 입력하세요' ref={refTitle} value={title} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
-        <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content} onChange={onChangeContent} rows={10} />
+        <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content.replaceAll('<br />','\n')} onChange={onChangeContent} rows={10} />
         <div style={{marginTop:'2%',textAlign:'center'}}>
             <Button onClick={onClickImageUpload} >    <PictureOutlined />    </Button>&nbsp;
             <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp;
