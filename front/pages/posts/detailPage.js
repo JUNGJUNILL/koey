@@ -38,7 +38,7 @@ import GooleAds_DetailPage_Top from '../../components/Ads/GooleAds_DetailPage_To
 
 
 //{nickName,postFlag,postId,submitDay}
-const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
+const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>{
   
 
   const dispatch = useDispatch(); 
@@ -215,6 +215,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid}) =>{
     return (
       
     <div >
+      <input type="hidden" value={helloValue} />
     {/*구글 광고*/}   
     {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
 
@@ -364,6 +365,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   const submitDay = context.query.submitDay;
   const who       = context.query.who;
   const pid       = context.query.pid;
+  const helloValue='pzqmlaonejf'; 
 
 
   const cookie = context.req ? context.req.headers.cookie : '';
@@ -428,7 +430,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   await context.store.sagaTask.toPromise(); 
   
   return {
-      props: {nickName,postFlag,postId,submitDay,who,pid}, // will be passed to the page component as props
+      props: {nickName,postFlag,postId,submitDay,who,pid,helloValue}, // will be passed to the page component as props
     } 
 
 });

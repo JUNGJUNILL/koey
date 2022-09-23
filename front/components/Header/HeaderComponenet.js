@@ -32,7 +32,7 @@ const HeaderComponenet =({posf,title,image,contents,preview})=>{
                     <meta property="og:image:width" content="80"></meta>
                     <meta property="og:image:height" content="60"></meta>
                     <meta property="og:title" content={title ? title : '좋소! 썰'} />
-                    <meta property="og:description" content={contents? contents+'#훯붫퀔' : '중소기업 썰 ㅋ'}></meta>
+                    <meta property="og:description" content={contents? contents : '중소기업 썰 ㅋ'}></meta>
             </Head>
 
         </div>
