@@ -23,10 +23,10 @@ const HeaderComponenet =({posf,title,image,contents,preview})=>{
     return(
         <div>  
             <Head>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta name="robots" content='index,follow' />
                     <meta name ="author" content="JJI" />
                     <meta name ="reply-to" content="devjji1207@gmail.com" />
-                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <meta property="og:url" content="http://www.jscompany.live"></meta>
                     <meta property="og:image" content={rootUrl}></meta>
                     <meta property="og:image:width" content="80"></meta>
