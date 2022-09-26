@@ -222,7 +222,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
-        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content} preview={mainPosts_1001Info[0].preview}/>
+        <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content} preview={mainPosts_1001Info[0].preview} writer={mainPosts_1001Info[0].userNickName}/>
       }
 
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
