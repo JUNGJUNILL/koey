@@ -18,6 +18,11 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>http://jscompany.live/test</loc>
+  <lastmod>2022-09-23T01:48:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>http://jscompany.live/posts/mainPosts_1001?nowPage=1&amp;posf=1001</loc>
   <lastmod>2022-09-23T01:48:12+00:00</lastmod>
   <priority>0.80</priority>
