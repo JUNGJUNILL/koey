@@ -188,6 +188,11 @@
   <priority>0.80</priority>
 </url>
 <url>
+  <loc>http://jscompany.live/posts/detailPage?postId=10000001&amp;postFlag=1009&amp;submitDay=20220920&amp;pid=anVuaWxqMTIwN0BnbWFpbC5jb20%3D&amp;userNickName=&amp;who=</loc>
+  <lastmod>2022-09-23T01:48:12+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>http://jscompany.live/posts/mainPosts_1001?nowPage=-1&amp;group=0&amp;posf=&amp;searchValue=&amp;searchCondition=</loc>
   <lastmod>2022-09-23T01:48:12+00:00</lastmod>
   <priority>0.64</priority>
@@ -197,6 +202,9 @@
   <lastmod>2022-09-23T01:48:12+00:00</lastmod>
   <priority>0.64</priority>
 </url>
+
+
+
 
 
 </urlset>
