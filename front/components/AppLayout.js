@@ -1,6 +1,6 @@
 
 import {useCallback,useState, useRef} from 'react'
-import {Row,Col} from  'antd'; 
+import {Row,Col,Avatar,Badge} from  'antd'; 
 import {UserOutlined } from '@ant-design/icons'
 
 
@@ -80,8 +80,8 @@ const AppLayOut = ({children}) =>{
 
         <div className="fr" style={{marginRight:"-5px"}}>
         
-        {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link> :'' }
-        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><UserOutlined onClick={goProfile}/> 내 정보</a></Link> } 
+        {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><Badge count={'N'} size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;내 정보</a></Link> } 
         {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
 
         </div>
