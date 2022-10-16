@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {Button} from 'antd'
+import { SyncOutlined,} from '@ant-design/icons';
 import 
     {
         PROMOTION_REVIEW_REQUEST
@@ -10,6 +11,7 @@ const profile = () =>{
 
     const dispatch = useDispatch(); 
     const {userInfo,userLevel,userlevelName,userid,promotionCondition,promotionConditionClick}      = useSelector((state)=>state.auth);
+    const promotionState='심사 중 입니다..';
     const promotionFunc = (level)=>{
         const levelValue =parseInt(level);
         let result='';
@@ -45,30 +47,29 @@ const profile = () =>{
     const promotionReview = () =>{
         
         let promotionLevel=0; 
-
         switch(userLevel){
-            case 10 : promotionLevel=3;
+            case 10 : promotionLevel=5; //사원
             break;
             
-            case 20 : promotionLevel=30;
+            case 20 : promotionLevel=15; //주임
             break;
 
-            case 30 : promotionLevel=40;
+            case 30 : promotionLevel=30; //대리
             break;
 
-            case 40 : promotionLevel=50
+            case 40 : promotionLevel=50; //과장
             break;
 
-            case 50 : promotionLevel='차장 승진 심사제출' 
+            case 50 : promotionLevel=70; //차장
             break;
 
-            case 60 : promotionLevel='부장 승진 심사제출' 
+            case 60 : promotionLevel=100; //부장
             break;
 
-            case 70 : promotionLevel='이사 승진 심사제출' 
+            case 70 : promotionLevel=150; //이사
             break;
 
-            default : promotionLevel='승진 심사 제출';
+            default : promotionLevel=0;
         }
 
         
@@ -78,6 +79,8 @@ const profile = () =>{
             data:{
                 userid,
                 userLevel,
+                promotionLevel,
+                
             }
         })
 
@@ -97,8 +100,14 @@ const profile = () =>{
             </div>
             
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-             <Button loading={promotionConditionClick} onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
-            </div>
+             {!promotionCondition && 
+                <Button loading={promotionConditionClick} onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
+             }
+             {promotionCondition && <div><SyncOutlined spin={true}/>  승진 심사 중 입니다..</div>
+             
+             }
+             
+             </div>
 
             
       </div>

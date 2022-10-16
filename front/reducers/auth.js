@@ -20,7 +20,7 @@ export const  initialState = {
     userEmailadress:'',         //사용자 메일
     mailExistence:'',           //가입여부
 
-    promotionCondition:0.,         //승진 가능 여부
+    promotionCondition:null,         //승진 가능 여부
     promotionConditionClick:false //승진 가능 여부 버튼 클릭
     
 

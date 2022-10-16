@@ -470,13 +470,25 @@ router.post('/checkNickName',async (req,res)=>{
 //승진 심사 
 router.post('/promotioncheck',async (req,res)=>{
     try{
-        const {userid} = req.body.data;  
-
+        const {userid,userLevel,promotionLevel} = req.body.data;  
         let stringQuery = 'CALL US_SELECT_PromotionCondition'; 
         stringQuery = stringQuery.concat(`('${userid}')`);
         console.log(stringQuery);
-        const promotionCondition = await pool.query(stringQuery); 
-        return res.status(200).json(promotionCondition[0]);  
+        const promotionCondition = await pool.query(stringQuery);
+        console.log(promotionCondition[0]);  
+        
+        let postCount=0; 
+        let promotionApproval='N'; 
+        promotionCondition[0].map((v,i)=>{
+            postCount+=v.postCount
+        }); 
+
+        if(postCount >= promotionLevel){
+            promotionApproval='Y';
+        }
+        
+        
+        return res.status(200).json({promotionApproval});  
 
     }catch(e){
         console.error(e); 

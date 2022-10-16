@@ -333,19 +333,10 @@ function* sagaPromotionReview(action){
 
     try{
         const result =   yield call(APIPromotionReview,action.data);        
-        const presentUserLevel = parseInt(action.data.userLevel); 
-        let postCount=0;      
-        promotionConditionYN="N"; 
-
-        result.data.map((v,i)=>{
-                postCount+=v.postCount; 
-        });
-
-   
-
+        
         yield put({
             type:PROMOTION_REVIEW_SUCCESS,
-            data:{ promotionCondition:postCount,}
+            data:{ promotionCondition:result.data.promotionApproval,}
         }); 
 
 
