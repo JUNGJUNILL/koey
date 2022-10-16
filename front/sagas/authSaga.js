@@ -28,6 +28,9 @@ import
     CHECK_NICKNAME_SUCCESS,
     CHECK_NICKNAME_FAILURE, 
 
+    PROMOTION_REVIEW_REQUEST,
+    PROMOTION_REVIEW_SUCCESS,
+    PROMOTION_REVIEW_FAILURE
     } 
 from '../reducers/auth'; 
 
@@ -47,10 +50,15 @@ function* sagaLoadUser(action){
         const nick = result.data.nick;
         const userid    = result.data.userid; 
         const userlevel = result.data.levelId?result.data.levelId:'';
+        const userlevelName = result.data.levelName?result.data.levelName:'';
         
         yield put({
                 type:LOAD_USER_SUCCESS, 
-                data: {nickName: nick,userid:userid,userLevel:userlevel},           
+                data: {nickName: nick,
+                       userid:userid,
+                       userLevel:userlevel,
+                       userlevelName:userlevelName
+                    },           
         }); 
 
     }catch(e){
@@ -193,7 +201,9 @@ function* sagaLogin(action){
                 type:LOGIN_SUCCESS,
                 data:{nickName: decoded.nick,
                       userid:decoded.userId,
-                      userLevel:decoded.userLevel},   
+                      userLevel:decoded.userLevel,
+                      userlevelName : decoded.userlevelName
+                    },   
             }); 
 
         //카카오 로그인
@@ -309,6 +319,49 @@ function* watchCheckNickName(){
 }
 //------------------------------------------------------------------------
 
+//승진 심사
+//------------------------------------------------------------------------
+function APIPromotionReview(data){
+
+    return axios.post('/auth/promotioncheck',{data},{withCredentials:true});
+
+
+}
+
+function* sagaPromotionReview(action){
+
+
+    try{
+        const result =   yield call(APIPromotionReview,action.data);        
+        const presentUserLevel = parseInt(action.data.userLevel); 
+        let postCount=0;      
+        promotionConditionYN="N"; 
+
+        result.data.map((v,i)=>{
+                postCount+=v.postCount; 
+        });
+
+   
+
+        yield put({
+            type:PROMOTION_REVIEW_SUCCESS,
+            data:{ promotionCondition:postCount,}
+        }); 
+
+
+    }catch(e){
+        alert('승진 심사 체크 에러'); 
+        yield put({
+            type:PROMOTION_REVIEW_FAILURE, 
+            error:e,
+        })
+    }
+}
+
+function* watchCheckPromotionReview(){
+    yield takeLatest(PROMOTION_REVIEW_REQUEST,sagaPromotionReview); 
+}
+//------------------------------------------------------------------------
 
 export default function* authSaga(){
 
@@ -320,6 +373,7 @@ export default function* authSaga(){
         fork(watchLogOut), 
         fork(watchSendEmail), 
         fork(watchCheckNickName), 
+        fork(watchCheckPromotionReview),
         
     ])
 }

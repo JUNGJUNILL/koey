@@ -33,6 +33,7 @@ const AppLayOut = ({children}) =>{
     const dispatch = useDispatch(); 
     const {userInfo, joined} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
+    const [badgeValue,setBadge] = useState(true);
 
     //로그아웃 버튼
     const logOut = useCallback(()=>{
@@ -50,10 +51,13 @@ const AppLayOut = ({children}) =>{
     }
 
     //프로필 화면으로 이동 
-    const goProfile = () =>{
+    const goProfile = useCallback(() =>{
+        if(badgeValue){
+            setBadge((prev)=>!prev)
+        }
         Router.push('/posts/profile'); 
         return; 
-    }
+    },[badgeValue])
     
     //스크롤 위치 초기화
     const initScrollRestoration = () =>{
@@ -62,6 +66,7 @@ const AppLayOut = ({children}) =>{
 
     }
 
+ 
     
     return(
 
@@ -79,9 +84,8 @@ const AppLayOut = ({children}) =>{
 	    </h1>
 
         <div className="fr" style={{marginRight:"-5px"}}>
-        
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
-        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'}><a className="mu"><Badge count={'N'} size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;내 정보</a></Link> } 
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue===true?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
         {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
 
         </div>

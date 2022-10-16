@@ -12,6 +12,7 @@ export const  initialState = {
     userInfo : null,            //사용자 정보
     userid   : null,            //사용자 아이디
     userLevel: '',              //유저 레벨
+    userlevelName:'',           //유저 레벨 이름
     loginError:null,            //로그인 에러 메시지
 
     emailSending:false,         //이메일 보내기 버튼 클릭 
@@ -19,6 +20,8 @@ export const  initialState = {
     userEmailadress:'',         //사용자 메일
     mailExistence:'',           //가입여부
 
+    promotionCondition:0.,         //승진 가능 여부
+    promotionConditionClick:false //승진 가능 여부 버튼 클릭
     
 
 }
@@ -54,6 +57,11 @@ export const CHECK_NICKNAME_FAILURE='CHECK_NICKNAME_FAILURE';
 
 //닉네임 새로 입력 
 export const LOAD_CHECK_NICKNAME='LOAD_CHECK_NICKNAME';
+
+//승진 심사 
+export const PROMOTION_REVIEW_REQUEST='PROMOTION_REVIEW_REQUEST'
+export const PROMOTION_REVIEW_SUCCESS='PROMOTION_REVIEW_SUCCESS'
+export const PROMOTION_REVIEW_FAILURE='PROMOTION_REVIEW_FAILURE'
 
 
 const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
@@ -103,6 +111,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 draft.userInfo = action.data.nickName; 
                 draft.userid    = action.data.userid; 
                 draft.userLevel = action.data.userLevel;
+                draft.userlevelName = action.data.userlevelName;
                 break; 
             }
         
@@ -123,7 +132,8 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             case LOAD_USER_SUCCESS :{
                 draft.userInfo = action.data.nickName; 
                 draft.userid    = action.data.userid; 
-                draft.userLevel = action.data.userLevel;            
+                draft.userLevel = action.data.userLevel; 
+                draft.userlevelName = action.data.userlevelName;            
                 break; 
             }
 
@@ -197,6 +207,23 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             }
 //------------------------------------------------
 
+//승진 심사
+//------------------------------------------------
+            case PROMOTION_REVIEW_REQUEST :{
+                draft.promotionConditionClick=true;
+                break; 
+            }
+
+            case PROMOTION_REVIEW_SUCCESS :{
+                draft.promotionConditionClick=false;
+                draft.promotionCondition= action.data.promotionCondition; 
+                break; 
+            }
+
+            case PROMOTION_REVIEW_FAILURE :{
+                break; 
+            }
+//------------------------------------------------
             default :  break;
     
              

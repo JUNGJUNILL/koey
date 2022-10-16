@@ -31,6 +31,7 @@ router.get('/',async (req,res)=>{
             return res.json({nick:req.decoded.nick,
                              userid:req.decoded.userId,
                              levelId:req.decoded.userLevel,
+                             levelName:req.decoded.userlevelName
                             }); 
 
         //카카오 로그인    
@@ -204,6 +205,7 @@ router.post('/login',async (req,res,next)=>{
                                 nick:userInfo.userNickName, 
                                 userId:userInfo.userId,
                                 userLevel:userInfo.levelId,
+                                userlevelName:userInfo.levelName
                     },
                     process.env.JWT_SECRET, 
                     {
@@ -462,6 +464,25 @@ router.post('/checkNickName',async (req,res)=>{
 
 
 }); 
+
+
+
+//승진 심사 
+router.post('/promotioncheck',async (req,res)=>{
+    try{
+        const {userid} = req.body.data;  
+
+        let stringQuery = 'CALL US_SELECT_PromotionCondition'; 
+        stringQuery = stringQuery.concat(`('${userid}')`);
+        console.log(stringQuery);
+        const promotionCondition = await pool.query(stringQuery); 
+        return res.status(200).json(promotionCondition[0]);  
+
+    }catch(e){
+        console.error(e); 
+    }
+
+})
 
 
 module.exports  = router; 
