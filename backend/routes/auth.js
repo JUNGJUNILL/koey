@@ -475,7 +475,6 @@ router.post('/promotioncheck',async (req,res)=>{
         stringQuery = stringQuery.concat(`('${userid}')`);
         console.log(stringQuery);
         const promotionCondition = await pool.query(stringQuery);
-        console.log(promotionCondition[0]);  
         
         let postCount=0; //포스팅 갯수
         let promotionApproval='N'; 
@@ -492,15 +491,37 @@ router.post('/promotioncheck',async (req,res)=>{
         stringQuery = stringQuery.concat(`('${userid}',`);
         stringQuery = stringQuery.concat(`'${promotionApproval}')`);
         console.log(stringQuery);
-        const promotionValue=await pool.query(stringQuery);
-        console.log('promotionValue[0]=',promotionValue[0])
+        await pool.query(stringQuery);
+        
         return res.status(200).json({promotionApproval});  
 
     }catch(e){
         console.error(e); 
     }
 
-})
+});
+
+
+//승진 가능 여부 데이터 가져오기 
+router.post('/promotioncheckvalue',async (req,res)=>{
+    try{
+        const {userid} = req.body.data; 
+
+        let stringQuery = 'CALL US_SELECT_PromotionCheckValue'; 
+        stringQuery = stringQuery.concat(`('${userid}')`);
+        console.log(stringQuery);
+        const promotionCheckValue = await pool.query(stringQuery);
+        const promotionYN =promotionCheckValue ? promotionCheckValue[0][0].promotionYN :'N'; 
+        return res.status(200).json({promotionYN});  
+
+    }catch(e){
+        console.error(e); 
+    }
+
+
+});
+
+
 
 
 module.exports  = router; 

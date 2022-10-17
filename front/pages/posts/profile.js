@@ -1,20 +1,39 @@
 import {END} from 'redux-saga'; 
 import wrapper from '../../store/configureStore';
-
+import React,{useEffect, useState}from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
 import {Button} from 'antd'
 import { SyncOutlined,} from '@ant-design/icons';
 import 
     {
-        PROMOTION_REVIEW_REQUEST
+        PROMOTION_REVIEW_REQUEST,
+        PROMOTION_CHECK_VALUE_REQUEST
     } 
 from '../../reducers/auth';
 
-const profile = ({}) =>{
+const profile = () =>{
 
     const dispatch = useDispatch(); 
-    const {userInfo,userLevel,userlevelName,userid,promotionCondition,promotionConditionClick}      = useSelector((state)=>state.auth);
+    const {userInfo,
+           userLevel,
+           userlevelName,
+           userid,
+           promotionCondition,
+           promotionConditionClick,
+           promotionCheckValue
+        }      = useSelector((state)=>state.auth);
+
+    useEffect(()=>{
+
+        dispatch({type:PROMOTION_CHECK_VALUE_REQUEST,
+                  data:{
+                        userid
+                }
+        });
+
+    },[]); 
+
     const promotionState='심사 중 입니다..';
     const promotionFunc = (level)=>{
         const levelValue =parseInt(level);
@@ -94,7 +113,7 @@ const profile = ({}) =>{
     return (
         <div className='divTableDetail'>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <p>안녕하세요 {userInfo}님 {promotionCondition}</p>
+                <p>안녕하세요 {userInfo}님 {promotionCondition} : {promotionCheckValue}</p>
             </div>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <p>현재 당신의 직책은</p>
@@ -104,11 +123,15 @@ const profile = ({}) =>{
             </div>
             
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-             {!promotionCondition && 
+             {(!promotionCondition && promotionCheckValue==='N') && 
                 <Button loading={promotionConditionClick} onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
              }
-             {promotionCondition && <div><SyncOutlined spin={true}/>  승진 심사 중 입니다..</div>
-             
+             {(promotionCondition || promotionCheckValue==='Y') &&
+                <div><SyncOutlined spin={true}/>  승진 심사 중 입니다..</div>         
+             }
+             {(promotionCondition==='N' && promotionCheckValue==='N') &&
+
+                <div>승진 할 수 있는 조건이 아닙니다. 승진 요건 보러가기</div>
              }
              
              </div>

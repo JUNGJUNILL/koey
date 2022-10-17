@@ -30,7 +30,13 @@ import
 
     PROMOTION_REVIEW_REQUEST,
     PROMOTION_REVIEW_SUCCESS,
-    PROMOTION_REVIEW_FAILURE
+    PROMOTION_REVIEW_FAILURE,
+
+    PROMOTION_CHECK_VALUE_REQUEST,
+    PROMOTION_CHECK_VALUE_SUCCESS,
+    PROMOTION_CHECK_VALUE_FAILURE,
+
+
     } 
 from '../reducers/auth'; 
 
@@ -354,6 +360,42 @@ function* watchCheckPromotionReview(){
 }
 //------------------------------------------------------------------------
 
+
+
+//승진 가능 여부 데이터 가져오기 
+//------------------------------------------------------------------------
+function APIPromotionCheckValue(data){
+
+    return axios.post('/auth/promotioncheckvalue',{data},{withCredentials:true});
+
+
+}
+
+function* sagaPromotionCheckValue(action){
+
+
+    try{
+        const result =   yield call(APIPromotionCheckValue,action.data);      
+        yield put({
+            type:PROMOTION_CHECK_VALUE_SUCCESS,
+            data:{ promotionCheckValue:result.data.promotionYN}
+        }); 
+
+
+    }catch(e){
+        alert('/승진 가능 여부 데이터 가져오기 에러'); 
+        yield put({
+            type:PROMOTION_CHECK_VALUE_FAILURE, 
+            error:e,
+        })
+    }
+}
+
+function* watchPromotionCheckValue(){
+    yield takeLatest(PROMOTION_CHECK_VALUE_REQUEST,sagaPromotionCheckValue); 
+}
+//------------------------------------------------------------------------
+
 export default function* authSaga(){
 
 
@@ -365,6 +407,7 @@ export default function* authSaga(){
         fork(watchSendEmail), 
         fork(watchCheckNickName), 
         fork(watchCheckPromotionReview),
+        fork(watchPromotionCheckValue), 
         
     ])
 }

@@ -21,8 +21,8 @@ export const  initialState = {
     mailExistence:'',           //가입여부
 
     promotionCondition:null,         //승진 가능 여부
-    promotionConditionClick:false //승진 가능 여부 버튼 클릭
-    
+    promotionConditionClick:false, //승진 가능 여부 버튼 클릭
+    promotionCheckValue:null,    //승진 가능 여부 
 
 }
 
@@ -59,10 +59,14 @@ export const CHECK_NICKNAME_FAILURE='CHECK_NICKNAME_FAILURE';
 export const LOAD_CHECK_NICKNAME='LOAD_CHECK_NICKNAME';
 
 //승진 심사 
-export const PROMOTION_REVIEW_REQUEST='PROMOTION_REVIEW_REQUEST'
-export const PROMOTION_REVIEW_SUCCESS='PROMOTION_REVIEW_SUCCESS'
-export const PROMOTION_REVIEW_FAILURE='PROMOTION_REVIEW_FAILURE'
+export const PROMOTION_REVIEW_REQUEST='PROMOTION_REVIEW_REQUEST';
+export const PROMOTION_REVIEW_SUCCESS='PROMOTION_REVIEW_SUCCESS';
+export const PROMOTION_REVIEW_FAILURE='PROMOTION_REVIEW_FAILURE';
 
+//승진 가능 여부 데이터 가져오기 
+export const PROMOTION_CHECK_VALUE_REQUEST='PROMOTION_CHECK_VALUE_REQUEST';
+export const PROMOTION_CHECK_VALUE_SUCCESS='PROMOTION_CHECK_VALUE_SUCCESS';
+export const PROMOTION_CHECK_VALUE_FAILURE='PROMOTION_CHECK_VALUE_FAILURE'; 
 
 const reducer = (state = initialState, action) => immerProduce(state, (draft) => {
 
@@ -221,6 +225,22 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             }
 
             case PROMOTION_REVIEW_FAILURE :{
+                break; 
+            }
+//------------------------------------------------
+
+//승진 가능 여부 데이터 가져오기 
+//------------------------------------------------
+            case PROMOTION_CHECK_VALUE_REQUEST :{
+                break; 
+            }
+
+            case PROMOTION_CHECK_VALUE_SUCCESS :{
+                draft.promotionCheckValue= action.data.promotionCheckValue; 
+                break; 
+            }
+
+            case PROMOTION_CHECK_VALUE_FAILURE :{
                 break; 
             }
 //------------------------------------------------
