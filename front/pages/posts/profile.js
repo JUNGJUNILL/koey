@@ -1,3 +1,7 @@
+import {END} from 'redux-saga'; 
+import wrapper from '../../store/configureStore';
+
+
 import { useDispatch, useSelector } from 'react-redux';
 import {Button} from 'antd'
 import { SyncOutlined,} from '@ant-design/icons';
@@ -7,7 +11,7 @@ import
     } 
 from '../../reducers/auth';
 
-const profile = () =>{
+const profile = ({}) =>{
 
     const dispatch = useDispatch(); 
     const {userInfo,userLevel,userlevelName,userid,promotionCondition,promotionConditionClick}      = useSelector((state)=>state.auth);
@@ -90,7 +94,7 @@ const profile = () =>{
     return (
         <div className='divTableDetail'>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <p>안녕하세요 {userInfo}님</p>
+                <p>안녕하세요 {userInfo}님 {promotionCondition}</p>
             </div>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <p>현재 당신의 직책은</p>
@@ -113,5 +117,6 @@ const profile = () =>{
       </div>
     )
 }
+
 
 export default profile; 

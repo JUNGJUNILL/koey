@@ -477,7 +477,7 @@ router.post('/promotioncheck',async (req,res)=>{
         const promotionCondition = await pool.query(stringQuery);
         console.log(promotionCondition[0]);  
         
-        let postCount=0; 
+        let postCount=0; //포스팅 갯수
         let promotionApproval='N'; 
         promotionCondition[0].map((v,i)=>{
             postCount+=v.postCount
@@ -486,8 +486,14 @@ router.post('/promotioncheck',async (req,res)=>{
         if(postCount >= promotionLevel){
             promotionApproval='Y';
         }
-        
-        
+
+        stringQuery=''; 
+        stringQuery='CALL US_UPDATE_PromotionYN'
+        stringQuery = stringQuery.concat(`('${userid}',`);
+        stringQuery = stringQuery.concat(`'${promotionApproval}')`);
+        console.log(stringQuery);
+        const promotionValue=await pool.query(stringQuery);
+        console.log('promotionValue[0]=',promotionValue[0])
         return res.status(200).json({promotionApproval});  
 
     }catch(e){
