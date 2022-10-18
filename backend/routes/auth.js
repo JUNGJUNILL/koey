@@ -505,14 +505,59 @@ router.post('/promotioncheck',async (req,res)=>{
 //승진 가능 여부 데이터 가져오기 
 router.post('/promotioncheckvalue',async (req,res)=>{
     try{
-        const {userid} = req.body.data; 
+        const {userid,userLevel} = req.body.data; 
 
-        let stringQuery = 'CALL US_SELECT_PromotionCheckValue'; 
+        let stringQuery = 'CALL US_SELECT_PromotionCondition'; 
         stringQuery = stringQuery.concat(`('${userid}')`);
         console.log(stringQuery);
         const promotionCheckValue = await pool.query(stringQuery);
-        const promotionYN =promotionCheckValue ? promotionCheckValue[0][0].promotionYN :'N'; 
-        return res.status(200).json({promotionYN});  
+
+
+        stringQuery=''; 
+        stringQuery=stringQuery.concat('CALL US_SELECT_PromotionCheckValue')
+        stringQuery=stringQuery.concat(`('${userid}')`);
+        const promotionClickCheck = await pool.query(stringQuery);
+        const promotionYN = promotionClickCheck[0][0].promotionYN; 
+
+
+        let promotionLevel=0; 
+        switch(userLevel){
+            case 10 : promotionLevel=5; //사원
+            break;
+            
+            case 20 : promotionLevel=15; //주임
+            break;
+
+            case 30 : promotionLevel=30; //대리
+            break;
+
+            case 40 : promotionLevel=50; //과장
+            break;
+
+            case 50 : promotionLevel=70; //차장
+            break;
+
+            case 60 : promotionLevel=100; //부장
+            break;
+
+            case 70 : promotionLevel=150; //이사
+            break;
+
+            default : promotionLevel=0;
+
+        }
+
+        let postCount=0; //포스팅 갯수
+        let promotionApproval='N'; 
+        promotionCheckValue[0].map((v,i)=>{
+            postCount+=v.postCount
+        }); 
+
+        if(postCount >= promotionLevel){
+            promotionApproval='Y';
+        }
+        
+        return res.status(200).json({promotionApproval,promotionYN});  
 
     }catch(e){
         console.error(e); 

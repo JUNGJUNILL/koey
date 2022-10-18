@@ -42,6 +42,8 @@ const AppLayOut = ({children}) =>{
             type:LOGOUT_REQUEST, 
         });
 
+        Router.push('/auth/login'); 
+
     },[userInfo]); 
  
 

@@ -28,7 +28,8 @@ const profile = () =>{
 
         dispatch({type:PROMOTION_CHECK_VALUE_REQUEST,
                   data:{
-                        userid
+                        userid,
+                        userLevel
                 }
         });
 
@@ -123,16 +124,33 @@ const profile = () =>{
             </div>
             
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-             {(!promotionCondition && promotionCheckValue==='N') && 
+             {/*
+                promotionCondition이 null일 경우, 
+                (버튼을 아직 클릭하지 않은 경우)
+             */}
+       
                 <Button loading={promotionConditionClick} onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
-             }
-             {(promotionCondition || promotionCheckValue==='Y') &&
-                <div><SyncOutlined spin={true}/>  승진 심사 중 입니다..</div>         
-             }
-             {(promotionCondition==='N' && promotionCheckValue==='N') &&
+       
+
+              {/*
+                promotionCondition이 null이 아닐 경우,
+                (버튼을 클릭 한 경우)
+             */}
+           
+                <div><SyncOutlined spin={true}/>&nbsp;승진 심사 중 입니다..</div>         
+     
+             {/*
+                승진 조건이 아니면 위에 버튼을 다 안보이고 
+                "승진 할 수 있는 조건이 아닙니다. 승진 요건 보러가기"
+                요 메시지만 보이게 하기 
+
+                버튼을 클릭했는데 승진 요건이 아니야 
+                그럼 1,2는 안보이고 3만 보이게 처리 
+             */}
+      
 
                 <div>승진 할 수 있는 조건이 아닙니다. 승진 요건 보러가기</div>
-             }
+        
              
              </div>
 

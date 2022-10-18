@@ -331,7 +331,6 @@ function APIPromotionReview(data){
 
     return axios.post('/auth/promotioncheck',{data},{withCredentials:true});
 
-
 }
 
 function* sagaPromotionReview(action){
@@ -375,10 +374,15 @@ function* sagaPromotionCheckValue(action){
 
 
     try{
-        const result =   yield call(APIPromotionCheckValue,action.data);      
+        const result =   yield call(APIPromotionCheckValue,action.data);   
+        console.log(result.data);    
+        console.log(result.data.promotionApproval);    
+
+        console.log(result.data.promotionYN);    
+
         yield put({
             type:PROMOTION_CHECK_VALUE_SUCCESS,
-            data:{ promotionCheckValue:result.data.promotionYN}
+            data:{ promotionCheckValue:result.data.promotionApproval}
         }); 
 
 
