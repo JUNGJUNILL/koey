@@ -489,7 +489,8 @@ router.post('/promotioncheck',async (req,res)=>{
         stringQuery=''; 
         stringQuery='CALL US_UPDATE_PromotionYN'
         stringQuery = stringQuery.concat(`('${userid}',`);
-        stringQuery = stringQuery.concat(`'${promotionApproval}')`);
+        stringQuery = stringQuery.concat(`'${promotionApproval}',`); 
+        stringQuery = stringQuery.concat(`'ing')`);//승진 하기 버튼을 눌렀다는 flag 값
         console.log(stringQuery);
         await pool.query(stringQuery);
         
