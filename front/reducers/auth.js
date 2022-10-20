@@ -20,9 +20,8 @@ export const  initialState = {
     userEmailadress:'',         //사용자 메일
     mailExistence:'',           //가입여부
 
-    promotionCondition:null,         //승진 가능 여부
-    promotionConditionClick:false, //승진 가능 여부 버튼 클릭
-    promotionCheckValue:null,    //승진 가능 여부 
+    promotionCheckValue:null,   //승진 가능 여부 
+    promotionReviewValue:null,  //승진 심사중 
 
 }
 
@@ -58,7 +57,7 @@ export const CHECK_NICKNAME_FAILURE='CHECK_NICKNAME_FAILURE';
 //닉네임 새로 입력 
 export const LOAD_CHECK_NICKNAME='LOAD_CHECK_NICKNAME';
 
-//승진 심사 
+//승진 심사 버튼 눌렀을 경우
 export const PROMOTION_REVIEW_REQUEST='PROMOTION_REVIEW_REQUEST';
 export const PROMOTION_REVIEW_SUCCESS='PROMOTION_REVIEW_SUCCESS';
 export const PROMOTION_REVIEW_FAILURE='PROMOTION_REVIEW_FAILURE';
@@ -211,16 +210,13 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             }
 //------------------------------------------------
 
-//승진 심사
+//승진 심사 버튼 눌렀을 경우
 //------------------------------------------------
             case PROMOTION_REVIEW_REQUEST :{
-                draft.promotionConditionClick=true;
                 break; 
             }
 
             case PROMOTION_REVIEW_SUCCESS :{
-                draft.promotionConditionClick=false;
-                draft.promotionCondition= action.data.promotionCondition; 
                 break; 
             }
 
@@ -237,6 +233,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 
             case PROMOTION_CHECK_VALUE_SUCCESS :{
                 draft.promotionCheckValue= action.data.promotionCheckValue; 
+                draft.promotionReviewValue = action.data.promotionReviewValue;
                 break; 
             }
 

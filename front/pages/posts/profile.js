@@ -19,13 +19,15 @@ const profile = () =>{
            userLevel,
            userlevelName,
            userid,
-           promotionCondition,
-           promotionConditionClick,
-           promotionCheckValue
+           promotionCheckValue,
+           promotionReviewValue
         }      = useSelector((state)=>state.auth);
 
+    const [promotionBtnClick,setPromotionBtnClick] =useState(false); 
+    
+    
     useEffect(()=>{
-
+        //승진 가능여부 실시간으로 가져오기 위함
         dispatch({type:PROMOTION_CHECK_VALUE_REQUEST,
                   data:{
                         userid,
@@ -35,7 +37,8 @@ const profile = () =>{
 
     },[]); 
 
-    const promotionState='심사 중 입니다..';
+
+
     const promotionFunc = (level)=>{
         const levelValue =parseInt(level);
         let result='';
@@ -69,6 +72,10 @@ const profile = () =>{
     }   
 
     const promotionReview = () =>{
+        setPromotionBtnClick(true); 
+        if(!promotionCheckValue){
+            return;
+        }
         
         let promotionLevel=0; 
         switch(userLevel){
@@ -104,7 +111,7 @@ const profile = () =>{
                 userid,
                 userLevel,
                 promotionLevel,
-                
+                promotionCheckValue                
             }
         })
 
@@ -114,7 +121,7 @@ const profile = () =>{
     return (
         <div className='divTableDetail'>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                <p>안녕하세요 {userInfo}님 {promotionCondition} : {promotionCheckValue}</p>
+                <p>안녕하세요 {userInfo}님</p>
             </div>
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
                 <p>현재 당신의 직책은</p>
@@ -124,12 +131,21 @@ const profile = () =>{
             </div>
             
             <div className='divTableRowTh' style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-   
-            <Button loading={promotionConditionClick} onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
-
-            <div><SyncOutlined spin={true}/>&nbsp;승진 심사 중 입니다..</div>         
-
+            
+            {(!promotionBtnClick && !promotionReviewValue) 
+            && 
+            <Button onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
+            }
+            {((promotionBtnClick && promotionCheckValue) || promotionReviewValue) 
+            && 
+            <div><SyncOutlined spin={true}/>&nbsp;승진 심사 중 입니다..</div>       
+            }  
+            
+            {(promotionBtnClick && !promotionCheckValue) 
+            && 
             <div>승진 할 수 있는 조건이 아닙니다. 승진 요건 보러가기</div>
+            }
+            
         
              
              </div>

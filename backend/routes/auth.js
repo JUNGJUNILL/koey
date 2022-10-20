@@ -470,31 +470,18 @@ router.post('/checkNickName',async (req,res)=>{
 //승진 심사 
 router.post('/promotioncheck',async (req,res)=>{
     try{
-        const {userid,userLevel,promotionLevel} = req.body.data;  
-        let stringQuery = 'CALL US_SELECT_PromotionCondition'; 
-        stringQuery = stringQuery.concat(`('${userid}')`);
-        console.log(stringQuery);
-        const promotionCondition = await pool.query(stringQuery);
-        
-        let postCount=0; //포스팅 갯수
-        let promotionApproval='N'; 
-        promotionCondition[0].map((v,i)=>{
-            postCount+=v.postCount
-        }); 
+        const { userid,
+                userLevel,
+                promotionLevel,
+                promotionCheckValue} = req.body.data;  
 
-        if(postCount >= promotionLevel){
-            promotionApproval='Y';
-        }
-
-        stringQuery=''; 
-        stringQuery='CALL US_UPDATE_PromotionYN'
+        let stringQuery='CALL US_UPDATE_promotionReview'
         stringQuery = stringQuery.concat(`('${userid}',`);
-        stringQuery = stringQuery.concat(`'${promotionApproval}',`); 
-        stringQuery = stringQuery.concat(`'ing')`);//승진 하기 버튼을 눌렀다는 flag 값
+        stringQuery = stringQuery.concat(`'${promotionCheckValue}')`);//승진 하기 버튼을 눌렀다는 flag 값
         console.log(stringQuery);
         await pool.query(stringQuery);
         
-        return res.status(200).json({promotionApproval});  
+        return res.status(200).json({promotionCheckValue});  
 
     }catch(e){
         console.error(e); 
@@ -508,18 +495,10 @@ router.post('/promotioncheckvalue',async (req,res)=>{
     try{
         const {userid,userLevel} = req.body.data; 
 
-        let stringQuery = 'CALL US_SELECT_PromotionCondition'; 
+        let stringQuery = 'CALL US_SELECT_PostCount';
         stringQuery = stringQuery.concat(`('${userid}')`);
         console.log(stringQuery);
-        const promotionCheckValue = await pool.query(stringQuery);
-
-
-        stringQuery=''; 
-        stringQuery=stringQuery.concat('CALL US_SELECT_PromotionCheckValue')
-        stringQuery=stringQuery.concat(`('${userid}')`);
-        const promotionClickCheck = await pool.query(stringQuery);
-        const promotionYN = promotionClickCheck[0][0].promotionYN; 
-
+        const postCount = await pool.query(stringQuery);
 
         let promotionLevel=0; 
         switch(userLevel){
@@ -548,17 +527,23 @@ router.post('/promotioncheckvalue',async (req,res)=>{
 
         }
 
-        let postCount=0; //포스팅 갯수
-        let promotionApproval='N'; 
-        promotionCheckValue[0].map((v,i)=>{
-            postCount+=v.postCount
+        stringQuery=''
+        stringQuery=stringQuery.concat(`SELECT promotionReview FROM client WHERE userid='${userid}'`);
+        const promotionReview = await pool.query(stringQuery);
+        const promotionReviewValue =promotionReview[0]? JSON.parse(promotionReview[0].promotionReview):false; 
+        console.log(stringQuery);
+
+        let count=0; 
+        let promotionCheckValue=false; 
+        postCount[0].map((v,i)=>{
+            count+=v.postCount
         }); 
 
-        if(postCount >= promotionLevel){
-            promotionApproval='Y';
+        if(count >= promotionLevel){
+            promotionCheckValue=true;
+
         }
-        
-        return res.status(200).json({promotionApproval,promotionYN});  
+        return res.status(200).json({promotionCheckValue, promotionReviewValue});  
 
     }catch(e){
         console.error(e); 

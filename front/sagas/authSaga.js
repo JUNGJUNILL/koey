@@ -375,19 +375,19 @@ function* sagaPromotionCheckValue(action){
 
     try{
         const result =   yield call(APIPromotionCheckValue,action.data);   
-        console.log(result.data);    
-        console.log(result.data.promotionApproval);    
+        console.log('result.data.promotionCheckValue',result.data.promotionCheckValue);
 
-        console.log(result.data.promotionYN);    
-
+        console.log('result.data.promotionReviewValue',result.data.promotionReviewValue);
         yield put({
             type:PROMOTION_CHECK_VALUE_SUCCESS,
-            data:{ promotionCheckValue:result.data.promotionApproval}
+            data:{ promotionCheckValue:result.data.promotionCheckValue,
+                   promotionReviewValue:result.data.promotionReviewValue
+            }
         }); 
 
 
     }catch(e){
-        alert('/승진 가능 여부 데이터 가져오기 에러'); 
+        alert('승진 가능 여부 데이터 가져오기 에러'); 
         yield put({
             type:PROMOTION_CHECK_VALUE_FAILURE, 
             error:e,
