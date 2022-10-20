@@ -31,7 +31,7 @@ const AppLayOut = ({children}) =>{
                         ]; 
 
     const dispatch = useDispatch(); 
-    const {userInfo, joined} = useSelector((state)=>state.auth); 
+    const {userInfo} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
     const [badgeValue,setBadge] = useState(true);
 
@@ -87,7 +87,7 @@ const AppLayOut = ({children}) =>{
 
         <div className="fr" style={{marginRight:"-5px"}}>
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
-        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue===true?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
         {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
 
         </div>

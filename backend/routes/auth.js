@@ -28,6 +28,10 @@ router.get('/',async (req,res)=>{
             console.log('jwt login'); 
             req.decoded = jwt.verify(req.cookies[process.env.COOKIE_SECRET],process.env.JWT_SECRET); 
             
+           const hello =  req.cookies['alarm'];
+           console.log('hello=',hello,':', typeof hello); 
+           const object= JSON.parse(hello);
+           console.log('object=',typeof object,': ',object.a); 
             return res.json({nick:req.decoded.nick,
                              userid:req.decoded.userId,
                              levelId:req.decoded.userLevel,
@@ -218,7 +222,11 @@ router.post('/login',async (req,res,next)=>{
                                                                   secure:false, 
                                                                   domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
                     }); 
+
+ 
                 
+                    const json = {"a":"1","b":"2","c":"3"}; 
+                    res.cookie('alarm',JSON.stringify(json));
 
                     return res.json({
                         code: 200, 
