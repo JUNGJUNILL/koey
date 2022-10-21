@@ -106,14 +106,14 @@ const profile = () =>{
         }
 
         
-        
         dispatch({
             type:PROMOTION_REVIEW_REQUEST,
             data:{
                 userid,
                 userLevel,
                 promotionLevel,
-                promotionCheckValue        
+                promotionCheckValue,
+                alarm01        
             }
         })
 
@@ -136,11 +136,11 @@ const profile = () =>{
             
             {(!promotionBtnClick && !promotionReviewValue) 
             && 
-            <Badge count={alarm01==='Y'?'승진가능':''} ><Button onClick={promotionReview}>{promotionFunc(userLevel)}&nbsp;승진 심사제출</Button></Badge>
+            <Badge count={alarm01==='Y'?'!':''} ><Button onClick={promotionReview}>{promotionFunc(userLevel)}&nbsp;승진 심사제출</Button></Badge>
             }
             {((promotionBtnClick && promotionCheckValue) || promotionReviewValue) 
             && 
-            <div><SyncOutlined spin={true}/>&nbsp;{promotionFunc(userLevel+10)}승진 심사 중 입니다..</div>       
+            <div><SyncOutlined spin={true}/>&nbsp;{promotionFunc(userLevel)}승진 심사 중 입니다..</div>       
             }  
             
             {(promotionBtnClick && !promotionCheckValue) 

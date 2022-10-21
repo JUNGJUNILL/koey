@@ -33,18 +33,18 @@ const AppLayOut = ({children}) =>{
     const dispatch = useDispatch(); 
     const {userInfo,representativeAlarm} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
-    const [badgeValue,setBadge] = useState(representativeAlarm);
+    const [badgeValue,setBadge] = useState('Y');
 
     //로그아웃 버튼
     const logOut = useCallback(()=>{
-
+        setBadge('Y'); 
         dispatch({
             type:LOGOUT_REQUEST, 
         });
 
         Router.push('/auth/login'); 
 
-    },[userInfo]); 
+    },[userInfo,badgeValue]); 
  
 
     //index 페이지 이동
@@ -54,12 +54,12 @@ const AppLayOut = ({children}) =>{
 
     //프로필 화면으로 이동 
     const goProfile = useCallback(() =>{
-        if(badgeValue==='Y'){
+        if(representativeAlarm==='Y'){
             setBadge('N'); 
         }
         Router.push('/posts/profile'); 
         return; 
-    },[badgeValue])
+    },[badgeValue,representativeAlarm])
     
     //스크롤 위치 초기화
     const initScrollRestoration = () =>{
@@ -68,6 +68,15 @@ const AppLayOut = ({children}) =>{
 
     }
 
+
+    const alarm01control = useCallback(()=>{
+
+        //승진 조건이 충족되었을 경우 뜨는 알람
+        if(badgeValue==='Y' && representativeAlarm==='Y'){
+            return true;
+        }
+
+    },[badgeValue,representativeAlarm])
  
     
     return(
@@ -88,7 +97,7 @@ const AppLayOut = ({children}) =>{
 
         <div className="fr" style={{marginRight:"-5px"}}>
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
-        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue==='Y'?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={alarm01control() ?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
         {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
 
         </div>

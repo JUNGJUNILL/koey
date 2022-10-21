@@ -8,7 +8,6 @@ const axios = require('axios');
 var qs = require('querystring');
 const router = express.Router();
 const nodemailer = require("nodemailer");
-const { Console } = require('console');
 
 
 
@@ -256,7 +255,6 @@ router.post('/login',async (req,res,next)=>{
                     }
              
 
-                    console.log('alarm01=>', alarm01); 
                     return res.json({
                         code: 200, 
                         message:'토큰이 발급되었습니다.', 
@@ -389,7 +387,13 @@ router.post('/promotioncheck',async (req,res)=>{
         const { userid,
                 userLevel,
                 promotionLevel,
-                promotionCheckValue} = req.body.data;  
+                promotionCheckValue,
+                alarm01,} = req.body.data;  
+            if(alarm01==='Y'){
+                 //승진 조건이 충족되었을 경우 alarm01 쿠키를 없앤다.
+                 res.clearCookie('alarm01',{domain:process.env.NODE_ENV === 'production' && '.jscompany.live'}); 
+            }
+         
 
         let stringQuery='CALL US_UPDATE_promotionReview'
         stringQuery = stringQuery.concat(`('${userid}',`);
@@ -422,9 +426,7 @@ router.post('/promotioncheckvalue',async (req,res)=>{
         //승진 조건이 충족되었을 경우
         if(alarm01==='Y'){
 
-            //승진 조건이 충족되었을 경우 alarm01 쿠키를 없앤다.
-            res.clearCookie('alarm01',{domain:process.env.NODE_ENV === 'production' && '.jscompany.live'}); 
-            promotionCheckValue=true;
+             promotionCheckValue=true;
 
         }
         return res.status(200).json({promotionCheckValue, promotionReviewValue});  
