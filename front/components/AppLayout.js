@@ -31,9 +31,9 @@ const AppLayOut = ({children}) =>{
                         ]; 
 
     const dispatch = useDispatch(); 
-    const {userInfo} = useSelector((state)=>state.auth); 
+    const {userInfo,representativeAlarm} = useSelector((state)=>state.auth); 
     const {posf} = useSelector((state)=>state.mainPosts_1001); 
-    const [badgeValue,setBadge] = useState(true);
+    const [badgeValue,setBadge] = useState(representativeAlarm);
 
     //로그아웃 버튼
     const logOut = useCallback(()=>{
@@ -54,8 +54,8 @@ const AppLayOut = ({children}) =>{
 
     //프로필 화면으로 이동 
     const goProfile = useCallback(() =>{
-        if(badgeValue){
-            setBadge((prev)=>!prev)
+        if(badgeValue==='Y'){
+            setBadge('N'); 
         }
         Router.push('/posts/profile'); 
         return; 
@@ -82,12 +82,13 @@ const AppLayOut = ({children}) =>{
     
         <header className="hd">
         <h1 className="h1">
+               
         {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/koielogo.jpg`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
 	    </h1>
 
         <div className="fr" style={{marginRight:"-5px"}}>
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
-        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
+        {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={badgeValue==='Y'?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
         {userInfo &&    <a className="mu" onClick={logOut}>로그아웃</a>} 
 
         </div>

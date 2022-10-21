@@ -3,7 +3,7 @@ import wrapper from '../../store/configureStore';
 import React,{useEffect, useState}from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
-import {Button} from 'antd'
+import {Button,Badge} from 'antd'
 import { SyncOutlined,} from '@ant-design/icons';
 import 
     {
@@ -20,6 +20,7 @@ const profile = () =>{
            userlevelName,
            userid,
            promotionCheckValue,
+           alarm01,
            promotionReviewValue
         }      = useSelector((state)=>state.auth);
 
@@ -31,7 +32,8 @@ const profile = () =>{
         dispatch({type:PROMOTION_CHECK_VALUE_REQUEST,
                   data:{
                         userid,
-                        userLevel
+                        userLevel,
+                        alarm01
                 }
         });
 
@@ -44,28 +46,28 @@ const profile = () =>{
         let result='';
 
         switch(levelValue){
-            case 10 : result='사원 승진 심사제출' 
+            case 10 : result='사원' 
             break;
             
-            case 20 : result='주임 승진 심사제출' 
+            case 20 : result='주임' 
             break;
 
-            case 30 : result='대리 승진 심사제출' 
+            case 30 : result='대리' 
             break;
 
-            case 40 : result='과장 승진 심사제출' 
+            case 40 : result='과장' 
             break;
 
-            case 50 : result='차장 승진 심사제출' 
+            case 50 : result='차장' 
             break;
 
-            case 60 : result='부장 승진 심사제출' 
+            case 60 : result='부장' 
             break;
 
-            case 70 : result='이사 승진 심사제출' 
+            case 70 : result='이사' 
             break;
 
-            default : result='승진 심사 제출';
+            default : result='승진';
         }
 
         return result; 
@@ -111,7 +113,7 @@ const profile = () =>{
                 userid,
                 userLevel,
                 promotionLevel,
-                promotionCheckValue                
+                promotionCheckValue        
             }
         })
 
@@ -134,11 +136,11 @@ const profile = () =>{
             
             {(!promotionBtnClick && !promotionReviewValue) 
             && 
-            <Button onClick={promotionReview}>{promotionFunc(userLevel)}</Button>
+            <Badge count={alarm01==='Y'?'승진가능':''} ><Button onClick={promotionReview}>{promotionFunc(userLevel)}&nbsp;승진 심사제출</Button></Badge>
             }
             {((promotionBtnClick && promotionCheckValue) || promotionReviewValue) 
             && 
-            <div><SyncOutlined spin={true}/>&nbsp;승진 심사 중 입니다..</div>       
+            <div><SyncOutlined spin={true}/>&nbsp;{promotionFunc(userLevel+10)}승진 심사 중 입니다..</div>       
             }  
             
             {(promotionBtnClick && !promotionCheckValue) 

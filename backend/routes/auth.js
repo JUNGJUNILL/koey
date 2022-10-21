@@ -8,6 +8,7 @@ const axios = require('axios');
 var qs = require('querystring');
 const router = express.Router();
 const nodemailer = require("nodemailer");
+const { Console } = require('console');
 
 
 
@@ -28,14 +29,19 @@ router.get('/',async (req,res)=>{
             console.log('jwt login'); 
             req.decoded = jwt.verify(req.cookies[process.env.COOKIE_SECRET],process.env.JWT_SECRET); 
             
-           const hello =  req.cookies['alarm'];
-           console.log('hello=',hello,':', typeof hello); 
-           const object= JSON.parse(hello);
-           console.log('object=',typeof object,': ',object.a); 
+
+           //승진 조건이 충족된 경우
+           let alarm01 =  req.cookies['alarm01']?req.cookies['alarm01']:'N';
+
+           //승진 된 경우
+           let alarm02 =  req.cookies['alarm02']?req.cookies['alarm02']:'N';
+
             return res.json({nick:req.decoded.nick,
                              userid:req.decoded.userId,
                              levelId:req.decoded.userLevel,
-                             levelName:req.decoded.userlevelName
+                             levelName:req.decoded.userlevelName,
+                             alarm01:alarm01,
+                             alarm02:alarm02,
                             }); 
 
         //카카오 로그인    
@@ -186,6 +192,13 @@ router.post('/login',async (req,res,next)=>{
                 const user = await pool.query(stringQuery); 
                 let result;
                 let userInfo;
+                let alarm01;
+                let alarm02;
+
+                stringQuery=''
+                stringQuery=stringQuery.concat('CALL US_SELECT_PostCount');
+                stringQuery = stringQuery.concat(`('${base64UserEmail}')`);
+                const postCount = await pool.query(stringQuery); 
 
                 
                 if(!user[0][0]){
@@ -199,8 +212,13 @@ router.post('/login',async (req,res,next)=>{
                     result = await bcrypt.compare(password,user[0][0].password);
                     delete user[0][0].password;  
                     userInfo = user[0][0]; 
-                }
+                    alarm02 = user[0][0].alarm02; 
 
+                    const promotionCondition= user[0][0].promotionCondition;
+                    const count=postCount?postCount[0][0].postCount:0; 
+                    count >= promotionCondition?  alarm01='Y': alarm01='N';
+                }
+        
              
             
                 //로그인 성공 
@@ -222,16 +240,27 @@ router.post('/login',async (req,res,next)=>{
                                                                   secure:false, 
                                                                   domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
                     }); 
+                    //승진 요건이 충족된 경우
+                    if(alarm01==='Y'){
+                        res.cookie('alarm01',alarm01,{httpOnly:true,
+                                                      secure:false, 
+                                                      domain: process.env.NODE_ENV === 'production' && '.jscompany.live'});
+                    }
 
- 
-                
-                    const json = {"a":"1","b":"2","c":"3"}; 
-                    res.cookie('alarm',JSON.stringify(json));
+                    //승진이 됬을 경우
+                    if(alarm02==='Y'){
+                        res.cookie('alarm02',alarm02,{httpOnly:true,
+                                                      secure:false, 
+                                                      domain: process.env.NODE_ENV === 'production' && '.jscompany.live'});
 
+                    }
+             
+
+                    console.log('alarm01=>', alarm01); 
                     return res.json({
                         code: 200, 
                         message:'토큰이 발급되었습니다.', 
-                        token 
+                        token,
                     });
 
                 }else{
@@ -250,127 +279,6 @@ router.post('/login',async (req,res,next)=>{
             }
 
 });
-
-//카카오 로그인
-router.get('/kakaoTest',async (req,res,next)=>{
-    
-    try{
-
-      
-        const kakaotoken = req.query.code;
-        const redirectUri=process.env.NODE_ENV === 'production' ? 'http://api.jscompany.live:3333/api/auth/kakaoTest':'http://localhost:3333/api/auth/kakaoTest';
-        const kakaoAccessToken = await axios({
-            method: "POST",
-            url: 'https://kauth.kakao.com/oauth/token',
-            headers: {
-              "content-type": "application/x-www-form-urlencoded"
-            },
-            data: qs.stringify({
-              grant_type: "authorization_code",
-              client_id: '8cf1ea216775ee5a5ff24a71b855846c',
-              redirect_uri: redirectUri,
-              code :kakaotoken,
-            })
-          });
-
-          res.cookie(process.env.KAKAO_COOKIE, kakaoAccessToken.data.access_token ,{httpOnly:true,
-            secure:false, 
-            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
-        }); 
-
-          const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
-          return res.redirect(redirectHome);
-          
-    }catch(e){
-        console.error(e)
-    }
-
-}); 
-
-
-
-
-//네이버 로그인
-router.get('/naverLoginCallback',async (req,res,next)=>{
-
-    try{
-        const client_id = 'FQxK6vBp2RiL0gne54KV';
-        const client_secret = 'V6rGNwgrBK';
-        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/naverLoginCallback":"http://localhost:3333/api/auth/naverLoginCallback";
-        const redirectURI = encodeURI(redirectUri);
-        const code  = req.query.code; 
-        const state = req.query.state;
-
-        const api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
-        + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
-        const response = await axios({
-            method: "GET",
-            url: api_url,
-            headers: {
-                'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret
-            }
-          });
-
-        const naverAccessToken = response.data.access_token;
-
-          res.cookie(process.env.NAVER_COOKIE, naverAccessToken,{httpOnly:true,
-            secure:false, 
-            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
-        }); 
-
-        const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
-        return res.redirect(redirectHome);
-
-    }catch(e){
-        console.error(e); 
-    }
-
-}); 
-
-//페이스북 로그인
-router.get('/facebookLogin',async (req,res,next)=>{
-
-    try{ 
-        
-        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/facebookLogin":"http://localhost:3333/api/auth/facebookLogin";
-
-        const { data } = await axios({
-            url: 'https://graph.facebook.com/v10.0/oauth/access_token',
-            method: 'GET',
-            params: {
-                client_id: "1145587049279696",
-                redirect_uri: redirectUri, 
-                client_secret : 'cec98856baf4b9d9bcbc2844855b2a26',
-                code: req.query.code,
-            },
-        });
-     
-        res.cookie(process.env.FACEBOOK_COOKIE, data.access_token,{httpOnly:true,
-            secure:false, 
-            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
-        }); 
-
-       const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
-       return res.redirect(redirectHome);
-
-    }catch(e){
-        console.error(e); 
-    }
-
-}); 
-
-//구글 로그인 
-router.get('/googleLogin',async (req,res,next)=>{
-    try{
-
-    }catch(e){
-        console.error(e); 
-    }
-
-}); 
-
-
-
 
 
 //로그아웃 
@@ -501,53 +409,21 @@ router.post('/promotioncheck',async (req,res)=>{
 //승진 가능 여부 데이터 가져오기 
 router.post('/promotioncheckvalue',async (req,res)=>{
     try{
-        const {userid,userLevel} = req.body.data; 
+        const {userid,alarm01} = req.body.data; 
 
-        let stringQuery = 'CALL US_SELECT_PostCount';
-        stringQuery = stringQuery.concat(`('${userid}')`);
+        let stringQuery=`SELECT promotionReview FROM client WHERE userid='${userid}'`; 
         console.log(stringQuery);
-        const postCount = await pool.query(stringQuery);
 
-        let promotionLevel=0; 
-        switch(userLevel){
-            case 10 : promotionLevel=5; //사원
-            break;
-            
-            case 20 : promotionLevel=15; //주임
-            break;
-
-            case 30 : promotionLevel=30; //대리
-            break;
-
-            case 40 : promotionLevel=50; //과장
-            break;
-
-            case 50 : promotionLevel=70; //차장
-            break;
-
-            case 60 : promotionLevel=100; //부장
-            break;
-
-            case 70 : promotionLevel=150; //이사
-            break;
-
-            default : promotionLevel=0;
-
-        }
-
-        stringQuery=''
-        stringQuery=stringQuery.concat(`SELECT promotionReview FROM client WHERE userid='${userid}'`);
         const promotionReview = await pool.query(stringQuery);
         const promotionReviewValue =promotionReview[0]? JSON.parse(promotionReview[0].promotionReview):false; 
-        console.log(stringQuery);
+        
+        let promotionCheckValue=false;
 
-        let count=0; 
-        let promotionCheckValue=false; 
-        postCount[0].map((v,i)=>{
-            count+=v.postCount
-        }); 
+        //승진 조건이 충족되었을 경우
+        if(alarm01==='Y'){
 
-        if(count >= promotionLevel){
+            //승진 조건이 충족되었을 경우 alarm01 쿠키를 없앤다.
+            res.clearCookie('alarm01',{domain:process.env.NODE_ENV === 'production' && '.jscompany.live'}); 
             promotionCheckValue=true;
 
         }
@@ -560,6 +436,126 @@ router.post('/promotioncheckvalue',async (req,res)=>{
 
 });
 
+
+
+
+//카카오 로그인
+router.get('/kakaoTest',async (req,res,next)=>{
+    
+    try{
+
+      
+        const kakaotoken = req.query.code;
+        const redirectUri=process.env.NODE_ENV === 'production' ? 'http://api.jscompany.live:3333/api/auth/kakaoTest':'http://localhost:3333/api/auth/kakaoTest';
+        const kakaoAccessToken = await axios({
+            method: "POST",
+            url: 'https://kauth.kakao.com/oauth/token',
+            headers: {
+              "content-type": "application/x-www-form-urlencoded"
+            },
+            data: qs.stringify({
+              grant_type: "authorization_code",
+              client_id: '8cf1ea216775ee5a5ff24a71b855846c',
+              redirect_uri: redirectUri,
+              code :kakaotoken,
+            })
+          });
+
+          res.cookie(process.env.KAKAO_COOKIE, kakaoAccessToken.data.access_token ,{httpOnly:true,
+            secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
+        }); 
+
+          const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+          return res.redirect(redirectHome);
+          
+    }catch(e){
+        console.error(e)
+    }
+
+}); 
+
+
+
+
+//네이버 로그인
+router.get('/naverLoginCallback',async (req,res,next)=>{
+
+    try{
+        const client_id = 'FQxK6vBp2RiL0gne54KV';
+        const client_secret = 'V6rGNwgrBK';
+        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/naverLoginCallback":"http://localhost:3333/api/auth/naverLoginCallback";
+        const redirectURI = encodeURI(redirectUri);
+        const code  = req.query.code; 
+        const state = req.query.state;
+
+        const api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
+        + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
+        const response = await axios({
+            method: "GET",
+            url: api_url,
+            headers: {
+                'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret
+            }
+          });
+
+        const naverAccessToken = response.data.access_token;
+
+          res.cookie(process.env.NAVER_COOKIE, naverAccessToken,{httpOnly:true,
+            secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
+        }); 
+
+        const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+        return res.redirect(redirectHome);
+
+    }catch(e){
+        console.error(e); 
+    }
+
+}); 
+
+//페이스북 로그인
+router.get('/facebookLogin',async (req,res,next)=>{
+
+    try{ 
+        
+        const redirectUri =process.env.NODE_ENV === 'production' ? "http://api.jscompany.live:3333/api/auth/facebookLogin":"http://localhost:3333/api/auth/facebookLogin";
+
+        const { data } = await axios({
+            url: 'https://graph.facebook.com/v10.0/oauth/access_token',
+            method: 'GET',
+            params: {
+                client_id: "1145587049279696",
+                redirect_uri: redirectUri, 
+                client_secret : 'cec98856baf4b9d9bcbc2844855b2a26',
+                code: req.query.code,
+            },
+        });
+     
+        res.cookie(process.env.FACEBOOK_COOKIE, data.access_token,{httpOnly:true,
+            secure:false, 
+            domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
+        }); 
+
+       const redirectHome = process.env.NODE_ENV === 'production' ? 'http://jscompany.live/' : 'http://localhost:3001/'
+       return res.redirect(redirectHome);
+
+    }catch(e){
+        console.error(e); 
+    }
+
+}); 
+
+//구글 로그인 
+router.get('/googleLogin',async (req,res,next)=>{
+    try{
+
+    }catch(e){
+        console.error(e); 
+    }
+
+}); 
 
 
 

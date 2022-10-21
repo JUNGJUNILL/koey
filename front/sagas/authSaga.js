@@ -57,14 +57,26 @@ function* sagaLoadUser(action){
         const userid    = result.data.userid; 
         const userlevel = result.data.levelId?result.data.levelId:'';
         const userlevelName = result.data.levelName?result.data.levelName:'';
-        
+        const alarm01 = result.data.alarm01?result.data.alarm01:'N'; 
+        const alarm02 = result.data.alarm02?result.data.alarm02:'N'; 
+        let representativeAlarm ='N'; 
+        if(alarm01==='Y' || alarm02==='Y'){
+            representativeAlarm='Y'; 
+        }
+      
+
         yield put({
                 type:LOAD_USER_SUCCESS, 
                 data: {nickName: nick,
                        userid:userid,
                        userLevel:userlevel,
-                       userlevelName:userlevelName
+                       userlevelName:userlevelName,
+                       representativeAlarm:representativeAlarm,
+                       alarm01:alarm01, 
+                       alarm02:alarm02,
+                       
                     },           
+
         }); 
 
     }catch(e){
@@ -202,13 +214,13 @@ function* sagaLogin(action){
                 throw Error(result.data.message);
             }
             decoded =jwtDeCoder(result.data.token); 
-            
+
             yield put({
                 type:LOGIN_SUCCESS,
                 data:{nickName: decoded.nick,
                       userid:decoded.userId,
                       userLevel:decoded.userLevel,
-                      userlevelName : decoded.userlevelName
+                      userlevelName : decoded.userlevelName,
                     },   
             }); 
 
@@ -375,9 +387,7 @@ function* sagaPromotionCheckValue(action){
 
     try{
         const result =   yield call(APIPromotionCheckValue,action.data);   
-        console.log('result.data.promotionCheckValue',result.data.promotionCheckValue);
 
-        console.log('result.data.promotionReviewValue',result.data.promotionReviewValue);
         yield put({
             type:PROMOTION_CHECK_VALUE_SUCCESS,
             data:{ promotionCheckValue:result.data.promotionCheckValue,

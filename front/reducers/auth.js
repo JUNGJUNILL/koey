@@ -23,6 +23,10 @@ export const  initialState = {
     promotionCheckValue:null,   //승진 가능 여부 
     promotionReviewValue:null,  //승진 심사중 
 
+    representativeAlarm:'', 
+    alarm01:'',
+    alarm02:'',
+
 }
 
 
@@ -136,7 +140,10 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 draft.userInfo = action.data.nickName; 
                 draft.userid    = action.data.userid; 
                 draft.userLevel = action.data.userLevel; 
-                draft.userlevelName = action.data.userlevelName;            
+                draft.userlevelName = action.data.userlevelName;  
+                draft.representativeAlarm = action.data.representativeAlarm;   
+                draft.alarm01 = action.data.alarm01;
+                draft.alarm02 = action.data.alarm02;       
                 break; 
             }
 
