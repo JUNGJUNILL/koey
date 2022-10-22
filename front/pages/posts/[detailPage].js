@@ -19,10 +19,10 @@ import
     {LOAD_USER_REQUEST,} 
 from '../../reducers/auth'; 
 
-import {DislikeTwoTone, LikeTwoTone, UserOutlined, FieldTimeOutlined, EyeOutlined} from '@ant-design/icons'
+import {DislikeTwoTone,LikeTwoTone,UserOutlined,FieldTimeOutlined,EyeOutlined,CopyOutlined,CheckOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl,AWSImageUrl } from '../../config/config';
+import { backImageUrl,AWSImageUrl,Url } from '../../config/config';
 
 import GoogleAds_DetailPage from '../../components/Ads/GooleAds_DetailPaage';
 import GooleAds_comment_footer from '../../components/Ads/GooleAds_comment_footer';
@@ -38,10 +38,9 @@ const detailPage  = () =>{
   const {detailPage} =router.query; 
   const postId   =  router.query.postId;
   const pid = router.query.pid;
-  const nickName = router.query.userNickName; //현재 로그인한 사람의 닉네임
   const postFlag = router.query.postFlag;
   const submitDay = router.query.submitDay;
-  const who       = router.query.who;        //현재 로그인한 사람의 아이디값
+
 
 
   useEffect(()=>{
@@ -116,6 +115,9 @@ const detailPage  = () =>{
         } = useSelector((state)=>state.mainPosts_1001); 
 
   const {userInfo,userid}      = useSelector((state)=>state.auth);
+  let nickName = userInfo;      //현재 로그인한 사람의 닉네임
+  let who       = userid;        //현재 로그인한 사람의 아이디값
+  
   const ref = createRef(); 
   const blank_pattern = /^\s+|\s+&/g;  
   const [unfoldList,setUnfoldList] = useState('fold'); 
@@ -310,7 +312,20 @@ const detailPage  = () =>{
         router.push('/posts/postEdit'+queryParam , '/posts/postEdit')
 
        };
+       
+       const copyUrl = createRef();
+       const [clickCopy,setClickCopy] =useState(true); 
 
+       //url 복사
+       const onClickCopy =async ()=>{
+          const copyValue = copyUrl.current.value; 
+          setClickCopy(false); 
+          try{
+            await navigator.clipboard.writeText(copyValue);
+          }catch(e){
+            alert('복사에 실패 하였습니다 - 브라우저 문제');
+          }
+       }
 
     return (
       
@@ -350,6 +365,22 @@ const detailPage  = () =>{
                   </div>
               </div>
             }
+
+              <div className='divTableRowTh'>
+                  <div className='divTableCellTh' >
+                      <input type="text"  ref={copyUrl} className='abbreviation02' value={`${Url}/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&pid=${pid}`} /> 
+                      &nbsp;&nbsp;                      
+                      {clickCopy &&
+                        <CopyOutlined  style={{fontSize:'19px',opacity:0.6}} onClick={onClickCopy}/>
+                      }
+                      {!clickCopy &&
+                       <CheckOutlined style={{color:'#58FA58'}}/>
+                      }
+
+                      
+                   
+                  </div>
+              </div>
      
       </div>
       

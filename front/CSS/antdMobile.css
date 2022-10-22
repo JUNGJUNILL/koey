@@ -462,6 +462,16 @@ img {
     width: 100%;
   }
 
+  .abbreviation02 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: none;
+    width: 68%;
+    background-color: transparent;
+    opacity: 0.5;
+  }
+
   .abbreviationMultiple {
 
     /* 한 줄 자르기 */ 

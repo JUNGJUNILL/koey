@@ -122,8 +122,6 @@ const mainPosts_1001 = ()=>{
                          postFlag:postFlag,
                          submitDay:submitDay,
                          pid:userId,
-                         userNickName:userNickName,                     
-                         who:userid,
                   },
                
                   
@@ -232,9 +230,7 @@ const mainPosts_1001 = ()=>{
                                   postId:v.postId,
                                   postFlag:posf,
                                   submitDay:v.submitDay,
-                                  pid:v.userid,  
-                                  userNickName:userInfo,                          
-                                  who:userid,},
+                                  pid:v.userid, },
                   
                         }}>
                         <a>

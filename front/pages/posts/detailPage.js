@@ -25,10 +25,10 @@ import
     {LOAD_USER_REQUEST,} 
 from '../../reducers/auth'; 
 
-import {DislikeTwoTone, LikeTwoTone, UserOutlined, FieldTimeOutlined, EyeOutlined} from '@ant-design/icons'
+import {DislikeTwoTone,LikeTwoTone,UserOutlined,FieldTimeOutlined,EyeOutlined,CopyOutlined,CheckOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
-import { backImageUrl,AWSImageUrl } from '../../config/config';
+import { backImageUrl,AWSImageUrl,Url } from '../../config/config';
 
 import GoogleAds_DetailPage from '../../components/Ads/GooleAds_DetailPaage';
 import GooleAds_comment_footer from '../../components/Ads/GooleAds_comment_footer';
@@ -38,7 +38,7 @@ import GooleAds_DetailPage_Top from '../../components/Ads/GooleAds_DetailPage_To
 
 
 //{nickName,postFlag,postId,submitDay}
-const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>{
+const detailPage  = ({postFlag,postId,submitDay,pid}) =>{
   
 
   const dispatch = useDispatch(); 
@@ -49,6 +49,7 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>
         } = useSelector((state)=>state.mainPosts_1001); 
 
   const {userInfo,userid}      = useSelector((state)=>state.auth);
+  const nickName = userInfo;
   const ref = createRef(); 
   const blank_pattern = /^\s+|\s+&/g;  
   const [unfoldList,setUnfoldList] = useState('fold'); 
@@ -211,11 +212,25 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>
       },[mainPosts_1001CommentByComments,unfoldList]); 
 
 
+      const copyUrl = createRef();
+      const [clickCopy,setClickCopy] =useState(true); 
+
+      //url 복사
+      const onClickCopy =async ()=>{
+         const copyValue = copyUrl.current.value; 
+         setClickCopy(false); 
+         try{
+           await navigator.clipboard.writeText(copyValue);
+         }catch(e){
+           alert('복사에 실패 하였습니다 - 브라우저 문제');
+         }
+      }
+
+
 
     return (
       
     <div >
-      <input type="hidden" value={helloValue} />
     {/*구글 광고*/}   
     {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
 
@@ -241,6 +256,22 @@ const detailPage  = ({nickName,postFlag,postId,submitDay,who,pid,helloValue}) =>
                 <DislikeTwoTone twoToneColor={'#ff6600'} />&nbsp;{mainPosts_1001Info[0].bad}   
                 </div>
            </div>
+
+           <div className='divTableRowTh'>
+                  <div className='divTableCellTh' >
+                      <input type="text"  ref={copyUrl} className='abbreviation02' value={`${Url}/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&pid=${pid}`} /> 
+                      &nbsp;&nbsp;                      
+                      {clickCopy &&
+                        <CopyOutlined  style={{fontSize:'19px',opacity:0.6}} onClick={onClickCopy}/>
+                      }
+                      {!clickCopy &&
+                       <CheckOutlined style={{color:'#58FA58'}}/>
+                      }
+
+                      
+                   
+                  </div>
+              </div>
       </div>
       
       <div style={{padding:'3%'}}>
@@ -360,12 +391,11 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
 
   //const array = context.query.postId.split(':'); 
   const postId   = context.query.postId;
-  const nickName = context.query.userNickName; 
+  const nickName = context.query.userNickName?context.query.userNickName:''; 
   const postFlag = context.query.postFlag; 
   const submitDay = context.query.submitDay;
-  const who       = context.query.who;
+  const who       = context.query.who?context.query.who:'';
   const pid       = context.query.pid;
-  const helloValue='pzqmlaonejf'; 
 
 
   const cookie = context.req ? context.req.headers.cookie : '';
@@ -430,7 +460,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   await context.store.sagaTask.toPromise(); 
   
   return {
-      props: {nickName,postFlag,postId,submitDay,who,pid,helloValue}, // will be passed to the page component as props
+      props: {nickName,postFlag,postId,submitDay,who,pid}, // will be passed to the page component as props
     } 
 
 });
