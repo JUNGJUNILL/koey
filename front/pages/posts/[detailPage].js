@@ -42,6 +42,9 @@ const detailPage  = () =>{
   const submitDay = router.query.submitDay;
 
 
+  const {userInfo,userid}      = useSelector((state)=>state.auth);
+  let nickName = userInfo;      //현재 로그인한 사람의 닉네임
+  let who       = userid;        //현재 로그인한 사람의 아이디값
 
   useEffect(()=>{
 
@@ -114,9 +117,7 @@ const detailPage  = () =>{
          postDeleteMessage
         } = useSelector((state)=>state.mainPosts_1001); 
 
-  const {userInfo,userid}      = useSelector((state)=>state.auth);
-  let nickName = userInfo;      //현재 로그인한 사람의 닉네임
-  let who       = userid;        //현재 로그인한 사람의 아이디값
+
   
   const ref = createRef(); 
   const blank_pattern = /^\s+|\s+&/g;  
