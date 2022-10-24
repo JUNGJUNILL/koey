@@ -9,8 +9,8 @@ export const  initialState = {
     nickNameExistence : '',     //닉네임 중복 여부
 
     isLogining : false,         //로그인 시도 중
-    userInfo : null,            //사용자 정보
-    userid   : null,            //사용자 아이디
+    userInfo : '',            //사용자 정보
+    userid   : '',            //사용자 아이디
     userLevel: '',              //유저 레벨
     userlevelName:'',           //유저 레벨 이름
     loginError:null,            //로그인 에러 메시지
