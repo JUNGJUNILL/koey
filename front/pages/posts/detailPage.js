@@ -216,6 +216,7 @@ const detailPage  = ({postFlag,postId,submitDay,pid}) =>{
       const [clickCopy,setClickCopy] =useState(true); 
 
       //url 복사
+      //https, localhost에서만 작동함
       const onClickCopy =async ()=>{
          const copyValue = copyUrl.current.value; 
          setClickCopy(false); 
@@ -224,6 +225,14 @@ const detailPage  = ({postFlag,postId,submitDay,pid}) =>{
          }catch(e){
            alert('복사에 실패 하였습니다 - 브라우저 문제');
          }
+      }
+
+      const onClickDeprecated=()=>{
+        const el = copyUrl.current; 
+        el.select(); 
+        setClickCopy(false); 
+        document.execCommand("copy");
+
       }
 
 
@@ -259,10 +268,10 @@ const detailPage  = ({postFlag,postId,submitDay,pid}) =>{
 
            <div className='divTableRowTh'>
                   <div className='divTableCellTh' >
-                      <input type="text"  ref={copyUrl} className='abbreviation02' value={`${Url}/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&pid=${pid}`} /> 
+                      <input type="text"  ref={copyUrl} className='abbreviation02' value={`${Url.substring(0,Url.indexOf('://')+3).concat(Url.substring(Url.indexOf('.')+1))}/posts/detailPage?postId=${postId}&postFlag=${postFlag}&submitDay=${submitDay}&pid=${pid}`} /> 
                       &nbsp;&nbsp;                      
                       {clickCopy &&
-                        <CopyOutlined  style={{fontSize:'19px',opacity:0.6}} onClick={onClickCopy}/>
+                        <CopyOutlined  style={{fontSize:'19px',opacity:0.6}} onClick={onClickDeprecated}/>
                       }
                       {!clickCopy &&
                        <CheckOutlined style={{color:'#58FA58'}}/>
