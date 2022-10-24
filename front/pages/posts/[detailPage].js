@@ -384,7 +384,7 @@ const detailPage  = () =>{
                         <CopyOutlined  style={{fontSize:'19px',opacity:0.6}} onClick={onClickDeprecated}/>
                       }
                       {!clickCopy &&
-                       <CheckOutlined style={{color:'#58FA58'}}/>
+                       <span style={{color:'#1d8102'}}><CheckOutlined />&nbsp;복사됨</span>
                       }
 
                       
