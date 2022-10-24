@@ -50,7 +50,7 @@ const Home =()=>{
   return (
     <div>
 
-  <Divider orientation="center">좋좋소! 베스트</Divider>
+  <Divider orientation="center"><b>좋좋소! 베스트</b></Divider>
   <Row style={{marginTop:'3%'}}>
   
   {data01.map((v,i)=>(
@@ -62,8 +62,7 @@ const Home =()=>{
                   postFlag:'1001',
                   submitDay:v.submitDay,
                   pid:v.userid,  
-                  userNickName:userInfo,                          
-                  who:userid,},
+                },
 
         }}>
     <Col span={8} style={{padding:'5px'}}> 
@@ -80,7 +79,7 @@ const Home =()=>{
           } />    
           <br />
           <div className="abbreviationMultiple" style={{marginTop:'3%'}}>
-          {v.title}
+          <b>{v.title}</b>
           </div>
       </div>
     </div>
@@ -109,8 +108,7 @@ const Home =()=>{
                     postFlag:'1002',
                     submitDay:item.submitDay,
                     pid:item.userid,  
-                    userNickName:userInfo,                          
-                    who:userid,},
+                  },
       
           }}>
       <a className="abbreviation">
@@ -143,8 +141,7 @@ const Home =()=>{
                     postFlag:'1003',
                     submitDay:item.submitDay,
                     pid:item.userid,  
-                    userNickName:userInfo,                          
-                    who:userid,},
+                  },
       
           }}>
       <a className="abbreviation">
@@ -174,8 +171,7 @@ const Home =()=>{
                     postFlag:'1004',
                     submitDay:item.submitDay,
                     pid:item.userid,  
-                    userNickName:userInfo,                          
-                    who:userid,},
+                  },
       
           }}>
       <a className="abbreviation">
@@ -206,8 +202,7 @@ const Home =()=>{
                     postFlag:'1005',
                     submitDay:item.submitDay,
                     pid:item.userid,  
-                    userNickName:userInfo,                          
-                    who:userid,},
+                  },
       
           }}>
        <a className="abbreviation">
@@ -237,8 +232,7 @@ const Home =()=>{
                     postFlag:'1006',
                     submitDay:item.submitDay,
                     pid:item.userid,  
-                    userNickName:userInfo,                          
-                    who:userid,},
+                  },
       
           }}>
         <a className="abbreviation">

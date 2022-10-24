@@ -193,6 +193,7 @@ router.post('/login',async (req,res,next)=>{
                 let userInfo;
                 let alarm01;
                 let alarm02;
+                let promotionReview; 
 
                 stringQuery=''
                 stringQuery=stringQuery.concat('CALL US_SELECT_PostCount');
@@ -212,6 +213,8 @@ router.post('/login',async (req,res,next)=>{
                     delete user[0][0].password;  
                     userInfo = user[0][0]; 
                     alarm02 = user[0][0].alarm02; 
+                    promotionReview = user[0][0].promotionReview?JSON.parse(user[0][0].promotionReview):false;
+                    
 
                     const promotionCondition= user[0][0].promotionCondition;
                     const count=postCount?postCount[0][0].postCount:0; 
@@ -240,7 +243,7 @@ router.post('/login',async (req,res,next)=>{
                                                                   domain: process.env.NODE_ENV === 'production' && '.jscompany.live'
                     }); 
                     //승진 요건이 충족된 경우
-                    if(alarm01==='Y'){
+                    if(alarm01==='Y' && !promotionReview){
                         res.cookie('alarm01',alarm01,{httpOnly:true,
                                                       secure:false, 
                                                       domain: process.env.NODE_ENV === 'production' && '.jscompany.live'});

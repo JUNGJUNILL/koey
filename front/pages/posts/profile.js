@@ -1,5 +1,6 @@
 import {END} from 'redux-saga'; 
 import wrapper from '../../store/configureStore';
+import Link from 'next/link'
 import React,{useEffect, useState}from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -145,7 +146,20 @@ const profile = () =>{
             
             {(promotionBtnClick && !promotionCheckValue) 
             && 
-            <div>승진 할 수 있는 조건이 아닙니다. 승진 요건 보러가기</div>
+            <div>승진 할 수 있는 조건이 아닙니다. 
+                <br />
+                <Link href={{pathname:'/posts/[detailPage]',
+                            query:{detailPage:'detailPage',
+                            postId:'10000001',
+                            postFlag:'1011',
+                            submitDay:'99999999',
+                            pid:'ZGV2amppMTIwN0BnbWFpbC5jb20=',  
+                  },}}>
+                    <a>
+                    <div style={{textAlign:'center'}}>승진 요건 보러가기</div>
+                    </a>
+                </Link>
+            </div>
             }
             
         

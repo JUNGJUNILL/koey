@@ -118,9 +118,21 @@ const AppLayOut = ({children}) =>{
         <div className="footer">
             <b>좋소? 좋좋소!</b>
             <br/>
-            <Link href={`/posts/detailPage?postId=10000001&userNickName=${decodeURIComponent('운영자')}&postFlag=1011&submitDay=20210810&who=${userInfo}`}><a>운영목적 | </a></Link>
+            <Link href={{pathname:'/posts/[detailPage]',
+                            query:{detailPage:'detailPage',
+                            postId:'10000002',
+                            postFlag:'1011',
+                            submitDay:'99999999',
+                            pid:'ZGV2amppMTIwN0BnbWFpbC5jb20=',  
+                  },}}><a>운영목적 | </a></Link>
             <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1011'}}}><a>운영진 요청사항 | </a></Link>
-            <Link href={`/posts/detailPage?postId=10000002&userNickName=${decodeURIComponent('운영자')}&postFlag=1011&submitDay=20210810&who=${userInfo}`}><a>후원하기</a></Link>
+            <Link href={{pathname:'/posts/[detailPage]',
+                            query:{detailPage:'detailPage',
+                            postId:'10000003',
+                            postFlag:'1011',
+                            submitDay:'99999999',
+                            pid:'ZGV2amppMTIwN0BnbWFpbC5jb20=',  
+                  },}}><a>후원하기</a></Link>
             <br/>
             좋소(jscompany)2021 ~ © All Rights Reserved.
         </div>
