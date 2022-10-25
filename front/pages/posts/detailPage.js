@@ -25,7 +25,7 @@ import
     {LOAD_USER_REQUEST,} 
 from '../../reducers/auth'; 
 
-import {DislikeTwoTone,LikeTwoTone,UserOutlined,FieldTimeOutlined,EyeOutlined,CopyOutlined,CheckOutlined,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10,} from '@ant-design/icons'
+import {DislikeTwoTone,LikeTwoTone,UserOutlined,FieldTimeOutlined,EyeOutlined,CopyOutlined,CheckOutlined} from '@ant-design/icons'
 import {Avatar, Button} from 'antd'
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl,AWSImageUrl,Url } from '../../config/config';
@@ -38,7 +38,7 @@ import GooleAds_DetailPage_Top from '../../components/Ads/GooleAds_DetailPage_To
 
 
 //{nickName,postFlag,postId,submitDay}
-const detailPage  = ({postFlag,postId,submitDay,pid,hello02,hello03,hello04,hello05,hello06}) =>{
+const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10,}) =>{
   
 
   const dispatch = useDispatch(); 
