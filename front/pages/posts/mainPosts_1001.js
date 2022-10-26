@@ -138,6 +138,13 @@ const mainPosts_1001 = ()=>{
 
   },[posf]); 
 
+    //게시글 쓰기
+    const gotoEditToastUI = useCallback(()=>{
+
+      router.push(`/posts/posting?posf=${posf}`); 
+  
+    },[posf]); 
+
   //게시물 검색 조회 조건 변경
   const changeSearchCondition = useCallback((value) =>{
     setSearchCondition(value); 
@@ -184,7 +191,7 @@ const mainPosts_1001 = ()=>{
     &nbsp;
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
-    
+    {userInfo && <Button  onClick={gotoEditToastUI} style={{marginTop:'3%',float:'right'}}><EditOutlined /> ToastUI</Button>}
      {/*구글 광고*/}
      {posf &&  <GooleAds_header />}
  
