@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef} from 'react';
 import { backImageUrl,AWSImageUrl,backUrl } from '../../config/config';
 
 
@@ -13,7 +13,7 @@ import
 from '../../reducers/mainPosts_1001';
 import ImageUploadComponentToastUI from './ImageUploadComponentToastUI'; 
 
-
+import ToastUIInsertHTML from './ToastUIInsertHTML'; 
 import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,27 +28,22 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
     const {userInfo,userid} = useSelector((state)=>state.auth); 
     const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc} = useSelector((state)=>state.mainPosts_1001); 
-    const [preview,setPreview] = useState(false); 
+    const [preview,setPreview] = useState(false);
 
+    
 
 
     const[content, setContent]=useState('락토핏'); 
 
     const showData = () =>{
         const html = editorRef.current.getInstance().getHTML();
-        
-        
         const markDown = editorRef.current.getInstance().getMarkdown();
-        
-
-        console.log('html=>', html,' type of=>',typeof html) ;
+    
         setContent(html); 
 
-        console.log('markDown=>', markDown);
     }
 
    
-
     const createLastButton = () =>{
         const button =  document.createElement('button');
 
@@ -56,7 +51,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
         button.className = 'toastui-editor-toolbar-icons last';
         button.style.backgroundImage = 'none';
         button.style.margin = '0';
-        button.innerHTML = '사진';
+        button.innerHTML = '<b>사진</b>';
 
         //클릭 시!
          button.addEventListener('click', () => {
@@ -140,7 +135,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
         //한번에 5장 이상 올렸을 경우 
         const imageArray = imageFormData.getAll('image');
-        console.log(imageArray); 
+
         if(imageArray.length > 5){
             alert('한번에 6장 이상 올릴 수 없습니다.'); 
             //setImageCount([]);
@@ -158,58 +153,24 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
                     },
                 }); 
-    
+                
+                
         }
 
-            
 
         });                 
-       
-
 
         }catch(e){
             alert(e);
         }
     
     
-    },[]);
+    },[imageFileName]);
     
         const image ='https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FtEMUl%2FbtrDc6957nj%2FNwJoDw0EOapJNDSNRNZK8K%2Fimg.jpg'; 
-        const imagew ='https://jscompany-s3.s3.ap-northeast-2.amazonaws.com/images/1001/z5_1666611928876_%EB%B3%91%EC%9E%BCTV.webp';
-        
-        //이미지 본분에 삽입
-        const handleClick =()=>{
-            const html = editorRef.current.getInstance().getHTML();
-            editorRef.current.getInstance().setHTML(html.concat(`<img src=${image}>`));
-        }
-
-        
-        const func =() =>{
-            const imagefilename = imageFileName;
-            let imageUrl =''; 
-            let imgHTML  =''; 
 
 
-            console.log('imageFileName length=>',imageFileName.length); 
-            imagefilename.map((v,i)=>{
-    
-                imageUrl+=process.env.NODE_ENV==='production' 
-                          ?`${AWSImageUrl}/images/${posf}/${v}}` //실서버
-                          :`${backImageUrl}/${posf}/${v}`       //로컬 
-                
-                imgHTML+=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
-                imageUrl=''; 
-    
-            }); 
-
-            if(imageFileName.length>0){    
-                const html = editorRef.current.getInstance().getHTML();
-                editorRef.current.getInstance().setHTML(html.concat(imgHTML));          
-            }
-
-         
-        }
-
+        //본문에 이미지 삽입
         const insertImage =(v)=>{
             let imageUrl =process.env.NODE_ENV==='production' 
                             ?`${AWSImageUrl}/images/${posf}/${v}}` //실서버
@@ -221,10 +182,17 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             console.log(imgHTML); 
         }
 
+
+    
+
     return(
             <>
-            {imageFileName && func()}
+            {/*이미지 업로드 하면 본문에 바로 추가 해주는 로직이 들어간 컴포넌트 */}
+             <ToastUIInsertHTML imageFileName={imageFileName} ref={editorRef}/>           
+
             <input type="file" name="image" multiple hidden ref={imageInputToastUI} accept={'.jpg,.gif,.png,.bmp,.jpeg,.webp'} onChange={onChangeImagesToastUI}/>
+        
+               
 
             <Editor 
             ref={editorRef}
@@ -238,7 +206,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             toolbarItems={[
                 // 툴바 옵션 설정
                 ['heading', 'bold', 'italic', 'strike'],
-                ['image', 'link'],
+               // ['image', 'link'],
          
                 [
 
@@ -261,12 +229,13 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
 
             <input type="button" value='버튼' onClick={showData} />
-            <button onClick={handleClick}>make bold</button>
 
             {content && 
                   <div style={{padding:'3%'}} dangerouslySetInnerHTML={{__html:content}} />
                   
             }
+
+
           
 
             </>
