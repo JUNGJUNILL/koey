@@ -304,14 +304,14 @@ const detailPage  = () =>{
         }
 
       },[]);
-
+  
        //게시글 수정
-       const updatePost=(postFlag,postId,userId,submitDay)=>{
-        
+       const updatePost=(postFlag,postId,userId,submitDay,postCategory)=>{
         const imageExist = imageSrc.length;
         const queryParam =`?posf=${postFlag}&postid=${postId}&userid=${userId}&submitday=${submitDay}&imageexist=${imageExist}&updateflag=update`
-        router.push('/posts/postEdit'+queryParam , '/posts/postEdit')
-
+        postCategory==='common'
+        ?router.push('/posts/postEdit'+queryParam , '/posts/postEdit')
+        :router.push('/posts/posting'+queryParam , '/posts/posting')
        };
        
        const copyUrl = createRef();
@@ -371,7 +371,7 @@ const detailPage  = () =>{
                 <div className='divTableRowTh'>
                   <div className='divTableCellTh'>
                       <Button onClick={()=>deletePost(postFlag,mainPosts_1001Info[0].postId ,mainPosts_1001Info[0].userid,mainPosts_1001Info[0].submitDay)} loading={postDeleting}>삭제</Button>
-                      <Button onClick={()=>updatePost(postFlag,mainPosts_1001Info[0].postId ,mainPosts_1001Info[0].userid,mainPosts_1001Info[0].submitDay)}>수정</Button>
+                      <Button onClick={()=>updatePost(postFlag,mainPosts_1001Info[0].postId ,mainPosts_1001Info[0].userid,mainPosts_1001Info[0].submitDay,mainPosts_1001Info[0].postCategory)}>수정</Button>
                   </div>
               </div>
             }
@@ -407,7 +407,7 @@ const detailPage  = () =>{
 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
      <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"1%"}}>
-        <div dangerouslySetInnerHTML={{__html:imageSrc.length > 0 ? contentImages : ''}}/>
+        <div dangerouslySetInnerHTML={{__html:imageSrc.length > 0 && mainPosts_1001Info[0].postCategory==='common' ? contentImages : ''}}/>
      </div> 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
     

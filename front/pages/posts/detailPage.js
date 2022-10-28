@@ -307,7 +307,7 @@ const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hell
 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
      <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:"1%"}}>
-        <div dangerouslySetInnerHTML={{__html:imageSrc.length > 0 ? contentImages : ''}}/>
+        <div dangerouslySetInnerHTML={{__html:imageSrc.length > 0 && mainPosts_1001Info[0].postCategory==='common' ? contentImages : ''}}/>
      </div> 
     {/*상세 페이지 이미지--------------------------------------------------------------------------------*/}
     

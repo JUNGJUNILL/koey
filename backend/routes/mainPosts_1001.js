@@ -269,7 +269,7 @@ router.post('/mainPosts_1001Comments', async (req,res,next)=>{
 router.post('/postInsert', async (req,res,next)=>{
 
     try{
-        let {content,title,userNickName,postFlag,imageFileName,userid,preview} = req.body.data; 
+        let {content,title,userNickName,postFlag,imageFileName,userid,preview,postCategory} = req.body.data; 
 
         const _title   = decodeURIComponent(title); 
         const _content = decodeURIComponent(content); 
@@ -278,6 +278,7 @@ router.post('/postInsert', async (req,res,next)=>{
         const _userid   =decodeURIComponent(userid); 
         const _imageFileName =imageFileName;
         const _preview =preview;
+        const _postCategory =postCategory; 
       
         let stringQuery;
             stringQuery=''; 
@@ -287,7 +288,8 @@ router.post('/postInsert', async (req,res,next)=>{
             stringQuery =stringQuery.concat(`'${_userNickName}',`); 
             stringQuery =stringQuery.concat(`'${_postFlag}',`);
             stringQuery =stringQuery.concat(`'${_userid}',`); 
-            stringQuery =stringQuery.concat(`'${_preview}')`);
+            stringQuery =stringQuery.concat(`'${_preview}',`); 
+            stringQuery =stringQuery.concat(`'${_postCategory}')`);
             
   
       
