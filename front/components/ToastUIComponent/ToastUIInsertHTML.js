@@ -20,7 +20,7 @@ const ToastUIInsertHTML =forwardRef(({postFlag,imageFileName,imageSrc,imgClick,u
                 let imgName=_updateFlag ? v.src : v; 
 
                 imageUrl+=process.env.NODE_ENV==='production' 
-                ?`${AWSImageUrl}/images/${postFlag}/${imgName}}` //실서버
+                ?`${AWSImageUrl}/images/${postFlag}/${imgName}` //실서버
                 :`${backImageUrl}/${postFlag}/${imgName}`       //로컬 
 
                 imgHTML+=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
