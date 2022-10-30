@@ -63,7 +63,7 @@ const ImageUploadComponentToastUI = ({postFlag,updateFlag,imageFileName,removeIm
             </div>
         ))}
         <br />
-        {imagefilename.length!==0 &&
+        {(updateflag!=='update' && imagefilename.length!==0) && 
             <div style={{display:'inline-block'}} >
                 <div style={{marginTop:'2%',textAlign:'center'}}>
                     <input type="checkbox" value={preview} onChange={()=>checkPreviewOption()} /> 미리보기 방지

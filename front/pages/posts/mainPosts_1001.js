@@ -1,7 +1,7 @@
 
 import React , {useState,useEffect,useCallback,useRef}from 'react'
 import {Button,Input,Select } from 'antd'
-import {EditOutlined} from '@ant-design/icons'
+import {EditOutlined,FormOutlined} from '@ant-design/icons'
 const { Option } = Select;
 const { Search } = Input;
 import { useRouter } from 'next/router';
@@ -189,9 +189,8 @@ const mainPosts_1001 = ()=>{
       <Option value={'userNickName'}>작성자</Option>
     </Select>
     &nbsp;
-    <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'40%'}} /> 
-    {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
-    {userInfo && <Button  onClick={gotoEditToastUI} style={{marginTop:'3%',float:'right'}}><EditOutlined /> ToastUI</Button>}
+    <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
+
      {/*구글 광고*/}
      {posf &&  <GooleAds_header />}
  
@@ -268,7 +267,8 @@ const mainPosts_1001 = ()=>{
                   postFlag={posf} 
                   searchValue={searchValue} 
                   searchCondition={searchCondition}/>
-
+    {userInfo && <Button  onClick={gotoEdit}  style={{marginTop:'3%',float:'right'}}><EditOutlined />글쓰기(일반)</Button>}
+    {userInfo && <Button  onClick={gotoEditToastUI}  style={{marginTop:'3%',float:'left'}}><FormOutlined />블로그형</Button>}
       {/*구글 광고*/}
       {posf && <GooleAds_footer />}
 

@@ -333,7 +333,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content.replaceAll('<br />','\n')} onChange={onChangeContent} rows={10} />
         <div style={{marginTop:'2%',textAlign:'center'}}>
             <Button onClick={onClickImageUpload} >    <PictureOutlined />    </Button>&nbsp;
-            <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp;
+            {/* <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp; */}
             <Button type="primary" onClick={contentSummit} loading={imageUploading | postInserting}>  submit  </Button>
        </div> 
        <br/>
