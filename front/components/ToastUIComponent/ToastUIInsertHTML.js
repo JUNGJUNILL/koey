@@ -18,7 +18,7 @@ const ToastUIInsertHTML =forwardRef(({postFlag,imageFileName,imageSrc,imgClick,u
         imagefilename.map((v,i)=>{
             if(i >= imgArrayLength){
                 let imgName=_updateFlag ? v.src : v; 
-
+                console.log("vvvv=>", v); 
                 imageUrl+=process.env.NODE_ENV==='production' 
                 ?`${AWSImageUrl}/images/${postFlag}/${imgName}` //실서버
                 :`${backImageUrl}/${postFlag}/${imgName}`       //로컬 
