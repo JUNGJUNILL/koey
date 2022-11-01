@@ -24,7 +24,8 @@ const AppLayOut = ({children}) =>{
                           { categoryName:'좋소!탈출',posf:'1005'},     
                           { categoryName:'좋소!희망편',posf:'1006'},     
                           { categoryName:'경제적 자유',posf:'1007'},     
-                          { categoryName:'자기계발',posf:'1008'},     
+                          { categoryName:'자기계발',posf:'1008'}, 
+                              
                           { categoryName:'상식/정보',posf:'1009'},     
                           { categoryName:'핫딜/광고',posf:'1010'},     
                           { categoryName:'운영진 요청사항',posf:'1011'},     
