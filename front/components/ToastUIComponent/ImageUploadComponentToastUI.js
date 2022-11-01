@@ -9,7 +9,6 @@ const ImageUploadComponentToastUI = ({postFlag,updateFlag,imageFileName,removeIm
     const posf = postFlag;
     const updateflag = updateFlag?updateFlag:'';
     const imagefilename = imageFileName; 
-    const {imageSrc} = useSelector((state)=>state.mainPosts_1001); 
     return(
 
          <div style={{textAlign:'center'}}>

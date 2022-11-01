@@ -324,7 +324,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 
             case MAINPOST_1001_INSERT_SUCCESS: {
                 draft.postInserting = false; 
-
+                draft.imageFileName = [];  
                 break; 
             }
 

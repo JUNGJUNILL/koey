@@ -264,7 +264,6 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
     return(
             <>
-            <p>{updateFlag}</p>
             {/*이미지 업로드 하면 본문에 바로 추가 해주는 로직이 들어간 컴포넌트 */}
              <ToastUIInsertHTML postFlag={posf} imageFileName={imageFileName} imageSrc={imageSrc} imgClick={imgClick} ref={editorRef} updateFlag={updateFlag}/>           
             {/*업로드 버튼 눌렀을 때*/}
