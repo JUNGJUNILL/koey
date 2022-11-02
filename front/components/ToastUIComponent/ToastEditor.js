@@ -182,7 +182,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
         //본문에 이미지 삽입
         const insertImage =(v)=>{
             let imageUrl =process.env.NODE_ENV==='production' 
-                            ?`${AWSImageUrl}/images/${posf}/${v}}` //실서버
+                            ?`${AWSImageUrl}/images/${posf}/${v}` //실서버
                             :`${backImageUrl}/${posf}/${v}`       //로컬 
             let  imgHTML=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
             const html = editorRef.current.getInstance().getHTML();
