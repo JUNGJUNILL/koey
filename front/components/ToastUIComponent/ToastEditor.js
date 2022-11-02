@@ -154,7 +154,6 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
         }else{
            
             const updateflag = updateFlag?updateFlag:'';
-            console.log('updateflag=>', updateflag); 
             dispatch({type:UPLOAD_IMAGES_REQUEST,
                 data:{images:imageFormData,
                      postFlag:posf,
@@ -181,12 +180,18 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
         //본문에 이미지 삽입
         const insertImage =(v)=>{
-            let imageUrl =process.env.NODE_ENV==='production' 
-                            ?`${AWSImageUrl}/images/${posf}/${v}` //실서버
-                            :`${backImageUrl}/${posf}/${v}`       //로컬 
-            let  imgHTML=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
-            const html = editorRef.current.getInstance().getHTML();
-            editorRef.current.getInstance().setHTML(html.concat(imgHTML));          
+            try{
+
+                let imageUrl =process.env.NODE_ENV==='production' 
+                                ?`${AWSImageUrl}/images/${posf}/${v}` //실서버
+                                :`${backImageUrl}/${posf}/${v}`       //로컬 
+                let  imgHTML=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
+                const html = editorRef.current.getInstance().getHTML();
+                editorRef.current.getInstance().setHTML(html.concat(imgHTML));  
+           
+            }catch(e){
+                alert(e)
+            }
 
         }
 
@@ -282,7 +287,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             placeholder='하고 싶은 이야기'
             toolbarItems={[
                 // 툴바 옵션 설정
-                ['heading', 'bold', 'italic', 'strike'],
+                [ 'bold', 'italic','strike','heading'],
                // ['image', 'link'],
                 
                //커스텀 툴바
