@@ -183,7 +183,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             try{
 
                 let imageUrl =process.env.NODE_ENV==='production' 
-                                ?`${AWSImageUrl}/images/${posf}/${v}` //실서버
+                                ?`${v}` //실서버
                                 :`${backImageUrl}/${posf}/${v}`       //로컬 
                 let  imgHTML=`<p><img src="${imageUrl}" contenteditable="false"><br></p>`
                 const html = editorRef.current.getInstance().getHTML();
