@@ -6,6 +6,14 @@ import { useRouter } from 'next/router'
 
 import {Editor} from '@toast-ui/react-editor'; 
 import '@toast-ui/editor/dist/toastui-editor.css';
+
+import fontSize from "tui-editor-plugin-font-size";
+import "tui-editor-plugin-font-size/dist/tui-editor-plugin-font-size.css";
+
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
+
 import 
     {
         MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
@@ -285,9 +293,12 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             initialEditType="wysiwyg"
             useCommandShortcut={true}
             placeholder='하고 싶은 이야기'
+        
+
             toolbarItems={[
                 // 툴바 옵션 설정
-                [ 'bold', 'italic','strike','heading'],
+                [ 'bold', 'italic','heading','strike'],
+                
                // ['image', 'link'],
                 
                //커스텀 툴바
@@ -301,8 +312,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
                     }
                 ]
               ]}
-              
-
+              plugins={[[colorSyntax,{preset:['#ff0000','#0300ff','#00deff']}],fontSize]}
             />
 
             <br/>
