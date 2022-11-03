@@ -294,25 +294,21 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             useCommandShortcut={true}
             placeholder='하고 싶은 이야기'
         
-
+            plugins={[[colorSyntax,{preset:['#ff0000','#0300ff','#00deff']}],fontSize]}
             toolbarItems={[
-                // 툴바 옵션 설정
-                [ 'bold', 'italic','heading','strike'],
-                
+            
                // ['image', 'link'],
-                
-               //커스텀 툴바
-                [
-                    {
+                // 툴바 옵션 설정
+                [{
 
-                    name: 'myItem',
-                    tooltip: 'image',
-                     el:createLastButton(), 
-                    text:'사진',
-                    }
-                ]
+                name: 'myItem',
+                tooltip: 'image',
+                    el:createLastButton(), 
+                text:'사진',
+                },'bold', 'italic','heading','strike'],
+                
               ]}
-              plugins={[[colorSyntax,{preset:['#ff0000','#0300ff','#00deff']}],fontSize]}
+            
             />
 
             <br/>
