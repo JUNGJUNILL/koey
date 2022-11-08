@@ -183,7 +183,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
                        postFlag:posf,
                        userid:encodeURIComponent(userid),
                        preview:previewCheck,
-                       tags:tagString,
+                       tags:encodeURIComponent(tagString),
                        postCategory : 'common'
                        
                },

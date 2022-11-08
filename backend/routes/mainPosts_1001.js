@@ -279,7 +279,7 @@ router.post('/postInsert', async (req,res,next)=>{
         const _imageFileName =imageFileName;
         const _preview =preview;
         const _postCategory =postCategory; 
-        const _tags =tags; 
+        const _tags =decodeURIComponent(tags); 
       
         let stringQuery;
             stringQuery=''; 
