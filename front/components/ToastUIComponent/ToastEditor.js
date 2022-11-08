@@ -14,6 +14,8 @@ import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 
+import TagsComponent from '../../components/mainPosts_1001/TagsComponent';
+
 import 
     {
         MAINPOST_1001_IMAGENAME_REMOVE_REQUEST,
@@ -40,7 +42,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
 
 
     const {userInfo,userid} = useSelector((state)=>state.auth); 
-    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc} = useSelector((state)=>state.mainPosts_1001); 
+    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc,tags} = useSelector((state)=>state.mainPosts_1001); 
     const [preview,setPreview] = useState(false);
     const [title,setTtile] = useState(updateFlag==='update'? mainPosts_1001Info[0].title:''); 
 
@@ -250,7 +252,19 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             //게시글 INSERT
             }else{
                 
-                const previewCheck =preview?'Y':'N';  
+                const previewCheck =preview?'Y':'N'; 
+
+                let tagString =''; 
+                if(tags.length>0){
+                    tags.map((v,i)=>{
+                        if(tags.length-1==i){
+                            tagString+=v; 
+                        }else{
+                            tagString+=v+','; 
+                        }
+                      
+                    });
+                }
 
                 dispatch({
                     type: MAINPOST_1001_INSERT_REQUEST,
@@ -261,6 +275,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
                         postFlag:posf,
                         userid:encodeURIComponent(userid),
                         preview:previewCheck,
+                        tags:tagString,
                         postCategory : 'blog'
                         
                 },
@@ -312,12 +327,12 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             />
 
             <br/>
+            <TagsComponent />
 
             <ImageUploadComponentToastUI postFlag={posf} updateFlag={updateFlag} imageFileName={imageFileName} removeImage={removeImage} removeImageName={removeImageName} checkPreviewOption={checkPreviewOption} insertImage={insertImage} preview={preview} />
             <div style={{marginTop:'2%',textAlign:'center'}}>
                 <Button type="primary" onClick={contentSummit} loading={imageUploading | postInserting}>  submit  </Button>
             </div>
-
 
           
 

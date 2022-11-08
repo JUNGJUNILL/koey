@@ -23,6 +23,8 @@ export const  initialState = {
     postDeleting : false,
     postDeleteMessage:'',
 
+    tags:[], //게시물 태그 
+
 
 }
 
@@ -108,6 +110,13 @@ export const MAINPOSTS_REMOVE_FAILURE='MAINPOSTS_REMOVE_FAILURE';
 export const MAINPOSTS_UPDATE_REQUEST='MAINPOSTS_UPDATE_REQUEST';
 export const MAINPOSTS_UPDATE_SUCCESS='MAINPOSTS_UPDATE_SUCCESS';
 export const MAINPOSTS_UPDATE_FAILURE='MAINPOSTS_UPDATE_FAILURE';
+
+
+//태그입력
+export const MAINPOSTS_INSERT_TAGS ='MAINPOSTS_INSERT_TAGS'; 
+
+//태그 삭제
+export const MAINPOSTS_DELETE_TAGS ='MAINPOSTS_DELETE_TAGS'; 
 
 
 
@@ -450,6 +459,24 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
                 break; 
             }
 //----------------------------------------
+
+
+//태그 입력, 태그 삭제
+//----------------------------------------
+            case MAINPOSTS_INSERT_TAGS: {
+                let tag = action.data.tagsValue; 
+                draft.tags.push(tag); 
+
+                break; 
+            }
+
+            case MAINPOSTS_DELETE_TAGS: {
+                let tag = action.data.tagsValue.replace(',',''); 
+                draft.tags = draft.tags.filter((v, i) => v !== tag);
+                break; 
+            }
+//----------------------------------------
+
 
 
 

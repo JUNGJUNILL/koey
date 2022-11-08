@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect, createRef } from 'react';
 import { useRouter } from 'next/router'
 import wrapper from '../../store/configureStore';
 import {PictureOutlined,PlaySquareOutlined} from '@ant-design/icons'
@@ -9,6 +9,7 @@ import {Button, Input,} from 'antd'
 import { backImageUrl,AWSImageUrl,backUrl } from '../../config/config';
 import secureFilter from   '../../util/secureFilter';
 import ImageUploadComponent from '../../components/mainPosts_1001/ImageUploadComponent';
+import TagsComponent from '../../components/mainPosts_1001/TagsComponent';
 
 import 
     {
@@ -30,8 +31,12 @@ import
         MAINPOST_1001_IMAGES_REQUEST,
         MAINPOST_1001_IMAGE_REMOVE_REQUEST
     } 
-from '../../reducers/mainPosts_1001'; 
+from '../../reducers/mainPosts_1001';
+
+
 const { TextArea } = Input;
+
+
 
 
 
@@ -39,7 +44,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
 
     const dispatch = useDispatch(); 
-    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc} = useSelector((state)=>state.mainPosts_1001); 
+    const {imageUploading,imageFileName,postInserting, mainPosts_1001Info,imageSrc,tags} = useSelector((state)=>state.mainPosts_1001); 
     const {userInfo,userid} = useSelector((state)=>state.auth); 
     const refTitle = useRef(); 
     const refContent = useRef(); 
@@ -121,7 +126,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         const filteredContent = secureFilter(content); 
         const filteredTitle   = secureFilter(title); 
         const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        console.log('hello=',hello); 
+        
         //게시글 UPDATE
         if(updateFlag && updateFlag==='update'){
              
@@ -156,7 +161,19 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         //게시글 INSERT
         }else{
             const previewCheck =preview?'Y':'N';  
-            
+
+            let tagString =''; 
+            if(tags.length>0){
+                tags.map((v,i)=>{
+                    if(tags.length-1==i){
+                        tagString+=v; 
+                    }else{
+                        tagString+=v+','; 
+                    }
+                  
+                });
+            }
+
             dispatch({
                 type: MAINPOST_1001_INSERT_REQUEST,
                 data: {content:encodeURIComponent(hello),
@@ -166,6 +183,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
                        postFlag:posf,
                        userid:encodeURIComponent(userid),
                        preview:previewCheck,
+                       tags:tagString,
                        postCategory : 'common'
                        
                },
@@ -331,11 +349,18 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
              */}
         <Input placeholder='제목을 입력하세요' ref={refTitle} value={title} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
         <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content.replaceAll('<br />','\n')} onChange={onChangeContent} rows={10} />
+        <TagsComponent />
+      
+       
+
+
+
         <div style={{marginTop:'2%',textAlign:'center'}}>
             <Button onClick={onClickImageUpload} >    <PictureOutlined />    </Button>&nbsp;
             {/* <Button onClick={onClickVideoUpload} >    <PlaySquareOutlined />    </Button>&nbsp; */}
             <Button type="primary" onClick={contentSummit} loading={imageUploading | postInserting}>  submit  </Button>
        </div> 
+
        <br/>
 
         <ImageUploadComponent postFlag={posf} updateFlag={updateFlag} imageFileName={imageFileName} removeImage={removeImage} removeImageName={removeImageName} checkPreviewOption={checkPreviewOption} preview={preview}/>
