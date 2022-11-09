@@ -220,6 +220,17 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             const filteredContent = editorRef.current.getInstance().getHTML(); 
             const filteredTitle   = secureFilter(title); 
             const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+            let tagString =''; 
+            if(tags.length>0){
+                tags.map((v,i)=>{
+                    if(tags.length-1==i){
+                        tagString+=v; 
+                    }else{
+                        tagString+=v+','; 
+                    }
+                  
+                });
+            }
 
             //게시글 UPDATE
             if(updateFlag && updateFlag==='update'){
@@ -233,6 +244,7 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
                         title:encodeURIComponent(filteredTitle),
                         content:encodeURIComponent(hello),
                         imageSrc:imageSrc,
+                        tags:encodeURIComponent(tagString),
                         
                 },
         
@@ -253,18 +265,6 @@ const ToastEditor =({posf,postId,userId,submitDay,imageExist,updateFlag})=>{
             }else{
                 
                 const previewCheck =preview?'Y':'N'; 
-
-                let tagString =''; 
-                if(tags.length>0){
-                    tags.map((v,i)=>{
-                        if(tags.length-1==i){
-                            tagString+=v; 
-                        }else{
-                            tagString+=v+','; 
-                        }
-                      
-                    });
-                }
 
                 dispatch({
                     type: MAINPOST_1001_INSERT_REQUEST,

@@ -376,6 +376,7 @@ router.post('/postUpdate', async (req,res,next)=>{
              title,
              content,
              imageSrc,
+             tags
             } = req.body.data; 
             
           
@@ -387,6 +388,7 @@ router.post('/postUpdate', async (req,res,next)=>{
             const _title   = decodeURIComponent(title); 
             const _content = decodeURIComponent(content);
             const _imageSrc =imageSrc; 
+            const _tags = decodeURIComponent(tags);
 
             let stringQuery=''; 
                 //게시글 수정 시 추가된 이미지 insert 
@@ -411,7 +413,8 @@ router.post('/postUpdate', async (req,res,next)=>{
             stringQuery =stringQuery.concat(`'${_userid}',`); 
             stringQuery =stringQuery.concat(`'${_submitDay}',`); 
             stringQuery =stringQuery.concat(`'${_title}',`); 
-            stringQuery =stringQuery.concat(`'${_content}')`);
+            stringQuery =stringQuery.concat(`'${_content}',`); 
+            stringQuery =stringQuery.concat(`'${_tags}')`);
 
         console.log(stringQuery); 
         await pool.query(stringQuery); 

@@ -187,6 +187,7 @@ const mainPosts_1001 = ()=>{
       <Option value={'title'}>제목</Option>
       <Option value={'title_content'}>제목+내용</Option>
       <Option value={'userNickName'}>작성자</Option>
+      <Option value={'tags'}>해시태그</Option>
     </Select>
     &nbsp;
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 

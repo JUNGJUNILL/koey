@@ -114,7 +114,7 @@ const detailPage  = () =>{
          imageSrc,
 
          postDeleting,
-         postDeleteMessage
+         tags, 
         } = useSelector((state)=>state.mainPosts_1001); 
 
 
@@ -337,12 +337,18 @@ const detailPage  = () =>{
 
       }
 
+       const searchTags=(v)=>{
+
+        router.push(`/posts/mainPosts_1001?nowPage=1&posf=${postFlag}&searchValue=${v}&searchCondition=tags`);
+
+      }
+
+
     return (
       
     <div >
     {/*구글 광고*/}       
     {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
-  
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
@@ -435,6 +441,14 @@ const detailPage  = () =>{
     </div>
     <br />
     {/*좋아요 싫어요 버튼--------------------------------------------------------------------------------*/}
+
+    {/*태그 정보--------------------------------------------------------------------------------*/}
+    <div style={{padding:'3%'}}>
+      {tags.length > 0 && tags.map((v)=>(
+        <div style={{display:'inline-block'}}><Button size='small' onClick={()=>searchTags(v)}>#{v}</Button>&nbsp;</div>
+      ))}
+    </div>
+    {/*태그 정보--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
     {mainPosts_1001Info && <GoogleAds_DetailPage />}
