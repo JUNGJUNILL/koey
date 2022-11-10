@@ -23,6 +23,7 @@ const HeaderComponenet =({posf,title,image,contents,preview,writer})=>{
     return(
         <div>  
             <Head>
+                    <title>{title} - 중소기업 정보전문 사이트</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" ></meta>
                     <meta name="robots" content="index,follow" ></meta>
                     <meta name="writer" conmtent={writer} ></meta>

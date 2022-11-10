@@ -30,7 +30,7 @@ class MyDocument extends Document {
     
         </Head>
         <body>
-          <title>좋소!</title>
+          <title>중소기업 정보전문 사이트 - 좋소</title>
           <Main />
           <NextScript />
         </body>
