@@ -11,7 +11,7 @@ class MyDocument extends Document {
       <Html>
         <Head> 
         <meta charSet="utf-8" />
-        <meta name="robots" content='index,follow' />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
         <meta name ="author" content="JJI" />
         <meta name ="reply-to" content="devjji1207@gmail.com" />
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
