@@ -125,7 +125,8 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
 
         const filteredContent = secureFilter(content); 
         const filteredTitle   = secureFilter(title); 
-        const hello = filteredContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+        const hello = filteredContent.replaceAll(/(?:\r\n|\r|\n)/g, '<br />');
+
         let tagString =''; 
         if(tags.length>0){
             tags.map((v,i)=>{
@@ -173,8 +174,6 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
         //게시글 INSERT
         }else{
             const previewCheck =preview?'Y':'N';  
-
-
 
             dispatch({
                 type: MAINPOST_1001_INSERT_REQUEST,
@@ -350,7 +349,7 @@ const postEdit = ({posf,postId,userId,submitDay,imageExist,updateFlag}) =>{
             <input type="file" name="video" multiple hidden ref={videoInput} accept={'.mp4'} onChange={onClickVideoUpload}/>
              */}
         <Input placeholder='제목을 입력하세요' ref={refTitle} value={title} onChange={onChangeTtitle} style={{marginBottom:'2%'}}/>
-        <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={content.replaceAll('<br />','\n')} onChange={onChangeContent} rows={10} />
+        <TextArea placeholder='하고 싶은 이야기' ref={refContent} value={updateFlag && updateFlag==='update' ? content.replaceAll('<br />','\n'):content} onChange={onChangeContent} rows={10} />
         <TagsComponent />
       
        

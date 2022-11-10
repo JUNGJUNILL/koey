@@ -207,7 +207,10 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
             case MAINPOSTS_1001_DETAIL_INFO_SUCCESS: {
 
                 draft.mainPosts_1001Info.length=0; 
-                draft.tags = action.data[0].tags.split(','); 
+                let tagExists = action.data[0].tags.length; 
+                if(tagExists!==0){
+                    draft.tags = action.data[0].tags.split(','); 
+                }
                 
                 //배열 초기화
                 action.data.forEach((v)=>{
