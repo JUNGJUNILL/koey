@@ -93,7 +93,7 @@ const AppLayOut = ({children}) =>{
         <header className="hd">
         <h1 className="h1">
                
-        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/koielogo.jpg`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
+        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/sitelogo.png`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
 	    </h1>
 
         <div className="fr" style={{marginRight:"-5px"}}>
