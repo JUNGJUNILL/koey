@@ -201,6 +201,7 @@ const reducer = (state = initialState, action) => immerProduce(state, (draft) =>
 //게시글 상세 페이지 가져오기 
 //----------------------------------------
             case MAINPOSTS_1001_DETAIL_INFO_REQUEST: {
+                draft.tags.length=0; 
                 break; 
             }
 
