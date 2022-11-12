@@ -115,7 +115,7 @@ const mainPosts_1001 = ()=>{
  
   //게시글 상세 페이지 
   const gotoDetail = useCallback((postId,userId,postFlag,submitDay,userNickName)=>{
-    router.push({pathname:'/posts/detailPage',
+    router.push({pathname:'/posts/[detailPage]',
                   query:{detailPage:'detailPage', 
                          postId:postId,
                          postFlag:postFlag,
