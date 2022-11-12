@@ -193,7 +193,7 @@ const mainPosts_1001 = ()=>{
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
 
      {/*구글 광고*/}
-     {posf &&  <GooleAds_header />}
+     <GooleAds_header />
  
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
@@ -271,7 +271,7 @@ const mainPosts_1001 = ()=>{
     {userInfo && <Button  onClick={gotoEdit}  style={{marginTop:'3%',float:'right'}}><EditOutlined />글쓰기(일반)</Button>}
     {userInfo && <Button  onClick={gotoEditToastUI}  style={{marginTop:'3%',float:'left'}}><FormOutlined />블로그형</Button>}
       {/*구글 광고*/}
-      {posf && <GooleAds_footer />}
+      <GooleAds_footer />
 
 
     </div>

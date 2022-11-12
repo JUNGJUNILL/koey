@@ -347,8 +347,8 @@ const detailPage  = () =>{
     return (
       
     <div >
-    {/*구글 광고*/}       
-    {mainPosts_1001Info && <GooleAds_DetailPage_Top />}
+    {/*구글 광고*/
+    <GooleAds_DetailPage_Top />}       
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
@@ -451,7 +451,7 @@ const detailPage  = () =>{
     {/*태그 정보--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    {mainPosts_1001Info && <GoogleAds_DetailPage />}
+    <GoogleAds_DetailPage />
     <br/>
 
 
@@ -514,7 +514,7 @@ const detailPage  = () =>{
     {/*댓글 리스트--------------------------------------------------------------------------------*/}
     
     {/*구글 광고*/}
-    {mainPosts_1001Info && <GooleAds_comment_footer />}
+    <GooleAds_comment_footer />
     </div>
         )
 }
