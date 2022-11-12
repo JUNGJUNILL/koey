@@ -3,12 +3,14 @@ import React , {useEffect}from 'react'
 
 const GooleAds_header =() =>{
     useEffect(()=>{
-        const ads = document.getElementsByClassName("adsbygoogle").length;
-        for (let i = 0; i < ads; i++) {
-          try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          } catch (e) { }
+
+        setTimeout(()=>{
+            console.log('디테일');
+            if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
         }
+               
+        ,1500)
+
     },[])
     return (
         <>
