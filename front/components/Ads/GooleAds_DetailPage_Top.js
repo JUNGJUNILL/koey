@@ -2,10 +2,7 @@ import React , {useEffect}from 'react'
 
 
 const GooleAds_DetailPage_Top = () =>{
-    useEffect(()=>{
-        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
 
-    },[])
 
 
     return (

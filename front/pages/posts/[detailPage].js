@@ -47,6 +47,7 @@ const detailPage  = () =>{
   let who       = userid;        //현재 로그인한 사람의 아이디값
 
   useEffect(()=>{
+    if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
 
     //url을 브라우져 주소창에 바로 입력 후 엔터 쳤을 때 에러 뜨는거 해결하는 로직 
     //if(!detailPage){

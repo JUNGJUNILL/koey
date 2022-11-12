@@ -2,11 +2,6 @@ import React , {useEffect}from 'react'
 
 const GooleAds_comment_footer =() =>{
 
-    useEffect(()=>{
-        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
-
-    },[])
-
     return (
             <ins className="adsbygoogle"
             style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px'}}
