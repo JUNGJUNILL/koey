@@ -24,6 +24,8 @@ import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl } from '../../config/config';
 
+import GooleAds_footer from '../../components/Ads/GooleAds_footer';
+import GooleAds_header from '../../components/Ads/GooleAds_header';
 
 
 
@@ -129,7 +131,7 @@ const mainPosts_1001 = ()=>{
    return (
     <div>
     
-  
+    <GooleAds_footer />
     &nbsp;<Search placeholder="input search text" onSearch={onSearch} style={{marginTop:'3%',width:'50%'}} /> 
     {userInfo && <Button  onClick={gotoEdit} style={{marginTop:'3%',float:'right'}}><EditOutlined /> Write</Button>}
 
@@ -183,7 +185,7 @@ const mainPosts_1001 = ()=>{
 
   
       <Pagenation pagenate={pagenate} dataLength={mainPosts_1001.length} postsPerPage={postsPerPage} nowPage={nowPage} groupPage={groupPage} groupPageArray={nowGroupPageArray} />
-
+      <GooleAds_header />
     </div>
     );
 }; 
