@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import { useEffect } from 'react'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -7,6 +8,18 @@ class MyDocument extends Document {
   }
 
   render() {
+
+        useEffect(() => {
+          var ads = document.getElementsByClassName("adsbygoogle").length;
+          for (var i = 0; i < ads; i++) {
+            try {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (e) { }
+          }
+      }, []);
+
+
+
     return (
       <Html>
         <Head> 
@@ -15,8 +28,11 @@ class MyDocument extends Document {
         <meta name ="author" content="JJI" />
         <meta name ="reply-to" content="devjji1207@gmail.com" />
         <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-         {/*구글에드 센스_20210902*/}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"/>
+         {/*구글에드 센스_20210902*/}
+         
+         {/* 
+        
         <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -26,7 +42,9 @@ class MyDocument extends Document {
             });
               `
         }}/>
-   
+      */}     
+
+    
     
         </Head>
         <body>
