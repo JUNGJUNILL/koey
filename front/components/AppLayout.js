@@ -115,7 +115,7 @@ const AppLayOut = ({children}) =>{
            {/*  <Link href={{pathname:'/tools/arrearsofwages'}}><a>임금채불 사업장</a></Link> */}
         </nav>
         {/*구글광고*/}
-        <GooleAds_header />
+        {mainPosts_1001 && <GooleAds_header />}
                 
 
     {children}
