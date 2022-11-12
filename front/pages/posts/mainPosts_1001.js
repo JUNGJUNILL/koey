@@ -110,6 +110,10 @@ const mainPosts_1001 = ()=>{
           
 
   },[pages,posf,searchValueParam,searchConditionParam]); 
+
+  useEffect(()=>{
+    if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
+  },[])
  
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
