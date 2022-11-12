@@ -15,6 +15,7 @@ import
     {LOGOUT_REQUEST,} 
 from '../reducers/auth'
 
+import GooleAds_footer from './Ads/GooleAds_footer';
 
 const AppLayOut = ({children}) =>{
     const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
@@ -116,6 +117,7 @@ const AppLayOut = ({children}) =>{
 
     
     <footer>
+        <GooleAds_footer />        
         <div className="footerSub" />
         <div className="footer">
             <b>좋소? 좋좋소!</b>

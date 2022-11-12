@@ -256,8 +256,7 @@ const mainPosts_1001 = ()=>{
                   </div>
               </div>
             ))}
-            {/*구글 광고*/}
-            <GooleAds_footer />
+
 
       </div>
    
