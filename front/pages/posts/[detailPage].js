@@ -347,7 +347,6 @@ const detailPage  = () =>{
       
     <div >
     {/*구글 광고*/} 
-    {mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>}
     {/*mainPosts_1001Info.length > 0 && <GooleAds_DetailPage_Top/>*/}
            
 
@@ -452,7 +451,7 @@ const detailPage  = () =>{
     {/*태그 정보--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    {/*mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>*/}
+    {mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>}
     <br/>
 
 

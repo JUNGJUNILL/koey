@@ -944,7 +944,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const keyword07='';
     const keyword08='';
     const keyword09='';
-    const keyword10='';
+    const keyword10='123';
 
     return {
         props: {

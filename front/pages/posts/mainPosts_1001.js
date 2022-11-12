@@ -258,7 +258,7 @@ const mainPosts_1001 = ()=>{
               </div>
             ))}
             {/*구글 광고*/}
-            {mainPosts_1001.length > 0 && <GooleAds_header />}
+            {/*mainPosts_1001.length > 0 && <GooleAds_header />*/}
       </div>
    
       <Pagenation pagenate={pagenate} 
