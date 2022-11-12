@@ -3,12 +3,8 @@ import React , {useEffect}from 'react'
 const GooleAds_comment_footer =() =>{
 
     useEffect(()=>{
-        const ads = document.getElementsByClassName("adsbygoogle").length;
-        for (let i = 0; i < ads; i++) {
-          try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          } catch (e) { }
-        }
+        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
+
     },[])
 
     return (
