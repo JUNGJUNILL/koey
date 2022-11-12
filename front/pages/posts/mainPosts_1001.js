@@ -21,7 +21,7 @@ import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
 import GooleAds_footer from '../../components/Ads/GooleAds_footer';
 import GooleAds_header from '../../components/Ads/GooleAds_header';
-
+import Nossr from '../../components/Ads/Nossr';
 
 const mainPosts_1001 = ()=>{
   const myRef = useRef(null);
@@ -193,10 +193,10 @@ const mainPosts_1001 = ()=>{
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
 
      {/*구글 광고*/}
-     {(mainPosts_1001 && mainPosts_1001.length>0) && <GooleAds_header />}
+     {mainPosts_1001 && <Nossr />}
  
       <div className="divTable">
-            {mainPosts_1001.map((v,i)=>(
+            {mainPosts_1001 && mainPosts_1001.map((v,i)=>(
                 <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userid,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
                <div className='divTableImageCell'>
                   <div className="divImageCell">
@@ -258,7 +258,8 @@ const mainPosts_1001 = ()=>{
               </div>
             ))}
             {/*구글 광고*/}
-            {(mainPosts_1001 && mainPosts_1001.length>0) && <GooleAds_header />}
+            {mainPosts_1001 && <Nossr />}
+            
       </div>
    
       <Pagenation pagenate={pagenate} 
