@@ -110,10 +110,6 @@ const mainPosts_1001 = ()=>{
           
 
   },[pages,posf,searchValueParam,searchConditionParam]); 
-
-  useEffect(()=>{
-    if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
-  },[])
  
   /*-------------------------------------------페이징 처리 로직   end-------------------------------------------------------*/
 
@@ -261,6 +257,8 @@ const mainPosts_1001 = ()=>{
                   </div>
               </div>
             ))}
+            {/*구글 광고*/}
+            {mainPosts_1001.length > 0 && <GooleAds_header />}
       </div>
    
       <Pagenation pagenate={pagenate} 
@@ -274,8 +272,7 @@ const mainPosts_1001 = ()=>{
                   searchCondition={searchCondition}/>
     {userInfo && <Button  onClick={gotoEdit}  style={{marginTop:'3%',float:'right'}}><EditOutlined />글쓰기(일반)</Button>}
     {userInfo && <Button  onClick={gotoEditToastUI}  style={{marginTop:'3%',float:'left'}}><FormOutlined />블로그형</Button>}
-      {/*구글 광고*/}
-      {mainPosts_1001.length > 0 && <GooleAds_footer />}
+
 
 
 

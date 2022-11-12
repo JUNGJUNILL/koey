@@ -3,6 +3,11 @@ import React , {useEffect}from 'react'
 
 const GooleAds_header =() =>{
 
+    useEffect(()=>{
+        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
+
+    },[])
+    
     return (
         <>
             <ins className="adsbygoogle"
