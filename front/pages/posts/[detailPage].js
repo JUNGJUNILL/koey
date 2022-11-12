@@ -453,7 +453,7 @@ const detailPage  = () =>{
     {/*태그 정보--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    {mainPosts_1001Info.length > 0 && <GooleAds_DetailPaage/>}
+    {mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>}
     <br/>
 
 
