@@ -6,6 +6,9 @@ import wrapper from '../../store/configureStore';
 import {END} from 'redux-saga'; 
 import axios from  'axios'; 
 
+import GooleAds_footer from '../../components/Ads/GooleAds_footer';
+import GooleAds_header from '../../components/Ads/GooleAds_header';
+
 const arrearsofwages = () =>{
 
     const columns =[
@@ -919,7 +922,9 @@ const arrearsofwages = () =>{
 
     return(
         <>
+        <GooleAds_header />
         <Table dataSource={array} columns={columns} />;
+        <GooleAds_footer />
 
         </>
     )
