@@ -193,7 +193,7 @@ const mainPosts_1001 = ()=>{
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
 
      {/*구글 광고*/}
-     {mainPosts_1001.length > 0 && <GooleAds_header />}
+     {router.query.posf && <GooleAds_header />}
  
       <div className="divTable">
             {mainPosts_1001.map((v,i)=>(
