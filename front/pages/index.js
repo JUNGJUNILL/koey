@@ -91,7 +91,8 @@ const Home =()=>{
 
 </Row>
 
-
+    {/*구글 광고*/}
+    <GoogleAds_MainPage01 />
     {/*좋소!*/}
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
@@ -122,9 +123,9 @@ const Home =()=>{
       </List.Item>
     )}
     />
+    {/*구글 광고*/}
+    <GoogleAds_MainPage02 />
 
-  {/*구글 광고*/}
-  <GoogleAds_MainPage01 />
 
     {/*유머*/}
     <List
@@ -247,8 +248,7 @@ const Home =()=>{
       )}
       />
 
-    {/*구글 광고*/}
-    <GoogleAds_MainPage02 />
+
 
    </div>
 
