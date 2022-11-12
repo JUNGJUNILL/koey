@@ -348,8 +348,12 @@ const detailPage  = () =>{
     return (
       
     <div >
-    {/*구글 광고*/
-    <GooleAds_DetailPage_Top />}       
+    {/*구글 광고*/} 
+            <ins className="adsbygoogle"
+            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px',marginTop:'2%'}}
+            data-ad-client={"ca-pub-9160341796142118"}
+            data-ad-slot={"5725163188"}
+            ></ins>      
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
       { mainPosts_1001Info &&
@@ -452,7 +456,12 @@ const detailPage  = () =>{
     {/*태그 정보--------------------------------------------------------------------------------*/}
 
     {/*구글 광고*/}
-    <GoogleAds_DetailPage />
+    <ins className="adsbygoogle"
+                style={{display:'block', textAlign:'center'}}
+                data-ad-layout={"in-article"}
+                data-ad-format={"fluid"}
+                data-ad-client={"ca-pub-9160341796142118"}
+                data-ad-slot={"6162979590"}></ins>
     <br/>
 
 
@@ -515,7 +524,11 @@ const detailPage  = () =>{
     {/*댓글 리스트--------------------------------------------------------------------------------*/}
     
     {/*구글 광고*/}
-    <GooleAds_comment_footer />
+    <ins className="adsbygoogle"
+            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px'}}
+            data-ad-client={"ca-pub-9160341796142118"}
+            data-ad-slot={"2812845805"}
+            ></ins>
     </div>
         )
 }
