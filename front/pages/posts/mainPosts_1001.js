@@ -84,7 +84,7 @@ const mainPosts_1001 = ()=>{
   //02.상세 정보 본 후 뒤로 가기 눌렀을 경우 
   //03.페이지 이동 후 뒤로가기 눌렀을 경우
   useEffect(()=>{
-
+          if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
           //초기에 groupPage 만큼 배열을 생생해 주어야 한다. 
           let pageArray =Array.from({length: groupPage}, (v, i) => i);
 

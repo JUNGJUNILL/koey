@@ -6,6 +6,7 @@ const GoogleAds_MainPage01 =()=>{
 
 
 
+
     return (
         <ins className="adsbygoogle"
             style={{display:'block', marginTop:'3%',marginBottom:'3px',textAlign:'center'}}

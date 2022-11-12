@@ -55,7 +55,7 @@ const detailPage  = () =>{
 
    // }else{
 
-    
+    if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
     //로그인 정보
     dispatch({
       type:LOAD_USER_REQUEST
