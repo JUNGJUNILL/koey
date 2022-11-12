@@ -350,7 +350,7 @@ const detailPage  = () =>{
     <div >
     {/*구글 광고*/} 
             <ins className="adsbygoogle"
-            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px',marginTop:'2%'}}
+            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px',marginTop:'2%',border:'solid 1px'}}
             data-ad-client={"ca-pub-9160341796142118"}
             data-ad-slot={"5725163188"}
             ></ins>      
@@ -457,7 +457,7 @@ const detailPage  = () =>{
 
     {/*구글 광고*/}
     <ins className="adsbygoogle"
-                style={{display:'block', textAlign:'center'}}
+                style={{display:'block', textAlign:'center',border:'solid 1px'}}
                 data-ad-layout={"in-article"}
                 data-ad-format={"fluid"}
                 data-ad-client={"ca-pub-9160341796142118"}
@@ -525,7 +525,7 @@ const detailPage  = () =>{
     
     {/*구글 광고*/}
     <ins className="adsbygoogle"
-            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px'}}
+            style={{display:'block',minWidth:'360px',maxWidth:'970px',width:'100%',height:'90px',border:'solid 1px'}}
             data-ad-client={"ca-pub-9160341796142118"}
             data-ad-slot={"2812845805"}
             ></ins>
