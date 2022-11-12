@@ -115,15 +115,17 @@ const AppLayOut = ({children}) =>{
            {/*  <Link href={{pathname:'/tools/arrearsofwages'}}><a>임금채불 사업장</a></Link> */}
         </nav>
         {/*구글광고*/}
-        {(mainPosts_1001 && mainPosts_1001.length>0) && <GooleAds_header />}
+        <GooleAds_header />        
+        
+      
                 
 
     {children}
 
     
     <footer>
-        {/*구글광고*/}
-        <GooleAds_footer />        
+        {/*구글광고* 잘 되면 넣자./}
+        {/*<GooleAds_footer />*/}
         <div className="footerSub" />
         <div className="footer">
             <b>좋소? 좋좋소!</b>
