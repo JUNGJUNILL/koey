@@ -43,6 +43,10 @@ const Home =()=>{
 
 
   useEffect(()=>{
+
+    if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
+
+
     window.scrollTo(0,window.localStorage.getItem('scrollY')); 
 
   },[])
