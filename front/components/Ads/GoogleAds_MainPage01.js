@@ -4,7 +4,10 @@ import React , {useEffect}from 'react'
 const GoogleAds_MainPage01 =()=>{
 
 
+    useEffect(()=>{
+        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
 
+    },[])
 
 
     return (

@@ -2,7 +2,10 @@ import React , {useEffect}from 'react'
 
 
 const GooleAds_footer =() =>{
+    useEffect(()=>{
+        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
 
+    },[])
 
     return (
         <>

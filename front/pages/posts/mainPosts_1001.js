@@ -271,7 +271,7 @@ const mainPosts_1001 = ()=>{
     {userInfo && <Button  onClick={gotoEdit}  style={{marginTop:'3%',float:'right'}}><EditOutlined />글쓰기(일반)</Button>}
     {userInfo && <Button  onClick={gotoEditToastUI}  style={{marginTop:'3%',float:'left'}}><FormOutlined />블로그형</Button>}
       {/*구글 광고*/}
-      {mainPosts_1001.length > 0 && <GooleAds_footer />}
+      {/* {mainPosts_1001.length > 0 && <GooleAds_footer />}*/}
 
 
 

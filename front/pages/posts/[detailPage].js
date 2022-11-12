@@ -347,7 +347,8 @@ const detailPage  = () =>{
       
     <div >
     {/*구글 광고*/} 
-    {mainPosts_1001Info.length > 0 && <GooleAds_DetailPage_Top/>}
+    {mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>}
+    {/*mainPosts_1001Info.length > 0 && <GooleAds_DetailPage_Top/>*/}
            
 
       {/*메타 테그--------------------------------------------------------------------------------*/}
@@ -514,7 +515,8 @@ const detailPage  = () =>{
     {/*댓글 리스트--------------------------------------------------------------------------------*/}
     
     {/*구글 광고*/}
-    {mainPosts_1001Info.length > 0 && <GooleAds_comment_footer/>}
+    {mainPosts_1001Info.length > 0 && <GoogleAds_DetailPage/>}
+    {/*mainPosts_1001Info.length > 0 && <GooleAds_comment_footer/>*/}
 
     </div>
         )
