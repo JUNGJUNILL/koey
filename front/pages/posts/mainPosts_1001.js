@@ -19,9 +19,6 @@ import isEmpty from '../../util/isEmpty';
 import custumDateFormat from  '../../util/custumDateFormat';
 import { backImageUrl, AWSImageUrl, backUrl,Url } from '../../config/config';
 
-import GooleAds_footer from '../../components/Ads/GooleAds_footer';
-import GooleAds_header from '../../components/Ads/GooleAds_header';
-
 const mainPosts_1001 = ()=>{
   const myRef = useRef(null);
   const executeScroll = () => myRef.current.scrollIntoView(false);  //alert(myRef.current.value)//
@@ -190,9 +187,6 @@ const mainPosts_1001 = ()=>{
     </Select>
     &nbsp;
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
-
-     {/*구글 광고*/}
-     <GooleAds_header />
  
       <div className="divTable">
             {mainPosts_1001 && mainPosts_1001.map((v,i)=>(

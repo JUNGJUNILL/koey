@@ -15,7 +15,9 @@ import
     {LOGOUT_REQUEST,} 
 from '../reducers/auth'
 
+import GooleAds_header from './Ads/GooleAds_header'; 
 import GooleAds_footer from './Ads/GooleAds_footer';
+
 
 const AppLayOut = ({children}) =>{
     const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
@@ -34,7 +36,7 @@ const AppLayOut = ({children}) =>{
 
     const dispatch = useDispatch(); 
     const {userInfo,representativeAlarm} = useSelector((state)=>state.auth); 
-    const {posf} = useSelector((state)=>state.mainPosts_1001); 
+    const {posf,mainPosts_1001} = useSelector((state)=>state.mainPosts_1001); 
     const [badgeValue,setBadge] = useState('Y');
 
     //로그아웃 버튼
@@ -112,11 +114,15 @@ const AppLayOut = ({children}) =>{
             ))} 
            {/*  <Link href={{pathname:'/tools/arrearsofwages'}}><a>임금채불 사업장</a></Link> */}
         </nav>
+        {/*구글광고*/}
+        {mainPosts_1001.length > 0 && <GooleAds_header />}
+                
 
     {children}
 
     
     <footer>
+        {/*구글광고*/}
         <GooleAds_footer />        
         <div className="footerSub" />
         <div className="footer">
