@@ -38,7 +38,7 @@ import GooleAds_DetailPage_Top from '../../components/Ads/GooleAds_DetailPage_To
 
 
 //{nickName,postFlag,postId,submitDay}
-const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10,}) =>{
+const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10, hello11,hello12,hello13,hello14,hello15,hello16,hello17,hello18,hello19}) =>{
   
 
   const dispatch = useDispatch(); 
@@ -255,7 +255,6 @@ const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hell
       { mainPosts_1001Info &&
         <HeaderComponenet posf={postFlag} title={mainPosts_1001Info[0].title} image={firstImage} contents={mainPosts_1001Info[0].content} preview={mainPosts_1001Info[0].preview} writer={mainPosts_1001Info[0].userNickName}/>
       }
-
         <div className='imgTextSEO'>{hello01}</div>
         <div className='imgTextSEO'>{hello02}</div>
         <div className='imgTextSEO'>{hello03}</div>
@@ -266,11 +265,19 @@ const detailPage  = ({postFlag,postId,submitDay,pid,hello01,hello02,hello03,hell
         <div className='imgTextSEO'>{hello08}</div>
         <div className='imgTextSEO'>{hello09}</div>
         <div className='imgTextSEO'>{hello10}</div>
-
+        <div className='imgTextSEO'>{hello11}</div>
+        <div className='imgTextSEO'>{hello12}</div>
+        <div className='imgTextSEO'>{hello13}</div>
+        <div className='imgTextSEO'>{hello14}</div>
+        <div className='imgTextSEO'>{hello15}</div>
+        <div className='imgTextSEO'>{hello16}</div>
+        <div className='imgTextSEO'>{hello17}</div>
+        <div className='imgTextSEO'>{hello18}</div>
+        <div className='imgTextSEO'>{hello19}</div>
     {/*상세 페이지 타이틀--------------------------------------------------------------------------------*/}
       <div className='divTableDetail' style={{marginTop:'3%'}}>
             <div className='divTableRowTh'>
-                <div className='divTableCellTh'><h3><b>{mainPosts_1001Info[0].title}</b></h3></div>
+                <div className='divTableCellTh'><h1><b>{mainPosts_1001Info[0].title}</b></h1></div>
            </div>
            <div className='divTableRowTh'>
                 <div className='divTableCellTh'><Avatar size="small" icon={<UserOutlined />} />&nbsp;{mainPosts_1001Info[0].userNickName}</div>
@@ -494,19 +501,31 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
   context.store.dispatch(END); 
   await context.store.sagaTask.toPromise(); 
 
-  const hello01='pzqmlaonejf';
-  const hello02='조충범';
-  const hello03='조충범 인스타';
-  const hello04='이과장'; 
-  const hello05='유 튜버 이과장';
-  const hello06='유튜브 이과장';
-  const hello07='pqzivmf';
-  const hello08='apmqnvtyfbss';
-  const hello09='퀖첡쏧';
-  const hello10='깻홀락람';
+  const hello01='좋소 뜻';
+  const hello02='중소기업 현실';
+  const hello03='중소기업 리스트';
+  const hello04='중소기업 나무위키'; 
+  const hello05='중소기업 종류';
+  const hello06='중소기업 순위';
+  const hello07='중소기업 요건';
+  const hello08='좋좋소 시즌5';
+  const hello09='중소기업 회사';
+  const hello10='중소기업이란';
+
+  const hello11='좋소기업 뜻';
+  const hello12='좋소기업 특징';
+  const hello13='좋좋소 뜻';
+  const hello14='좋좋소 이미나';
+  const hello15='좋좋소 이과장';
+  const hello16='좋좋소 조충범';
+  const hello17='좆소';
+  const hello18='중소기업';
+  const hello19='좋소';
   
   return {
-      props: {nickName,postFlag,postId,submitDay,who,pid,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10,}, // will be passed to the page component as props
+      props: {nickName,postFlag,postId,submitDay,who,pid,hello01,hello02,hello03,hello04,hello05,hello06,hello07,hello08,hello09,hello10,
+        hello11,hello12,hello13,hello14,hello15,hello16,hello17,hello18,hello19
+      }, // will be passed to the page component as props
     } 
 
 });
