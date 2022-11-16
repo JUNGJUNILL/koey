@@ -929,19 +929,21 @@ const arrearsofwages = () =>{
     return(
         <div>
             <div style={{width:'100%',textAlign:"center"}}>
-                        <font style={{fontFamily:'Hanna',fontSize:'5vh'}}>체불사업주 명단공개</font> <br/>
+                        <font style={{fontFamily:'Hanna',fontSize:'5vh'}}>임금 체불사업주</font> <br/>
+                        <font style={{fontFamily:'Hanna',fontSize:'5vh'}}>명단공개</font> <br/>
                         <font style={{fontFamily:'jua',fontSize:'2vh',opacity:'0.6'}}>(체불액이 높은 순으로 정렬)</font>
             </div>
 
             <div className='divTable'>
             {array && array.map((v,i)=>(
-                <div className='divTableRow' >
-                    <div className='divTableCell' >
+                <div className='divTableRow' style={{height:'100%'}}>
+                    <div className='divTableCell' style={{height:'60px'}}>
                         <font color={i<=2 ? 'red' : ''} style={{fontFamily:'Hanna',fontSize:'3vh'}}>
                         {v.store}
                         </font>
                         <br/>
-                        <font style={{fontFamily:'jua',fontSize:'2vh'}}>&nbsp;{v.address}</font>
+                        <font style={{fontFamily:'jua',fontSize:'2vh'}}>&nbsp;주소 : {v.address}</font>
+                        <font style={{fontFamily:'jua',fontSize:'2vh'}}>&nbsp;대표자 : {v.ceo}</font>
                         <br/>
                         <font style={{fontFamily:'jua',fontSize:'2vh'}}>&nbsp;{v.money}</font>
 
