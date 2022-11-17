@@ -112,7 +112,7 @@ const AppLayOut = ({children}) =>{
             {categoryList.map((v)=>(
                 <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
             ))} 
-           {/*  <Link href={{pathname:'/tools/arrearsofwages'}}><a>임금채불 사업장</a></Link> */}
+           {<Link href={{pathname:'/tools/arrearsofwages'}}><a>임금채불</a></Link>}
         </nav>
         {/*구글광고*/}
         <GooleAds_header />        

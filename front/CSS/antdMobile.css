@@ -207,7 +207,7 @@ div.divTableRow:hover {
   padding-bottom: 1%;
   padding-top: 1%;
   border-bottom: 1px solid #a0a0a0;
-   background-color: #eeecec;
+  /*background-color: #eeecec;*/
   word-wrap: break-word;
 
 }
