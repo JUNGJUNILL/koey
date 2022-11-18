@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Select, Space, Table } from 'antd';
 const { Option } = Select;
 import { numToKorean, FormatOptions } from 'num-to-korean';
+import Head from "next/head";
 
 import wrapper from '../../store/configureStore';
 import {END} from 'redux-saga'; 
@@ -84,9 +85,41 @@ const arrearsofwages = ({
 
     return(
         <div>
+            <Head>
+                <title>좋소 - 임금체불 사업자 명단</title>
+                <meta name='description' content="임금체불 사업자 명단공개"></meta>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" ></meta>
+                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" ></meta>
+                <meta name="writer" conmtent='jji' ></meta>
+                <meta property="og:locale" content='ko_KR' />
+                <meta property="og:type" content="article" ></meta>
+                <meta property="og:title" content="임금체불 사업자 명단" ></meta>
+                <meta property="og:description" content="임금체불 사업자 명단" ></meta>
+                <meta property="og:url" content="http://www.jscompany.live" ></meta>
+                <meta property="og:site_name" content="좋소" ></meta>
+                <meta property="og:image" content='http://jscompany.live/jsMetaImage.gif'></meta>
+                <meta property="og:image:width" content="80"></meta>
+                <meta property="og:image:height" content="60"></meta>
+                <meta property="og:image:type" content='gif'></meta>
+            </Head>
+            <div className='imgTextSEO'>{keyword01}</div>
+            <div className='imgTextSEO'>{keyword02}</div>
+            <div className='imgTextSEO'>{keyword03}</div>
+            <div className='imgTextSEO'>{keyword04}</div>
+            <div className='imgTextSEO'>{keyword05}</div>
+            <div className='imgTextSEO'>{keyword06}</div>
+            <div className='imgTextSEO'>{keyword07}</div>
+            <div className='imgTextSEO'>{keyword08}</div>
+            <div className='imgTextSEO'>{keyword09}</div>
+            <div className='imgTextSEO'>{keyword10}</div>
+            <div className='imgTextSEO'>{keyword11}</div>
+            <div className='imgTextSEO'>{keyword12}</div>
+            <div className='imgTextSEO'>{keyword13}</div>
+            <div className='imgTextSEO'>{keyword14}</div>
+   
            
             <div style={{width:'100%',textAlign:"center"}}>
-                        <h1><font style={{fontFamily:'Hanna',fontSize:'4.5vh'}}>임금 체불사업주 명단공개</font></h1>
+                        <h1><font style={{fontFamily:'Hanna',fontSize:'4.5vh'}}>임금체불 사업주 명단공개</font></h1>
                         <font style={{fontFamily:'jua',fontSize:'2vh',opacity:'0.6'}}>(체불액이 높은 순으로 정렬)</font>
             </div>
 
