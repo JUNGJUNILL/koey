@@ -1,9 +1,12 @@
-import React, { useCallback,useEffect, useState, createRef } from 'react'
+import React, { useCallback,useEffect, useState, createRef,useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Select, Space, Table } from 'antd';
+import { Select, Input, } from 'antd';
 const { Option } = Select;
+const { Search } = Input;
+
 import { numToKorean, FormatOptions } from 'num-to-korean';
 import Head from "next/head";
+import Link from 'next/link'
 
 import wrapper from '../../store/configureStore';
 import {END} from 'redux-saga'; 
@@ -30,7 +33,8 @@ const arrearsofwages = ({
     keyword11,
     keyword12,
     keyword13,
-    keyword14
+    keyword14,
+    keyword15
 }) =>{
 
 
@@ -60,11 +64,18 @@ const arrearsofwages = ({
 
     }); 
 
-    //
+    const refRegion = useRef(); 
+    const [regionValue, setRegionValue] = useState('all'); 
+    //지역 변경 함수
     const onChangeMainLocal =(value)=>{
         let sum=0; 
         let changeList = originArray;
 
+        setRegionValue(value); 
+        setSearchValue(''); 
+        setSearchCondition('store'); 
+
+        searchCondition
         if(value!=='all'){
             changeList = originArray.filter((v,i,arr)=>{
                 if(v.region === value){
@@ -81,6 +92,70 @@ const arrearsofwages = ({
         setArray([...changeList]); 
         setMoneySum(sum); 
     }
+
+
+    const [searchValue,setSearchValue]= useState(''); 
+    const [searchCondition,setSearchCondition] = useState('store'); 
+    const refSearchValue = useRef(); 
+    const blank_pattern = /^\s+|\s+&/g; 
+
+    //검색창 입력
+    const onSearchValue = useCallback((e) =>{
+
+        setSearchValue(e.target.value); 
+
+    },[searchValue]); 
+
+    //게시물 검색 조회 조건 변경
+    const changeSearchCondition = useCallback((value) =>{
+        setSearchCondition(value); 
+    },[searchCondition]); 
+
+  //게시물 검색
+  const onSearch = useCallback(() =>{
+    let changeList = originArray;
+
+    if(searchValue.length === 0 || searchValue.replace(blank_pattern,'')===""){
+        setArray([...changeList]); 
+        return;
+    }
+
+    if(searchCondition==='store'){
+
+        changeList = originArray.filter((v,i,array)=>{
+            if(regionValue!=='all'){
+                if(v.region===regionValue && v.store.indexOf(searchValue)!==-1){
+                    return array; 
+                }
+            }else{
+                if(v.store.indexOf(searchValue)!==-1){
+                    return array; 
+                }
+            }
+       
+        }); 
+
+    }else{
+
+        changeList = originArray.filter((v,i,array)=>{
+            if(regionValue!=='all'){
+                if(v.region===regionValue && v.ceo.indexOf(searchValue)!==-1){
+                    return array; 
+                }
+            }else{
+                if(v.ceo.indexOf(searchValue)!==-1){
+                    return array; 
+                }
+            }
+       
+        }); 
+
+    }
+
+    setArray([...changeList]); 
+
+  },[searchCondition,searchValue,regionValue]); 
+    
 
 
     return(
@@ -116,8 +191,8 @@ const arrearsofwages = ({
             <div className='imgTextSEO'>{keyword12}</div>
             <div className='imgTextSEO'>{keyword13}</div>
             <div className='imgTextSEO'>{keyword14}</div>
+            <div className='imgTextSEO'>{keyword15}</div>            
    
-           
             <div style={{width:'100%',textAlign:"center"}}>
                         <h1><font style={{fontFamily:'Hanna',fontSize:'4.5vh'}}>임금체불 사업주 명단공개</font></h1>
                         <font style={{fontFamily:'jua',fontSize:'2vh',opacity:'0.6'}}>(체불액이 높은 순으로 정렬)</font>
@@ -126,7 +201,7 @@ const arrearsofwages = ({
             <div style={{display:"flex",justifyContent:"center",alignItems:"center",marginTop:'2%'}}>
                 <font style={{fontFamily:'jua',fontSize:'2.2vh'}}>지역선택 :</font> &nbsp; 
                 {/*광역 시 도 */}           
-                <Select defaultValue={'all'} onChange={onChangeMainLocal} style={{width:'40%'}}>
+                <Select defaultValue={'all'} ref={refRegion} onChange={onChangeMainLocal} style={{width:'40%'}}>
                     <Option value={'all'} >전체</Option>
                 {mainLocal.map((v)=>(              
                     <Option value={v.regionName} >{v.regionNameHangul}</Option>
@@ -139,9 +214,17 @@ const arrearsofwages = ({
             <div style={{width:'100%',textAlign:"center"}}>
                 <font style={{fontFamily:'jua',fontSize:'3vh',}}>총 체불액 : {numToKorean(moneySum, 'mixed')}원</font> <br/>
             </div>
+            <div style={{width:'100%',textAlign:"center"}}>
+                &nbsp;
+                <Select  value={searchCondition} style={{marginTop:'3%',width:'25%'}} onChange={changeSearchCondition}>
+                    <Option value={'store'}>회사명</Option>
+                    <Option value={'ceo'}>대표명</Option>
+                </Select>
+                &nbsp;
+                <Search placeholder="검색" ref={refSearchValue}  value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'50%'}} /> 
+            </div>
        
 
-          
             <GooleAds_footer />
             <div className='divTable'>
             {array && array.map((v,i)=>(
@@ -162,6 +245,7 @@ const arrearsofwages = ({
                 </div>
                 ))}
             </div>
+                <p style={{marginTop:'2%'}}>자료출처 : <Link href={{pathname:'https://www.moel.go.kr/info/defaulter/list.do'}}><a target='_blank'>고용노동부</a></Link></p>
             <GoogleAds_MainPage01 />
 
         </div>
@@ -187,7 +271,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const keyword12='노동청 임금 체불';
     const keyword13='임금 체불 이란';
     const keyword14='재직 중 임금 체불';
-
+    const keyword15='중소기업 커뮤니티';
     
     
     
@@ -206,7 +290,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
             keyword11,
             keyword12,
             keyword13,
-            keyword14
+            keyword14,
+            keyword15
         }, // will be passed to the page component as props
       } 
 }); 
