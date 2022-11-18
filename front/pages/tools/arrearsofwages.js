@@ -70,7 +70,8 @@ const arrearsofwages = ({
     const onChangeMainLocal =(value)=>{
         let sum=0; 
         let changeList = originArray;
-
+        window.localStorage.setItem('scrollY',0); 
+        
         setRegionValue(value); 
         setSearchValue(''); 
         setSearchCondition('store'); 
