@@ -1,7 +1,7 @@
 
 import {useCallback,useState, useRef} from 'react'
 import {Row,Col,Avatar,Badge} from  'antd'; 
-import {UserOutlined } from '@ant-design/icons'
+import {UserOutlined,HomeOutlined,MenuOutlined } from '@ant-design/icons'
 
 
 import Router from 'next/router'; 
@@ -81,7 +81,10 @@ const AppLayOut = ({children}) =>{
         }
 
     },[badgeValue,representativeAlarm])
- 
+    
+    const items =[
+        {label:'Navigation One',key:'sub1',icon:null,children:[{label:'option 5',key:'5'}]}
+    ]
     
     return(
 
@@ -91,14 +94,13 @@ const AppLayOut = ({children}) =>{
     
 
         <Col  xs={24} md={12}>
- 
+
     
         <header className="hd">
         <h1 className="h1">
-               
-        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/sitelogo.png`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
-	    </h1>
 
+        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/sitelogo11.png`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
+	    </h1>
         <div className="fr" style={{marginRight:"-5px"}}>
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
         {!userInfo ?    <Link href={'/auth/authentication'} ><a className="mu">회원가입</a></Link>:<Link  href={'/posts/profile'} ><a className="mu"><Badge count={alarm01control() ?'N':''}  size='small'><Avatar size="small" icon={<UserOutlined />} onClick={goProfile}/></Badge>&nbsp;<label onClick={goProfile}>내 정보</label></a></Link> } 
@@ -109,10 +111,15 @@ const AppLayOut = ({children}) =>{
         </header>
 
         <nav className='navInfo'>
-            {categoryList.map((v)=>(
-                <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+            {!posf && categoryList.map((v)=>(        
+               <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
             ))} 
-           {<Link href={{pathname:'/tools/arrearsofwages'}}><a>임금체불</a></Link>}
+            {posf && <b onClick={gotoHome}><HomeOutlined /> Home ＞</b> }  
+            {posf && categoryList.map((v)=>(           
+                posf===v.posf &&  
+               <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+            ))}
+            {posf && <MenuOutlined />} 
         </nav>
         {/*구글광고*/}
         <GooleAds_header />        
