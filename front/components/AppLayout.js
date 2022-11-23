@@ -22,9 +22,9 @@ import GooleAds_footer from './Ads/GooleAds_footer';
 const AppLayOut = ({children}) =>{
     const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
                           { categoryName:'좋소!',posf:'1002'},      
-                          { categoryName:'유머',posf:'1003'},     
-                          { categoryName:'연애/결혼',posf:'1004'},     
-                          { categoryName:'좋소!탈출',posf:'1005'},     
+                          { categoryName:'좋소!탈출',posf:'1005'},    
+                          { categoryName:'유머',posf:'1003'},      
+                          { categoryName:'연애/결혼',posf:'1004'},   
                           { categoryName:'좋소!희망편',posf:'1006'},     
                           { categoryName:'경제적 자유',posf:'1007'},     
                           { categoryName:'자기계발',posf:'1008'}, 
@@ -65,12 +65,6 @@ const AppLayOut = ({children}) =>{
         return; 
     },[badgeValue,representativeAlarm])
     
-    //스크롤 위치 초기화
-    const initScrollRestoration = () =>{
-
-        window.localStorage.setItem('scrollY',0); 
-
-    }
 
 
     const alarm01control = useCallback(()=>{
@@ -82,9 +76,20 @@ const AppLayOut = ({children}) =>{
 
     },[badgeValue,representativeAlarm])
     
-    const items =[
-        {label:'Navigation One',key:'sub1',icon:null,children:[{label:'option 5',key:'5'}]}
-    ]
+    const [showCategory,setShowCategory]= useState(false); 
+    const getCategory = useCallback(() =>{
+
+        setShowCategory((prev)=>!prev); 
+
+    },[showCategory]);
+
+
+    //스크롤 위치 초기화
+    const initScrollRestoration = () =>{
+
+        window.localStorage.setItem('scrollY',0); 
+        setShowCategory(false); 
+    }
     
     return(
 
@@ -99,7 +104,7 @@ const AppLayOut = ({children}) =>{
         <header className="hd">
         <h1 className="h1">
 
-        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/sitelogo11.png`} style={{width:"111",height:"28",justifyContent:"left"}} onClick={gotoHome}></img>
+        {/* <AlignLeftOutlined onClick={showDrawer}/>*/}&nbsp;<img src={`${backImageUrl}/logo.png`} style={{width:"135px",height:"28px",justifyContent:"left"}} onClick={gotoHome}></img>
 	    </h1>
         <div className="fr" style={{marginRight:"-5px"}}>
         {!userInfo ?    <Link href={'/auth/login'} ><a className="mu">로그인</a></Link>:'' }
@@ -110,17 +115,28 @@ const AppLayOut = ({children}) =>{
   
         </header>
 
-        <nav className='navInfo'>
-            {!posf && categoryList.map((v)=>(        
+        {posf && 
+          <nav className='navInfoDetail'>
+                <b onClick={gotoHome}><HomeOutlined /> Home ＞</b> 
+                {categoryList.map((v)=>(           
+                    posf===v.posf &&  
+                    <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+                ))}
+                <b style={{float:'right'}} onClick={getCategory}><MenuOutlined /> {showCategory?'Close':'Menu'}</b>
+        </nav>
+        }
+
+        {(!posf || showCategory) && 
+        <nav className='navInfo' >
+            {categoryList.map((v)=>(        
                <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
             ))} 
-            {posf && <b onClick={gotoHome}><HomeOutlined /> Home ＞</b> }  
-            {posf && categoryList.map((v)=>(           
-                posf===v.posf &&  
-               <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
-            ))}
-            {posf && <MenuOutlined />} 
         </nav>
+        }
+
+
+        
+
         {/*구글광고*/}
         <GooleAds_header />        
         
