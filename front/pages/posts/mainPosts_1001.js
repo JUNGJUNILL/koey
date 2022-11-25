@@ -189,6 +189,20 @@ const mainPosts_1001 = ()=>{
     <Search placeholder="search" ref={refSearchValue} value={searchValue} maxLength={25} onSearch={onSearch} onChange={onSearchValue} style={{marginTop:'3%',width:'30%'}} /> 
  
       <div className="divTable">
+      <div  className='divTableRow' style={{backgroundColor:'#ffdfbb'}}>
+        <div className='divTableImageCell'>
+            <div className="divImageCell">
+              <img src={`${Url}/noimages.gif`} />
+            </div>
+        </div>
+        <Link href={{pathname:'/tools/arrearsofwages'}}>
+          <div className="divTableCell" >   
+              <span className='bestSpan'>공지</span>   
+              <a><b><font size="2" color="red">임금체불 사업주 명단공개</font></b></a>
+          </div>
+          </Link>
+      </div>
+      
             {mainPosts_1001 && mainPosts_1001.map((v,i)=>(
                 <div  className='divTableRow' onClick={()=>gotoDetail(v.postId,v.userid,posf,v.submitDay,userInfo)} style={{ backgroundColor:v.remark01==='best' ? '#ffdfbb':''}}>
                <div className='divTableImageCell'>

@@ -68,9 +68,10 @@ const arrearsofwages = ({
     const [regionValue, setRegionValue] = useState('all'); 
     //지역 변경 함수
     const onChangeMainLocal =(value)=>{
+        window.localStorage.setItem('scrollY',0); 
+
         let sum=0; 
         let changeList = originArray;
-        window.localStorage.setItem('scrollY',0); 
         
         setRegionValue(value); 
         setSearchValue(''); 
