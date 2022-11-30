@@ -14,6 +14,7 @@ import
     {LOAD_USER_REQUEST,} 
 from '../reducers/auth'; 
 
+
 import 
     {INDEX_PAGE_DATA_1001_REQUEST,
      INDEX_PAGE_DATA_1002_REQUEST,
@@ -51,7 +52,41 @@ const Home =()=>{
 
   return (
     <div>
+      <div className="divTable">
+        <div  className='divTableRow' style={{backgroundColor:'#ffdfbb'}}>
+          <div className='divTableImageCell'>
+              <div className="divImageCell">
+                <img src={`${Url}/noimages.gif`} />
+              </div>
+          </div>
+          <Link href={{pathname:'/tools/arrearsofwages'}}>
+            <div className="divTableCell" >   
+                <span className='bestSpan'>공지</span>   
+                <a><b><font size="2" color="red">임금체불 사업주 명단공개</font></b></a>
+            </div>
+            </Link>
+        </div>
 
+        <div  className='divTableRow' style={{backgroundColor:'#ffdfbb'}}>
+          <div className='divTableImageCell'>
+              <div className="divImageCell">
+                <img src={`${Url}/noimages.gif`} />
+              </div>
+          </div>
+          <Link href={{pathname:'/posts/[detailPage]',
+                            query:{detailPage:'detailPage',
+                            postId:'10000004',
+                            postFlag:'1011',
+                            submitDay:'99999999',
+                            pid:'ZGV2amppMTIwN0BnbWFpbC5jb20=',  
+                  },}}>
+            <div className="divTableCell" >   
+                <span className='bestSpan'>공지</span>   
+                <a><b><font size="2" color="red">제 1회 천하제일 좆소대회</font></b></a>
+            </div>
+            </Link>
+        </div>
+      </div>
   <Divider orientation="center"><b>좋좋소! 베스트</b></Divider>
   <Row style={{marginTop:'3%'}}>
   
