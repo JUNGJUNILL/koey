@@ -31,7 +31,8 @@ const AppLayOut = ({children}) =>{
                               
                           { categoryName:'상식/정보',posf:'1009'},     
                           { categoryName:'핫딜/광고',posf:'1010'},     
-                          { categoryName:'운영진 요청사항',posf:'1011'},     
+                          { categoryName:'운영진 요청사항',posf:'1011'},
+                          { categoryName:'tools(도구)',posf:'9999'},
                         ]; 
 
     const dispatch = useDispatch(); 
@@ -120,7 +121,7 @@ const AppLayOut = ({children}) =>{
                 <b onClick={gotoHome}><HomeOutlined /> Home ＞</b> 
                 {categoryList.map((v)=>(           
                     posf===v.posf &&  
-                    <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+                    <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex' ,query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
                 ))}
                 <b style={{float:'right'}} onClick={getCategory}><MenuOutlined /> {showCategory?'Close':'Menu'}</b>
         </nav>
@@ -129,8 +130,8 @@ const AppLayOut = ({children}) =>{
         {(!posf || showCategory) && 
         <nav className='navInfo' >
             {categoryList.map((v)=>(        
-               <Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
-            ))} 
+               <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+            ))}
         </nav>
         }
 
