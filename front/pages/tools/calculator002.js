@@ -162,19 +162,18 @@ const calculator002 =({
 export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
 
  const SEOKEYWORD001='Online calculator';
- const SEOKEYWORD002='Google calculator';
+ const SEOKEYWORD002='계산기';
  const SEOKEYWORD003='Online calculator';
- const SEOKEYWORD004='Math calculator';
+ const SEOKEYWORD004='온라인 계산기';
  const SEOKEYWORD005='Scientific calculator online';
  const SEOKEYWORD006='dollar2age calculator';
  const SEOKEYWORD007='Calculus calculator';
- const SEOKEYWORD008='Root calculator';
+ const SEOKEYWORD008='일반계산기';
  const SEOKEYWORD009='ratio';
- const SEOKEYWORD010='rate';
+ const SEOKEYWORD010='증감율 계산 공식';
  const SEOKEYWORD011='Simple calculator';
- const SEOKEYWORD012='Unit rate';
+ const SEOKEYWORD012='증감률 계산기';
  const SEOKEYWORD013='Calculator online';
- 
  const SEOKEYWORD014='Interest rate calculator';
  const SEOKEYWORD015='Ratio calculator';
  const SEOKEYWORD016='Proportion ratio';
