@@ -1,7 +1,7 @@
 
 import {useCallback,useState, useRef} from 'react'
 import {Row,Col,Avatar,Badge} from  'antd'; 
-import {UserOutlined,HomeOutlined,MenuOutlined } from '@ant-design/icons'
+import {UserOutlined,HomeOutlined,MenuOutlined,ToolOutlined } from '@ant-design/icons'
 
 
 import Router from 'next/router'; 
@@ -115,13 +115,13 @@ const AppLayOut = ({children}) =>{
         </div>
   
         </header>
-
+       
         {posf && 
           <nav className='navInfoDetail'>
                 <b onClick={gotoHome}><HomeOutlined /> Home ＞</b> 
                 {categoryList.map((v)=>(           
                     posf===v.posf &&  
-                    <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex' ,query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+                    <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex' ,query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.posf==='9999' && <ToolOutlined />}{v.categoryName}</a></Link>
                 ))}
                 <b style={{float:'right'}} onClick={getCategory}><MenuOutlined /> {showCategory?'Close':'Menu'}</b>
         </nav>
@@ -130,7 +130,7 @@ const AppLayOut = ({children}) =>{
         {(!posf || showCategory) && 
         <nav className='navInfo' >
             {categoryList.map((v)=>(        
-               <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.categoryName}</a></Link>
+               <Link href={{pathname:v.posf!=='9999'? '/posts/mainPosts_1001' : '/tools/toolsIndex',query:{nowPage:1,posf:v.posf}} }><a style={{backgroundColor:posf===v.posf?'#4CAF50':''}} onClick={initScrollRestoration}>{v.posf==='9999' && <ToolOutlined />}{v.categoryName}</a></Link>
             ))}
         </nav>
         }

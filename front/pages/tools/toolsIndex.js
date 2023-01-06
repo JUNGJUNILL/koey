@@ -1,6 +1,7 @@
 import { Url } from '../../config/config';
 import Link from 'next/link'
 import wrapper from '../../store/configureStore';
+import Head from "next/head";
 
 
 
@@ -31,16 +32,16 @@ const toolsIndex = ({
 
     return(
         <div>
-                        <Head>
-                <title>좋소 - 임금체불 사업자 명단</title>
-                <meta name='description' content="임금체불 사업자 명단공개"></meta>
+            <Head>
+                <title>좋소 - tools</title>
+                <meta name='description' content="tools"></meta>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" ></meta>
                 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" ></meta>
                 <meta name="writer" conmtent='jji' ></meta>
                 <meta property="og:locale" content='ko_KR' />
                 <meta property="og:type" content="article" ></meta>
-                <meta property="og:title" content="임금체불 사업자 명단" ></meta>
-                <meta property="og:description" content="임금체불 사업자 명단" ></meta>
+                <meta property="og:title" content="중소기업 커뮤니티" ></meta>
+                <meta property="og:description" content="계산기" ></meta>
                 <meta property="og:url" content="http://www.jscompany.live" ></meta>
                 <meta property="og:site_name" content="좋소" ></meta>
                 <meta property="og:image" content='http://jscompany.live/jsMetaImage.gif'></meta>
@@ -63,7 +64,7 @@ const toolsIndex = ({
             <div className='imgTextSEO'>{keyword13}</div>
             <div className='imgTextSEO'>{keyword14}</div>
             <div className='imgTextSEO'>{keyword15}</div>   
-            
+
             <div className='divTable'>
             {array && array.map((v,i)=>(
                 <div className='divTableRow' style={{height:'100%'}}>
