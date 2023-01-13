@@ -6,6 +6,8 @@ import wrapper from '../../store/configureStore';
 
 const { Option } = Select;
 
+import GoogleAds_MainPage01 from '../../components/Ads/GoogleAds_MainPage01';
+import GooleAds_footer from '../../components/Ads/GooleAds_footer';
 
 const calculator003 =({
     SEOKEYWORD001,
@@ -143,6 +145,7 @@ const calculator003 =({
                 <div className='imgBase'>
                     <img src='../ramen.webp' /> 
                 </div>
+                <GooleAds_footer />
             </div>
 
             <div style={{width:'100%',textAlign:"center",marginTop:'3%'}}>
@@ -199,6 +202,7 @@ const calculator003 =({
                 
             </div>
             </FadeIn>
+            <GoogleAds_MainPage01 />
 
 
           </div>

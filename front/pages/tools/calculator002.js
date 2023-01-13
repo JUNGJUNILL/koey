@@ -4,6 +4,9 @@ import FadeIn from 'react-fade-in';
 import Head from "next/head";
 import wrapper from '../../store/configureStore';
 
+import GoogleAds_MainPage01 from '../../components/Ads/GoogleAds_MainPage01';
+import GooleAds_footer from '../../components/Ads/GooleAds_footer';
+
 const { Option } = Select;
 
 const calculator002 =({
@@ -112,6 +115,7 @@ const calculator002 =({
                 <div className='imgBase'>
                     <img src='../ramen.webp' /> 
                 </div>
+                <GooleAds_footer />
             </div>
 
             <div style={{width:'100%',textAlign:"center",marginTop:'3%'}}>
@@ -152,6 +156,8 @@ const calculator002 =({
                 {`((${dollar2} - ${dollar}) / ${dollar}) * 100` }
             </div>
             </FadeIn>
+            <GoogleAds_MainPage01 />
+            
         </div>   
         )
 
