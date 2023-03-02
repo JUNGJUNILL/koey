@@ -62,7 +62,7 @@ const Home =()=>{
           <Link href={{pathname:'/tools/arrearsofwages'}}>
             <div className="divTableCell" >   
                 <span className='bestSpan'>공지</span>   
-                <a><b><font size="2" color="red">임금체불 사업주 명단공개</font></b></a>
+                <a><b><font size="2" color="red">공짓사항1</font></b></a>
             </div>
             </Link>
         </div>
@@ -82,12 +82,12 @@ const Home =()=>{
                   },}}>
             <div className="divTableCell" >   
                 <span className='bestSpan'>공지</span>   
-                <a><b><font size="2" color="red">제 1회 천하제일 좆소대회</font></b></a>
+                <a><b><font size="2" color="red">공지사항2</font></b></a>
             </div>
             </Link>
         </div>
       </div>
-  <Divider orientation="center"><b>좋좋소! 베스트</b></Divider>
+  <Divider orientation="center"><b>베스트</b></Divider>
   <Row style={{marginTop:'3%'}}>
   
   {data01.map((v,i)=>(
@@ -132,7 +132,7 @@ const Home =()=>{
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>좋소!</b></div>}
+    header={<div><b>게시판1</b></div>}
     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1002'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data02}
@@ -166,7 +166,7 @@ const Home =()=>{
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>유머</b></div>}
+    header={<div><b>게시판2</b></div>}
     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1003'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data03}
@@ -196,7 +196,7 @@ const Home =()=>{
     <List
     style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
     itemLayout="horizontal"
-    header={<div><b>연애/결혼</b></div>}
+    header={<div><b>게시판3</b></div>}
     footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1004'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
 
     dataSource={data04}
@@ -227,7 +227,7 @@ const Home =()=>{
      <List
      style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
      itemLayout="horizontal"
-     header={<div><b>좋소!탈출</b></div>}
+     header={<div><b>게시판4</b></div>}
      footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1005'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
  
      dataSource={data05}
@@ -257,7 +257,7 @@ const Home =()=>{
       <List
       style={{marginTop:'3%',paddingLeft:'2%',paddingRight:'2%'}}
       itemLayout="horizontal"
-      header={<div><b>좋소!희망편</b></div>}
+      header={<div><b>게시판5</b></div>}
       footer={<div><Link href={{pathname:'/posts/mainPosts_1001',query:{nowPage:1,posf:'1006'}}} scroll={false}><a><Button onClick={scrollRestoration} block>더 보기</Button></a></Link></div>}
   
       dataSource={data06}

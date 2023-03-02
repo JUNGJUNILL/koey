@@ -20,7 +20,7 @@ import GooleAds_footer from './Ads/GooleAds_footer';
 
 
 const AppLayOut = ({children}) =>{
-    const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
+    /*const categoryList = [{ categoryName:'좋좋소!',posf:'1001'},
                           { categoryName:'좋소!',posf:'1002'},      
                           { categoryName:'좋소!탈출',posf:'1005'},    
                           { categoryName:'유머',posf:'1003'},      
@@ -34,6 +34,21 @@ const AppLayOut = ({children}) =>{
                           { categoryName:'운영진 요청사항',posf:'1011'},
                           { categoryName:'tools(도구)',posf:'9999'},
                         ]; 
+    */
+const categoryList = [{ categoryName:'게시판1',posf:'1001'},
+                        { categoryName:'게시판2',posf:'1002'},      
+                        { categoryName:'게시판3',posf:'1005'},    
+                        { categoryName:'게시판4',posf:'1003'},      
+                        { categoryName:'게시판5',posf:'1004'},   
+                        { categoryName:'게시판6',posf:'1006'},     
+                        { categoryName:'게시판7',posf:'1007'},     
+                        { categoryName:'게시판8',posf:'1008'}, 
+                            
+                        { categoryName:'상식/정보',posf:'1009'},     
+                        { categoryName:'핫딜/광고',posf:'1010'},     
+                        { categoryName:'운영진 요청사항',posf:'1011'},
+                        { categoryName:'tools(도구)',posf:'9999'},
+                      ]; 
 
     const dispatch = useDispatch(); 
     const {userInfo,representativeAlarm} = useSelector((state)=>state.auth); 
