@@ -167,7 +167,7 @@ const categoryList = [{ categoryName:'게시판1',posf:'1001'},
         {/*<GooleAds_footer />*/}
         <div className="footerSub" />
         <div className="footer">
-            <b>좋소? 좋좋소!</b>
+            <b>커뮤니티</b>
             <br/>
             <Link href={{pathname:'/posts/[detailPage]',
                             query:{detailPage:'detailPage',
@@ -185,7 +185,7 @@ const categoryList = [{ categoryName:'게시판1',posf:'1001'},
                             pid:'ZGV2amppMTIwN0BnbWFpbC5jb20=',  
                   },}}><a>후원하기</a></Link>
             <br/>
-            좋소(jscompany)2021 ~ © All Rights Reserved.
+            커뮤니티(jscompany)2021 ~ © All Rights Reserved.
         </div>
     </footer>
     </Col>
